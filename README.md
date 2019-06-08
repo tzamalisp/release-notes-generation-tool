@@ -146,11 +146,11 @@ found, and after this, the tool will be submitted.
 
 <img src="images/google.png"
  alt="Google Logo"
- style="width: 20%%; margin: auto;" />
+ style="width: 20%; margin: auto;" />
 
  <img src="images/jboss.png"
  alt="JBoss Logo"
- style="width: 20%%; margin: auto;" />
+ style="width: 20%; margin: auto;" />
 
 
 
