@@ -479,6 +479,17 @@ if __name__ == '__main__':
     print('---------------------------------------------')
     print()
 
+    # DASHBOARD'S CUSTOM FIELDS AVAILABLE - CONFIGURATION JSON FILE CREATION
+    print("DASHBOARD'S CUSTOM FIELDS AVAILABLE - CONFIGURATION JSON FILE CREATION")
+    print()
+    dashboard_custom_field_list = CustomFieldListFile(issue_name)
+    dashboard_custom_field_list.list_file_generator()
+
+    print()
+    print('---------------------------------------------')
+    print('---------------------------------------------')
+    print()
+
     # BASIC DATA RETRIEVER
     print('BASIC DATA RETRIEVER')
     print()
