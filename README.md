@@ -99,3 +99,47 @@ In fact, *RLGEN* adopts a kind of *hybridization* on the way the reports are gen
 Intelligence*, this belongs to the on-demand scanning of the Bug Tracking Systems, while Machine Intelligence is about
 the *automated* or *event-triggered scanning*. Nevertheless, after the report generation, the decision making pertains
 to the human part.
+
+### DELIVERABLES & MILESTONES
+
+This section includes the development planning of the tool. Several milestones and deliverables have been defined due
+to Google’s “Summer of Code” call and with the Mentors. On *May 27* is the starting period of tool development. The
+next steps are devided into the next subsections.
+
+#### 01) June 24 2019 - Implementation Phase Pt. 1**
+
+After the determination of the tool’s requirements and specifications, the implementation period starts. *Phase 1*
+includes the following milestones:
+
+- *03 June 2019* → Definition of the Bug Tracking Systems APIs that will be used and Git repository initiation.
+
+- *14 June 2019* → Selection of the suitable Python libraries that will be used to connect with the APIs, their
+dependencies, and finally, getting the corresponding access delegation credentials.
+
+- *24 June 2019* → Successfully fetching the data from Bug Tracking Systems APIs using relevant libraries.
+
+#### 02) July 22 2019 - Implementation Phase Pt. 2
+
+This is the period of building the main core of the tool where the data pre-processing, processing and analysis take
+place. It includes only one milestone that is equal with the predefined by Google deadline:
+
+- *22 July 2019* → This implementation step is about the cleaning, the process and the analysis of the data that is
+fetched to the system. The User Experience (UX) is also part of that phase, as the arguments that will define and feed
+the data inputs of the platform, as well as the related analysis and exports will be built. Other parameters will be
+determined to be part of that inputs, for example, the DateTime the user asked for the generation of the report, etc.
+The final part of that period is the transformation of the data to a suitable structure for further processing by the
+output creation component.
+
+#### 03) August 26 2019 - Implementation Phase Pt. 3, Performance Improvements and Final Evaluation
+
+The final phase comprises three milestones, which are related to the data exports in easily readable formats,
+performance improvements, and final debugging:
+
+- *28 July 2019* → Selection and determination of the reports file formats that will be exported by the system and the
+relevant Python libraries that will manipulate this process.
+
+- *18 August 2019* → The final form of the reports will be successfully exported to suitable formats, and performance
+improvements will take place until that deadline.
+
+- *24 August 2019* → This is the last step of evaluation where a minor debugging will take place in case errors will be
+found, and after this, the tool will be submitted.
