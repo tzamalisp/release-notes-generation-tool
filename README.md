@@ -1,6 +1,6 @@
 <img src="images/GSoC-logo-horizontal-800.png"
      alt="Google Summer of Code"
-     style="width: 70%; border: 1px solid black; display: block; margin-left: auto; margin-right: auto;" />
+     style="width: 60%; border: 1px solid black; display: block; margin-left: auto; margin-right: auto;" />
 
 # Release Notes Generation Tool (RLGEN)
 ### DESCRIPTION
