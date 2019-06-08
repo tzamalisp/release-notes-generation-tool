@@ -106,7 +106,7 @@ This section includes the development planning of the tool. Several milestones a
 to Google’s “Summer of Code” call and with the Mentors. On *May 27* is the starting period of tool development. The
 next steps are devided into the next subsections.
 
-#### 01) June 24 2019 - Implementation Phase Pt. 1**
+#### 01) June 24 2019 - Implementation Phase Pt. 1
 
 After the determination of the tool’s requirements and specifications, the implementation period starts. *Phase 1*
 includes the following milestones:
