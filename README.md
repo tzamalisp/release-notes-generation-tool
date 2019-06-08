@@ -143,3 +143,14 @@ improvements will take place until that deadline.
 
 - *24 August 2019* → This is the last step of evaluation where a minor debugging will take place in case errors will be
 found, and after this, the tool will be submitted.
+
+<img src="images/google.png"
+ alt="Google Logo"
+ style="width: 20%%; margin: auto;" />
+
+ <img src="images/jboss.png"
+ alt="JBoss Logo"
+ style="width: 20%%; margin: auto;" />
+
+
+
