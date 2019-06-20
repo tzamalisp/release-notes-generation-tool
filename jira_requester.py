@@ -626,6 +626,8 @@ class CustomFieldDataRetriever:
         issue = jira.issue(self.issue_name_input)
         print()
 
+        bug_custom_fields_list_feed = []
+
         # Target Release (Custom Field)
         with open('customfields_list.json') as json_file:
             data = json.load(json_file)
@@ -636,20 +638,32 @@ class CustomFieldDataRetriever:
                 print(self.custom_field_name + ' custom field found!')
                 print(self.custom_field_name + ':')
                 print('Name:', self.custom_field_name, '-', 'Custom Field ID =', str(self.custom_field_id))
+                bug_custom_fields_list_feed.append('=== ' + self.custom_field_name)
                 new_var = 'issue.fields.customfield_' + str(field_id)
                 command = 'global temp; temp = ' + new_var
                 # print(command)
                 exec(command)
                 if temp is not None:
                     print('\tDescription:', temp.description)
+                    bug_custom_fields_list_feed.append('* Description: {}'.format(temp.description))
                     print('\tName:', temp.name)
+                    bug_custom_fields_list_feed.append('* Name: {}'.format(temp.name))
                     print('\tArchived:', temp.archived)
+                    bug_custom_fields_list_feed.append('* Archived: {}'.format(temp.archived))
                     print('\tReleased:', temp.released)
+                    bug_custom_fields_list_feed.append('* Released: {}'.format(temp.released))
                     print()
-                else:
-                    print(self.custom_field_name + ': There is no ' + self.custom_field_name + ' for the Issue --> {}'
-                          .format(self.issue_name_input))
-                    print()
+                # else:
+                #     print(self.custom_field_name + ': There is no ' + self.custom_field_name + ' for the Issue --> {}'
+                #           .format(self.issue_name_input))
+                #
+                #     print()
+        print()
+        for item in bug_custom_fields_list_feed:
+            print(item)
+            print()
+
+        return bug_custom_fields_list_feed
 
 
 if __name__ == '__main__':
@@ -700,7 +714,7 @@ if __name__ == '__main__':
     print('BASIC DATA RETRIEVER')
     print()
     jira_basic_data = BasicDataRetriever(issue_name)
-    jira_basic_data.data_retriever()
+    # jira_basic_data.data_retriever()
 
     print()
     print('---------------------------------------------')
@@ -712,7 +726,6 @@ if __name__ == '__main__':
     print()
     jira_custom_field_data = CustomFieldDataRetriever(issue_name, name_field_id_name, field_id)
     # jira_custom_field_data.data_retriever()
-
     print()
     print()
     print('----')
@@ -726,6 +739,7 @@ if __name__ == '__main__':
     print()
 
     doc_basic = Generator(user=username, bug=bug_id, firstname=first_name, lastname=last_name, email_account=email,
-                          data=jira_basic_data.data_retriever())
+                          data_basic=jira_basic_data.data_retriever(),
+                          data_custom=jira_custom_field_data.data_retriever())
     doc_basic.generating_doc_jira()
 
