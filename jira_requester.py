@@ -4,7 +4,7 @@ import requests
 import os
 from datetime import datetime
 from pprint import pprint
-from asciidoc_generator import Generator
+from asciidoc_generator import GeneratorJira
 
 """CLASS FOR RETRIEVING BASIC ISSUE INFORMATION FROM JIRA API"""
 
@@ -631,7 +631,7 @@ class CustomFieldDataRetriever:
         # Target Release (Custom Field)
         with open('customfields_list.json') as json_file:
             data = json.load(json_file)
-        custom_search = 'customfield_' + str(field_id)
+        custom_search = 'customfield_' + str(self.custom_field_id)
         custom_fields_list_read = data['custom_fields']
         for item in custom_fields_list_read:
             if item == custom_search:
@@ -639,7 +639,7 @@ class CustomFieldDataRetriever:
                 print(self.custom_field_name + ':')
                 print('Name:', self.custom_field_name, '-', 'Custom Field ID =', str(self.custom_field_id))
                 bug_custom_fields_list_feed.append('=== ' + self.custom_field_name)
-                new_var = 'issue.fields.customfield_' + str(field_id)
+                new_var = 'issue.fields.customfield_' + str(self.custom_field_id)
                 command = 'global temp; temp = ' + new_var
                 # print(command)
                 exec(command)
@@ -664,82 +664,3 @@ class CustomFieldDataRetriever:
             print()
 
         return bug_custom_fields_list_feed
-
-
-if __name__ == '__main__':
-    issue_name = 'JBCS-535'
-    name_field_id_name = 'Target Release'
-    field_id = 12311240
-
-    bug_id = issue_name.lower()
-    username = 'tzamalisp'
-    first_name = 'Pantelis'
-    last_name = 'Tzamalis'
-    email = 'tzamalis@ceid.upatras.gr'
-
-    # CONNECTION TO JIRA
-    print('CONNECTION TO JIRA')
-    print()
-    # test_connector = Connector()
-    # test_connector.jira_connector()
-
-    print()
-    print('---------------------------------------------')
-    print('---------------------------------------------')
-    print()
-
-    # ADDING CUSTOM FIELD - CREATION OF THE JSON CONFIGURATION FILE
-    print('ADDING CUSTOM FIELD - CREATION OF THE JSON CONFIGURATION FILE')
-    print()
-    # new__custom_field = CustomFieldConfCreation('xxx', 'customfield_12310220')
-    # new__custom_field.custom_field_configuration_creation()
-
-    print()
-    print('---------------------------------------------')
-    print('---------------------------------------------')
-    print()
-
-    # DASHBOARD'S CUSTOM FIELDS AVAILABLE - CONFIGURATION JSON FILE CREATION
-    print("DASHBOARD'S CUSTOM FIELDS AVAILABLE - CONFIGURATION JSON FILE CREATION")
-    print()
-    dashboard_custom_field_list = CustomFieldListFile(issue_name)
-    dashboard_custom_field_list.list_file_generator()
-
-    print()
-    print('---------------------------------------------')
-    print('---------------------------------------------')
-    print()
-
-    # BASIC DATA RETRIEVER
-    print('BASIC DATA RETRIEVER')
-    print()
-    jira_basic_data = BasicDataRetriever(issue_name)
-    # jira_basic_data.data_retriever()
-
-    print()
-    print('---------------------------------------------')
-    print('---------------------------------------------')
-    print()
-
-    # CUSTOM FIELD DATA RETRIEVER
-    print('CUSTOM FIELD DATA RETRIEVER')
-    print()
-    jira_custom_field_data = CustomFieldDataRetriever(issue_name, name_field_id_name, field_id)
-    # jira_custom_field_data.data_retriever()
-    print()
-    print()
-    print('----')
-    report_time = datetime.now()
-    print('Report time:', report_time)
-    print('----')
-    print()
-    print()
-    print('>>> Calling JIRA API and printing Issue parts is now completed successfully!')
-    print()
-    print()
-
-    doc_basic = Generator(user=username, bug=bug_id, firstname=first_name, lastname=last_name, email_account=email,
-                          data_basic=jira_basic_data.data_retriever(),
-                          data_custom=jira_custom_field_data.data_retriever())
-    doc_basic.generating_doc_jira()
-

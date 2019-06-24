@@ -1,0 +1,270 @@
+= Release Notes Generation Tool (RLGEN)
+:author: Pantelis Tzamalis
+:email: tzamalis@ceid.upatras.gr
+
+== Basic Fields
+
+=== Summary
+
+* Summary: Seamonkey 2.33 Print Preview Paper Size Error auto sets for 3.0 in x 4.57 in
+
+=== Assigned to
+
+* Email: nobody@mozilla.org
+
+* ID: 1
+
+* Name: nobody@mozilla.org
+
+* Nickname: nobody
+
+* Real Name: Nobody; OK to take it and work on it
+
+=== Blocks
+
+* No blocks listed at this time.
+
+=== CC
+
+* CC 1: bestgroup@lvcoxmail.com
+
+* CC 2: hb@calen.de
+
+* CC 3: pppx@i.com.ua
+
+=== CC Information
+
+* CC 1 Information:
+
+** Email: bestgroup@lvcoxmail.com
+
+** ID: 398600
+
+** Name: bestgroup@lvcoxmail.com
+
+** Nickname: bestgroup
+
+** Real Name: Charles Kominek
+
+* CC 2 Information:
+
+** Email: hb@calen.de
+
+** ID: 236695
+
+** Name: hb@calen.de
+
+** Nickname: Hb
+
+** Real Name: :Hb
+
+* CC 3 Information:
+
+** Email: pppx@i.com.ua
+
+** ID: 139806
+
+** Name: pppx@i.com.ua
+
+** Nickname: pppx
+
+** Real Name: Phoenix
+
+=== Classification
+
+* Client Software
+
+=== Comments Counted
+
+* Count: 3
+
+=== Component
+
+* General
+
+=== Creation Time
+
+* 2015-03-18T00:38:16Z
+
+=== Creator
+
+* bestgroup@lvcoxmail.com
+
+* Creator Information:
+
+** Email: bestgroup@lvcoxmail.com
+
+** ID: 398600
+
+** Name: bestgroup@lvcoxmail.com
+
+** Nickname: bestgroup
+
+** Real Name: Charles Kominek
+
+=== Depends On
+
+* No dependencies were found.
+
+=== Dupe of
+
+* No Dupe of information at this time.
+
+=== Duplicates
+
+* No listed items.
+
+=== Flags
+
+* No listed items.
+
+=== Groups
+
+* No listed items.
+
+=== ID
+
+* 1144467
+
+=== Is CC Accessble
+
+* True
+
+=== Is Confirmed
+
+* False
+
+=== Is Creator Accessible
+
+* True
+
+=== Is Open
+
+* False
+
+=== Keywords
+
+* No listed keywords.
+
+=== Last Change Time
+
+* 2015-04-22T00:10:21Z
+
+=== Mentors
+
+* No listed Mentors.
+
+=== Operation System
+
+* Windows 7
+
+=== Platform
+
+* x86_64
+
+=== Priority
+
+* --
+
+=== Product
+
+* SeaMonkey
+
+=== QA Contact
+
+*  There is no QA Contact available.
+
+=== Regressed By
+
+* No listed items.
+
+=== Regressions
+
+* No listed items.
+
+=== Resolution
+
+* INCOMPLETE
+
+=== See Also
+
+* No listed items.
+
+=== Severity
+
+* normal
+
+=== Status
+
+* RESOLVED
+
+=== Target Milestone
+
+* ---
+
+=== Type
+
+* defect
+
+=== Update Token
+
+* 1561416251-GBOTqdUzkHzXLo2IsjvV4IXtpyaiseq2eYa6Q83L368
+
+=== URL
+
+* No URL is defined
+
+=== Version
+
+* * SeaMonkey 2.33 Branch
+
+=== Votes
+
+* No votes are defined.
+
+=== Whiteboard
+
+* Whiteboard is not available
+
+=== Alias
+
+* No alias is specified
+
+== Custom Fields
+
+* cf_status_seamonkey263: ---
+
+* cf_tracking_seamonkey257esr: ---
+
+* cf_tracking_seamonkey263: ---
+
+* cf_qa_whiteboard: 
+
+* cf_tracking_firefox67_0_5: ---
+
+* cf_fx_iteration: ---
+
+* cf_last_resolved: 2015-04-22T00:10:21Z
+
+* cf_fx_points: ---
+
+* cf_status_seamonkey257esr: ---
+
+* cf_crash_signature: 
+
+* cf_user_story: 
+
+* cf_tracking_seamonkey253: ---
+
+* cf_status_seamonkey253: ---
+
+* cf_tracking_seamonkey249: ---
+
+* cf_status_seamonkey249: ---
+
+
+
+----------
+Report time: 2019-06-25 01:44:11.660631
+
+

@@ -52,6 +52,12 @@ class BugRetriever:
         # Fetching the data from the API
         data_fetched = connector.connection()
 
+        # Basic Fields List of asciidoc fields declaration
+        bug_basic_fields_feed = []
+
+        # Custom Fields List of asciidoc fields declaration
+        bug_custom_fields_feed = []
+
         if data_fetched:
             print()
             print('Bug ID:', self.bug_id)
@@ -71,309 +77,473 @@ class BugRetriever:
                             if not key.startswith('cf'):
                                 # print(key + ':', bug.get(key))
                                 counter_keys_basic += 1
+
+                        bug_basic_fields_feed.append('== Basic Fields')
                         # Summary
+                        bug_basic_fields_feed.append('=== Summary')
                         if bug['summary'] and bug['summary'] is not '':
                             print('Summary:', bug['summary'])
+                            bug_basic_fields_feed.append('* Summary: {}'.format(bug['summary']))
                         else:
                             print('Summary: No summary is available')
+                            bug_basic_fields_feed.append('* No summary is available')
                         # Assigned_to
+                        bug_basic_fields_feed.append('=== Assigned to')
                         if bug['assigned_to'] and bug['assigned_to'] is not '':
                             print('Assigned to:', bug['assigned_to'])
                             # Assigned to Info
                             print('Assigned to - Info:')
                             print('\tEmail:', bug['assigned_to_detail']['email'])
+                            bug_basic_fields_feed.append('* Email: {}'.format(bug['assigned_to_detail']['email']))
                             print('\tID:', bug['assigned_to_detail']['id'])
+                            bug_basic_fields_feed.append('* ID: {}'.format(bug['assigned_to_detail']['id']))
                             print('\tName:', bug['assigned_to_detail']['name'])
+                            bug_basic_fields_feed.append('* Name: {}'.format(bug['assigned_to_detail']['name']))
                             print('\tNickname:', bug['assigned_to_detail']['nick'])
+                            bug_basic_fields_feed.append('* Nickname: {}'.format(bug['assigned_to_detail']['nick']))
                             print('\tReal Name:', bug['assigned_to_detail']['real_name'])
+                            bug_basic_fields_feed.append('* Real Name: {}'
+                                                         .format(bug['assigned_to_detail']['real_name']))
                         else:
                             print('Assigned to: No assigned user.')
+                            bug_basic_fields_feed.append('No assigned user.')
+                        # Blocks
                         print('Blocks:')
+                        bug_basic_fields_feed.append('=== Blocks')
                         list_blocks = bug['blocks']
                         if len(list_blocks) > 0:
                             counter_list_blocks = 1
                             for block_item in list_blocks:
                                 print('\tBlock Item {}:'.format(counter_list_blocks), block_item)
+                                bug_basic_fields_feed.append('* Block Item {}:'.format(counter_list_blocks) + ' {}'
+                                                             .format(block_item))
                                 counter_list_blocks += 1
                         else:
                             print('\tNo blocks listed at this time.')
+                            bug_basic_fields_feed.append('* No blocks listed at this time.')
                         # CC mails
                         print('CC:')
+                        bug_basic_fields_feed.append('=== CC')
                         list_cc = bug['cc']
                         if len(list_cc) > 0:
                             counter_list_cc = 1
                             for cc in list_cc:
                                 print('\tCC {}:'.format(counter_list_cc), cc)
+                                bug_basic_fields_feed.append('* CC {}:'.format(counter_list_cc) + ' {}'.format(cc))
                                 counter_list_cc += 1
                             # CC Detail
                             print('CC Information:')
+                            bug_basic_fields_feed.append('=== CC Information')
                             list_cc_detail = bug['cc_detail']
                             if len(list_cc_detail) > 0:
                                 counter_cc_detail = 1
                                 for cc_item in list_cc_detail:
                                     print('\tCC {} Information:'.format(counter_cc_detail))
+                                    bug_basic_fields_feed.append('* CC {} Information:'.format(counter_cc_detail))
                                     print('\t\tEmail:', cc_item['email'])
+                                    bug_basic_fields_feed.append('** Email: {}'.format(cc_item['email']))
                                     print('\t\tID:', cc_item['id'])
+                                    bug_basic_fields_feed.append('** ID: {}'.format(cc_item['id']))
                                     print('\t\tName:', cc_item['name'])
+                                    bug_basic_fields_feed.append('** Name: {}'.format(cc_item['name']))
                                     print('\t\tNickname:', cc_item['nick'])
+                                    bug_basic_fields_feed.append('** Nickname: {}'.format(cc_item['nick']))
                                     print('\t\tReal Name:', cc_item['real_name'])
+                                    bug_basic_fields_feed.append('** Real Name: {}'.format(cc_item['real_name']))
                                     counter_cc_detail += 1
                         else:
                             print('\tCC List: No CC listed at this time.')
+                            bug_basic_fields_feed.append('* No CC listed at this time.')
                         # Classification
+                        bug_basic_fields_feed.append('=== Classification')
                         if bug['classification'] and bug['classification'] is not '':
                             print('Classification:', bug['classification'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['classification']))
                         else:
-                            print('Classification: No Classification defined at this time')
+                            print('Classification: No Classification is defined at this time')
+                            bug_basic_fields_feed.append('* No Classification is defined at this time.')
                         # Comments counted
+                        bug_basic_fields_feed.append('=== Comments Counted')
                         if bug['comment_count']:
                             print('Comments Count:', bug['comment_count'])
+                            bug_basic_fields_feed.append('* Count: ' + str(bug['comment_count']))
                         else:
                             print('Comments Count: No Comments are available at this time')
+                            bug_basic_fields_feed.append('* No Comments are available at this time.')
                         # Component
+                        bug_basic_fields_feed.append('=== Component')
                         if bug['component'] and bug['component'] is not '':
                             print('Component:', bug['component'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['component']))
                         else:
                             print('component: No component is defined')
+                            bug_basic_fields_feed.append('* No Component is defined.')
                         # Creation Time
+                        bug_basic_fields_feed.append('=== Creation Time')
                         if bug['creation_time'] and bug['creation_time'] is not '':
                             print('Creation Time:', bug['creation_time'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['creation_time']))
                         else:
                             print('Creation Time: No time of creation is available')
+                            bug_basic_fields_feed.append('* No time of creation is available.')
                         # Creator
+                        bug_basic_fields_feed.append('=== Creator')
                         if bug['creator'] and bug['creator'] is not '':
                             print('Creator:', bug['creator'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['creator']))
                             # creator_detail
                             print('Creator Information:')
+                            bug_basic_fields_feed.append('* Creator Information:')
                             print('\tEmail:', bug['creator_detail']['email'])
+                            bug_basic_fields_feed.append('** Email: {}'.format(bug['creator_detail']['email']))
                             print('\tID:', bug['creator_detail']['id'])
+                            bug_basic_fields_feed.append('** ID: {}'.format(bug['creator_detail']['id']))
                             print('\tName:', bug['creator_detail']['name'])
+                            bug_basic_fields_feed.append('** Name: {}'.format(bug['creator_detail']['name']))
                             print('\tNickname:', bug['creator_detail']['nick'])
+                            bug_basic_fields_feed.append('** Nickname: {}'.format(bug['creator_detail']['nick']))
                             print('\tReal Name:', bug['creator_detail']['real_name'])
+                            bug_basic_fields_feed.append('** Real Name: {}'.format(bug['creator_detail']['real_name']))
                         else:
                             print('Creator: No creator is defined')
+                            bug_basic_fields_feed.append('* Creator is not defined.')
                         # Depends On
+                        bug_basic_fields_feed.append('=== Depends On')
                         print('Depends On:')
                         depends_on_list = bug['depends_on']
                         if len(depends_on_list) > 0:
                             counter_depends_on_list = 1
                             for depends_item in depends_on_list:
                                 print('\tDepends on {}'.format(counter_depends_on_list))
+                                bug_basic_fields_feed.append('* Dependency {}'.format(counter_depends_on_list))
                                 print('\t\t', depends_item)
+                                bug_basic_fields_feed.append('** {}'.format(depends_item))
                                 counter_depends_on_list += 1
                         else:
                             print('\tNo dependencies found')
+                            bug_basic_fields_feed.append('* No dependencies were found.')
                         # Dupe of
+                        bug_basic_fields_feed.append('=== Dupe of')
                         if bug['dupe_of'] and bug['dupe_of'] is not None:
                             print('Dupe of:', bug['dupe_of'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['dupe_of']))
                         else:
                             print('Dupe of: No Dupe of information at this time')
+                            bug_basic_fields_feed.append('* No Dupe of information at this time.')
                         # Duplicates
                         print('Duplicates:')
+                        bug_basic_fields_feed.append('=== Duplicates')
                         duplicates_list = bug['duplicates']
                         if len(duplicates_list) > 0:
                             counter_duplicates_list = 1
                             for duplicates_item in duplicates_list:
                                 print('\tDuplicate {}'.format(counter_duplicates_list))
+                                bug_basic_fields_feed.append('* Duplicate {}'.format(counter_duplicates_list))
                                 print('\t\t', duplicates_item)
+                                bug_basic_fields_feed.append('** {}'.format(duplicates_item))
                                 counter_duplicates_list += 1
                         else:
                             print('\tNo listed items.')
+                            bug_basic_fields_feed.append('* No listed items.')
                         # Flags
                         print('Flags:')
                         flags_list = bug['flags']
+                        bug_basic_fields_feed.append('=== Flags')
                         if len(flags_list) > 0:
                             counter_flags_list = 1
                             for flags_item in flags_list:
                                 print('\tFlag {}'.format(counter_flags_list))
+                                bug_basic_fields_feed.append('* Flag {}'.format(counter_flags_list))
                                 print('\t\t', flags_item)
+                                bug_basic_fields_feed.append('** {}'.format(flags_item))
                                 counter_flags_list += 1
                         else:
                             print('\tNo listed items.')
+                            bug_basic_fields_feed.append('* No listed items.')
                         # Groups
                         print('Groups:')
+                        bug_basic_fields_feed.append('=== Groups')
                         groups_list = bug['groups']
                         if len(groups_list) > 0:
                             counter_groups_list = 1
                             for group_item in groups_list:
                                 print('\tGroup {}'.format(counter_groups_list))
+                                bug_basic_fields_feed.append('* Group {}'.format(counter_groups_list))
                                 print('\t\t', group_item)
+                                bug_basic_fields_feed.append('** {}'.format(group_item))
                                 counter_groups_list += 1
                         else:
                             print('\tNo listed items.')
+                            bug_basic_fields_feed.append('* No listed items.')
                         # ID
+                        bug_basic_fields_feed.append('=== ID')
                         if bug['id'] and bug['id'] is not None:
                             print('ID:', bug['id'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['id']))
                         else:
                             print('ID: No ID available')
+                            bug_basic_fields_feed.append('* No ID available.')
                         # Is CC Accessble
+                        bug_basic_fields_feed.append('=== Is CC Accessble')
                         print('CC Accessible:', bug['is_cc_accessible'])
+                        bug_basic_fields_feed.append('* {}'.format(bug['is_cc_accessible']))
                         # Is Confirmed
+                        bug_basic_fields_feed.append('=== Is Confirmed')
                         print('Confirmed:', bug['is_confirmed'])
-                        # Is Creator  Accessible
+                        bug_basic_fields_feed.append('* {}'.format(bug['is_confirmed']))
+                        # Is Creator Accessible
+                        bug_basic_fields_feed.append('=== Is Creator Accessible')
                         print('Creator Accessible:', bug['is_creator_accessible'])
+                        bug_basic_fields_feed.append('* {}'.format(bug['is_creator_accessible']))
                         # Is Open
+                        bug_basic_fields_feed.append('=== Is Open')
                         print('Open:', bug['is_open'])
+                        bug_basic_fields_feed.append('* {}'.format(bug['is_open']))
                         # Keywords
                         print('Keywords:')
                         keywords_list = bug['keywords']
+                        bug_basic_fields_feed.append('=== Keywords')
                         if len(keywords_list) > 0:
                             counter_keywords_list = 1
                             for keyword_item in keywords_list:
                                 print('\tKeyword {}'.format(counter_keywords_list))
+                                bug_basic_fields_feed.append('* Keyword {}'.format(counter_keywords_list))
                                 print('\t\t', keyword_item)
+                                bug_basic_fields_feed.append('** {}'.format(keyword_item))
                                 counter_keywords_list += 1
                         else:
                             print('\tNo listed keywords.')
+                            bug_basic_fields_feed.append('* No listed keywords.')
                         # Last Change Time
+                        bug_basic_fields_feed.append('=== Last Change Time')
                         if bug['last_change_time'] and bug['last_change_time'] is not '':
                             print('Last Change Time:', bug['last_change_time'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['last_change_time']))
                         else:
                             print('Last Change Time: No Last Change Time is available')
+                            bug_basic_fields_feed.append('* No Last Change Time is available.')
                         # Mentors
                         print('Mentors:')
+                        bug_basic_fields_feed.append('=== Mentors')
                         mentors_list = bug['mentors']
                         if len(mentors_list) > 0:
                             counter_mentors_list = 1
                             for mentor_item in mentors_list:
                                 print('\tMentor {}'.format(counter_mentors_list))
+                                bug_basic_fields_feed.append('* Mentor {}'.format(counter_mentors_list))
                                 print('\t\t', mentor_item)
+                                bug_basic_fields_feed.append('** {}'.format(mentor_item))
                                 counter_mentors_list += 1
                             # Mentors Information
                             print('Mentors Information')
+                            bug_basic_fields_feed.append('=== Mentors Information')
                             mentors_detail_list = bug['mentors_detail']
                             if len(mentors_detail_list) > 0:
                                 counter_mentors_detail_list = 1
                                 for mentor_item in mentors_detail_list:
                                     print('\tMentor {}'.format(counter_mentors_detail_list))
+                                    bug_basic_fields_feed.append('* Mentor {}'.format(counter_mentors_detail_list))
                                     print('\t\tEmail:', mentor_item['email'])
+                                    bug_basic_fields_feed.append('** Email: {}'.format(mentor_item['email']))
                                     print('\t\tID:', mentor_item['id'])
+                                    bug_basic_fields_feed.append('** ID: {}'.format(mentor_item['id']))
                                     print('\t\tName:', mentor_item['name'])
+                                    bug_basic_fields_feed.append('** Name: {}'.format(mentor_item['name']))
                                     print('\t\tNickname:', mentor_item['nick'])
-                                    print('\t\tReal Name::', mentor_item['real_name'])
+                                    bug_basic_fields_feed.append('** Nickname: {}'.format(mentor_item['nick']))
+                                    print('\t\tReal Name:', mentor_item['real_name'])
+                                    bug_basic_fields_feed.append('** Real Name: {}'.format(mentor_item['real_name']))
                                     counter_mentors_detail_list += 1
                         else:
                             print('\tNo listed items.')
+                            bug_basic_fields_feed.append('* No listed Mentors.')
                         # Operation System
+                        bug_basic_fields_feed.append('=== Operation System')
                         if bug['op_sys'] and bug['op_sys'] is not '':
                             print('Operating System:', bug['op_sys'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['op_sys']))
                         else:
                             print('Operating System: The operating system is not defined')
+                            bug_basic_fields_feed.append('* The operating system is not defined.')
                         # Platform
+                        bug_basic_fields_feed.append('=== Platform')
                         if bug['platform'] and bug['platform'] is not '':
                             print('Platform:', bug['platform'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['platform']))
                         else:
                             print('Platform: No platform defined')
+                            bug_basic_fields_feed.append('* The platform is not defined.')
                         # Priority
+                        bug_basic_fields_feed.append('=== Priority')
                         if bug['priority'] and bug['priority'] is not '':
                             print('Priority:', bug['priority'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['priority']))
                         else:
                             print('Priority: The priority of the bug is not defined')
+                            bug_basic_fields_feed.append('* The priority of the bug is not defined.')
                         # Product
+                        bug_basic_fields_feed.append('=== Product')
                         if bug['product'] and bug['product'] is not '':
                             print('Product:', bug['product'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['product']))
                         else:
                             print('Product: No product information is available')
+                            bug_basic_fields_feed.append('* No product information is available.')
                         # QA Contact
+                        bug_basic_fields_feed.append('=== QA Contact')
                         if bug['qa_contact'] and bug['qa_contact'] is not '':
                             print('QA Contact:', bug['qa_contact'])
+                            bug_basic_fields_feed.append('* {}:'.format(bug['qa_contact']))
                             # qa_contact_detail
                             print('QA Contact Information:')
+                            bug_basic_fields_feed.append('=== QA Contact Information')
                             print('\tEmail:', bug['qa_contact_detail']['email'])
+                            bug_basic_fields_feed.append('* Email: {}'.format(bug['qa_contact_detail']['email']))
                             print('\tID:', bug['qa_contact_detail']['id'])
+                            bug_basic_fields_feed.append('* ID: {}'.format(bug['qa_contact_detail']['id']))
                             print('\tName:', bug['qa_contact_detail']['name'])
+                            bug_basic_fields_feed.append('* Name: {}'.format(bug['qa_contact_detail']['name']))
                             print('\tNickname:', bug['qa_contact_detail']['nick'])
+                            bug_basic_fields_feed.append('* Nickname: {}'.format(bug['qa_contact_detail']['nick']))
                             print('\tReal Name:', bug['qa_contact_detail']['real_name'])
+                            bug_basic_fields_feed.append('* Real Name: {}'
+                                                         .format(bug['qa_contact_detail']['real_name']))
                         else:
                             print('QA Contact: There is no QA Contact available.')
+                            bug_basic_fields_feed.append('*  There is no QA Contact available.')
                         # Regressed by
                         print('Regressed By:')
+                        bug_basic_fields_feed.append('=== Regressed By')
                         regressed_by_list = bug['regressed_by']
                         if len(regressed_by_list) > 0:
                             counter_regressed_by_list = 1
                             for regressed_by_item in regressed_by_list:
                                 print('\tRegressed by {}'.format(counter_regressed_by_list))
+                                bug_basic_fields_feed.append('* Regressed by {}'.format(counter_regressed_by_list))
                                 print('\t\t', regressed_by_item)
+                                bug_basic_fields_feed.append('** {}'.format(regressed_by_item))
                                 counter_regressed_by_list += 1
                         else:
                             print('\tNo listed items.')
+                            bug_basic_fields_feed.append('* No listed items.')
                         # Regressions
                         print('Regressions:')
+                        bug_basic_fields_feed.append('=== Regressions')
                         regressions_list = bug['regressions']
                         if len(regressions_list) > 0:
                             counter_regressions_list = 1
                             for regression_item in regressions_list:
                                 print('\tRegression {}'.format(counter_regressions_list))
+                                bug_basic_fields_feed.append('* Regression {}'.format(counter_regressions_list))
                                 print('\t\t', regression_item)
+                                bug_basic_fields_feed.append('** {}'.format(regression_item))
                                 counter_regressions_list += 1
                         else:
                             print('\tNo listed items.')
+                            bug_basic_fields_feed.append('* No listed items.')
                         # Resolution
+                        bug_basic_fields_feed.append('=== Resolution')
                         if bug['resolution'] and bug['resolution'] is not '':
                             print('Resolution:', bug['resolution'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['resolution']))
                         else:
                             print('Resolution: No resolution is defined')
+                            bug_basic_fields_feed.append('* No resolution is defined.')
                         # See Also
+                        bug_basic_fields_feed.append('=== See Also')
                         print('See Also:')
                         see_also_list = bug['see_also']
                         if len(see_also_list) > 0:
                             counter_see_also_list = 1
                             for see_item in see_also_list:
                                 print('\tSee {}'.format(counter_see_also_list))
+                                bug_basic_fields_feed.append('* See {}'.format(counter_see_also_list))
                                 print('\t\t', see_item)
+                                bug_basic_fields_feed.append('** {}'.format(see_item))
                                 counter_see_also_list += 1
                         else:
                             print('\tNo listed items.')
+                            bug_basic_fields_feed.append('* No listed items.')
                         # Severity
+                        bug_basic_fields_feed.append('=== Severity')
                         if bug['severity'] and bug['severity'] is not '':
                             print('Severity:', bug['severity'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['severity']))
                         else:
                             print('Severity: Severity is not defined')
+                            bug_basic_fields_feed.append('* Severity is not defined.')
                         # Status
+                        bug_basic_fields_feed.append('=== Status')
                         if bug['status'] and bug['status'] is not '':
                             print('Status:', bug['status'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['status']))
                         else:
                             print('Status: No status is available')
+                            bug_basic_fields_feed.append('* Status is not available.')
                         # Target Milestone
+                        bug_basic_fields_feed.append('=== Target Milestone')
                         if bug['target_milestone'] and bug['target_milestone'] is not '---':
                             print('Target Milestone:', bug['target_milestone'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['target_milestone']))
                         else:
                             print('Target Milestone: No target milestone is available')
+                            bug_basic_fields_feed.append('* No target milestone is available.')
                         # Type
+                        bug_basic_fields_feed.append('=== Type')
                         if bug['type'] and bug['type'] is not '':
                             print('Type:', bug['type'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['type']))
                         else:
                             print('Type: No bug type is available')
+                            bug_basic_fields_feed.append('* No bug type is available.')
                         # Update Token
+                        bug_basic_fields_feed.append('=== Update Token')
                         if bug['update_token'] and bug['update_token'] is not '':
                             print('Update Token:', bug['update_token'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['update_token']))
                         else:
                             print('Update Token: Update token is not available')
+                            bug_basic_fields_feed.append('* Update token is not available')
                         # URL
+                        bug_basic_fields_feed.append('=== URL')
                         if bug['url'] and bug['url'] is not '':
                             print('URL:', bug['url'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['url']))
                         else:
                             print('URL: No URL defined')
+                            bug_basic_fields_feed.append('* No URL is defined')
                         # version
+                        bug_basic_fields_feed.append('=== Version')
                         if bug['version'] and bug['version'] is not '':
                             print('Version:', bug['version'])
+                            bug_basic_fields_feed.append('* {}'.format('* {}'.format(bug['version'])))
                         else:
                             print('Version: No version defined')
+                            bug_basic_fields_feed.append('* No version is defined')
                         # votes
+                        bug_basic_fields_feed.append('=== Votes')
                         if bug['votes']:
                             print('Votes:', bug['votes'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['votes']))
                         else:
                             print('Votes: No votes defined')
+                            bug_basic_fields_feed.append('* No votes are defined.')
                         # whiteboard
+                        bug_basic_fields_feed.append('=== Whiteboard')
                         if bug['whiteboard'] and bug['whiteboard'] is not '':
                             print('Whiteboard:', bug['whiteboard'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['whiteboard']))
                         else:
                             print('Whiteboard: Whiteboard is not available')
+                            bug_basic_fields_feed.append('* Whiteboard is not available')
                         # alias
+                        bug_basic_fields_feed.append('=== Alias')
                         if bug['alias'] and bug['alias'] is not None:
                             print('Alias:', bug['alias'])
+                            bug_basic_fields_feed.append('* {}'.format(bug['alias']))
                         else:
                             print('Alias: No alias is specified')
+                            bug_basic_fields_feed.append('* No alias is specified')
                         print()
                         print('Countered Basic Fields:', counter_keys_basic)
                         print()
@@ -381,18 +551,27 @@ class BugRetriever:
                         print()
                         # CUSTOM FIELDS
                         print('CUSTOM FIELDS')
+                        bug_basic_fields_feed.append('== Custom Fields')
                         counter_keys_cf = 0
                         for key in bug_keys_list:
                             if key.startswith('cf'):
                                 print(key + ':', bug.get(key))
+                                bug_basic_fields_feed.append('* {}'.format(key) + ': {}'.format(bug.get(key)))
                                 counter_keys_cf += 1
                         print()
                         print('Countered Custom Fields:', counter_keys_cf)
                         print()
                         print()
-
+                        for item in bug_basic_fields_feed:
+                            print(item)
+                            print()
+                        print()
+                        print()
                 elif bugs != 'bugs' and bugs != 'faults':
                     pprint(data_fetched)
+                    bug_basic_fields_feed.append(data_fetched)
+
+        return bug_basic_fields_feed
 
 
 """ CLASS: Getting all comments for a single bug """
@@ -416,24 +595,32 @@ class Comments:
         data = r.json()
         # pprint(data)
         # print(data.keys())
+        bug_comments_list = []
         for bugs in data.keys():
             if bugs == 'bugs':
                 real_documents = data[bugs][str(self.bug_id)]['comments']
                 counter_comments = 1
+                bug_comments_list.append('== Comments')
                 for item in real_documents:
                     print('Comment {}'.format(counter_comments))
+                    bug_comments_list.append('=== Comment {}'.format(counter_comments))
+                    print('--')
+                    print('Text:')
+                    bug_comments_list.append('* Text:')
+                    print(item['text'])
+                    bug_comments_list.append('** {}'.format(item['text']))
                     print('--')
                     print('Author:')
                     print(item['author'])
-                    print('--')
-                    print('Text:')
-                    print(item['text'])
+                    bug_comments_list.append('* Author: {}'.format(item['author']))
                     print('--')
                     print('Created at:')
                     print(item['creation_time'])
+                    bug_comments_list.append('* Created at: {}'.format(item['creation_time']))
                     print('--')
                     print('Bug ID:')
                     print(item['bug_id'])
+                    bug_comments_list.append('* Bug ID: {}'.format(item['bug_id']))
                     print()
                     print()
                     print('-----------------------------------------------------------------------------------')
@@ -445,6 +632,17 @@ class Comments:
                 print()
             elif bugs != 'bugs' and bugs != 'comments':
                 print(data)
+                bug_comments_list.append('* {}'.format(data))
+            else:
+                bug_comments_list.append('* No comments are available at this time.')
+        print()
+        print()
+        for item in bug_comments_list:
+            print(item)
+            print()
+        print()
+        print()
+        return bug_comments_list
 
 
 """ CLASS: Getting history of all metadata changes for a single bug """
@@ -466,27 +664,36 @@ class History:
         u = url + "?token={}".format(self.key)
         r = requests.get(u)
         data = r.json()
+        history_list = []
         # print(data.keys())
+        history_list.append('== History')
         for bugs in data.keys():
             if bugs == 'bugs':
                 real_documents = data['bugs'][0]['history']
                 counter_history = 1
                 for item in real_documents:
                     print('History {}'.format(counter_history))
+                    history_list.append('=== History {}'.format(counter_history))
                     print()
                     print('DateTime:', item['when'])
+                    history_list.append('* Datetime: {}'.format( item['when']))
                     changes = item['changes']
                     print()
                     print('Changes:')
                     counter_changes = 0
                     for sub_item in changes:
                         print('\tchange {}'.format(counter_changes))
+                        history_list.append('* Change {}'.format(counter_changes))
                         print('\t\tremoved:', sub_item['removed'])
+                        history_list.append('** removed: {}'.format(sub_item['removed']))
                         print('\t\tadded:', sub_item['added'])
+                        history_list.append('** added: {}'.format(sub_item['added']))
                         print('\t\tfield name:', sub_item['field_name'])
+                        history_list.append('** field name: {}'.format(sub_item['field_name']))
                         counter_changes += 1
                     print()
                     print('Who:', item['who'])
+                    history_list.append('* Who: {}'.format(item['who']))
                     print()
                     print()
                     print('-----------------------------------------------------------------------------------')
@@ -495,8 +702,23 @@ class History:
                     counter_history += 1
                 print()
                 print('Countered histories:', counter_history - 1)
+                history_list.append('\n')
+                history_list.append('\n')
+                history_list.append('Countered histories: {}'.format(counter_history - 1))
             else:
                 print(data)
+                history_list.append('* {}'.format(data))
+                print()
+
+        print()
+        print()
+        for item in history_list:
+            print(item)
+            print()
+        print()
+        print()
+
+        return history_list
 
 
 """ CLASS: Getting data for all the bugs assigned to a particular user  """
@@ -518,12 +740,14 @@ class UserBugs:
         r = requests.get(url)
         data = r.json()
         # pprint(data)
+        bug_basic_fields_feed = []
         print()
         for bugs in data.keys():
             if bugs == 'bugs':
                 bugs_counter = 1
                 for item in data[bugs]:
                     print('User Bug: {}'.format(bugs_counter))
+                    bug_basic_fields_feed.append('= User Bug: {}'.format(bugs_counter))
                     print()
                     # print(item.keys())
                     item_keys_list = item.keys()
@@ -534,316 +758,465 @@ class UserBugs:
                         if not key.startswith('cf'):
                             # print(key + ':', item.get(key))
                             counter_keys_basic += 1
+
+                    bug_basic_fields_feed.append('== Basic Fields')
                     # Summary
+                    bug_basic_fields_feed.append('=== Summary')
                     if item['summary'] and item['summary'] is not '':
                         print('Summary:', item['summary'])
+                        bug_basic_fields_feed.append('* Summary: {}'.format(item['summary']))
                     else:
-                        print('Summary: No summary is defined')
+                        print('Summary: No summary is available')
+                        bug_basic_fields_feed.append('* No summary is available')
                     # Assigned to
+                    bug_basic_fields_feed.append('=== Assigned to')
                     if item['assigned_to'] and item['assigned_to'] is not '':
                         print('Assigned to:', item['assigned_to'])
                         # Assigned to Info
                         print('Assigned to - Info:')
                         print('\tEmail:', item['assigned_to_detail']['email'])
+                        bug_basic_fields_feed.append('* Email: {}'.format(item['assigned_to_detail']['email']))
                         print('\tID:', item['assigned_to_detail']['id'])
+                        bug_basic_fields_feed.append('* ID: {}'.format(item['assigned_to_detail']['id']))
                         print('\tName:', item['assigned_to_detail']['name'])
+                        bug_basic_fields_feed.append('* Name: {}'.format(item['assigned_to_detail']['name']))
                         print('\tNickname:', item['assigned_to_detail']['nick'])
+                        bug_basic_fields_feed.append('* Nickname: {}'.format(item['assigned_to_detail']['nick']))
                         print('\tReal Name:', item['assigned_to_detail']['real_name'])
+                        bug_basic_fields_feed.append('* Real Name: {}'
+                                                     .format(item['assigned_to_detail']['real_name']))
                     else:
                         print('Assigned to: No assigned user.')
+                        bug_basic_fields_feed.append('No assigned user.')
                     # blocks
                     print('Blocks:')
+                    bug_basic_fields_feed.append('=== Blocks')
                     list_blocks = item['blocks']
                     if len(list_blocks) > 0:
                         counter_list_blocks = 1
                         for block_item in list_blocks:
                             print('\tBlock Item {}:'.format(counter_list_blocks), block_item)
+                            bug_basic_fields_feed.append('* Block Item {}:'.format(counter_list_blocks) + ' {}'
+                                                         .format(block_item))
                             counter_list_blocks += 1
                     else:
                         print('\tNo blocks listed at this time.')
+                        bug_basic_fields_feed.append('* No blocks listed at this time.')
                     # CC
                     print('CC:')
+                    bug_basic_fields_feed.append('=== CC')
                     list_cc = item['cc']
                     if len(list_cc) > 0:
                         counter_list_cc = 1
                         for cc in list_cc:
                             print('\tCC {}:'.format(counter_list_cc), cc)
+                            bug_basic_fields_feed.append('* CC {}:'.format(counter_list_cc) + ' {}'.format(cc))
                             counter_list_cc += 1
                         # CC Detail
                         print('CC Information:')
+                        bug_basic_fields_feed.append('=== CC Information')
                         list_cc_detail = item['cc_detail']
                         if len(list_cc_detail) > 0:
                             counter_cc_detail = 1
                             for cc_item in list_cc_detail:
                                 print('\tCC {} Information:'.format(counter_cc_detail))
+                                bug_basic_fields_feed.append('* CC {} Information:'.format(counter_cc_detail))
                                 print('\t\tEmail:', cc_item['email'])
+                                bug_basic_fields_feed.append('** Email: {}'.format(cc_item['email']))
                                 print('\t\tID:', cc_item['id'])
+                                bug_basic_fields_feed.append('** ID: {}'.format(cc_item['id']))
                                 print('\t\tName:', cc_item['name'])
+                                bug_basic_fields_feed.append('** Name: {}'.format(cc_item['name']))
                                 print('\t\tNickname:', cc_item['nick'])
+                                bug_basic_fields_feed.append('** Nickname: {}'.format(cc_item['nick']))
                                 print('\t\tReal Name:', cc_item['real_name'])
+                                bug_basic_fields_feed.append('** Real Name: {}'.format(cc_item['real_name']))
                                 counter_cc_detail += 1
                     else:
                         print('\tCC List: No CC listed at this time.')
+                        bug_basic_fields_feed.append('* No CC listed at this time.')
                     # classification
+                    bug_basic_fields_feed.append('=== Classification')
                     if item['classification'] and item['classification'] is not '':
                         print('Classification:', item['classification'])
+                        bug_basic_fields_feed.append('* {}'.format(item['classification']))
                     else:
-                        print('Classification: No classification is assigned')
+                        print('Classification: No Classification is defined at this time')
+                        bug_basic_fields_feed.append('* No Classification is defined at this time.')
                     # comment_count
+                    bug_basic_fields_feed.append('=== Comments Counted')
                     if item['comment_count']:
-                        print('Comment count:', item['comment_count'])
+                        print('Comments Count:', item['comment_count'])
+                        bug_basic_fields_feed.append('* Count: ' + str(item['comment_count']))
                     else:
-                        print('Comment count: There is no comments field')
+                        print('Comments Count: No Comments are available at this time')
+                        bug_basic_fields_feed.append('* No Comments are available at this time.')
                     # component
+                    bug_basic_fields_feed.append('=== Component')
                     if item['component'] and item['component'] is not '':
                         print('Component:', item['component'])
+                        bug_basic_fields_feed.append('* {}'.format(item['component']))
                     else:
-                        print('Component: No component is defined')
+                        print('component: No component is defined')
+                        bug_basic_fields_feed.append('* No Component is defined.')
                     # creation_time
+                    bug_basic_fields_feed.append('=== Creation Time')
                     if item['creation_time'] and item['creation_time'] is not '':
-                        print('Created at:', item['creation_time'])
+                        print('Creation Time:', item['creation_time'])
+                        bug_basic_fields_feed.append('* {}'.format(item['creation_time']))
                     else:
-                        print('Created at: No creation time is available at this time')
+                        print('Creation Time: No time of creation is available')
+                        bug_basic_fields_feed.append('* No time of creation is available.')
                     # creator
+                    bug_basic_fields_feed.append('=== Creator')
                     if item['creator'] and item['creator'] is not '':
                         print('Creator:', item['creator'])
+                        bug_basic_fields_feed.append('* {}'.format(item['creator']))
                         # creator_detail
                         print('Creator Information:')
+                        bug_basic_fields_feed.append('* Creator Information:')
                         print('\tEmail:', item['creator_detail']['email'])
+                        bug_basic_fields_feed.append('** Email: {}'.format(item['creator_detail']['email']))
                         print('\tID:', item['creator_detail']['id'])
+                        bug_basic_fields_feed.append('** ID: {}'.format(item['creator_detail']['id']))
                         print('\tName:', item['creator_detail']['name'])
+                        bug_basic_fields_feed.append('** Name: {}'.format(item['creator_detail']['name']))
                         print('\tNickname:', item['creator_detail']['nick'])
+                        bug_basic_fields_feed.append('** Nickname: {}'.format(item['creator_detail']['nick']))
                         print('\tReal Name:', item['creator_detail']['real_name'])
+                        bug_basic_fields_feed.append('** Real Name: {}'.format(item['creator_detail']['real_name']))
                     else:
                         print('Creator: No creator is defined')
+                        bug_basic_fields_feed.append('* Creator is not defined.')
                     # Depends On
+                    bug_basic_fields_feed.append('=== Depends On')
                     print('Depends On:')
                     depends_on_list = item['depends_on']
                     if len(depends_on_list) > 0:
                         counter_depends_on_list = 1
                         for depends_item in depends_on_list:
                             print('\tDepends on {}'.format(counter_depends_on_list))
+                            bug_basic_fields_feed.append('* Dependency {}'.format(counter_depends_on_list))
                             print('\t\t', depends_item)
+                            bug_basic_fields_feed.append('** {}'.format(depends_item))
                             counter_depends_on_list += 1
                     else:
-                        print('\tNo listed items.')
+                        print('\tNo dependencies found')
+                        bug_basic_fields_feed.append('* No dependencies were found.')
                     # dupe of
+                    bug_basic_fields_feed.append('=== Dupe of')
                     if item['dupe_of'] and item['dupe_of'] is not None:
                         print('Dupe of:', item['dupe_of'])
+                        bug_basic_fields_feed.append('* {}'.format(item['dupe_of']))
                     else:
-                        print('Dupe of: Nothing to show')
+                        print('Dupe of: No Dupe of information at this time')
+                        bug_basic_fields_feed.append('* No Dupe of information at this time.')
                     # Duplicates
                     print('Duplicates:')
+                    bug_basic_fields_feed.append('=== Duplicates')
                     duplicates_list = item['duplicates']
                     if len(duplicates_list) > 0:
                         counter_duplicates_list = 1
                         for duplicates_item in duplicates_list:
                             print('\tDuplicate {}'.format(counter_duplicates_list))
+                            bug_basic_fields_feed.append('* Duplicate {}'.format(counter_duplicates_list))
                             print('\t\t', duplicates_item)
+                            bug_basic_fields_feed.append('** {}'.format(duplicates_item))
                             counter_duplicates_list += 1
                     else:
                         print('\tNo listed items.')
+                        bug_basic_fields_feed.append('* No listed items.')
                     # Flags
                     print('Flags:')
                     flags_list = item['flags']
+                    bug_basic_fields_feed.append('=== Flags')
                     if len(flags_list) > 0:
                         counter_flags_list = 1
                         for flags_item in flags_list:
                             print('\tFlag {}'.format(counter_flags_list))
+                            bug_basic_fields_feed.append('* Flag {}'.format(counter_flags_list))
                             print('\t\t', flags_item)
+                            bug_basic_fields_feed.append('** {}'.format(flags_item))
                             counter_flags_list += 1
                     else:
                         print('\tNo listed items.')
+                        bug_basic_fields_feed.append('* No listed items.')
                     # Groups
                     print('Groups:')
+                    bug_basic_fields_feed.append('=== Groups')
                     groups_list = item['groups']
                     if len(groups_list) > 0:
                         counter_groups_list = 1
                         for group_item in groups_list:
                             print('\tGroup {}'.format(counter_groups_list))
+                            bug_basic_fields_feed.append('* Group {}'.format(counter_groups_list))
                             print('\t\t', group_item)
+                            bug_basic_fields_feed.append('** {}'.format(group_item))
                             counter_groups_list += 1
                     else:
                         print('\tNo listed items.')
+                        bug_basic_fields_feed.append('* No listed items.')
                     # ID
+                    bug_basic_fields_feed.append('=== ID')
                     if item['id'] and item['id'] is not None:
                         print('ID:', item['id'])
+                        bug_basic_fields_feed.append('* {}'.format(item['id']))
                     else:
-                        print('ID: No ID defined')
+                        print('ID: No ID available')
+                        bug_basic_fields_feed.append('* No ID available.')
                     # is_cc_accessible
-                    print('CC Accessible', item['is_cc_accessible'])
+                    bug_basic_fields_feed.append('=== Is CC Accessble')
+                    print('CC Accessible:', item['is_cc_accessible'])
+                    bug_basic_fields_feed.append('* {}'.format(item['is_cc_accessible']))
                     # is_confirmed
+                    bug_basic_fields_feed.append('=== Is Confirmed')
                     print('Confirmed:', item['is_confirmed'])
+                    bug_basic_fields_feed.append('* {}'.format(item['is_confirmed']))
                     # is_creator_accessible
+                    bug_basic_fields_feed.append('=== Is Creator Accessible')
                     print('Creator Accessible:', item['is_creator_accessible'])
+                    bug_basic_fields_feed.append('* {}'.format(item['is_creator_accessible']))
                     # is_open
+                    bug_basic_fields_feed.append('=== Is Open')
                     print('Open:', item['is_open'])
+                    bug_basic_fields_feed.append('* {}'.format(item['is_open']))
                     # Keywords
                     print('Keywords:')
                     keywords_list = item['keywords']
+                    bug_basic_fields_feed.append('=== Keywords')
                     if len(keywords_list) > 0:
                         counter_keywords_list = 1
                         for keyword_item in keywords_list:
                             print('\tKeyword {}'.format(counter_keywords_list))
+                            bug_basic_fields_feed.append('* Keyword {}'.format(counter_keywords_list))
                             print('\t\t', keyword_item)
+                            bug_basic_fields_feed.append('** {}'.format(keyword_item))
                             counter_keywords_list += 1
                     else:
                         print('\tNo listed keywords.')
+                        bug_basic_fields_feed.append('* No listed keywords.')
                     # last_change_time
+                    bug_basic_fields_feed.append('=== Last Change Time')
                     if item['last_change_time'] and item['last_change_time'] is not '':
                         print('Last Change Time:', item['last_change_time'])
+                        bug_basic_fields_feed.append('* {}'.format(item['last_change_time']))
                     else:
-                        print('Last Change Time: No time defined')
+                        print('Last Change Time: No Last Change Time is available')
+                        bug_basic_fields_feed.append('* No Last Change Time is available.')
                     # Mentors
-                    print('Mentors:')
-                    mentors_list = item['mentors']
-                    if len(mentors_list) > 0:
-                        counter_mentors_list = 1
-                        for mentor_item in mentors_list:
-                            print('\tMentor {}'.format(counter_mentors_list))
-                            print('\t\t', mentor_item)
-                            counter_mentors_list += 1
-                        # Mentors Information
-                        print('Mentors Information')
-                        mentors_detail_list = item['mentors_detail']
-                        if len(mentors_detail_list) > 0:
-                            counter_mentors_detail_list = 1
-                            for mentor_item in mentors_detail_list:
-                                print('\tMentor {}'.format(counter_mentors_detail_list))
-                                print('\t\tEmail:', mentor_item['email'])
-                                print('\t\tID:', mentor_item['id'])
-                                print('\t\tName:', mentor_item['name'])
-                                print('\t\tNickname:', mentor_item['nick'])
-                                print('\t\tReal Name::', mentor_item['real_name'])
-                                print()
-                                counter_mentors_detail_list += 1
+                    print('Mentors Information')
+                    bug_basic_fields_feed.append('=== Mentors Information')
+                    mentors_detail_list = item['mentors_detail']
+                    if len(mentors_detail_list) > 0:
+                        counter_mentors_detail_list = 1
+                        for mentor_item in mentors_detail_list:
+                            print('\tMentor {}'.format(counter_mentors_detail_list))
+                            bug_basic_fields_feed.append('* Mentor {}'.format(counter_mentors_detail_list))
+                            print('\t\tEmail:', mentor_item['email'])
+                            bug_basic_fields_feed.append('** Email: {}'.format(mentor_item['email']))
+                            print('\t\tID:', mentor_item['id'])
+                            bug_basic_fields_feed.append('** ID: {}'.format(mentor_item['id']))
+                            print('\t\tName:', mentor_item['name'])
+                            bug_basic_fields_feed.append('** Name: {}'.format(mentor_item['name']))
+                            print('\t\tNickname:', mentor_item['nick'])
+                            bug_basic_fields_feed.append('** Nickname: {}'.format(mentor_item['nick']))
+                            print('\t\tReal Name:', mentor_item['real_name'])
+                            bug_basic_fields_feed.append('** Real Name: {}'.format(mentor_item['real_name']))
+                            counter_mentors_detail_list += 1
                     else:
                         print('\tNo listed items.')
+                    bug_basic_fields_feed.append('* No listed Mentors.')
                     # op_sys
+                    bug_basic_fields_feed.append('=== Operation System')
                     if item['op_sys'] and item['op_sys'] is not '':
                         print('Operating System:', item['op_sys'])
+                        bug_basic_fields_feed.append('* {}'.format(item['op_sys']))
                     else:
-                        print('Operating System: No OS defined')
+                        print('Operating System: The operating system is not defined')
+                        bug_basic_fields_feed.append('* The operating system is not defined.')
                     # platform
+                    bug_basic_fields_feed.append('=== Platform')
                     if item['platform'] and item['platform'] is not '':
                         print('Platform:', item['platform'])
+                        bug_basic_fields_feed.append('* {}'.format(item['platform']))
                     else:
                         print('Platform: No platform defined')
+                        bug_basic_fields_feed.append('* The platform is not defined.')
                     # priority
+                    bug_basic_fields_feed.append('=== Priority')
                     if item['priority'] and item['priority'] is not '':
                         print('Priority:', item['priority'])
+                        bug_basic_fields_feed.append('* {}'.format(item['priority']))
                     else:
-                        print('Priority: No priority defined')
+                        print('Priority: The priority of the bug is not defined')
+                        bug_basic_fields_feed.append('* The priority of the bug is not defined.')
                     # product
+                    bug_basic_fields_feed.append('=== Product')
                     if item['product'] and item['product'] is not '':
                         print('Product:', item['product'])
+                        bug_basic_fields_feed.append('* {}'.format(item['product']))
                     else:
-                        print('Product: No product defined')
+                        print('Product: No product information is available')
+                        bug_basic_fields_feed.append('* No product information is available.')
                     # qa_contact
+                    bug_basic_fields_feed.append('=== QA Contact')
                     if item['qa_contact'] and item['qa_contact'] is not '':
                         print('QA Contact:', item['qa_contact'])
+                        bug_basic_fields_feed.append('* {}:'.format(item['qa_contact']))
                         # qa_contact_detail
                         print('QA Contact Information:')
+                        bug_basic_fields_feed.append('=== QA Contact Information')
                         print('\tEmail:', item['qa_contact_detail']['email'])
+                        bug_basic_fields_feed.append('* Email: {}'.format(item['qa_contact_detail']['email']))
                         print('\tID:', item['qa_contact_detail']['id'])
+                        bug_basic_fields_feed.append('* ID: {}'.format(item['qa_contact_detail']['id']))
                         print('\tName:', item['qa_contact_detail']['name'])
+                        bug_basic_fields_feed.append('* Name: {}'.format(item['qa_contact_detail']['name']))
                         print('\tNickname:', item['qa_contact_detail']['nick'])
+                        bug_basic_fields_feed.append('* Nickname: {}'.format(item['qa_contact_detail']['nick']))
                         print('\tReal Name:', item['qa_contact_detail']['real_name'])
+                        bug_basic_fields_feed.append('* Real Name: {}'
+                                                     .format(item['qa_contact_detail']['real_name']))
                     else:
                         print('QA Contact: There is no QA Contact available.')
+                        bug_basic_fields_feed.append('*  There is no QA Contact available.')
                     # Regressed By
                     print('Regressed By:')
+                    bug_basic_fields_feed.append('=== Regressed By')
                     regressed_by_list = item['regressed_by']
                     if len(regressed_by_list) > 0:
                         counter_regressed_by_list = 1
                         for regressed_by_item in regressed_by_list:
                             print('\tRegressed by {}'.format(counter_regressed_by_list))
+                            bug_basic_fields_feed.append('* Regressed by {}'.format(counter_regressed_by_list))
                             print('\t\t', regressed_by_item)
+                            bug_basic_fields_feed.append('** {}'.format(regressed_by_item))
                             counter_regressed_by_list += 1
                     else:
                         print('\tNo listed items.')
+                        bug_basic_fields_feed.append('* No listed items.')
                     # regressions
                     print('Regressions:')
+                    bug_basic_fields_feed.append('=== Regressions')
                     regressions_list = item['regressions']
                     if len(regressions_list) > 0:
                         counter_regressions_list = 1
                         for regression_item in regressions_list:
                             print('\tRegression {}'.format(counter_regressions_list))
+                            bug_basic_fields_feed.append('* Regression {}'.format(counter_regressions_list))
                             print('\t\t', regression_item)
+                            bug_basic_fields_feed.append('** {}'.format(regression_item))
                             counter_regressions_list += 1
                     else:
                         print('\tNo listed items.')
+                        bug_basic_fields_feed.append('* No listed items.')
                     # resolution
+                    bug_basic_fields_feed.append('=== Resolution')
                     if item['resolution'] and item['resolution'] is not '':
                         print('Resolution:', item['resolution'])
+                        bug_basic_fields_feed.append('* {}'.format(item['resolution']))
                     else:
-                        print('Resolution: No resolution defined')
+                        print('Resolution: No resolution is defined')
+                        bug_basic_fields_feed.append('* No resolution is defined.')
                     # see also
+                    bug_basic_fields_feed.append('=== See Also')
                     print('See Also:')
                     see_also_list = item['see_also']
                     if len(see_also_list) > 0:
                         counter_see_also_list = 1
                         for see_item in see_also_list:
                             print('\tSee {}'.format(counter_see_also_list))
+                            bug_basic_fields_feed.append('* See {}'.format(counter_see_also_list))
                             print('\t\t', see_item)
+                            bug_basic_fields_feed.append('** {}'.format(see_item))
                             counter_see_also_list += 1
                     else:
                         print('\tNo listed items.')
+                        bug_basic_fields_feed.append('* No listed items.')
                     # severity
+                    bug_basic_fields_feed.append('=== Severity')
                     if item['severity'] and item['severity'] is not '':
                         print('Severity:', item['severity'])
+                        bug_basic_fields_feed.append('* {}'.format(item['severity']))
                     else:
-                        print('Severity: No severity is defined')
+                        print('Severity: Severity is not defined')
+                        bug_basic_fields_feed.append('* Severity is not defined.')
                     # status
+                    bug_basic_fields_feed.append('=== Status')
                     if item['status'] and item['status'] is not '':
                         print('Status:', item['status'])
+                        bug_basic_fields_feed.append('* {}'.format(item['status']))
                     else:
-                        print('Status: No status defines')
+                        print('Status: No status is available')
+                        bug_basic_fields_feed.append('* Status is not available.')
                     # Target milestone
+                    bug_basic_fields_feed.append('=== Target Milestone')
                     if item['target_milestone'] and item['target_milestone'] is not '---':
                         print('Target Milestone:', item['target_milestone'])
+                        bug_basic_fields_feed.append('* {}'.format(item['target_milestone']))
                     else:
-                        print('Target Milestone: No targeted milestone defined')
+                        print('Target Milestone: No target milestone is available')
+                        bug_basic_fields_feed.append('* No target milestone is available.')
                     # type
+                    bug_basic_fields_feed.append('=== Type')
                     if item['type'] and item['type'] is not '':
                         print('Type:', item['type'])
+                        bug_basic_fields_feed.append('* {}'.format(item['type']))
                     else:
-                        print('Type: No type defined')
+                        print('Type: No bug type is available')
+                        bug_basic_fields_feed.append('* No bug type is available.')
                     # url
+                    bug_basic_fields_feed.append('=== URL')
                     if item['url'] and item['url'] is not '':
                         print('URL:', item['url'])
+                        bug_basic_fields_feed.append('* {}'.format(item['url']))
                     else:
                         print('URL: No URL defined')
+                        bug_basic_fields_feed.append('* No URL is defined')
                     # version
+                    bug_basic_fields_feed.append('=== Version')
                     if item['version'] and item['version'] is not '':
                         print('Version:', item['version'])
+                        bug_basic_fields_feed.append('* {}'.format('* {}'.format(item['version'])))
                     else:
                         print('Version: No version defined')
+                        bug_basic_fields_feed.append('* No version is defined')
                     # votes
+                    bug_basic_fields_feed.append('=== Votes')
                     if item['votes']:
                         print('Votes:', item['votes'])
+                        bug_basic_fields_feed.append('* {}'.format(item['votes']))
                     else:
                         print('Votes: No votes defined')
+                        bug_basic_fields_feed.append('* No votes are defined.')
                     # whiteboard
+                    bug_basic_fields_feed.append('=== Whiteboard')
                     if item['whiteboard'] and item['whiteboard'] is not '':
                         print('Whiteboard:', item['whiteboard'])
+                        bug_basic_fields_feed.append('* {}'.format(item['whiteboard']))
                     else:
                         print('Whiteboard: Whiteboard is not available')
+                        bug_basic_fields_feed.append('* Whiteboard is not available')
                     # alias
+                    bug_basic_fields_feed.append('=== Alias')
                     if item['alias'] and item['alias'] is not None:
                         print('Alias:', item['alias'])
+                        bug_basic_fields_feed.append('* {}'.format(item['alias']))
                     else:
                         print('Alias: No alias is specified')
+                        bug_basic_fields_feed.append('* No alias is specified')
                     print()
                     print('Countered Basic Fields:', counter_keys_basic)
                     print()
                     print('--')
                     # CUSTOM FIELDS
                     print('CUSTOM FIELDS')
+                    bug_basic_fields_feed.append('== Custom Fields')
                     counter_keys_cf = 0
                     for key in item_keys_list:
                         if key.startswith('cf'):
                             print(key + ':', item.get(key))
+                            bug_basic_fields_feed.append('* {}'.format(key) + ': {}'.format(item.get(key)))
                             counter_keys_cf += 1
                     print()
                     print('Countered Custom Fields:', counter_keys_cf)
@@ -859,6 +1232,16 @@ class UserBugs:
                 print()
             else:
                 print(data)
+                bug_basic_fields_feed.append(data)
+
+        print()
+        print()
+        for item in bug_basic_fields_feed:
+            print(item)
+            print()
+        print()
+        print()
+        return bug_basic_fields_feed
 
 
 """CLASS: Getting data for a user """
@@ -875,48 +1258,25 @@ class UserInfo:
         r = requests.get(url)
         data = r.json()
         # pprint(data)
+        user_info_list = []
+        user_info_list.append('== User Information')
         for user in data.keys():
             if user == 'users':
                 for item in data[user]:
                     print('User Info')
+                    user_info_list.append('=== User')
                     keys_list = item.keys()
                     for field in keys_list:
                         print('\t' + field + ':', item.get(field))
+                        user_info_list.append('* {}'.format(field) + ': {}'.format(item.get(field)))
             else:
                 pprint(data)
-
-
-if __name__ == '__main__':
-    # Bug ID to searching for in the REST API
-    bug_id_in_api = 1144467
-    user_name = 'lhenry@mozilla.com'
-    # Access key provided by the Bugzilla API Service
-    # https://bugzilla.mozilla.org/home
-    # An account is necessary, and the API Access Key can be generated here:
-    # https://bugzilla.mozilla.org/userprefs.cgi?tab=apikey
-    api_key = 'JjuxII3hzJBzpzxZ1erGO2vNMnqz5FigqMeTLdzw'
-
-    # creating the objects for retrieving the information from the API and printing the fetched data
-
-    # bug data
-    bug_fetcher = BugRetriever(bug_id=str(bug_id_in_api), key=api_key)
-    bug_fetcher.data_retriever()
-
-    # bug comments
-    # get_comments = Comments(bug_id=bug_id_in_api, key=api_key)
-    # get_comments.getting_comments()
-
-    # bug history
-    # get_history = History(bug_id=bug_id_in_api, key=api_key)
-    # get_history.getting_history()
-
-    # bugs related to a user
-    # user_bugs = UserBugs(user='lhenry@mozilla.com', key=api_key)
-    # user_bugs.getting_user_bugs()
-
-    # user information
-    # user_info = UserInfo(user=user_name, key=api_key)
-    # user_info.getting_user_info()
-    print('---')
-    print('Report time:', datetime.now())
-    print()
+                user_info_list.append('* {}'.format(data))
+        print()
+        print()
+        for item in user_info_list:
+            print(item)
+            print()
+        print()
+        print()
+        return user_info_list

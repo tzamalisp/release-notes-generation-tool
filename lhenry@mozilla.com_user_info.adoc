@@ -1,0 +1,22 @@
+= Release Notes Generation Tool (RLGEN)
+:author: Pantelis Tzamalis
+:email: tzamalis@ceid.upatras.gr
+
+== User Information
+
+=== User
+
+* real_name: Liz Henry (:lizzard) (use needinfo)
+
+* name: lhenry@mozilla.com
+
+* nick: lizzard
+
+* id: 451704
+
+
+
+----------
+Report time: 2019-06-25 01:44:24.802800
+
+
