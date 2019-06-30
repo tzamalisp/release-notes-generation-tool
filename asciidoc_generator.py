@@ -12,7 +12,7 @@ class GeneratorJira:
         self.data_custom = data_custom
 
     def generating_doc_jira(self):
-        f = open('{}_{}.adoc'.format(self.bug, self.user), 'w+')
+        f = open('release-notes-docs/jira_{}_{}.adoc'.format(self.bug, self.user), 'w+')
         print('Writing file..')
         f.write('= Release Notes Generation Tool (RLGEN)')
         f.write('\n')
@@ -54,7 +54,7 @@ class GeneratorBugzillaBug:
         self.data_basic = data_basic
 
     def generating_doc_bugzilla(self):
-        f = open('{}_{}.adoc'.format(self.bug, self.user), 'w+')
+        f = open('release-notes-docs/bugzilla_{}_{}.adoc'.format(self.bug, self.user), 'w+')
         print('Writing file..')
         f.write('= Release Notes Generation Tool (RLGEN)')
         f.write('\n')
@@ -89,7 +89,7 @@ class GenratorBugzillaBugComments:
         self.data_comments = data_comments
 
     def generating_doc_bug_comments(self):
-        f = open('{}_{}_comments.adoc'.format(self.bug, self.user), 'w+')
+        f = open('release-notes-docs/bugzilla_{}_{}_comments.adoc'.format(self.bug, self.user), 'w+')
         print('Writing file..')
         f.write('= Release Notes Generation Tool (RLGEN)')
         f.write('\n')
@@ -124,7 +124,7 @@ class GeneratorBugzillaBugHistory:
         self.data_bug_history = data_bug_history
 
     def generating_doc_bug_history(self):
-        f = open('{}_{}_bug_history.adoc'.format(self.bug, self.user), 'w+')
+        f = open('release-notes-docs/bugzilla_{}_{}_bug_history.adoc'.format(self.bug, self.user), 'w+')
         print('Writing file..')
         f.write('= Release Notes Generation Tool (RLGEN)')
         f.write('\n')
@@ -158,7 +158,7 @@ class GeneratorBugzillaUserBugs:
         self.data_bugs_user = data_bugs_user
 
     def generating_doc_user_bugs(self):
-        f = open('{}_user_bugs.adoc'.format(self.user), 'w+')
+        f = open('release-notes-docs/bugzilla_{}_user_bugs.adoc'.format(self.user), 'w+')
         print('Writing file..')
         f.write('= Release Notes Generation Tool (RLGEN)')
         f.write('\n')
@@ -192,7 +192,7 @@ class GeneratorBuzillaUserInfo:
         self.data_user = data_user
 
     def generating_doc_user_info(self):
-        f = open('{}_user_info.adoc'.format(self.user), 'w+')
+        f = open('release-notes-docs/bugzilla_{}_user_info.adoc'.format(self.user), 'w+')
         print('Writing file..')
         f.write('= Release Notes Generation Tool (RLGEN)')
         f.write('\n')

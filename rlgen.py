@@ -1,16 +1,15 @@
 from datetime import datetime
 
-from bugzilla_requester import BugRetriever
-from bugzilla_requester import Comments
-from bugzilla_requester import History
-from bugzilla_requester import UserBugs
-from bugzilla_requester import UserInfo
+from trackers.bugzilla_requester import BugRetriever
+from trackers.bugzilla_requester import Comments
+from trackers.bugzilla_requester import History
+from trackers.bugzilla_requester import UserBugs
+from trackers.bugzilla_requester import UserInfo
 
-from jira_requester import Connector
-from jira_requester import BasicDataRetriever
-from jira_requester import CustomFieldConfCreation
-from jira_requester import CustomFieldListFile
-from jira_requester import CustomFieldDataRetriever
+from trackers.jira_requester import BasicDataRetriever
+from trackers.jira_requester import CustomFieldConfCreation
+from trackers.jira_requester import CustomFieldListFile
+from trackers.jira_requester import CustomFieldDataRetriever
 
 from asciidoc_generator import GeneratorJira
 from asciidoc_generator import GeneratorBugzillaBug

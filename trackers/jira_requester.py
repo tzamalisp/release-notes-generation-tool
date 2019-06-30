@@ -545,7 +545,7 @@ class CustomFieldConfCreation:
         self.field_id = field_id
 
     def custom_field_configuration_creation(self):
-        file_name = 'user_custom_fields.json'
+        file_name = 'trackers/jira_user_custom_fields.json'
         user_custom_fields_list = []
         custom_field_entry = {self.name:  self.field_id}
         print('Writing wanted custom fields configuration file..')
@@ -594,7 +594,7 @@ class CustomFieldListFile:
             print('Writing custom fields list JSON file..')
             print('Writing..')
             custom_fields_list = {'custom_fields': custom_fields_list}
-            customfields_json = 'customfields_list.json'
+            customfields_json = 'trackers/jira_customfields_list.json'
             with open(customfields_json, 'w') as f:  # writing JSON object
                 json.dump(custom_fields_list, f)
             print(
@@ -629,7 +629,7 @@ class CustomFieldDataRetriever:
         bug_custom_fields_list_feed = []
 
         # Target Release (Custom Field)
-        with open('customfields_list.json') as json_file:
+        with open('trackers/jira_customfields_list.json') as json_file:
             data = json.load(json_file)
         custom_search = 'customfield_' + str(self.custom_field_id)
         custom_fields_list_read = data['custom_fields']

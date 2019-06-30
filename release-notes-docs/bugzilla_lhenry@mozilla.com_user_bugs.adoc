@@ -248,6 +248,10 @@
 
 * cf_qa_whiteboard: 
 
+* cf_tracking_firefox_esr68: ---
+
+* cf_status_firefox_esr68: ---
+
 * cf_tracking_firefox69: ---
 
 * cf_tracking_firefox67: ---
@@ -9358,6 +9362,10 @@
 
 * cf_fission_milestone: ---
 
+* cf_tracking_firefox_esr68: ---
+
+* cf_status_firefox_esr68: ---
+
 * cf_webcompat_priority: ---
 
 * cf_tracking_firefox69: ---
@@ -9844,6 +9852,10 @@
 
 * cf_qa_whiteboard: 
 
+* cf_tracking_firefox_esr68: ---
+
+* cf_status_firefox_esr68: ---
+
 * cf_tracking_firefox69: ---
 
 * cf_tracking_firefox67_0_5: ---
@@ -10304,6 +10316,10 @@
 
 * cf_fission_milestone: ---
 
+* cf_tracking_firefox_esr68: ---
+
+* cf_status_firefox_esr68: ---
+
 * cf_status_firefox53: fixed
 
 * cf_webcompat_priority: ---
@@ -10525,6 +10541,10 @@
 * cf_status_firefox68: ---
 
 * cf_qa_whiteboard: 
+
+* cf_tracking_firefox_esr68: ---
+
+* cf_status_firefox_esr68: ---
 
 * cf_tracking_firefox69: ---
 
@@ -10772,10 +10792,6 @@
 
 * cf_qa_whiteboard: 
 
-* cf_tracking_firefox69: ---
-
-* cf_tracking_firefox67_0_5: ---
-
 * cf_tracking_firefox67: ---
 
 * cf_fx_iteration: ---
@@ -10786,21 +10802,29 @@
 
 * cf_fx_points: ---
 
-* cf_status_firefox67_0_5: ---
-
-* cf_crash_signature: 
-
 * cf_user_story: 
 
 * cf_status_firefox69: ---
 
-* cf_tracking_firefox_esr60: ---
-
 * cf_status_firefox_esr60: ---
 
-* cf_tracking_firefox68: ---
-
 * cf_status_firefox67: ---
+
+* cf_tracking_firefox_esr68: ---
+
+* cf_status_firefox_esr68: ---
+
+* cf_tracking_firefox69: ---
+
+* cf_tracking_firefox67_0_5: ---
+
+* cf_status_firefox67_0_5: ---
+
+* cf_crash_signature: 
+
+* cf_tracking_firefox_esr60: ---
+
+* cf_tracking_firefox68: ---
 
 = User Bug: 39
 
@@ -11018,10 +11042,6 @@
 
 * cf_qa_whiteboard: 
 
-* cf_tracking_firefox69: ---
-
-* cf_tracking_firefox67_0_5: ---
-
 * cf_tracking_firefox67: ---
 
 * cf_fx_iteration: ---
@@ -11032,21 +11052,29 @@
 
 * cf_fx_points: ---
 
-* cf_status_firefox67_0_5: ---
-
-* cf_crash_signature: 
-
 * cf_user_story: 
 
 * cf_status_firefox69: ---
 
-* cf_tracking_firefox_esr60: ---
-
 * cf_status_firefox_esr60: ---
 
-* cf_tracking_firefox68: ---
-
 * cf_status_firefox67: ---
+
+* cf_tracking_firefox_esr68: ---
+
+* cf_status_firefox_esr68: ---
+
+* cf_tracking_firefox69: ---
+
+* cf_tracking_firefox67_0_5: ---
+
+* cf_status_firefox67_0_5: ---
+
+* cf_crash_signature: 
+
+* cf_tracking_firefox_esr60: ---
+
+* cf_tracking_firefox68: ---
 
 = User Bug: 40
 
@@ -11264,10 +11292,6 @@
 
 * cf_qa_whiteboard: 
 
-* cf_tracking_firefox69: ---
-
-* cf_tracking_firefox67_0_5: ---
-
 * cf_tracking_firefox67: ---
 
 * cf_fx_iteration: ---
@@ -11278,21 +11302,29 @@
 
 * cf_fx_points: ---
 
-* cf_status_firefox67_0_5: ---
-
-* cf_crash_signature: 
-
 * cf_user_story: 
 
 * cf_status_firefox69: ---
 
-* cf_tracking_firefox_esr60: ---
-
 * cf_status_firefox_esr60: ---
 
-* cf_tracking_firefox68: ---
-
 * cf_status_firefox67: ---
+
+* cf_tracking_firefox_esr68: ---
+
+* cf_status_firefox_esr68: ---
+
+* cf_tracking_firefox69: ---
+
+* cf_tracking_firefox67_0_5: ---
+
+* cf_status_firefox67_0_5: ---
+
+* cf_crash_signature: 
+
+* cf_tracking_firefox_esr60: ---
+
+* cf_tracking_firefox68: ---
 
 = User Bug: 41
 
@@ -11498,14 +11530,6 @@
 
 * cf_qa_whiteboard: 
 
-* cf_status_firefox56: fixed
-
-* cf_tracking_firefox69: ---
-
-* cf_tracking_firefox67_0_5: ---
-
-* cf_locale: []
-
 * cf_tracking_firefox67: ---
 
 * cf_fx_iteration: ---
@@ -11516,25 +11540,37 @@
 
 * cf_fx_points: ---
 
-* cf_status_firefox67_0_5: ---
-
 * cf_user_story: 
 
 * cf_status_firefox69: ---
 
-* cf_tracking_firefox_esr60: ---
-
 * cf_status_firefox_esr60: ---
 
-* cf_tracking_firefox68: ---
-
 * cf_status_firefox67: ---
+
+* cf_tracking_firefox_esr68: ---
+
+* cf_status_firefox_esr68: ---
+
+* cf_status_firefox56: fixed
+
+* cf_tracking_firefox69: ---
+
+* cf_tracking_firefox67_0_5: ---
+
+* cf_locale: []
+
+* cf_status_firefox67_0_5: ---
+
+* cf_tracking_firefox_esr60: ---
+
+* cf_tracking_firefox68: ---
 
 * cf_tracking_firefox56: +
 
 
 
 ----------
-Report time: 2019-06-25 01:44:23.749958
+Report time: 2019-07-01 01:26:47.857649
 
 
