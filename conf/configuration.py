@@ -1,6 +1,7 @@
 import configparser
 import sys
 from argparse import ArgumentParser
+import logging
 
 
 def user_settings(argv):
@@ -221,6 +222,22 @@ class BugzillaReadConfigurationApiKey:
         api_key_reason = 'Missing API Key configuration. Please define an API Key.'
 
 
+class UserChoise:
+    def __init__(self, tracker):
+        self.tracker = tracker
+
+    def tracker_selection(self):
+        if self.tracker is 'J' or self.tracker is 'j':
+            jira_connection = JiraReadConfigurationServer()
+            print(jira_connection.server)
+        elif self.tracker is 'B' or self.tracker is 'b':
+            bugzilla_basic_auth = BugzillaReadConfigurationBasicAuth()
+            print(bugzilla_basic_auth.username)
+        else:
+            print('Please press a valid letter for choosing your tracker.')
+            print('Terminating..')
+
+
 if __name__ == '__main__':
 
     # user_settings(sys.argv[1:])
@@ -333,3 +350,8 @@ if __name__ == '__main__':
         print('API Key:', bugzilla_api_key_auth.api_key)
     else:
         print('API Key:', bugzilla_api_key_auth.api_key_reason)
+
+    # User Choise
+    tracker_selection = input("Select a tracker ('J' for Jira / 'B' for Bugzilla):\n")
+    tracker_choice = UserChoise(tracker_selection)
+    tracker_choice.tracker_selection()
