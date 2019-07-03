@@ -1,4 +1,4 @@
-from datetime import datetime
+import logging
 
 from trackers.bugzilla_requester import BugRetriever
 from trackers.bugzilla_requester import Comments
@@ -18,13 +18,17 @@ from asciidoc_generator import GeneratorBugzillaBugHistory
 from asciidoc_generator import GeneratorBugzillaUserBugs
 from asciidoc_generator import GeneratorBuzillaUserInfo
 
+# create and configure a logger
+LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
+logging_file = logging.basicConfig(filename='rlgen.log', level=logging.DEBUG, format=LOG_FORMAT, filemode='w')
+
+# root logger (without name)
+logger = logging.getLogger()
 
 if __name__ == '__main__':
 
     """ BUGZILLA """
-    print()
-    print('-----------------------------------------BUGZILLA------------------------------------------')
-    print()
+    logger.debug('-----------------------------------------BUGZILLA------------------------------------------')
     # Bug ID to searching for in the REST API
     bug_id_in_api = 1144467
     user_name = 'lhenry@mozilla.com'
@@ -83,9 +87,9 @@ if __name__ == '__main__':
     doc_user_info.generating_doc_user_info()
 
     """JIRA"""
-    print()
-    print('---------------------------JIRA------------------------------------')
-    print()
+    
+    logger.debug('---------------------------JIRA------------------------------------')
+    
     issue_name = 'JBCS-535'
     name_field_id_name = 'Target Release'
     field_id = 12311240
@@ -96,72 +100,40 @@ if __name__ == '__main__':
     email = 'tzamalis@ceid.upatras.gr'
 
     # CONNECTION TO JIRA
-    print('CONNECTION TO JIRA')
-    print()
+    logger.debug('CONNECTION TO JIRA')
+    
     # test_connector = Connector()
     # test_connector.jira_connector()
 
-    print()
-    print('---------------------------------------------')
-    print('---------------------------------------------')
-    print()
-
     # ADDING CUSTOM FIELD - CREATION OF THE JSON CONFIGURATION FILE
-    print('ADDING CUSTOM FIELD - CREATION OF THE JSON CONFIGURATION FILE')
-    print()
+    logger.debug('ADDING CUSTOM FIELD - CREATION OF THE JSON CONFIGURATION FILE')
+    
     # new__custom_field = CustomFieldConfCreation('xxx', 'customfield_12310220')
     # new__custom_field.custom_field_configuration_creation()
 
-    print()
-    print('---------------------------------------------')
-    print('---------------------------------------------')
-    print()
-
     # DASHBOARD'S CUSTOM FIELDS AVAILABLE - CONFIGURATION JSON FILE CREATION
-    print("DASHBOARD'S CUSTOM FIELDS AVAILABLE - CONFIGURATION JSON FILE CREATION")
-    print()
+    logger.debug("DASHBOARD'S CUSTOM FIELDS AVAILABLE - CONFIGURATION JSON FILE CREATION")
     dashboard_custom_field_list = CustomFieldListFile(issue_name)
     dashboard_custom_field_list.list_file_generator()
 
-    print()
-    print('---------------------------------------------')
-    print('---------------------------------------------')
-    print()
-
     # BASIC DATA RETRIEVER
-    print('BASIC DATA RETRIEVER')
-    print()
+    logger.debug('BASIC DATA RETRIEVER OBJECT')
     jira_basic_data = BasicDataRetriever(issue_name)
     # jira_basic_data.data_retriever()
 
-    print()
-    print('---------------------------------------------')
-    print('---------------------------------------------')
-    print()
-
     # CUSTOM FIELD DATA RETRIEVER
-    print('CUSTOM FIELD DATA RETRIEVER')
-    print()
+    logger.debug('CUSTOM FIELD DATA RETRIEVER OBJECT')
+    
     jira_custom_field_data = CustomFieldDataRetriever(issue_name, name_field_id_name, field_id)
     # jira_custom_field_data.data_retriever()
-    print()
-    print()
-    print('----')
-    report_time = datetime.now()
-    print('Report time:', report_time)
-    print('----')
-    print()
-    print()
-    print('>>> Calling JIRA API and printing Issue parts is now completed successfully!')
-    print()
-    print()
 
-    # doc basic fields
+    # doc basic + custom fields
+    logger.debug('JIRA Doc including Basic + Custom Fields')
     doc_basic = GeneratorJira(user=username, bug=bug_id, firstname=first_name, lastname=last_name, email_account=email,
                               data_basic=jira_basic_data.data_retriever(),
                               data_custom=jira_custom_field_data.data_retriever())
     doc_basic.generating_doc_jira()
 
-    print('---')
-    print('Report time:', datetime.now())
-    print()
+    logger.debug('>>> Calling JIRA API and printing Issue parts is now completed successfully!')
+
+

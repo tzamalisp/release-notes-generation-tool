@@ -60,7 +60,7 @@
 
 ** Nickname: whimboo
 
-** Real Name: Henrik Skupin (:whimboo) [⌚️UTC+2]
+** Real Name: Henrik Skupin (:whimboo) [⌚️UTC+2] (away July 6th - July 19th)
 
 * CC 3 Information:
 
@@ -11571,6 +11571,6 @@
 
 
 ----------
-Report time: 2019-07-01 01:26:47.857649
+Report time: 2019-07-03 23:28:51.029172
 
 
