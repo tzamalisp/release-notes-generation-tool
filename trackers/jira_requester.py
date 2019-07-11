@@ -6,29 +6,60 @@ from datetime import datetime
 from pprint import pprint
 from asciidoc_generator import GeneratorJira
 
+from conf.configuration import JiraReadConfigurationServer
+from conf.configuration import JiraReadConfigurationBasicAuth
+from conf.configuration import JiraReadConfigurationOAuth
+from conf.configuration import JiraReadConfigurationKerberos
+
+
 """CLASS FOR RETRIEVING BASIC ISSUE INFORMATION FROM JIRA API"""
 
 
 class Connector:
+
     def jira_connector(self):
         """ JIRA Connection"""
         # JIRA connection credentials
+        jira_connection = JiraReadConfigurationServer()
+        server_value = jira_connection.read_server_conf()['server']
+
+        jira_basic_auth = JiraReadConfigurationBasicAuth()
+        username_value = jira_basic_auth.read_user_basic_auth()['username']
+        username_reason = jira_basic_auth.read_user_basic_auth()['username_reason']
+        print(username_reason)
+        password_value = jira_basic_auth.read_user_basic_auth()['password']
+
+        jira_oauth = JiraReadConfigurationOAuth()
+        access_token_value = jira_oauth.read_oauth()['access_token']
+        access_token_secret_value = jira_oauth.read_oauth()['access_token_secret']
+        consumer_key_value = jira_oauth.read_oauth()['consumer_key']
+        # code for key cert here:
+        key_cert_data = None
+        # with open(key_cert, 'r') as key_cert_file:
+        #     key_cert_data = key_cert_file.read()
+
+        jira_kerberos = JiraReadConfigurationKerberos()
+        kerberos_value = bool(jira_kerberos.read_kerberos_auth()['kerberos'])
+        kerberos_mutual_authentication_value = jira_kerberos.read_kerberos_auth()['kerberos_options']
+
         options = {
-            'server': 'https://issues.jboss.org/',
-            'basic_auth': ('<username>', '<password>'),
+            'server': server_value,
+            'basic_auth': (username_value, password_value),
             'oauth': {
-                'access_token': '',
-                'access_token_secret': '',
-                'consumer_key': '',
-                'key_cert': ''
-            }
+                'access_token': access_token_value,
+                'access_token_secret': access_token_secret_value,
+                'consumer_key': consumer_key_value,
+                'key_cert': key_cert_data
+            },
+            'kerberos': kerberos_value,
+            'kerberos_options': {'mutual_authentication': kerberos_mutual_authentication_value}
         }
 
         # JIRA object for connecting to the API
         print('Connecting to the JIRA API..')
-        jira = JIRA(options)
+        jira_auth_connection = JIRA(options)
         print('Connected to JIRA API successfully!')
-        return jira
+        return jira_auth_connection
 
 
 class BasicDataRetriever:
@@ -37,6 +68,7 @@ class BasicDataRetriever:
 
     def data_retriever(self):
         bug_ascii_data = []
+
         # JIRA API connection and connector object creation
         jira_connection_obj = Connector()
         jira = jira_connection_obj.jira_connector()
@@ -55,485 +87,315 @@ class BasicDataRetriever:
         bug_ascii_data.append('=== Project Object')
         if issue.fields.project.self:
             project_url = issue.fields.project.self
-            print('\tProject JSON URL:', project_url + '[{}]'.format(self.issue_name_input))
             bug_ascii_data.append('* Project JSON URL: ' + project_url + '[{}]'.format(self.issue_name_input))
-            print('\tProject Key:', issue.fields.project.key)  # 'JRA'
             bug_ascii_data.append('* Project Key: {}'.format(issue.fields.project.key))
-            print('\tProject Name:', issue.fields.project.name)
             bug_ascii_data.append('* Project Name: {}'.format(issue.fields.project.name))
-            print('\tProject ID:', issue.fields.project.id)
             bug_ascii_data.append('* Project ID: {}'.format(issue.fields.project.id))
-            print('\tProject Category Name:', issue.fields.project.projectCategory.name)
             bug_ascii_data.append('* Project Category Name: {}'.format(issue.fields.project.projectCategory.name))
-            print('\tProject Category Description:', issue.fields.project.projectCategory.description)
             bug_ascii_data.append('* Project Category Description: {}'.
                                   format(issue.fields.project.projectCategory.description))
             r = requests.get(project_url)
             data = r.json()
-            print('\tProject Avatar:', data['avatarUrls']['48x48'])
             bug_ascii_data.append('* Project Avatar: {}'.format(data['avatarUrls']['48x48']))
         else:
-            print('Nothing to show.')
             bug_ascii_data.append('* No information to show about the Project.')
-        print()
         # Issue type
-        print('Issue Type:')
         bug_ascii_data.append('=== Issue Type')
         if issue.fields.issuetype.name and issue.fields.issuetype.name is not None:
-            print('\tName:', issue.fields.issuetype.name)  # 'New Feature'
             bug_ascii_data.append('* Name: {}'.format(issue.fields.issuetype.name))
-            print('\tDescription:', issue.fields.issuetype.description)
             bug_ascii_data.append('* Description: {}'.format(issue.fields.issuetype.description))
-            print('\tAvatar:', issue.fields.issuetype.iconUrl)
             bug_ascii_data.append('* Avatar: {}'.format(issue.fields.issuetype.iconUrl))
         else:
-            print('\tThere is no Type defined for the Issue --> {}'.format(self.issue_name_input))
             bug_ascii_data.append('* There is no Type defined for the Issue --> {}'.format(self.issue_name_input))
-        print()
         # Reporter Display Name
-        print('Reporter Display Name:')
         bug_ascii_data.append('=== Reporter Display Name')
         if issue.fields.reporter.displayName and issue.fields.reporter.displayName is not None:
-            print('Reporter Display name:', issue.fields.reporter.displayName)  # 'Mike Cannon-Brookes [Atlassian]'
             bug_ascii_data.append('* Display Name: {}'.format(issue.fields.reporter.displayName))
         else:
-            print('Reporter Display name: There is no Display Name for the Issue --> {}'.format(self.issue_name_input))
             bug_ascii_data.append('* There is no Display Name for the Issue --> {}'.
                                   format(self.issue_name_input))
-        print()
         # Created datetime
-        print('Created datetime:')
         bug_ascii_data.append('=== Created DateTime')
         if issue.fields.created and issue.fields.created is not None:
-            print('Created at:', issue.fields.created)
             bug_ascii_data.append('* Created at: {}'.format(issue.fields.created))
         else:
-            print('Created at: There is no DateTime value stored for the Issue --> {}'.format(self.issue_name_input))
             bug_ascii_data.append('* There is no DateTime value stored for the Issue --> {}'
                                   .format(self.issue_name_input))
-        print()
         # Assignee
-        print('Assignee:')
         bug_ascii_data.append('=== Assignee')
         if issue.fields.assignee and issue.fields.assignee is not None:
-            print('\tDisplay Name:', issue.fields.assignee.displayName)
             bug_ascii_data.append('* Display Name: {}'.format(issue.fields.assignee.displayName))
-            print('\tName:', issue.fields.assignee.name)
             bug_ascii_data.append('* Name: {}'.format(issue.fields.assignee.name))
-            print('\tKey:', issue.fields.assignee.key)
             bug_ascii_data.append('* Key: {}'.format(issue.fields.assignee.key))
-            print('\tActive:', issue.fields.assignee.active)
             bug_ascii_data.append('* Active: {}'.format('issue.fields.assignee.active'))
-            print('\ttimeZone:', issue.fields.assignee.timeZone)
             bug_ascii_data.append('* TimeZone: {}'.format(issue.fields.assignee.timeZone))
         else:
-            print('Assignee: Assignee is not stored for the Issue --> {}'.format(self.issue_name_input))
             bug_ascii_data.append('* Assignee is not stored for the Issue --> {}'
                                   .format(self.issue_name_input))
-        print()
         # Issue description
-        print('Issue description:')
         bug_ascii_data.append('=== Issue Description')
         if issue.fields.description and issue.fields.description is not None:
-            print('Description:', issue.fields.description)
             bug_ascii_data.append('* Description: {}'.format(issue.fields.description))
         else:
-            print('Issue Description: Description is not available for that Issue --> {}'.format(self.issue_name_input))
             bug_ascii_data.append('* Description is not available for that Issue --> {}'
                                   .format(self.issue_name_input))
-        print()
         # Current Status
-        print('Status:')
         bug_ascii_data.append('=== Status')
         if issue.fields.status and issue.fields.status is not None:
-            print('\tName:', issue.fields.status.name)
             bug_ascii_data.append('* Name: {}'.format(issue.fields.status.name))
-            print('\tDescription:', issue.fields.status.description)
             bug_ascii_data.append('* Description: {}'.format(issue.fields.status.description))
-            print('\tStatus Category Name:', issue.fields.status.statusCategory.name)
             bug_ascii_data.append('* Status Category Name: {}'.format(issue.fields.status.statusCategory.name))
-            print('\tIcon:', issue.fields.status.iconUrl)
             bug_ascii_data.append('* Icon: {}'.format(issue.fields.status.iconUrl))
         else:
-            print('Status: No status is set for the Issue --> {}'.format(self.issue_name_input))
             bug_ascii_data.append('* No Status is set for the Issue --> {}'.format(self.issue_name_input))
-        print()
         # Aggregate progress
-        print('Aggregate Progress:')
         bug_ascii_data.append('=== Aggregate Progress')
         if issue.fields.aggregateprogress:
-            print('\tProgress:', issue.fields.aggregateprogress.progress)
             bug_ascii_data.append('* Progress: {}'.format(issue.fields.aggregateprogress.progress))
-            print('\tTotal:', issue.fields.aggregateprogress.total)
             bug_ascii_data.append('* Total: {}'.format(issue.fields.aggregateprogress.total))
         else:
             bug_ascii_data.append('* No information about Aggregate Progress is available.')
-        print()
         # Aggregate time estimate
-        print('Aggregate time estimate:')
         bug_ascii_data.append('=== Aggregate Time Estimate')
         if issue.fields.aggregatetimeestimate and issue.fields.aggregatetimeestimate is not None:
-            print('Aggregate Time Estimate:', issue.fields.aggregatetimeestimate)
             bug_ascii_data.append('* Estimate: {}'.format(issue.fields.aggregatetimeestimate))
         else:
-            print('Aggregate Time Estimate: No Aggregate time estimate is available for the Issue --> {}'
-                  .format(self.issue_name_input))
             bug_ascii_data.append('* No Aggregate Time Estimate is available for the Issue --> {}'
                                   .format(self.issue_name_input))
-        print()
         # Aggregate time original estimate
-        print('Aggregate time original estimate:')
         bug_ascii_data.append('=== Aggregate Time Original Estimate')
         if issue.fields.aggregatetimeoriginalestimate and issue.fields.aggregatetimeoriginalestimate is not None:
-            print('Estimate:', issue.fields.aggregatetimeoriginalestimate)
             bug_ascii_data.append('* Estimate: {}'.format(issue.fields.aggregatetimeoriginalestimate))
         else:
-            print('Aggregate Time Original Estimate: No Aggregate time estimate is available for the Issue --> {}'
-                  .format(self.issue_name_input))
             bug_ascii_data.append('* No Aggregate Time Estimate is available for the Issue --> {}'
                                   .format(self.issue_name_input))
-        print()
         # Aggregate time spent
-        print('Aggregate time spent:')
         bug_ascii_data.append('=== Aggregate Time Spent')
         if issue.fields.aggregatetimespent and issue.fields.aggregatetimespent is not None:
-            print('Aggregate Time Spent:', issue.fields.aggregatetimespent)
             bug_ascii_data.append('* Time Spent: {}'.format(issue.fields.aggregatetimespent))
         else:
-            print('Aggregate Time Spent: No Aggregate time spent is available for the Issue --> {}'
-                  .format(self.issue_name_input))
             bug_ascii_data.append('* No Aggregate Time Spent is available for the Issue --> {}'
                                   .format(self.issue_name_input))
-        print()
         # Attachments list
-        print('Attachments:')
         bug_ascii_data.append('=== Attachments')
         if issue.fields.attachment:
             attachment_list = issue.fields.attachment
             if len(attachment_list) > 0:
                 counter_attachment_list = 1
                 for item in attachment_list:
-                    print('\tAttachments Item {}:'.format(counter_attachment_list), item)
                     bug_ascii_data.append('* Attachments Item {}:'.format(counter_attachment_list) + ' {}'.format(item))
                     counter_attachment_list += 1
             else:
-                print('\tThere are no listed attachments for the Issue --> {}'.format(self.issue_name_input))
                 bug_ascii_data.append('* There are no listed attachments for the Issue --> {}'
                                       .format(self.issue_name_input))
-        print()
         # Comment object
-        print('Comments')
         bug_ascii_data.append('=== Comments')
         if issue.fields.comment.comments:
             comments_object_list = issue.fields.comment.comments
             if len(comments_object_list) > 0:
                 counter_comments_object_list = 1
                 for item in comments_object_list:
-                    print('\tComment {}:'.format(counter_comments_object_list), item.body)
                     bug_ascii_data.append('* Comment {}:'.format(counter_comments_object_list) + ' {}'.format(item.body))
                     counter_comments_object_list += 1
             else:
-                print('There are no listed comments for the Issue --> {}'.format(self.issue_name_input))
                 bug_ascii_data.append('* There are no listed comments for the Issue --> {}'
                                       .format(self.issue_name_input))
-        print()
         # Components Name
-        print('Components:')
         bug_ascii_data.append('=== Components')
         if issue.fields.components:
             components_list = issue.fields.components
             if len(components_list) > 0:
                 counter_components_list = 1
                 for item in components_list:
-                    print('\tComponent {}'.format(counter_components_list))
                     bug_ascii_data.append('* Component {}'.format(counter_components_list))
-                    print('\t\tName:', item.name)
                     bug_ascii_data.append('** Name: {}'.format(item.name))
-                    print('\t\tDescription:', item.description)
                     bug_ascii_data.append('** Description: {}'.format(item.description))
-                    print('\t\tID:', item.id)
                     bug_ascii_data.append('** ID: {}'.format(item.id))
                     counter_components_list += 1
             else:
-                print('Components Name: There is no Component list available for the Issue --> {}'
-                      .format(self.issue_name_input))
                 bug_ascii_data.append('* There is no Component list available for the Issue --> {}'
                                       .format(self.issue_name_input))
-        print()
         # Environment
-        print('Environment:')
         bug_ascii_data.append('=== Environment')
         if issue.fields.environment and issue.fields.environment is not None:
-            print('Environment:', issue.fields.environment)
             bug_ascii_data.append('* Environment: {}'.format(issue.fields.environment))
         else:
-            print('Environment: There is no Environment set for the Issue --> {}'.format(self.issue_name_input))
             bug_ascii_data.append('* There is no Environment set for the Issue --> {}'.format(self.issue_name_input))
-        print()
         # Fix versions
-        print('Fix Versions List:')
         bug_ascii_data.append('=== Fix Versions List')
         # if issue.fields.fixVersions:
         fix_versions_list = issue.fields.fixVersions
         if len(fix_versions_list) > 0:
             counter_fix_versions_list = 1
             for item in fix_versions_list:
-                print('\tVersion Item {}:'.format(counter_fix_versions_list), item)
                 bug_ascii_data.append('* Version Item {}:'.format(counter_fix_versions_list) + ' {}'.format(item))
                 counter_fix_versions_list += 1
         else:
-            print('\tThere are no listed fixed versions for the Issue --> {}'.format(self.issue_name_input))
             bug_ascii_data.append('* There are no listed fixed versions for the Issue --> {}'
                                   .format(self.issue_name_input))
-        print()
         # Issue links
-        print('Issue Links List:')
         bug_ascii_data.append('=== Issue Links List')
         if issue.fields.issuelinks:
             issue_links_list = issue.fields.issuelinks
             if len(issue_links_list) > 0:
                 counter_issue_links_list = 1
                 for item in issue_links_list:
-                    print('\tIssue Link Item {}:'.format(counter_issue_links_list), item)
                     bug_ascii_data.append('* Issue Link Item {}:'.format(counter_issue_links_list) + ' {}'.format(item))
                     counter_issue_links_list += 1
             else:
-                print('\tThere are no listed issue links for the Issue --> {}'.format(self.issue_name_input))
                 bug_ascii_data.append('* There are no listed issue links for the Issue --> {}'
                                       .format(self.issue_name_input))
-        print()
         # Labels
-        print('Labels List:')
         bug_ascii_data.append('=== Labels List')
         if issue.fields.labels:
             labels_list = issue.fields.labels
             if len(labels_list) > 0:
                 counter_labels_list = 1
                 for item in labels_list:
-                    print('\tLabel Item {}:'.format(counter_labels_list), item)
                     bug_ascii_data.append('* Label Item {}:'.format(counter_labels_list) + ' {}'.format(item))
                     counter_labels_list += 1
             else:
-                print('\tThere are not listed labels for the Issue --> {}'.format(self.issue_name_input))
                 bug_ascii_data.append('* There are not listed labels for the Issue --> {}'
                                       .format(self.issue_name_input))
-        print()
         # Mro
         # print('Mro:', issue.fields.mro)  # ??????????????????????
         # print()
         # Progress object
-        print('Progress Object:')
         bug_ascii_data.append('=== Progress')
         if issue.fields.progress:
-            print('\tProgress:', issue.fields.progress.progress)
             bug_ascii_data.append('* Progress: {}'.format(issue.fields.progress.progress))
-            print('\tTotal:', issue.fields.progress.total)
             bug_ascii_data.append('* Total: {}'.format(issue.fields.progress.total))
         else:
             bug_ascii_data.append('* No information about Progress is available.')
-        print()
         # Reporter
-        print('Reporter:')
         bug_ascii_data.append('=== Reporter')
         if issue.fields.reporter and issue.fields.reporter is not None:
-            print('\tDisplay Name:', issue.fields.reporter.displayName)
             bug_ascii_data.append('* Display Name: {}'.format(issue.fields.reporter.displayName))
-            print('\tActive:', issue.fields.reporter.active)
             bug_ascii_data.append('* Active: {}'.format(issue.fields.reporter.active))
-            print('\tName:', issue.fields.reporter.name)
             bug_ascii_data.append('* Name: {}'.format(issue.fields.reporter.name))
-            print('\tKey:', issue.fields.reporter.key)
             bug_ascii_data.append('* Key: {}'.format(issue.fields.reporter.key))
-            print('\tTimezone:', issue.fields.reporter.timeZone)
             bug_ascii_data.append('* Timezone: {}'.format(issue.fields.reporter.timeZone))
         else:
-            print('Reporter: The is no reporter set for the Issue --> {}'.format(self.issue_name_input))
             bug_ascii_data.append('*  The is no Reporter set for the Issue --> {}'.format(self.issue_name_input))
-        print()
         # Resolution
-        print('Resolution:')
         bug_ascii_data.append('=== Resolution')
         if issue.fields.resolution and issue.fields.resolution is not None:
-            print('Resolution:', issue.fields.resolution)
             bug_ascii_data.append('* Resolution: {}'.format(issue.fields.resolution))
         else:
-            print('Resolution: No resolution is stored at this time for the Issue --> {}'.format(self.issue_name_input))
             bug_ascii_data.append('* No Resolution is stored at this time for the Issue --> {}'
                                   .format(self.issue_name_input))
-        print()
         # Resolution date
-        print('Resolution date:')
         bug_ascii_data.append('=== Resolution Date')
         if issue.fields.resolutiondate and issue.fields.resolutiondate is not None:
-            print('Date:', issue.fields.resolutiondate)
             bug_ascii_data.append('* Date: {}'.format(issue.fields.resolutiondate))
         else:
-            print('No resolution date is stored at this time for the Issue --> {}'
-                  .format(self.issue_name_input))
             bug_ascii_data.append('* No resolution date is stored at this time for the Issue --> {}'
                                   .format(self.issue_name_input))
-        print()
         # Sub-tasks
-        print('Sub-tasks List:')
         bug_ascii_data.append('=== Sub-tasks')
         if issue.fields.subtasks:
             sub_tasks_list = issue.fields.subtasks
             if len(sub_tasks_list) > 0:
                 counter_sub_tasks = 1
                 for item in sub_tasks_list:
-                    print('\tSub-task {}:'.format(counter_sub_tasks), issue.fields.subtasks[item])
                     bug_ascii_data.append('* Sub-task {}:'.format(counter_sub_tasks) +
                                           ' {}'.format(issue.fields.subtasks[item]))
                     counter_sub_tasks += 1
             else:
-                print('\tThere are no listed sub-tasks at this time for the Issue --> {}'.format(self.issue_name_input))
                 bug_ascii_data.append('There are no listed sub-tasks at this time for the Issue --> {}'
                                       .format(self.issue_name_input))
-        print()
         # Summary
-        print('Summary:')
         bug_ascii_data.append('=== Summary')
         if issue.fields.summary and issue.fields.summary is not None:
-            print('Summary:', issue.fields.summary)
             bug_ascii_data.append('* Summary: {}'.format(issue.fields.summary))
         else:
-            print('No summary is available now for the Issue --> {}'.format(self.issue_name_input))
             bug_ascii_data.append('* No summary is available now for the Issue --> {}'.format(self.issue_name_input))
-        print()
         # Time estimate
-        print('Time estimate:')
         bug_ascii_data.append('=== Time Estimate')
         if issue.fields.timeestimate and issue.fields.timeestimate is not None:
-            print('Estimate:', issue.fields.timeestimate)
             bug_ascii_data.append('* Estimate: {}'.format(issue.fields.timeestimate))
         else:
-            print('No time-estimate is now available fo the Issue --> {}'.format(self.issue_name_input))
             bug_ascii_data.append('* No time-estimate is now available fo the Issue --> {}'.format(self.issue_name_input))
-        print()
         # Time original estimate
-        print('Time original estimate:')
         bug_ascii_data.append('=== Time Original Estimate')
         if issue.fields.timeoriginalestimate and issue.fields.timeoriginalestimate is not None:
-            print('Estimate:', issue.fields.timeoriginalestimate)
             bug_ascii_data.append('* Estimate: {}'.format(issue.fields.timeoriginalestimate))
         else:
-            print('No time-original-estimate is now available for the Issue --> {}'
-                  .format(self.issue_name_input))
             bug_ascii_data.append('* No time-original-estimate is now available for the Issue --> {}'
                                   .format(self.issue_name_input))
-        print()
         # Time spent
-        print('Time spent:')
         bug_ascii_data.append('=== Time Spent')
         if issue.fields.timespent and issue.fields.timespent is not None:
-            print('Time:', issue.fields.timespent)
             bug_ascii_data.append('* Time: {}'.format(issue.fields.timespent))
         else:
-            print('No time-spent is now available for the Issue --> {}'.format(self.issue_name_input))
             bug_ascii_data.append('* No time-spent is now available for the Issue --> {}'.format(self.issue_name_input))
-        print()
         # Updated Date
-        print('Updated Date:')
         bug_ascii_data.append('=== Updated Date')
         if issue.fields.updated and issue.fields.updated is not None:
-            print('Date:', issue.fields.updated)
             bug_ascii_data.append('* Date: {}'.format(issue.fields.updated))
         else:
-            print('No updated-date is now available for the the Issue -->'.format(self.issue_name_input))
             bug_ascii_data.append('* No updated-date is now available for the the Issue --> {}'
                                   .format(self.issue_name_input))
-        print()
         # Versions list
-        print('Versions:')
         bug_ascii_data.append('=== Versions')
         if issue.fields.versions:
             versions_list = issue.fields.versions
             if len(versions_list) > 0:
                 counter_versions_list = 1
                 for item in versions_list:
-                    print('\tVersion {}'.format(counter_versions_list))
                     bug_ascii_data.append('* Version {}'.format(counter_versions_list))
-                    print('\t\tID:', item.id)
                     bug_ascii_data.append('** ID: {}'.format(item.id))
-                    print('\t\tName:', item.name)
                     bug_ascii_data.append('** Name: {}'.format(item.name))
-                    print('\t\tDescription:', item.description)
                     bug_ascii_data.append('** Description: {}'.format(item.description))
-                    print('\t\tArchived:', item.archived)
                     bug_ascii_data.append('** Archived: {}'.format(item.archived))
-                    print('\t\tReleased:', item.released)
                     bug_ascii_data.append('** Released: {}'.format(item.released))
-                    print('\t\tRelease Date', item.releaseDate)
                     bug_ascii_data.append('** Release Date: {}'.format(item.releaseDate))
                     counter_versions_list += 1
             else:
-                print('\tThe are no listed versions for the Issue --> {}'.format(self.issue_name_input))
                 bug_ascii_data.append('* The are no listed versions for the Issue --> {}'.format(self.issue_name_input))
-        print()
         # Votes
-        print('Votes:')
         bug_ascii_data.append('=== Votes')
         if issue.fields.votes:
-            print('\tVotes No.:', issue.fields.votes.votes)
             bug_ascii_data.append('* Votes No.: {}'.format(issue.fields.votes.votes))
-            print('\thas Voted:', issue.fields.votes.hasVoted)
             bug_ascii_data.append('* has Voted: {}'.format(issue.fields.votes.hasVoted))
         else:
             bug_ascii_data.append('* Votes are not available at this time.')
-        print()
         # Watchers object
-        print('Watchers:')
         bug_ascii_data.append('=== Watchers')
         if issue.fields.watches.watchCount and issue.fields.watches.watchCount is not None:
-            print('\tWatches:', issue.fields.watches.watchCount)
             bug_ascii_data.append('* Watches: {}'.format(issue.fields.watches.watchCount))
-            print('\tWatching:', issue.fields.watches.isWatching)
             bug_ascii_data.append('* Watching: {}'.format(issue.fields.watches.isWatching))
         else:
-            print('\tNo watches are available until now for the Issue: --> {}'.format(self.issue_name_input))
             bug_ascii_data.append('No watches are available until now for the Issue: --> {}'
                                   .format(self.issue_name_input))
-        print()
         # Work Ratio
-        print('Work Ratio:')
         bug_ascii_data.append('=== Work Ratio')
         if issue.fields.workratio:
-            print('Work Ratio:', issue.fields.workratio)
             bug_ascii_data.append('* Ratio: {}'.format(issue.fields.workratio))
         else:
             bug_ascii_data.append('* No Work Ratio available.')
-        print()
-        print('Issue Work-logs:')
+        # Issue Work-logs
         bug_ascii_data.append('=== Issue Work-logs')
         if issue.fields.worklog:
-            print('\tStart at:', issue.fields.worklog.startAt)
             bug_ascii_data.append('* Start at: {}'.format(issue.fields.worklog.startAt))
-            print('\tMax Results:', issue.fields.worklog.maxResults)
             bug_ascii_data.append('* Max Results: {}'.format(issue.fields.worklog.maxResults))
-            print('\tTotal:', issue.fields.worklog.total)
             bug_ascii_data.append('* Total: {}'.format(issue.fields.worklog.total))
             work_logs_list = issue.fields.worklog.worklogs
             bug_ascii_data.append('* Work-logs List:')
             if len(work_logs_list) > 0:
                 counter_work_logs = 1
                 for item in work_logs_list:
-                    print('\tWork-logs Item {}:'.format(counter_work_logs), work_logs_list[item])
                     bug_ascii_data.append('** Work-logs Item {}:'.format(counter_work_logs) + ' {}'.
                                           format(work_logs_list[item]))
                     counter_work_logs += 1
             else:
-                print('\tThere are no listed work-logs at this time for the Issue --> {}'.format(self.issue_name_input))
                 bug_ascii_data.append('** There are no listed work-logs at this time for the Issue --> {}'
                                       .format(self.issue_name_input))
-        print()
-        print('------------------------------------')
-        print()
+        # print the list of asciidoc data
         for item in bug_ascii_data:
             print(item)
             print('\n')
         return bug_ascii_data
-
-
 
 
 """CLASS FOR CREATING CONFIGURATION FILE WITH USER'S WANTED CUSTOM FIELDS"""

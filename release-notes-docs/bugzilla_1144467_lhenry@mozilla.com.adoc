@@ -208,7 +208,7 @@
 
 === Update Token
 
-* 1562185721-xcmj1O7njA_78L5uVaKuT-Ondi5u2T-3YphU0N6Fc7g
+* 1562780514-EVlGyoWoOzduvP7fYVo0GflvBy1tuvsMkfqfP9hyxcA
 
 === URL
 
@@ -240,8 +240,6 @@
 
 * cf_qa_whiteboard: 
 
-* cf_tracking_firefox67_0_5: ---
-
 * cf_fx_iteration: ---
 
 * cf_last_resolved: 2015-04-22T00:10:21Z
@@ -265,6 +263,6 @@
 
 
 ----------
-Report time: 2019-07-03 23:28:41.369672
+Report time: 2019-07-10 20:41:54.671348
 
 

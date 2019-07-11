@@ -246,6 +246,8 @@
 
 * cf_status_firefox68: ---
 
+* cf_status_firefox70: ---
+
 * cf_qa_whiteboard: 
 
 * cf_tracking_firefox_esr68: ---
@@ -261,6 +263,8 @@
 * cf_tracking_firefox_relnote: ---
 
 * cf_last_resolved: 2013-04-18T08:49:14Z
+
+* cf_tracking_firefox70: ---
 
 * cf_fx_points: ---
 
@@ -5252,7 +5256,7 @@
 
 ** Nickname: karlcow
 
-** Real Name: Karl Dubost💡 :karlcow
+** Real Name: Karl Dubost💡 :karlcow (PTO July 9-26)
 
 * CC 7 Information:
 
@@ -9348,6 +9352,8 @@
 
 * cf_last_resolved: 2015-01-06T00:24:37Z
 
+* cf_tracking_firefox70: ---
+
 * cf_fx_points: ---
 
 * cf_has_str: ---
@@ -9360,6 +9366,8 @@
 
 * cf_status_firefox67: ---
 
+* cf_status_firefox70: ---
+
 * cf_fission_milestone: ---
 
 * cf_tracking_firefox_esr68: ---
@@ -9370,11 +9378,7 @@
 
 * cf_tracking_firefox69: ---
 
-* cf_tracking_firefox67_0_5: ---
-
 * cf_has_regression_range: ---
-
-* cf_status_firefox67_0_5: ---
 
 * cf_crash_signature: 
 
@@ -9850,6 +9854,8 @@
 
 * cf_status_firefox68: ---
 
+* cf_status_firefox70: ---
+
 * cf_qa_whiteboard: 
 
 * cf_tracking_firefox_esr68: ---
@@ -9857,8 +9863,6 @@
 * cf_status_firefox_esr68: ---
 
 * cf_tracking_firefox69: ---
-
-* cf_tracking_firefox67_0_5: ---
 
 * cf_locale: []
 
@@ -9870,9 +9874,9 @@
 
 * cf_last_resolved: 2015-10-01T19:55:10Z
 
-* cf_fx_points: ---
+* cf_tracking_firefox70: ---
 
-* cf_status_firefox67_0_5: ---
+* cf_fx_points: ---
 
 * cf_user_story: 
 
@@ -10300,6 +10304,8 @@
 
 * cf_last_resolved: 2017-04-19T16:38:50Z
 
+* cf_tracking_firefox70: ---
+
 * cf_fx_points: ---
 
 * cf_has_str: ---
@@ -10314,6 +10320,8 @@
 
 * cf_tracking_firefox53: +
 
+* cf_status_firefox70: ---
+
 * cf_fission_milestone: ---
 
 * cf_tracking_firefox_esr68: ---
@@ -10326,11 +10334,7 @@
 
 * cf_tracking_firefox69: ---
 
-* cf_tracking_firefox67_0_5: ---
-
 * cf_has_regression_range: ---
-
-* cf_status_firefox67_0_5: ---
 
 * cf_crash_signature: 
 
@@ -10540,6 +10544,8 @@
 
 * cf_status_firefox68: ---
 
+* cf_status_firefox70: ---
+
 * cf_qa_whiteboard: 
 
 * cf_tracking_firefox_esr68: ---
@@ -10547,8 +10553,6 @@
 * cf_status_firefox_esr68: ---
 
 * cf_tracking_firefox69: ---
-
-* cf_tracking_firefox67_0_5: ---
 
 * cf_locale: []
 
@@ -10560,9 +10564,9 @@
 
 * cf_last_resolved: 2017-08-09T23:44:38Z
 
-* cf_fx_points: ---
+* cf_tracking_firefox70: ---
 
-* cf_status_firefox67_0_5: ---
+* cf_fx_points: ---
 
 * cf_user_story: 
 
@@ -10800,6 +10804,8 @@
 
 * cf_last_resolved: 2019-04-26T17:30:44Z
 
+* cf_tracking_firefox70: ---
+
 * cf_fx_points: ---
 
 * cf_user_story: 
@@ -10810,15 +10816,13 @@
 
 * cf_status_firefox67: ---
 
+* cf_status_firefox70: ---
+
 * cf_tracking_firefox_esr68: ---
 
 * cf_status_firefox_esr68: ---
 
 * cf_tracking_firefox69: ---
-
-* cf_tracking_firefox67_0_5: ---
-
-* cf_status_firefox67_0_5: ---
 
 * cf_crash_signature: 
 
@@ -11050,6 +11054,8 @@
 
 * cf_last_resolved: 2019-04-26T17:31:59Z
 
+* cf_tracking_firefox70: ---
+
 * cf_fx_points: ---
 
 * cf_user_story: 
@@ -11060,15 +11066,13 @@
 
 * cf_status_firefox67: ---
 
+* cf_status_firefox70: ---
+
 * cf_tracking_firefox_esr68: ---
 
 * cf_status_firefox_esr68: ---
 
 * cf_tracking_firefox69: ---
-
-* cf_tracking_firefox67_0_5: ---
-
-* cf_status_firefox67_0_5: ---
 
 * cf_crash_signature: 
 
@@ -11300,6 +11304,8 @@
 
 * cf_last_resolved: 2019-04-26T17:32:40Z
 
+* cf_tracking_firefox70: ---
+
 * cf_fx_points: ---
 
 * cf_user_story: 
@@ -11310,15 +11316,13 @@
 
 * cf_status_firefox67: ---
 
+* cf_status_firefox70: ---
+
 * cf_tracking_firefox_esr68: ---
 
 * cf_status_firefox_esr68: ---
 
 * cf_tracking_firefox69: ---
-
-* cf_tracking_firefox67_0_5: ---
-
-* cf_status_firefox67_0_5: ---
 
 * cf_crash_signature: 
 
@@ -11538,6 +11542,8 @@
 
 * cf_last_resolved: 2017-10-02T20:48:56Z
 
+* cf_tracking_firefox70: ---
+
 * cf_fx_points: ---
 
 * cf_user_story: 
@@ -11548,6 +11554,8 @@
 
 * cf_status_firefox67: ---
 
+* cf_status_firefox70: ---
+
 * cf_tracking_firefox_esr68: ---
 
 * cf_status_firefox_esr68: ---
@@ -11556,11 +11564,7 @@
 
 * cf_tracking_firefox69: ---
 
-* cf_tracking_firefox67_0_5: ---
-
 * cf_locale: []
-
-* cf_status_firefox67_0_5: ---
 
 * cf_tracking_firefox_esr60: ---
 
@@ -11571,6 +11575,6 @@
 
 
 ----------
-Report time: 2019-07-03 23:28:51.029172
+Report time: 2019-07-10 20:42:06.294114
 
 

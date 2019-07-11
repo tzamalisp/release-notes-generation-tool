@@ -1,0 +1,21 @@
+DEBUG 2019-07-11 21:52:42,876 - DASHBOARD'S CUSTOM FIELDS AVAILABLE - CONFIGURATION JSON FILE CREATION
+DEBUG 2019-07-11 21:52:42,888 - Starting new HTTPS connection (1): issues.jboss.org
+DEBUG 2019-07-11 21:52:43,696 - https://issues.jboss.org:443 "GET /rest/api/2/serverInfo HTTP/1.1" 200 None
+DEBUG 2019-07-11 21:52:44,102 - https://issues.jboss.org:443 "GET /rest/api/2/field HTTP/1.1" 200 None
+DEBUG 2019-07-11 21:52:44,624 - https://issues.jboss.org:443 "GET /rest/api/2/issue/JBCS-535 HTTP/1.1" 200 None
+DEBUG 2019-07-11 21:52:44,632 - BASIC DATA RETRIEVER OBJECT
+DEBUG 2019-07-11 21:52:44,632 - CUSTOM FIELD DATA RETRIEVER OBJECT
+DEBUG 2019-07-11 21:52:44,632 - JIRA Doc including Basic + Custom Fields
+DEBUG 2019-07-11 21:52:44,640 - Starting new HTTPS connection (1): issues.jboss.org
+DEBUG 2019-07-11 21:52:45,691 - https://issues.jboss.org:443 "GET /rest/api/2/serverInfo HTTP/1.1" 200 None
+DEBUG 2019-07-11 21:52:46,128 - https://issues.jboss.org:443 "GET /rest/api/2/field HTTP/1.1" 200 None
+DEBUG 2019-07-11 21:52:46,645 - https://issues.jboss.org:443 "GET /rest/api/2/issue/JBCS-535 HTTP/1.1" 200 None
+DEBUG 2019-07-11 21:52:46,651 - Starting new HTTPS connection (1): issues.jboss.org
+DEBUG 2019-07-11 21:52:47,529 - https://issues.jboss.org:443 "GET /rest/api/2/project/12317125 HTTP/1.1" 200 None
+DEBUG 2019-07-11 21:52:47,543 - Starting new HTTPS connection (1): issues.jboss.org
+DEBUG 2019-07-11 21:52:48,355 - https://issues.jboss.org:443 "GET /rest/api/2/serverInfo HTTP/1.1" 200 None
+DEBUG 2019-07-11 21:52:48,770 - https://issues.jboss.org:443 "GET /rest/api/2/field HTTP/1.1" 200 None
+DEBUG 2019-07-11 21:52:49,059 - https://issues.jboss.org:443 "GET /rest/api/2/issue/JBCS-535 HTTP/1.1" 200 None
+DEBUG 2019-07-11 21:52:49,064 - >>> Calling JIRA API and printing Issue parts is now completed successfully!
+DEBUG 2019-07-11 21:52:49,064 - Hello
+DEBUG 2019-07-11 21:52:49,064 - ---------------------------JIRA------------------------------------

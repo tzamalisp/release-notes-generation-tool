@@ -12,7 +12,9 @@ class GeneratorJira:
         self.data_custom = data_custom
 
     def generating_doc_jira(self):
-        f = open('release-notes-docs/jira_{}_{}.adoc'.format(self.bug, self.user), 'w+')
+        now = datetime.now()
+        now_str = now.strftime("%Y%m%d_%H-%M-%S")
+        f = open('release-notes-docs/jira_{}_{}_{}.adoc'.format(self.bug, self.user, now_str), 'w+')
         print('Writing file..')
         f.write('= Release Notes Generation Tool (RLGEN)')
         f.write('\n')
