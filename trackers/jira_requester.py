@@ -4,7 +4,6 @@ import requests
 import os
 from datetime import datetime
 from pprint import pprint
-from asciidoc_generator import GeneratorJira
 
 from conf.configuration import JiraReadConfigurationServer
 from conf.configuration import JiraReadConfigurationBasicAuth
@@ -67,6 +66,7 @@ class BasicDataRetriever:
         self.issue_name_input = issue_name_input
 
     def data_retriever(self):
+
         bug_ascii_data = []
 
         # JIRA API connection and connector object creation
@@ -392,80 +392,10 @@ class BasicDataRetriever:
                 bug_ascii_data.append('** There are no listed work-logs at this time for the Issue --> {}'
                                       .format(self.issue_name_input))
         # print the list of asciidoc data
-        for item in bug_ascii_data:
-            print(item)
-            print('\n')
+        # for item in bug_ascii_data:
+        #     print(item)
+        #     print('\n')
         return bug_ascii_data
-
-
-"""CLASS FOR CREATING CONFIGURATION FILE WITH USER'S WANTED CUSTOM FIELDS"""
-
-
-class CustomFieldConfCreation:
-    def __init__(self, name, field_id):
-        self.name = name
-        self.field_id = field_id
-
-    def custom_field_configuration_creation(self):
-        file_name = 'trackers/jira_user_custom_fields.json'
-        user_custom_fields_list = []
-        custom_field_entry = {self.name:  self.field_id}
-        print('Writing wanted custom fields configuration file..')
-        if not os.path.isfile(file_name):
-            user_custom_fields_list.append(custom_field_entry)
-            with open(file_name, mode='w', encoding='utf-8') as f:
-                f.write(json.dumps(user_custom_fields_list, indent=4))
-            print('Wanted custom fields configuration file is created successfully!')
-        else:
-            with open(file_name, encoding='utf-8') as feeds_json:
-                feeds = json.load(feeds_json)
-
-            feeds.append(custom_field_entry)
-            with open(file_name, mode='w', encoding='utf-8') as f:
-                f.write(json.dumps(feeds, indent=4))
-            print('Wanted custom fields configuration file is updated successfully!')
-
-
-"""CLASS FOR CREATING CUSTOM FIELDS LIST CONFIGURATION FILE FROM JIRA API"""
-
-
-class CustomFieldListFile:
-    def __init__(self, issue_name_input):
-        self.issue_name_input = issue_name_input
-
-    def list_file_generator(self):
-        # JIRA API connection and connector object creation
-        jira_connection_obj = Connector()
-        jira = jira_connection_obj.jira_connector()
-
-        # creating an issue object to fetch information later on from JIRA API
-        print('Creating the custom fields issue object..')
-        issue = jira.issue(self.issue_name_input)
-        print()
-
-        print('CUSTOM FIELDS JSON FILE CREATION:')
-        custom_fields_counter = 0
-        custom_fields_list = []
-        for field_name in issue.raw['fields']:
-            if field_name.startswith('customfield_'):
-                custom_fields_counter += 1
-                # print("Field:", field_name)
-                custom_fields_list.append(field_name)
-        if len(custom_fields_list) > 0:
-            print('Custom Fields Number in JBOSS found:', custom_fields_counter)
-            print('Writing custom fields list JSON file..')
-            print('Writing..')
-            custom_fields_list = {'custom_fields': custom_fields_list}
-            customfields_json = 'trackers/jira_customfields_list.json'
-            with open(customfields_json, 'w') as f:  # writing JSON object
-                json.dump(custom_fields_list, f)
-            print(
-                'Configuration JSON file with the name "{}", which is related to custom fields, '
-                'was created successfully!'.
-                format(customfields_json))
-            print()
-        else:
-            print('No custom fields were found to that issue.')
 
 
 """CLASS FOR RETRIEVING CUSTOM FIELDS ISSUE INFORMATION FROM JIRA API"""
@@ -479,50 +409,72 @@ class CustomFieldDataRetriever:
 
     def data_retriever(self):
         # JIRA API connection and connector object creation
-        jira_connection_obj = Connector()
-        jira = jira_connection_obj.jira_connector()
-
-        """Issue Definition"""
-        # creating an issue object to fetch information later on from JIRA API
-        print('Creating the custom fields issue object..')
-        issue = jira.issue(self.issue_name_input)
-        print()
-
         bug_custom_fields_list_feed = []
+        if self.issue_name_input is not None and self.custom_field_name is not None and self.custom_field_id is not None:
+            bug_custom_fields_list_feed.append('== Custom Fields Section')
+            if len(self.custom_field_name) == len(self.custom_field_id):
+                customfield_list = zip(self.custom_field_name, self.custom_field_id)
+                # connection to JIRA (again :) )
+                jira_connection_obj = Connector()
+                jira = jira_connection_obj.jira_connector()
+                """Issue Definition"""
+                # creating an issue object to fetch information later on from JIRA API
+                print('Creating the custom fields issue object..')
+                issue = jira.issue(self.issue_name_input)
+                # taking custom fields to a list
+                print('CUSTOM FIELDS JSON FILE CREATION')
+                custom_fields_counter = 0
+                custom_fields_list_from_api = []
+                for field_name in issue.raw['fields']:
+                    if field_name.startswith('customfield_'):
+                        custom_fields_counter += 1
+                        # print("Field:", field_name)
+                        custom_fields_list_from_api.append(field_name)
 
-        # Target Release (Custom Field)
-        with open('trackers/jira_customfields_list.json') as json_file:
-            data = json.load(json_file)
-        custom_search = 'customfield_' + str(self.custom_field_id)
-        custom_fields_list_read = data['custom_fields']
-        for item in custom_fields_list_read:
-            if item == custom_search:
-                print(self.custom_field_name + ' custom field found!')
-                print(self.custom_field_name + ':')
-                print('Name:', self.custom_field_name, '-', 'Custom Field ID =', str(self.custom_field_id))
-                bug_custom_fields_list_feed.append('=== ' + self.custom_field_name)
-                new_var = 'issue.fields.customfield_' + str(self.custom_field_id)
-                command = 'global temp; temp = ' + new_var
-                # print(command)
-                exec(command)
-                if temp is not None:
-                    print('\tDescription:', temp.description)
-                    bug_custom_fields_list_feed.append('* Description: {}'.format(temp.description))
-                    print('\tName:', temp.name)
-                    bug_custom_fields_list_feed.append('* Name: {}'.format(temp.name))
-                    print('\tArchived:', temp.archived)
-                    bug_custom_fields_list_feed.append('* Archived: {}'.format(temp.archived))
-                    print('\tReleased:', temp.released)
-                    bug_custom_fields_list_feed.append('* Released: {}'.format(temp.released))
+                if len(custom_fields_list_from_api) > 0:
+                    for item_id_search in customfield_list:
+                        # Target Release (Custom Field)
+                        custom_search = 'customfield_' + str(item_id_search[1])
+                        for item_custom_field_api in custom_fields_list_from_api:
+                            counter_match_found = 0
+                            if item_custom_field_api == custom_search:
+                                counter_match_found += 1
+                                if counter_match_found > 0:
+                                    print(item_id_search[0] + ' custom field found!')
+                                    print(item_id_search[0] + ':')
+                                    print('Name:', item_id_search[0], '-', 'Custom Field ID =', str(item_id_search[1]))
+                                    bug_custom_fields_list_feed.append('=== ' + item_id_search[0])
+                                    new_var = 'issue.fields.customfield_' + str(item_id_search[1])
+                                    command = 'global temp; temp = ' + new_var
+                                    exec(command)
+                                    bug_custom_fields_list_feed.append('* Description: {}'.format(temp.description))
+                                    bug_custom_fields_list_feed.append('* Name: {}'.format(temp.name))
+                                    bug_custom_fields_list_feed.append('* Archived: {}'.format(temp.archived))
+                                    bug_custom_fields_list_feed.append('* Released: {}'.format(temp.released))
+                                else:
+                                    print(item_id_search[0] + ': There is no ' + item_id_search[0] +
+                                          ' for the Issue --> {}'.format(self.issue_name_input))
+                                    bug_custom_fields_list_feed.append(item_id_search[0] + ': There is no ' +
+                                                                       item_id_search[0] + ' for the Issue --> {}'
+                                                                       .format(self.issue_name_input))
+
                     print()
-                # else:
-                #     print(self.custom_field_name + ': There is no ' + self.custom_field_name + ' for the Issue --> {}'
-                #           .format(self.issue_name_input))
-                #
-                #     print()
-        print()
-        for item in bug_custom_fields_list_feed:
-            print(item)
-            print()
+                    for item in bug_custom_fields_list_feed:
+                        print(item)
+                        print()
 
-        return bug_custom_fields_list_feed
+                    return bug_custom_fields_list_feed
+
+        elif self.custom_field_id is None or self.custom_field_name is None:
+            bug_custom_fields_list_feed.append('== Custom Fields Section')
+            nothing_right_selected = '* No ID for custom field or custom field Name are selected.'
+            print(nothing_right_selected)
+            bug_custom_fields_list_feed.append(nothing_right_selected)
+            return bug_custom_fields_list_feed
+
+        else:
+            bug_custom_fields_list_feed.append('== Custom Fields Section')
+            nothing_found = '*  Something is not set right for the custom fields.'
+            print(nothing_found)
+            bug_custom_fields_list_feed.append(nothing_found)
+            return bug_custom_fields_list_feed

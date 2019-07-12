@@ -10,8 +10,6 @@ from trackers.bugzilla_requester import UserBugs
 from trackers.bugzilla_requester import UserInfo
 
 from trackers.jira_requester import BasicDataRetriever
-from trackers.jira_requester import CustomFieldConfCreation
-from trackers.jira_requester import CustomFieldListFile
 from trackers.jira_requester import CustomFieldDataRetriever
 from trackers.jira_requester import Connector
 
@@ -35,10 +33,12 @@ logger = logging.getLogger()
 
 
 class UserTrackerChoice:
-    def __init__(self, tracker, issue, user):
+    def __init__(self, tracker, issue, user, custom_field_name, custom_field_id):
         self.tracker = tracker
         self.issue = issue
         self.user = user
+        self.custom_field_name = custom_field_name
+        self.custom_field_id = custom_field_id
 
     def tracker_selection(self):
 
@@ -55,27 +55,15 @@ class UserTrackerChoice:
             first_name = config['author']['firstname']
             last_name = config['author']['lastname']
             email = config['author']['email']
-            custom_field_name = config['author']['customfield_name']
-            custom_field_id = int(config['author']['customfield_id'])
-
-            # # ADDING CUSTOM FIELD - CREATION OF THE JSON CONFIGURATION FILE
-            # logger.debug('ADDING CUSTOM FIELD - CREATION OF THE JSON CONFIGURATION FILE')
-            #
-            # # new__custom_field = CustomFieldConfCreation('xxx', 'customfield_12310220')
-            # # new__custom_field.custom_field_configuration_creation()
-            #
-            # DASHBOARD'S CUSTOM FIELDS AVAILABLE - CONFIGURATION JSON FILE CREATION
-            logger.debug("DASHBOARD'S CUSTOM FIELDS AVAILABLE - CONFIGURATION JSON FILE CREATION")
-            dashboard_custom_field_list = CustomFieldListFile(self.issue)
-            dashboard_custom_field_list.list_file_generator()
+            # custom_field_name = config['author']['customfield_name']
+            # custom_field_id = int(config['author']['customfield_id'])
 
             # BASIC DATA RETRIEVER
             logger.debug('BASIC DATA RETRIEVER OBJECT')
             jira_basic_data = BasicDataRetriever(self.issue)
-
-            # CUSTOM FIELD DATA RETRIEVER
+             # CUSTOM FIELD DATA RETRIEVER
             logger.debug('CUSTOM FIELD DATA RETRIEVER OBJECT')
-            jira_custom_field_data = CustomFieldDataRetriever(self.issue, custom_field_name, custom_field_id)
+            jira_custom_field_data = CustomFieldDataRetriever(self.issue, self.custom_field_name, self.custom_field_id)
 
             # doc basic + custom fields
             logger.debug('JIRA Doc including Basic + Custom Fields')
@@ -106,28 +94,53 @@ def user_input(argv):
 
     parser = ArgumentParser()
 
-    parser.add_argument("-t", "--tracker", dest="tracker",
+    parser.add_argument("-t", "--tracker",
+                        dest="tracker",
                         help="add the tracker you want to search the issue: 'j' or 'J' for Jira | "
-                             "'b' or 'B' for Bugzilla", metavar="<TRACKER_VALUE>")
-    parser.add_argument("-i", "--issue", dest="issue",
-                        help="add the issue ID", metavar="<ISSUE_ID>")
-    parser.add_argument("-u", "--user", dest="user",
-                        help="add the user you want to search for", metavar="<USER NAME>")
+                             "'b' or 'B' for Bugzilla",
+                        metavar="<TRACKER_VALUE>")
+    parser.add_argument("-i", "--issue",
+                        dest="issue",
+                        help="add the issue ID",
+                        metavar="<ISSUE_ID>")
+    parser.add_argument("-n", "--name",
+                        dest="custom_field_name",
+                        action='append',
+                        help="Define the customfield name - <Required> Set flag",
+                        required=True,
+                        metavar="<CUSTOMFIELD_NAME>")
+    parser.add_argument("-c", "--customfieldid",
+                        dest="custom_field_id",
+                        nargs='+',
+                        help="Define the customfield ID number",
+                        metavar="<CUSTOMFIELD_ID>",
+                        type=int)
+    parser.add_argument("-u", "--user",
+                        dest="user",
+                        help="add the user you want to search for",
+                        metavar="<USER NAME>")
     # ARGUMENTS --> extra
     parser.add_argument("-q", "--quiet",
-                        action="store_false", dest="verbose", default=True,
+                        action="store_false",
+                        dest="verbose",
+                        default=True,
                         help="don't print status messages to stdout")
 
     # arguments parser creation object
     arguments = parser.parse_args()
-    return {'tracker': arguments.tracker, 'issue': arguments.issue, 'user': arguments.user}
+    print(">>>> Print when a value is empty:", arguments.user)
+    print('Print custom field names', arguments.custom_field_name)
+    print('>>>> Print list customfield IDs:', arguments.custom_field_id)
+    return {'tracker': arguments.tracker, 'issue': arguments.issue, 'user': arguments.user,
+            'custom_field_name': arguments.custom_field_name, 'custom_field_id': arguments.custom_field_id}
 
 
 if __name__ == '__main__':
     tracker_issue_selection = user_input(sys.argv[1:])
     # User Choice
     tracker_choice = UserTrackerChoice(tracker_issue_selection['tracker'], tracker_issue_selection['issue'],
-                                       tracker_issue_selection['user'])
+                                       tracker_issue_selection['user'], tracker_issue_selection['custom_field_name'],
+                                       tracker_issue_selection['custom_field_id'])
     tracker_choice.tracker_selection()
     logger.debug('Hello')
 
