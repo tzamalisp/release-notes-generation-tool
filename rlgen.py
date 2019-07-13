@@ -24,7 +24,7 @@ from conf.configuration import BugzillaReadConfigurationBasicAuth
 
 # create and configure a logger
 LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
-logging_file = logging.basicConfig(filename='rlgen.log', level=logging.DEBUG, format=LOG_FORMAT, filemode='w')
+logging_file = logging.basicConfig(filename='log/rlgen.log', level=logging.DEBUG, format=LOG_FORMAT, filemode='w')
 
 
 """ USER CHOICE OF ISSUE TRACKING PLATFORM """
@@ -128,9 +128,9 @@ def user_input(argv):
 
     # arguments parser creation object
     arguments = parser.parse_args()
-    print(">>>> Print when a value is empty:", arguments.user)
-    print('Print custom field names', arguments.custom_field_name)
-    print('>>>> Print list customfield IDs:', arguments.custom_field_id)
+    # print(">>>> Print when a value is empty:", arguments.user)
+    # print('Print custom field names', arguments.custom_field_name)
+    # print('>>>> Print list customfield IDs:', arguments.custom_field_id)
     return {'tracker': arguments.tracker, 'issue': arguments.issue, 'user': arguments.user,
             'custom_field_name': arguments.custom_field_name, 'custom_field_id': arguments.custom_field_id}
 
