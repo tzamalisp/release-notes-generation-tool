@@ -18,43 +18,110 @@ class Connector:
 
     def jira_connector(self):
         """ JIRA Connection"""
+        # JIRA connection options dictionary
+        options = {}
         # JIRA connection credentials
         jira_connection = JiraReadConfigurationServer()
-        server_value = jira_connection.read_server_conf()['server']
+        server_auth = jira_connection.read_server_conf()['server_auth']
+        if server_auth is True:
+            server_value = jira_connection.read_server_conf()['server']
+            options['server'] = server_value
+        else:
+            server_reason_value = jira_connection.read_server_conf()['server_reason']
+            raise Exception(server_reason_value)
 
+        # Authentication objects
         jira_basic_auth = JiraReadConfigurationBasicAuth()
-        username_value = jira_basic_auth.read_user_basic_auth()['username']
-        username_reason = jira_basic_auth.read_user_basic_auth()['username_reason']
-        print(username_reason)
-        password_value = jira_basic_auth.read_user_basic_auth()['password']
-
         jira_oauth = JiraReadConfigurationOAuth()
-        access_token_value = jira_oauth.read_oauth()['access_token']
-        access_token_secret_value = jira_oauth.read_oauth()['access_token_secret']
-        consumer_key_value = jira_oauth.read_oauth()['consumer_key']
-        # code for key cert here:
+        jira_kerberos = JiraReadConfigurationKerberos()
+
+        basic_auth = jira_basic_auth.read_user_basic_auth()['basic_auth']
+        oauth = jira_oauth.read_oauth()['oauth']
+        kerberos_auth = jira_kerberos.read_kerberos_auth()['kerberos_auth']
+        # code for key cert here
         key_cert_data = None
         # with open(key_cert, 'r') as key_cert_file:
         #     key_cert_data = key_cert_file.read()
+        key_cert_data = 'To be added'
 
-        jira_kerberos = JiraReadConfigurationKerberos()
-        kerberos_value = bool(jira_kerberos.read_kerberos_auth()['kerberos'])
-        kerberos_mutual_authentication_value = jira_kerberos.read_kerberos_auth()['kerberos_options']
+        # Structure of 'options' value authentication
+        # options = {
+        #     'server': server_value,
+        #     'basic_auth': (username_value, password_value),
+        #     'oauth': {
+        #         'access_token': access_token_value,
+        #         'access_token_secret': access_token_secret_value,
+        #         'consumer_key': consumer_key_value,
+        #         'key_cert': key_cert_data
+        #     },
+        #     'kerberos': kerberos_value,
+        #     'kerberos_options': {'mutual_authentication': kerberos_mutual_authentication_value}
+        # }
 
-        options = {
-            'server': server_value,
-            'basic_auth': (username_value, password_value),
-            'oauth': {
-                'access_token': access_token_value,
-                'access_token_secret': access_token_secret_value,
-                'consumer_key': consumer_key_value,
-                'key_cert': key_cert_data
-            },
-            'kerberos': kerberos_value,
-            'kerberos_options': {'mutual_authentication': kerberos_mutual_authentication_value}
-        }
+        if basic_auth is True or oauth is True or kerberos_auth is True:
+            if basic_auth is True:
+                basic_auth_reason_value = jira_basic_auth.read_user_basic_auth()['basic_auth_reason']
+                username_value = jira_basic_auth.read_user_basic_auth()['username']
+                username_reason_value = jira_basic_auth.read_user_basic_auth()['username_reason']
+                password_value = jira_basic_auth.read_user_basic_auth()['password']
+                password_reason_value = jira_basic_auth.read_user_basic_auth()['password_reason']
+                options['basic_auth'] = (username_value, password_value)
+            elif oauth is True:
+                oauth_reason_value = jira_oauth.read_oauth()['oauth_reason']
+                access_token_value = jira_oauth.read_oauth()['access_token']
+                access_token_reason_value = jira_oauth.read_oauth()['access_token_reason']
+                access_token_secret_value = jira_oauth.read_oauth()['access_token_secret']
+                access_token_secret_reason_value = jira_oauth.read_oauth()['access_token_secret_reason']
+                consumer_key_value = jira_oauth.read_oauth()['consumer_key']
+                consumer_key_reason_value = jira_oauth.read_oauth()['consumer_key_reason']
+                # (TO DEFINE THE IF STATEMENT HERE):
+                if key_cert_data is not None:
+                    options['oauth'] = {'access_token': access_token_value,
+                                        'access_token_secret': access_token_secret_value,
+                                        'consumer_key': consumer_key_value,
+                                        'key_cert': key_cert_data}
+                else:
+                    raise Exception('Please add the key certification data.')
+            elif kerberos_auth is True:
+                kerberos_auth_value_reason = jira_kerberos.read_kerberos_auth('kerberos_auth_reason')
+                kerberos_value = bool(jira_kerberos.read_kerberos_auth('kerberos'))
+                kerberos_reason_value = jira_kerberos.read_kerberos_auth('kerberos_reason')
+                kerberos_mutual_authentication_value = jira_kerberos.read_kerberos_auth('kerberos_options')
+                kerberos_options_reason_value = jira_kerberos.read_kerberos_auth('kerberos_options_reason')
+                options['kerberos'] = kerberos_value
+                options['kerberos_options'] = {'mutual_authentication': kerberos_mutual_authentication_value}
+        else:
+            if basic_auth is False:
+                basic_auth_reason_value = jira_basic_auth.read_user_basic_auth()['basic_auth_reason']
+                username_reason_value = jira_basic_auth.read_user_basic_auth()['username_reason']
+                password_reason_value = jira_basic_auth.read_user_basic_auth()['password_reason']
+                print(basic_auth_reason_value)
+                print(username_reason_value)
+                print(password_reason_value)
+                raise Exception('Basic Authentication failed.')
+            elif oauth is False:
+                oauth_reason_value = jira_oauth.read_oauth()['oauth_reason']
+                access_token_reason_value = jira_oauth.read_oauth()['access_token_reason']
+                access_token_secret_reason_value = jira_oauth.read_oauth()['access_token_secret_reason']
+                consumer_key_reason_value = jira_oauth.read_oauth()['consumer_key_reason']
+                print(oauth_reason_value)
+                print(access_token_reason_value)
+                print(access_token_secret_reason_value)
+                print(consumer_key_reason_value)
+                raise Exception('OAuth Authentication failed.')
+            elif kerberos_auth is False:
+                kerberos_auth_value_reason = jira_kerberos.read_kerberos_auth('kerberos_auth_reason')
+                kerberos_reason_value = jira_kerberos.read_kerberos_auth('kerberos_reason')
+                kerberos_options_reason_value = jira_kerberos.read_kerberos_auth('kerberos_options_reason')
+                print(kerberos_auth_value_reason)
+                print(kerberos_reason_value)
+                print(kerberos_options_reason_value)
+                raise Exception('Kerberos Authentication failed.')
 
         # JIRA object for connecting to the API
+        print('Options Authentication:')
+        pprint(options)
+        print()
         print('Connecting to the JIRA API..')
         jira_auth_connection = JIRA(options)
         print('Connected to JIRA API successfully!')
@@ -441,23 +508,37 @@ class CustomFieldDataRetriever:
                                 counter_match_found += 1
                                 if counter_match_found > 0:
                                     print(item_id_search[0] + ' custom field found!')
-                                    print(item_id_search[0] + ':')
                                     print('Name:', item_id_search[0], '-', 'Custom Field ID =', str(item_id_search[1]))
                                     bug_custom_fields_list_feed.append('=== ' + item_id_search[0])
                                     new_var = 'issue.fields.customfield_' + str(item_id_search[1])
                                     command = 'global temp; temp = ' + new_var
                                     exec(command)
-                                    bug_custom_fields_list_feed.append('* Description: {}'.format(temp.description))
-                                    bug_custom_fields_list_feed.append('* Name: {}'.format(temp.name))
-                                    bug_custom_fields_list_feed.append('* Archived: {}'.format(temp.archived))
-                                    bug_custom_fields_list_feed.append('* Released: {}'.format(temp.released))
+                                    temp_doc_output = '* ' + item_id_search[0] + ': ' + str(temp)
+                                    print(temp_doc_output)
+                                    bug_custom_fields_list_feed.append(temp_doc_output)
+                                    # temp_object = dir(temp)
+                                    # print(type(temp_object))
+                                    # print(temp_object)
+                                    # dict_keys = temp.__dict__.keys()
+                                    # print(dict_keys)
+                                    # for item in dict_keys:
+                                    #     if not item.startswith('_'):
+                                    #         print('Index: ' + dict_keys.index(item))
+                                    # print()
+                                    # print()
+                                    # print()
+                                    # print()
+                                    # print()
+                                    # bug_custom_fields_list_feed.append('* Description: {}'.format(temp.description))
+                                    # bug_custom_fields_list_feed.append('* Name: {}'.format(temp.name))
+                                    # bug_custom_fields_list_feed.append('* Archived: {}'.format(temp.archived))
+                                    # bug_custom_fields_list_feed.append('* Released: {}'.format(temp.released))
                                 else:
                                     print(item_id_search[0] + ': There is no ' + item_id_search[0] +
                                           ' for the Issue --> {}'.format(self.issue_name_input))
                                     bug_custom_fields_list_feed.append(item_id_search[0] + ': There is no ' +
                                                                        item_id_search[0] + ' for the Issue --> {}'
                                                                        .format(self.issue_name_input))
-
                     print()
                     for item in bug_custom_fields_list_feed:
                         print(item)

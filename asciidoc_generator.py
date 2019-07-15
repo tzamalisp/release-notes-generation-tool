@@ -14,6 +14,14 @@ class GeneratorJira:
     def generating_doc_jira(self):
         now = datetime.now()
         now_str = now.strftime("%Y%m%d_%H-%M-%S")
+        if self.user is None:
+            self.user = 'unknown_username'
+        if self.email_account is '':
+            self.email_account = 'Email is not defined at the configuration file'
+        if self.firstname is '':
+            self.firstname = 'Unknown Firstname - '
+        if self.lastname is '':
+            self.lastname = ' - Unknown Lastname'
         f = open('release-notes-docs/jira_{}_{}_{}.adoc'.format(self.bug, self.user, now_str), 'w+')
         print('Writing file..')
         f.write('= Release Notes Generation Tool (RLGEN)')

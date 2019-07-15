@@ -1,0 +1,244 @@
+= Release Notes Generation Tool (RLGEN)
+:author: Pantelis Tzamalis
+:email: tzamalis@ceid.upatras.gr
+
+== Bug ID: JBCS-535
+
+=== Project Object
+
+* Project JSON URL: https://issues.jboss.org/rest/api/2/project/12317125[JBCS-535]
+
+* Project Key: JBCS
+
+* Project Name: JBoss Core Services
+
+* Project ID: 12317125
+
+* Project Category Name: n) JBoss Enterprise Middleware
+
+* Project Category Description: Projects related to JBoss Enterprise Middleware products.
+
+* Project Avatar: https://issues.jboss.org/secure/projectavatar?pid=12317125&avatarId=15267
+
+=== Issue Type
+
+* Name: Bug
+
+* Description: A problem which impairs or prevents the functions of the product.
+
+* Avatar: https://issues.jboss.org/secure/viewavatar?size=xsmall&avatarId=13263&avatarType=issuetype
+
+=== Reporter Display Name
+
+* Display Name: Pavel Reichl
+
+=== Created DateTime
+
+* Created at: 2018-04-16T03:40:13.000-0400
+
+=== Assignee
+
+* Display Name: George Zaronikas
+
+* Name: gzaronikas
+
+* Key: gzaronikas
+
+* Active: issue.fields.assignee.active
+
+* TimeZone: America/New_York
+
+=== Issue Description
+
+* Description: Tests for https://issues.jboss.org/browse/JBCS-57 are failing again...did we forget to backport the patch?
+
+=== Status
+
+* Name: Open
+
+* Description: The issue is open and ready for the assignee to start work on it.
+
+* Status Category Name: To Do
+
+* Icon: https://issues.jboss.org/images/icons/statuses/open.png
+
+=== Aggregate Progress
+
+* Progress: 0
+
+* Total: 0
+
+=== Aggregate Time Estimate
+
+* No Aggregate Time Estimate is available for the Issue --> JBCS-535
+
+=== Aggregate Time Original Estimate
+
+* No Aggregate Time Estimate is available for the Issue --> JBCS-535
+
+=== Aggregate Time Spent
+
+* No Aggregate Time Spent is available for the Issue --> JBCS-535
+
+=== Attachments
+
+=== Comments
+
+* Comment 1: cherry picked by http://git.app.eng.bos.redhat.com/git/httpd.git/commit/?h=jbcs-httpd-2.4.29&id=e6bdf2632b254c15c79a7ace850ad52b59152256
+
+* Comment 2: The upstream branch 2.4.x is OK. Weird.
+
+* Comment 3: [~gzaronikas] The patch we had in 2.4.29 are missing in 2.4.37
+
+=== Components
+
+* Component 1
+
+** Name: httpd
+
+** Description: Apache HTTP Server
+
+** ID: 12323365
+
+=== Environment
+
+* There is no Environment set for the Issue --> JBCS-535
+
+=== Fix Versions List
+
+* There are no listed fixed versions for the Issue --> JBCS-535
+
+=== Issue Links List
+
+* Issue Link Item 1: 12539825
+
+=== Labels List
+
+* Label Item 1: jws-pool
+
+* Label Item 2: regression
+
+=== Progress
+
+* Progress: 0
+
+* Total: 0
+
+=== Reporter
+
+* Display Name: Pavel Reichl
+
+* Active: True
+
+* Name: preichl1
+
+* Key: preichl1
+
+* Timezone: Europe/Prague
+
+=== Resolution
+
+* No Resolution is stored at this time for the Issue --> JBCS-535
+
+=== Resolution Date
+
+* No resolution date is stored at this time for the Issue --> JBCS-535
+
+=== Sub-tasks
+
+=== Summary
+
+* Summary: CheckCaseOnly On does not stop Multiple Choices based on common basename
+
+=== Time Estimate
+
+* No time-estimate is now available fo the Issue --> JBCS-535
+
+=== Time Original Estimate
+
+* No time-original-estimate is now available for the Issue --> JBCS-535
+
+=== Time Spent
+
+* No time-spent is now available for the Issue --> JBCS-535
+
+=== Updated Date
+
+* Date: 2019-06-26T08:03:16.000-0400
+
+=== Versions
+
+* Version 1
+
+** ID: 12337224
+
+** Name: httpd 2.4.29 DR2
+
+** Description: DR2 Build of httpd 2.4.29 release
+
+** Archived: False
+
+** Released: True
+
+** Release Date: 2018-03-26
+
+* Version 2
+
+** ID: 12337285
+
+** Name: httpd 2.4.29 DR3
+
+** Description: DR3 Build of httpd 2.4.29 releas
+
+** Archived: False
+
+** Released: True
+
+** Release Date: 2018-04-09
+
+=== Votes
+
+* Votes No.: 0
+
+* has Voted: False
+
+=== Watchers
+
+* Watches: 4
+
+* Watching: False
+
+=== Work Ratio
+
+* Ratio: -1
+
+=== Issue Work-logs
+
+* Start at: 0
+
+* Max Results: 20
+
+* Total: 0
+
+* Work-logs List:
+
+** There are no listed work-logs at this time for the Issue --> JBCS-535
+
+
+
+=== Target Release
+
+* Description: JBCS-2.4.37
+
+* Name: httpd 2.4.37 GA
+
+* Archived: False
+
+* Released: False
+
+
+
+----------
+Report time: 2019-07-11 20:42:15.815481
+
+

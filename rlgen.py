@@ -61,7 +61,7 @@ class UserTrackerChoice:
             # BASIC DATA RETRIEVER
             logger.debug('BASIC DATA RETRIEVER OBJECT')
             jira_basic_data = BasicDataRetriever(self.issue)
-             # CUSTOM FIELD DATA RETRIEVER
+            # CUSTOM FIELD DATA RETRIEVER
             logger.debug('CUSTOM FIELD DATA RETRIEVER OBJECT')
             jira_custom_field_data = CustomFieldDataRetriever(self.issue, self.custom_field_name, self.custom_field_id)
 
@@ -77,7 +77,6 @@ class UserTrackerChoice:
             doc_basic.generating_doc_jira()
 
             logger.debug('>>> Calling JIRA API and printing Issue parts is now completed successfully!')
-
         elif self.tracker is 'B' or self.tracker is 'b':
             print('Entered Bugzilla environment')
             bugzilla_basic_auth = BugzillaReadConfigurationBasicAuth()
