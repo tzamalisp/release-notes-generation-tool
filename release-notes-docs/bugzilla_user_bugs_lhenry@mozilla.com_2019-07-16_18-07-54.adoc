@@ -256,8 +256,6 @@
 
 * cf_tracking_firefox69: ---
 
-* cf_tracking_firefox67: ---
-
 * cf_fx_iteration: ---
 
 * cf_tracking_firefox_relnote: ---
@@ -277,8 +275,6 @@
 * cf_status_firefox_esr60: ---
 
 * cf_tracking_firefox68: ---
-
-* cf_status_firefox67: ---
 
 = User Bug: 2
 
@@ -9344,8 +9340,6 @@
 
 * cf_qa_whiteboard: 
 
-* cf_tracking_firefox67: ---
-
 * cf_fx_iteration: ---
 
 * cf_tracking_firefox_relnote: ---
@@ -9363,8 +9357,6 @@
 * cf_status_firefox69: ---
 
 * cf_status_firefox_esr60: ---
-
-* cf_status_firefox67: ---
 
 * cf_status_firefox70: ---
 
@@ -9866,8 +9858,6 @@
 
 * cf_locale: []
 
-* cf_tracking_firefox67: ---
-
 * cf_fx_iteration: ---
 
 * cf_tracking_firefox_relnote: ---
@@ -9887,8 +9877,6 @@
 * cf_status_firefox_esr60: ---
 
 * cf_tracking_firefox68: ---
-
-* cf_status_firefox67: ---
 
 = User Bug: 36
 
@@ -10296,8 +10284,6 @@
 
 * cf_rank: None
 
-* cf_tracking_firefox67: ---
-
 * cf_fx_iteration: ---
 
 * cf_tracking_firefox_relnote: ---
@@ -10315,8 +10301,6 @@
 * cf_status_firefox69: ---
 
 * cf_status_firefox_esr60: ---
-
-* cf_status_firefox67: ---
 
 * cf_tracking_firefox53: +
 
@@ -10556,8 +10540,6 @@
 
 * cf_locale: []
 
-* cf_tracking_firefox67: ---
-
 * cf_fx_iteration: ---
 
 * cf_tracking_firefox_relnote: ---
@@ -10577,8 +10559,6 @@
 * cf_status_firefox_esr60: ---
 
 * cf_tracking_firefox68: ---
-
-* cf_status_firefox67: ---
 
 = User Bug: 38
 
@@ -10794,9 +10774,15 @@
 
 * cf_status_firefox68: ---
 
+* cf_status_firefox70: ---
+
 * cf_qa_whiteboard: 
 
-* cf_tracking_firefox67: ---
+* cf_tracking_firefox_esr68: ---
+
+* cf_status_firefox_esr68: ---
+
+* cf_tracking_firefox69: ---
 
 * cf_fx_iteration: ---
 
@@ -10808,25 +10794,15 @@
 
 * cf_fx_points: ---
 
+* cf_crash_signature: 
+
 * cf_user_story: 
 
 * cf_status_firefox69: ---
 
-* cf_status_firefox_esr60: ---
-
-* cf_status_firefox67: ---
-
-* cf_status_firefox70: ---
-
-* cf_tracking_firefox_esr68: ---
-
-* cf_status_firefox_esr68: ---
-
-* cf_tracking_firefox69: ---
-
-* cf_crash_signature: 
-
 * cf_tracking_firefox_esr60: ---
+
+* cf_status_firefox_esr60: ---
 
 * cf_tracking_firefox68: ---
 
@@ -11044,9 +11020,15 @@
 
 * cf_status_firefox68: ---
 
+* cf_status_firefox70: ---
+
 * cf_qa_whiteboard: 
 
-* cf_tracking_firefox67: ---
+* cf_tracking_firefox_esr68: ---
+
+* cf_status_firefox_esr68: ---
+
+* cf_tracking_firefox69: ---
 
 * cf_fx_iteration: ---
 
@@ -11058,25 +11040,15 @@
 
 * cf_fx_points: ---
 
+* cf_crash_signature: 
+
 * cf_user_story: 
 
 * cf_status_firefox69: ---
 
-* cf_status_firefox_esr60: ---
-
-* cf_status_firefox67: ---
-
-* cf_status_firefox70: ---
-
-* cf_tracking_firefox_esr68: ---
-
-* cf_status_firefox_esr68: ---
-
-* cf_tracking_firefox69: ---
-
-* cf_crash_signature: 
-
 * cf_tracking_firefox_esr60: ---
+
+* cf_status_firefox_esr60: ---
 
 * cf_tracking_firefox68: ---
 
@@ -11294,9 +11266,15 @@
 
 * cf_status_firefox68: ---
 
+* cf_status_firefox70: ---
+
 * cf_qa_whiteboard: 
 
-* cf_tracking_firefox67: ---
+* cf_tracking_firefox_esr68: ---
+
+* cf_status_firefox_esr68: ---
+
+* cf_tracking_firefox69: ---
 
 * cf_fx_iteration: ---
 
@@ -11308,25 +11286,15 @@
 
 * cf_fx_points: ---
 
+* cf_crash_signature: 
+
 * cf_user_story: 
 
 * cf_status_firefox69: ---
 
-* cf_status_firefox_esr60: ---
-
-* cf_status_firefox67: ---
-
-* cf_status_firefox70: ---
-
-* cf_tracking_firefox_esr68: ---
-
-* cf_status_firefox_esr68: ---
-
-* cf_tracking_firefox69: ---
-
-* cf_crash_signature: 
-
 * cf_tracking_firefox_esr60: ---
+
+* cf_status_firefox_esr60: ---
 
 * cf_tracking_firefox68: ---
 
@@ -11532,9 +11500,19 @@
 
 * cf_status_firefox68: ---
 
+* cf_status_firefox70: ---
+
 * cf_qa_whiteboard: 
 
-* cf_tracking_firefox67: ---
+* cf_tracking_firefox_esr68: ---
+
+* cf_status_firefox_esr68: ---
+
+* cf_status_firefox56: fixed
+
+* cf_tracking_firefox69: ---
+
+* cf_locale: []
 
 * cf_fx_iteration: ---
 
@@ -11550,23 +11528,9 @@
 
 * cf_status_firefox69: ---
 
-* cf_status_firefox_esr60: ---
-
-* cf_status_firefox67: ---
-
-* cf_status_firefox70: ---
-
-* cf_tracking_firefox_esr68: ---
-
-* cf_status_firefox_esr68: ---
-
-* cf_status_firefox56: fixed
-
-* cf_tracking_firefox69: ---
-
-* cf_locale: []
-
 * cf_tracking_firefox_esr60: ---
+
+* cf_status_firefox_esr60: ---
 
 * cf_tracking_firefox68: ---
 
@@ -11575,6 +11539,6 @@
 
 
 ----------
-Report time: 2019-07-10 20:42:06.294114
+Report time: 2019-07-16 18:07:54.851219
 
 

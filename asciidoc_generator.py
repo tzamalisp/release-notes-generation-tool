@@ -2,7 +2,7 @@ from datetime import datetime
 
 
 class GeneratorJira:
-    def __init__(self, user, bug, firstname, lastname, email_account, data_basic, data_custom):
+    def __init__(self, user, bug, firstname, lastname, email_account, data_basic, data_custom, path):
         self.user = user
         self.bug = bug
         self.firstname = firstname
@@ -10,10 +10,11 @@ class GeneratorJira:
         self.email_account = email_account
         self.data_basic = data_basic
         self.data_custom = data_custom
+        self.path = path
 
     def generating_doc_jira(self):
         now = datetime.now()
-        now_str = now.strftime("%Y%m%d_%H-%M-%S")
+        now_str = now.strftime("%Y-%m-%d_%H-%M-%S")
         if self.user is None:
             self.user = 'unknown_username'
         if self.email_account is '':
@@ -22,7 +23,10 @@ class GeneratorJira:
             self.firstname = 'Unknown Firstname - '
         if self.lastname is '':
             self.lastname = ' - Unknown Lastname'
-        f = open('release-notes-docs/jira_{}_{}_{}.adoc'.format(self.bug, self.user, now_str), 'w+')
+        if self.path is None:
+            f = open('release-notes-docs/jira_bug_info_{}_{}_{}.adoc'.format(self.bug, self.user, now_str), 'w+')
+        else:
+            f = open('{}/jira_bug_info_{}_{}_{}.adoc'.format(self.path, self.bug, self.user, now_str), 'w+')
         print('Writing file..')
         f.write('= Release Notes Generation Tool (RLGEN)')
         f.write('\n')
@@ -54,17 +58,34 @@ class GeneratorJira:
         print('File AsciiDoc is written successfully!')
 
 
+"""GENERATING BUG INFORMATION DOC"""
+
+
 class GeneratorBugzillaBug:
-    def __init__(self, user, bug, firstname, lastname, email_account, data_basic):
+    def __init__(self, user, bug, firstname, lastname, email_account, data_basic, path):
         self.user = user
         self.bug = bug
         self.firstname = firstname
         self.lastname = lastname
         self.email_account = email_account
         self.data_basic = data_basic
+        self.path = path
 
     def generating_doc_bugzilla(self):
-        f = open('release-notes-docs/bugzilla_{}_{}.adoc'.format(self.bug, self.user), 'w+')
+        now = datetime.now()
+        now_str = now.strftime("%Y-%m-%d_%H-%M-%S")
+        if self.user is None:
+            self.user = 'unknown_username'
+        if self.email_account is '':
+            self.email_account = 'Email is not defined at the configuration file'
+        if self.firstname is '':
+            self.firstname = 'Unknown Firstname - '
+        if self.lastname is '':
+            self.lastname = ' - Unknown Lastname'
+        if self.path is None:
+            f = open('release-notes-docs/bugzilla_bug_info_{}_{}_{}.adoc'.format(self.bug, self.user, now_str), 'w+')
+        else:
+            f = open('{}/bugzilla_bug_info_{}_{}_{}.adoc'.format(self.path, self.bug, self.user, now_str), 'w+')
         print('Writing file..')
         f.write('= Release Notes Generation Tool (RLGEN)')
         f.write('\n')
@@ -89,17 +110,36 @@ class GeneratorBugzillaBug:
         print('File AsciiDoc is written successfully!')
 
 
-class GenratorBugzillaBugComments:
-    def __init__(self, user, bug, firstname, lastname, email_account, data_comments):
+"""GENERATING BUG COMMENTS DOC"""
+
+
+class GeneratorBugzillaBugComments:
+    def __init__(self, user, bug, firstname, lastname, email_account, data_comments, path):
         self.user = user
         self.bug = bug
         self.firstname = firstname
         self.lastname = lastname
         self.email_account = email_account
         self.data_comments = data_comments
+        self.path = path
 
     def generating_doc_bug_comments(self):
-        f = open('release-notes-docs/bugzilla_{}_{}_comments.adoc'.format(self.bug, self.user), 'w+')
+        now = datetime.now()
+        now_str = now.strftime("%Y-%m-%d_%H-%M-%S")
+        if self.user is None:
+            self.user = 'unknown_username'
+        if self.email_account is '':
+            self.email_account = 'Email is not defined at the configuration file'
+        if self.firstname is '':
+            self.firstname = 'Unknown Firstname - '
+        if self.lastname is '':
+            self.lastname = ' - Unknown Lastname'
+        if self.path is None:
+            f = open('release-notes-docs/bugzilla_bug_comments__{}_{}_{}.adoc'
+                     .format(self.bug, self.user, now_str), 'w+')
+        else:
+            f = open('{}/bugzilla_bug_comments__{}_{}_{}.adoc'
+                     .format(self.path, self.bug, self.user, now_str), 'w+')
         print('Writing file..')
         f.write('= Release Notes Generation Tool (RLGEN)')
         f.write('\n')
@@ -124,17 +164,34 @@ class GenratorBugzillaBugComments:
         print('File AsciiDoc is written successfully!')
 
 
+"""GENERATING BUG HISTORY DOC"""
+
+
 class GeneratorBugzillaBugHistory:
-    def __init__(self, user, bug, firstname, lastname, email_account, data_bug_history):
+    def __init__(self, user, bug, firstname, lastname, email_account, data_bug_history, path):
         self.user = user
         self.bug = bug
         self.firstname = firstname
         self.lastname = lastname
         self.email_account = email_account
         self.data_bug_history = data_bug_history
+        self.path = path
 
     def generating_doc_bug_history(self):
-        f = open('release-notes-docs/bugzilla_{}_{}_bug_history.adoc'.format(self.bug, self.user), 'w+')
+        now = datetime.now()
+        now_str = now.strftime("%Y-%m-%d_%H-%M-%S")
+        if self.user is None:
+            self.user = 'unknown_username'
+        if self.email_account is '':
+            self.email_account = 'Email is not defined at the configuration file'
+        if self.firstname is '':
+            self.firstname = 'Unknown Firstname - '
+        if self.lastname is '':
+            self.lastname = ' - Unknown Lastname'
+        if self.path is None:
+            f = open('release-notes-docs/bugzilla_bug_history_{}_{}_{}.adoc'.format(self.bug, self.user,now_str), 'w+')
+        else:
+            f = open('{}/bugzilla_bug_history_{}_{}_{}.adoc'.format(self.path, self.bug, self.user, now_str), 'w+')
         print('Writing file..')
         f.write('= Release Notes Generation Tool (RLGEN)')
         f.write('\n')
@@ -159,16 +216,33 @@ class GeneratorBugzillaBugHistory:
         print('File AsciiDoc is written successfully!')
 
 
+"""GENERATING USER BUGS DOC"""
+
+
 class GeneratorBugzillaUserBugs:
-    def __init__(self, user, firstname, lastname, email_account, data_bugs_user):
+    def __init__(self, user, firstname, lastname, email_account, data_bugs_user, path):
         self.user = user
         self.firstname = firstname
         self.lastname = lastname
         self.email_account = email_account
         self.data_bugs_user = data_bugs_user
+        self.path = path
 
     def generating_doc_user_bugs(self):
-        f = open('release-notes-docs/bugzilla_{}_user_bugs.adoc'.format(self.user), 'w+')
+        now = datetime.now()
+        now_str = now.strftime("%Y-%m-%d_%H-%M-%S")
+        if self.user is None:
+            self.user = 'unknown_username'
+        if self.email_account is '':
+            self.email_account = 'Email is not defined at the configuration file'
+        if self.firstname is '':
+            self.firstname = 'Unknown Firstname - '
+        if self.lastname is '':
+            self.lastname = ' - Unknown Lastname'
+        if self.path is None:
+            f = open('release-notes-docs/bugzilla_user_bugs_{}_{}.adoc'.format(self.user, now_str), 'w+')
+        else:
+            f = open('{}/bugzilla_user_bugs_{}_{}.adoc'.format(self.path, self.user, now_str), 'w+')
         print('Writing file..')
         f.write('= Release Notes Generation Tool (RLGEN)')
         f.write('\n')
@@ -193,16 +267,33 @@ class GeneratorBugzillaUserBugs:
         print('File AsciiDoc is written successfully!')
 
 
-class GeneratorBuzillaUserInfo:
-    def __init__(self, user, firstname, lastname, email_account, data_user):
+"""GENERATING USER INFO DOC"""
+
+
+class GeneratorBugzillaUserInfo:
+    def __init__(self, user, firstname, lastname, email_account, data_user, path):
         self.user = user
         self.firstname = firstname
         self.lastname = lastname
         self.email_account = email_account
         self.data_user = data_user
+        self.path = path
 
     def generating_doc_user_info(self):
-        f = open('release-notes-docs/bugzilla_{}_user_info.adoc'.format(self.user), 'w+')
+        now = datetime.now()
+        now_str = now.strftime("%Y-%m-%d_%H-%M-%S")
+        if self.user is None:
+            self.user = 'unknown_username'
+        if self.email_account is '':
+            self.email_account = 'Email is not defined at the configuration file'
+        if self.firstname is '':
+            self.firstname = 'Unknown Firstname - '
+        if self.lastname is '':
+            self.lastname = ' - Unknown Lastname'
+        if self.path is None:
+            f = open('release-notes-docs/bugzilla_user_info_{}_{}.adoc'.format(self.user, now_str), 'w+')
+        else:
+            f = open('{}/bugzilla_user_info_{}_{}.adoc'.format(self.path, self.user, now_str), 'w+')
         print('Writing file..')
         f.write('= Release Notes Generation Tool (RLGEN)')
         f.write('\n')

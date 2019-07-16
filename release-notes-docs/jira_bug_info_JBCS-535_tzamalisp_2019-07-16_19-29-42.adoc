@@ -230,17 +230,11 @@
 
 === Target Release
 
-* Description: JBCS-2.4.37
-
-* Name: httpd 2.4.37 GA
-
-* Archived: False
-
-* Released: False
+* Target Release: httpd 2.4.37 GA
 
 
 
 ----------
-Report time: 2019-07-15 21:36:10.533681
+Report time: 2019-07-16 19:29:42.897606
 
 

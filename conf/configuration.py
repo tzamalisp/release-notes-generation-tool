@@ -1,11 +1,12 @@
 import configparser
 import logging
-import sys
-from argparse import ArgumentParser
 
 # create and configure a logger
 LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
-logging_file = logging.basicConfig(filename='log/configuration.log', level=logging.DEBUG, format=LOG_FORMAT, filemode='w')
+logging_file = logging.basicConfig(filename='log/configuration.log',
+                                   level=logging.DEBUG,
+                                   format=LOG_FORMAT,
+                                   filemode='w')
 
 # root logger (without name)
 logger = logging.getLogger()
