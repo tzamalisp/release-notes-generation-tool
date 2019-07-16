@@ -2,10 +2,10 @@ from jira import JIRA
 import requests
 from pprint import pprint
 
-from conf.configuration import JiraReadConfigurationServer
-from conf.configuration import JiraReadConfigurationBasicAuth
-from conf.configuration import JiraReadConfigurationOAuth
-from conf.configuration import JiraReadConfigurationKerberos
+from conf.confparse import JiraReadConfigurationServer
+from conf.confparse import JiraReadConfigurationBasicAuth
+from conf.confparse import JiraReadConfigurationOAuth
+from conf.confparse import JiraReadConfigurationKerberos
 
 
 """CLASS FOR RETRIEVING BASIC ISSUE INFORMATION FROM JIRA API"""

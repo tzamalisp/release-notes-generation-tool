@@ -19,7 +19,7 @@ from asciidoc_generator import GeneratorBugzillaBugHistory
 from asciidoc_generator import GeneratorBugzillaUserBugs
 from asciidoc_generator import GeneratorBugzillaUserInfo
 
-from conf.configuration import BugzillaReadConfigurationBasicAuth
+from conf.confparse import BugzillaReadConfigurationBasicAuth
 
 # create and configure a logger
 LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"

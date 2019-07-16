@@ -2,8 +2,8 @@ import logging
 import requests
 from pprint import pprint
 
-from conf.configuration import BugzillaReadConfigurationBasicAuth
-from conf.configuration import BugzillaReadConfigurationApiKey
+from conf.confparse import BugzillaReadConfigurationBasicAuth
+from conf.confparse import BugzillaReadConfigurationApiKey
 
 # create and configure a logger
 LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
