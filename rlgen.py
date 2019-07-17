@@ -19,14 +19,34 @@ from asciidoc_generator import GeneratorBugzillaBugHistory
 from asciidoc_generator import GeneratorBugzillaUserBugs
 from asciidoc_generator import GeneratorBugzillaUserInfo
 
-from conf.confparse import BugzillaReadConfigurationBasicAuth
 
 # create and configure a logger
 LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
-logging_file = logging.basicConfig(filename='log/rlgen.log', level=logging.DEBUG, format=LOG_FORMAT, filemode='w')
+logging_file = logging.basicConfig(filename='log/rlgen.log',
+                                   level=logging.DEBUG,
+                                   format=LOG_FORMAT,
+                                   filemode='w')
 
 # root logger (without name)
 logger_rlgen = logging.getLogger()
+
+"""CLASS FOR LOGGING ENVIRONMENT"""
+
+
+# class Logger:
+#     def __init__(self, level):
+#         self.level = level
+#
+#     def logger_setting(self):
+#         # create and configure a logger
+#         LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
+#         logging_file = logging.basicConfig(filename='log/rlgen.log',
+#                                            level=logging.DEBUG,
+#                                            format=LOG_FORMAT,
+#                                            filemode='w')
+#
+#         # root logger (without name)
+#         logger_rlgen = logging.getLogger()
 
 
 """ USER CHOICE OF ISSUE TRACKING PLATFORM """
@@ -93,7 +113,7 @@ class UserTrackerChoice:
 
         # BUGZILLA
         elif self.tracker is 'B' or self.tracker is 'b':
-            logger_rlgen.debug('---------------------------------------BUGZILLA----------------------------------------')
+            logger_rlgen.debug('---------------------------------BUGZILLA------------------------------------')
             print('Entered Bugzilla environment')
             config = configparser.ConfigParser()
             config.read('conf/config.conf')
@@ -243,6 +263,10 @@ def user_input(argv):
                         help="add the function you want to use for Bugzilla (i: bug information, c: bug comments, "
                              "h: bug history)",
                         metavar="<BUG_FUNCTION>")
+    parser.add_argument("-d", "--debug",
+                        dest="debug_level",
+                        help="add the level of debugging (0: DEBUG, 1: INFO, 2: WARNING)",
+                        metavar="<DEBUG_LEVEL>")
     # parser.add_argument("-p", "--path",
     #                     dest="path",
     #                     help="add the path directory yoy want to save the Asciidoc export files",
@@ -266,7 +290,8 @@ def user_input(argv):
             'custom_field_name': arguments.custom_field_name,
             'custom_field_id': arguments.custom_field_id,
             'bug_function': arguments.function,
-            'user_operation': arguments.operation}
+            'user_operation': arguments.operation,
+            'debug_level': arguments.debug_level}
 
 
 if __name__ == '__main__':
@@ -280,6 +305,8 @@ if __name__ == '__main__':
                                        tracker_issue_selection['custom_field_id'],
                                        tracker_issue_selection['bug_function'],
                                        tracker_issue_selection['user_operation'])
+
+
     tracker_choice.tracker_selection()
     print()
     print('Terminating..')
