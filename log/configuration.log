@@ -1,4 +1,17 @@
-DEBUG 2019-07-16 23:37:03,529 - Hello Tracker!
-DEBUG 2019-07-16 23:37:03,530 - ---------------------------------------BUGZILLA----------------------------------------
-DEBUG 2019-07-16 23:37:03,539 - Starting new HTTPS connection (1): bugzilla.mozilla.org
-DEBUG 2019-07-16 23:37:11,124 - https://bugzilla.mozilla.org:443 "GET /rest/bug?assigned_to=lhenry@mozilla.com HTTP/1.1" 200 None
+DEBUG 2019-07-18 11:15:21,404 - Hello Tracker!
+DEBUG 2019-07-18 11:15:21,411 - ---------------------------JIRA------------------------------------
+DEBUG 2019-07-18 11:15:21,411 - Entered JIRA environment
+DEBUG 2019-07-18 11:15:21,412 - BASIC DATA RETRIEVER OBJECT
+DEBUG 2019-07-18 11:15:21,412 - CUSTOM FIELD DATA RETRIEVER OBJECT
+DEBUG 2019-07-18 11:15:21,412 - JIRA Doc including Basic + Custom Fields
+DEBUG 2019-07-18 11:15:21,612 - Starting new HTTPS connection (1): issues.jboss.org
+DEBUG 2019-07-18 11:15:22,375 - https://issues.jboss.org:443 "GET /rest/api/2/serverInfo HTTP/1.1" 200 None
+DEBUG 2019-07-18 11:15:22,765 - https://issues.jboss.org:443 "GET /rest/api/2/field HTTP/1.1" 200 None
+DEBUG 2019-07-18 11:15:23,262 - https://issues.jboss.org:443 "GET /rest/api/2/issue/JBCS-535 HTTP/1.1" 200 None
+DEBUG 2019-07-18 11:15:23,270 - Starting new HTTPS connection (1): issues.jboss.org
+DEBUG 2019-07-18 11:15:24,053 - https://issues.jboss.org:443 "GET /rest/api/2/project/12317125 HTTP/1.1" 200 None
+DEBUG 2019-07-18 11:15:24,252 - Starting new HTTPS connection (1): issues.jboss.org
+DEBUG 2019-07-18 11:15:25,029 - https://issues.jboss.org:443 "GET /rest/api/2/serverInfo HTTP/1.1" 200 None
+DEBUG 2019-07-18 11:15:25,237 - https://issues.jboss.org:443 "GET /rest/api/2/field HTTP/1.1" 200 None
+DEBUG 2019-07-18 11:15:25,729 - https://issues.jboss.org:443 "GET /rest/api/2/issue/JBCS-535 HTTP/1.1" 200 None
+DEBUG 2019-07-18 11:15:25,734 - >>> Calling JIRA API and printing Issue parts is now completed successfully!

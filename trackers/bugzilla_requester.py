@@ -1,6 +1,8 @@
 import logging
 import requests
 from pprint import pprint
+import configparser
+import os
 
 from conf.confparse import BugzillaReadConfigurationBasicAuth
 from conf.confparse import BugzillaReadConfigurationApiKey
@@ -14,6 +16,16 @@ logging_file = logging.basicConfig(filename='log/bugzilla_request.log',
 
 # root logger (without name)
 logger = logging.getLogger()
+
+current_d = os.getcwd()
+# print(current_d)
+directories_list = current_d.split('/')
+# print(directories_list)
+# print(directories_list[1:4])
+basic_desktop_path = directories_list[1:4]
+new_path = 'conf/'
+basic_desktop_path.append(new_path)
+conf_path = '/' + '/'.join(basic_desktop_path)
 
 
 """CLASS: CONNECTING TO BUGZILLA API WITH THE API TOKEN + BUG ID INSERTION --> FETCHING THE DATA"""
@@ -37,8 +49,11 @@ class Connector:
 
         print('Connection to Bugzilla API..')
         logger.debug('Connection to Bugzilla API..')
-        r = requests.get('https://bugzilla.mozilla.org/rest/bug/', params={'ids': '{}'.format(self.bug_id),
-                                                                           'api_key': '{}'.format(api_key)})
+        config = configparser.ConfigParser()
+        config.read('{}config.conf'.format(conf_path))
+        company = config['bugzilla_basic_auth']['company']
+        r = requests.get('https://bugzilla.{}/rest/bug/'.format(company), params={'ids': '{}'.format(self.bug_id),
+                                                                                  'api_key': '{}'.format(api_key)})
         success_connection = str(r)
         if success_connection == '<Response [200]>':
             print('Connected successfully!')
@@ -85,6 +100,7 @@ class BugRetriever:
                 if bugs == 'bugs':
                     for bug in data_fetched[bugs]:
                         bug_keys_list = bug.keys()
+                        print(bug_keys_list)
                         counter_keys_basic = 0
                         # BASIC FIELDS
                         print('BASIC FIELDS')
@@ -98,6 +114,7 @@ class BugRetriever:
                         bug_basic_fields_feed.append('=== Summary')
                         if bug['summary'] and bug['summary'] is not '':
                             bug_basic_fields_feed.append('* Summary: {}'.format(bug['summary']))
+                            print('* Summary: {}'.format(bug['summary']))
                         else:
                             bug_basic_fields_feed.append('* No summary is available')
                         # Assigned_to

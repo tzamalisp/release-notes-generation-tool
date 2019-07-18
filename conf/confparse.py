@@ -1,5 +1,6 @@
 import configparser
 import logging
+import os
 
 # create and configure a logger
 LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
@@ -10,6 +11,16 @@ logging_file = logging.basicConfig(filename='log/configuration.log',
 
 # root logger (without name)
 logger = logging.getLogger()
+
+current_d = os.getcwd()
+# print(current_d)
+directories_list = current_d.split('/')
+# print(directories_list)
+# print(directories_list[1:4])
+basic_desktop_path = directories_list[1:4]
+new_path = 'conf/'
+basic_desktop_path.append(new_path)
+conf_path = '/' + '/'.join(basic_desktop_path)
 
 
 """CREATING JIRA CONFIGURATION FILE"""
@@ -42,7 +53,7 @@ logger = logging.getLogger()
 class JiraReadConfigurationServer:
     def read_server_conf(self):
         config = configparser.ConfigParser()
-        config.read('conf/config.conf')
+        config.read('{}config.conf'.format(conf_path))
         # print(config.sections())
         if config['jira_hosting_server']['server'] is not '':
             server_auth = True
@@ -59,7 +70,7 @@ class JiraReadConfigurationServer:
 class JiraReadConfigurationBasicAuth:
     def read_user_basic_auth(self):
         config = configparser.ConfigParser()
-        config.read('conf/config.conf')
+        config.read('{}config.conf'.format(conf_path))
         if config['jira_basic_auth']['username'] is '' or config['jira_basic_auth']['password'] is '':
             basic_auth_reason = 'Missing values for valid Basic Authorization connection.'
             basic_auth = False
@@ -91,7 +102,7 @@ class JiraReadConfigurationBasicAuth:
 class JiraReadConfigurationOAuth:
     def read_oauth(self):
         config = configparser.ConfigParser()
-        config.read('conf/config.conf')
+        config.read('{}config.conf'.format(conf_path))
         if config['jira_oauth']['access_token'] is '' or config['jira_oauth']['access_token_secret'] is '' or config['jira_oauth']['consumer_key'] is '':
             oauth = False
             oauth_reason = 'Missing values for valid OAuth connection.'
@@ -136,7 +147,7 @@ class JiraReadConfigurationOAuth:
 class JiraReadConfigurationKerberos:
     def read_kerberos_auth(self):
         config = configparser.ConfigParser()
-        config.read('conf/config.conf')
+        config.read('{}config.conf'.format(conf_path))
         if config['jira_kerberos']['kerberos'] is '' or config['jira_kerberos_options']['mutual_authentication'] is '':
             kerberos_auth = False
             kerberos_auth_reason = 'Missing values for valid Kerberos Authorization connection.'
@@ -174,7 +185,7 @@ class JiraReadConfigurationKerberos:
 class BugzillaReadConfigurationBasicAuth:
     def read_user_auth(self):
         config = configparser.ConfigParser()
-        config.read('conf/config.conf')
+        config.read('{}config.conf'.format(conf_path))
         if config['bugzilla_basic_auth']['username'] is '' or config['bugzilla_basic_auth']['password'] is '':
             basic_auth = False
             basic_auth_reason = 'Missing values for valid Basic Authorization connection.'
@@ -208,7 +219,7 @@ class BugzillaReadConfigurationBasicAuth:
 class BugzillaReadConfigurationApiKey:
     def key_auth(self):
         config = configparser.ConfigParser()
-        config.read('conf/config.conf')
+        config.read('{}config.conf'.format(conf_path))
         if config['bugzilla_oauth']['api_key'] is not '':
             api_key_auth = True
             api_key = config['bugzilla_oauth']['api_key']

@@ -2,6 +2,7 @@ import logging
 import sys
 import configparser
 from argparse import ArgumentParser
+import os
 
 from trackers.bugzilla_requester import BugRetriever
 from trackers.bugzilla_requester import Comments
@@ -29,6 +30,17 @@ logging_file = logging.basicConfig(filename='log/rlgen.log',
 
 # root logger (without name)
 logger_rlgen = logging.getLogger()
+
+current_d = os.getcwd()
+# print(current_d)
+directories_list = current_d.split('/')
+# print(directories_list)
+# print(directories_list[1:4])
+basic_desktop_path = directories_list[1:4]
+new_path = 'conf/'
+basic_desktop_path.append(new_path)
+conf_path = '/' + '/'.join(basic_desktop_path)
+
 
 """CLASS FOR LOGGING ENVIRONMENT"""
 
@@ -74,7 +86,7 @@ class UserTrackerChoice:
             # test_connector.jira_connector()
 
             config = configparser.ConfigParser()
-            config.read('conf/config.conf')
+            config.read('{}config.conf'.format(conf_path))
             user_name = config['jira_basic_auth']['username']
             first_name = config['author']['firstname']
             last_name = config['author']['lastname']
@@ -116,7 +128,7 @@ class UserTrackerChoice:
             logger_rlgen.debug('---------------------------------BUGZILLA------------------------------------')
             print('Entered Bugzilla environment')
             config = configparser.ConfigParser()
-            config.read('conf/config.conf')
+            config.read('{}config.conf'.format(conf_path))
             user_name = config['bugzilla_basic_auth']['username']
             first_name = config['author']['firstname']
             last_name = config['author']['lastname']
@@ -305,7 +317,6 @@ if __name__ == '__main__':
                                        tracker_issue_selection['custom_field_id'],
                                        tracker_issue_selection['bug_function'],
                                        tracker_issue_selection['user_operation'])
-
 
     tracker_choice.tracker_selection()
     print()
