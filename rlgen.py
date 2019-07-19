@@ -10,8 +10,9 @@ from trackers.bugzilla_requester import History
 from trackers.bugzilla_requester import UserBugs
 from trackers.bugzilla_requester import UserInfo
 
-from trackers.jira_requester import BasicDataRetriever
-from trackers.jira_requester import CustomFieldDataRetriever
+from trackers.jira_requester_issue import BasicDataRetriever
+from trackers.jira_requester_issue import CustomFieldDataRetriever
+from trackers.jira_requester_release_notes import TargetRelease
 
 from asciidoc_generator import GeneratorJira
 from asciidoc_generator import GeneratorBugzillaBug
@@ -19,6 +20,7 @@ from asciidoc_generator import GeneratorBugzillaBugComments
 from asciidoc_generator import GeneratorBugzillaBugHistory
 from asciidoc_generator import GeneratorBugzillaUserBugs
 from asciidoc_generator import GeneratorBugzillaUserInfo
+from asciidoc_generator import GeneratorJiraReleaseNotes
 
 
 # create and configure a logger
@@ -65,7 +67,8 @@ conf_path = '/' + '/'.join(basic_desktop_path)
 
 
 class UserTrackerChoice:
-    def __init__(self, tracker, issue, user, custom_field_name, custom_field_id, bug_function, user_operation):
+    def __init__(self, tracker, issue, release_note, order, user, custom_field_name, custom_field_id,
+                 bug_function, user_operation):
         self.tracker = tracker
         self.issue = issue
         self.user = user
@@ -73,6 +76,8 @@ class UserTrackerChoice:
         self.custom_field_id = custom_field_id
         self.bug_function = bug_function
         self.user_operation = user_operation
+        self.release_note = release_note
+        self.order = order
 
     def tracker_selection(self):
         # JIRA
@@ -91,6 +96,9 @@ class UserTrackerChoice:
             first_name = config['author']['firstname']
             last_name = config['author']['lastname']
             email = config['author']['email']
+            release_name = config['release']['name']
+            if release_name is '':
+                release_name = None
             path = config['path']['directory']
             if path is '':
                 path = None
@@ -118,10 +126,30 @@ class UserTrackerChoice:
                 doc_basic.generating_doc_jira()
 
                 logger_rlgen.debug('>>> Calling JIRA API and printing Issue parts is now completed successfully!')
+            elif release_name is not None and self.release_note is not None:
+                print(self.release_note)
+                jira_release_notes = TargetRelease(release_name=release_name,
+                                                   release=self.release_note,
+                                                   order=self.order)
+                doc_release_notes = GeneratorJiraReleaseNotes(user=user_name,
+                                                              release_name=release_name,
+                                                              release=self.release_note,
+                                                              firstname=first_name,
+                                                              lastname=last_name,
+                                                              email_account=email,
+                                                              data_basic=jira_release_notes.get_release_notes(),
+                                                              path=path)
+                doc_release_notes.generating_doc_jira()
             else:
-                print('Please define an issue to search for..')
-                logger_rlgen.warning('Please define an issue with the -i argument.')
-                raise Exception('Please define an issue with the -i argument.')
+                if self.release_note is None:
+                    print('Please define at least a Release Note to search for..')
+                    logger_rlgen.warning('Please define at least a Release Note with the -r argument.')
+                    raise Exception('Please define at least a Release Note with the -r argument.')
+                elif release_name is None:
+                    print('Please define the Release Name field of the custom field of JIRA inside the configuration '
+                          'file.')
+                    raise Exception('Please define the Release Name field of the custom field of JIRA inside the '
+                                    'configuration file')
 
         # BUGZILLA
         elif self.tracker is 'B' or self.tracker is 'b':
@@ -253,7 +281,7 @@ def user_input(argv):
     parser.add_argument("-n", "--name",
                         dest="custom_field_name",
                         action='append',
-                        help="Define the customfield name - <Required> Set flag",
+                        help="Define the customfield name",
                         # required=True,
                         metavar="<CUSTOMFIELD_NAME>")
     parser.add_argument("-c", "--customfieldid",
@@ -279,6 +307,17 @@ def user_input(argv):
                         dest="debug_level",
                         help="add the level of debugging (0: DEBUG, 1: INFO, 2: WARNING)",
                         metavar="<DEBUG_LEVEL>")
+    parser.add_argument("-r", "--release",
+                        dest="release_note",
+                        nargs='+',
+                        help="add the Target Release Name separated with the space character, inside quotes)",
+                        metavar="<TARGET_RELEASE_NAME>",
+                        type=str)
+    parser.add_argument("-a", "--ascending",
+                        dest="order_ascending",
+                        help="add the operation you want for ascending/descending (a: ascending, b: descending)",
+                        metavar="<USER_OPERATION>")
+
     # parser.add_argument("-p", "--path",
     #                     dest="path",
     #                     help="add the path directory yoy want to save the Asciidoc export files",
@@ -303,20 +342,24 @@ def user_input(argv):
             'custom_field_id': arguments.custom_field_id,
             'bug_function': arguments.function,
             'user_operation': arguments.operation,
-            'debug_level': arguments.debug_level}
+            'debug_level': arguments.debug_level,
+            'order_ascending': arguments.order_ascending,
+            'release_note': arguments.release_note}
 
 
 if __name__ == '__main__':
     logger_rlgen.debug('Hello Tracker!')
     tracker_issue_selection = user_input(sys.argv[1:])
     # User Choice
-    tracker_choice = UserTrackerChoice(tracker_issue_selection['tracker'],
-                                       tracker_issue_selection['issue'],
-                                       tracker_issue_selection['user'],
-                                       tracker_issue_selection['custom_field_name'],
-                                       tracker_issue_selection['custom_field_id'],
-                                       tracker_issue_selection['bug_function'],
-                                       tracker_issue_selection['user_operation'])
+    tracker_choice = UserTrackerChoice(tracker=tracker_issue_selection['tracker'],
+                                       issue=tracker_issue_selection['issue'],
+                                       user=tracker_issue_selection['user'],
+                                       custom_field_name=tracker_issue_selection['custom_field_name'],
+                                       custom_field_id=tracker_issue_selection['custom_field_id'],
+                                       bug_function=tracker_issue_selection['bug_function'],
+                                       user_operation=tracker_issue_selection['user_operation'],
+                                       order=tracker_issue_selection['order_ascending'],
+                                       release_note=tracker_issue_selection['release_note'])
 
     tracker_choice.tracker_selection()
     print()

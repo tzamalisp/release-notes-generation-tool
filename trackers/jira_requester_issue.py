@@ -33,13 +33,15 @@ class Connector:
         jira_kerberos = JiraReadConfigurationKerberos()
 
         basic_auth = jira_basic_auth.read_user_basic_auth()['basic_auth']
+
         oauth = jira_oauth.read_oauth()['oauth']
-        kerberos_auth = jira_kerberos.read_kerberos_auth()['kerberos_auth']
         # code for key cert here
         key_cert_data = None
         # with open(key_cert, 'r') as key_cert_file:
         #     key_cert_data = key_cert_file.read()
         key_cert_data = 'To be added'
+
+        kerberos_auth = jira_kerberos.read_kerberos_auth()['kerberos_auth']
 
         # Structure of 'options' value authentication
         # options = {
