@@ -103,7 +103,7 @@ class UserTrackerChoice:
             if path is '':
                 path = None
 
-            # BASIC DATA RETRIEVER
+            # BASIC JIRA DATA RETRIEVER
             if self.issue is not None:
                 logger_rlgen.debug('BASIC DATA RETRIEVER OBJECT')
                 jira_basic_data = BasicDataRetriever(self.issue)

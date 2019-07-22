@@ -1,7 +1,3 @@
-DEBUG 2019-07-19 21:06:06,679 - Hello Tracker!
-DEBUG 2019-07-19 21:06:06,680 - ---------------------------JIRA------------------------------------
-DEBUG 2019-07-19 21:06:06,681 - Entered JIRA environment
-DEBUG 2019-07-19 21:06:06,692 - Starting new HTTPS connection (1): issues.jboss.org
-DEBUG 2019-07-19 21:06:10,766 - https://issues.jboss.org:443 "GET /rest/api/latest/search?jql=%22Target%20Release%22=%22httpd%202.4.37%20GA%22 HTTP/1.1" 200 None
-DEBUG 2019-07-19 21:06:11,202 - Starting new HTTPS connection (1): issues.jboss.org
-DEBUG 2019-07-19 21:06:12,626 - https://issues.jboss.org:443 "GET /rest/api/latest/search?jql=%22Target%20Release%22=%225.backlog.GA%22 HTTP/1.1" 200 None
+DEBUG 2019-07-22 10:32:51,052 - API Key configuration is defined.
+DEBUG 2019-07-22 10:32:51,063 - Starting new HTTPS connection (1): bugzilla.redhat.com
+DEBUG 2019-07-22 10:32:52,255 - https://bugzilla.redhat.com:443 "GET /rest/user?names=luhliari@redhat.com&api_key=M96V1T2SVmTX6MBzhRut3r43hKu32UxMbS5aOWok HTTP/1.1" 200 120
