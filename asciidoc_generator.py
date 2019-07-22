@@ -136,6 +136,56 @@ class GeneratorJira:
 """GENERATING BUGZILLA BUG INFORMATION DOC"""
 
 
+class GeneratorBugzillaReleaseNotes:
+    def __init__(self, user, release, firstname, lastname, email_account, data_basic, path):
+        self.user = user
+        self.release = release
+        self.firstname = firstname
+        self.lastname = lastname
+        self.email_account = email_account
+        self.data_basic = data_basic
+        self.path = path
+
+    def generating_doc_bugzilla(self):
+        now = datetime.now()
+        now_str = now.strftime("%Y-%m-%d_%H-%M-%S")
+        if self.user is None:
+            self.user = 'unknown_username'
+        if self.email_account is '':
+            self.email_account = 'Email is not defined at the configuration file'
+        if self.firstname is '':
+            self.firstname = 'Unknown Firstname - '
+        if self.lastname is '':
+            self.lastname = ' - Unknown Lastname'
+        if self.path is None:
+            f = open('release-notes-docs/bugzilla_Target_Release_{}_{}_{}.adoc'
+                     .format(self.release, self.user, now_str), 'w+')
+        else:
+            f = open('{}/bugzilla_Target_Release_{}_{}_{}.adoc'
+                     .format(self.path, self.release, self.user, now_str), 'w+')
+        print('Writing file..')
+        f.write('= Release Notes Generation Tool (RLGEN)')
+        f.write('\n')
+        f.write(':author: {} {}'.format(self.firstname, self.lastname))
+        f.write('\n')
+        f.write(':email: {}'.format(self.email_account))
+        f.write('\n')
+        f.write('\n')
+        if self.data_basic:
+            for item in self.data_basic:
+                f.write(item)
+                f.write('\n')
+                f.write('\n')
+        f.write('\n')
+        f.write('\n')
+        f.write('----------\n')
+        f.write('Report time: ' + str(datetime.now()))
+        f.write('\n')
+        f.write('\n')
+        f.write('\n')
+        f.close()
+        print('File AsciiDoc is written successfully!')
+
 class GeneratorBugzillaBug:
     def __init__(self, user, bug, firstname, lastname, email_account, data_basic, path):
         self.user = user

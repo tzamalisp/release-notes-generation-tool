@@ -1,3 +1,5 @@
-DEBUG 2019-07-22 10:32:51,052 - API Key configuration is defined.
-DEBUG 2019-07-22 10:32:51,063 - Starting new HTTPS connection (1): bugzilla.redhat.com
-DEBUG 2019-07-22 10:32:52,255 - https://bugzilla.redhat.com:443 "GET /rest/user?names=luhliari@redhat.com&api_key=M96V1T2SVmTX6MBzhRut3r43hKu32UxMbS5aOWok HTTP/1.1" 200 120
+DEBUG 2019-07-22 22:25:58,227 - Hello Tracker!
+DEBUG 2019-07-22 22:25:58,228 - ---------------------------------BUGZILLA------------------------------------
+DEBUG 2019-07-22 22:25:58,230 - API Key configuration is defined.
+DEBUG 2019-07-22 22:25:58,239 - Starting new HTTPS connection (1): bugzilla.redhat.com
+DEBUG 2019-07-22 22:26:02,133 - https://bugzilla.redhat.com:443 "GET /rest/bug?target_release=3.4&api_key=M96V1T2SVmTX6MBzhRut3r43hKu32UxMbS5aOWok HTTP/1.1" 200 37804

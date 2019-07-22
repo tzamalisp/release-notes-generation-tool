@@ -1,0 +1,223 @@
+= Release Notes Generation Tool (RLGEN)
+:author: Pantelis Tzamalis
+:email: tzamalis@ceid.upatras.gr
+
+== Bug ID: 1376835
+
+* Search Fields: ['creation_time', 'creator', 'text', 'tags', 'is_private']
+
+=== Comment 1
+
+* creation_time: 2016-09-16T14:24:30Z
+
+* creator: rsawhill@redhat.com
+
+* text: DESCRIPTION OF PROBLEM:
+
+ Apache httpd in RHEL7 configured with worker/event mpm segfaults after receiving multiple successive graceful reloads (SIGHUP).
+
+VERSION-RELEASE NUMBER OF SELECTED COMPONENT (IF APPLICABLE):
+
+  Able to reproduce on the following versions:
+  
+  * RHEL7 httpd-2.4.6-40.el7_2.4.x86_64
+  * JWS3 EL7 httpd24-2.4.6-62.ep7.el7.x86_64
+  * RHSCL EL7 httpd24-httpd-2.4.18-11.el7.x86_64
+  * JBCS EL7 jbcs-httpd24-httpd-2.4.6-77.SP1.jbcs.el7.x86_64
+
+  Opened this bz against RHEL7 httpd. I'll leave it to dev's discretion whether to clone to other products.
+  
+HOW REPRODUCIBLE:
+
+  100% with worker or event
+
+STEPS TO REPRODUCE:
+
+  1. Install httpd
+  2. Ensure using worker or event
+     (E.g.: sed -i -e '/^Load/s/^/#/' -e '/#Load.*event/s/^#//' /etc/httpd/conf.modules.d/00-mpm.conf)
+  3. systemctl restart httpd
+  4. while :; do ((n++)); systemctl reload httpd || break; done 2>/dev/null; echo reload failed after count=$n
+
+ACTUAL RESULTS:
+
+  The main httpd process segfaults after a small number of reloads
+  
+  [root@a72 ~]# while :; do ((n++)); systemctl reload httpd || break; done 2>/dev/null; echo reload failed after count=$n
+  reload failed after count=16
+  [root@a72 ~]# tail -4 /var/log/httpd/error_log
+  [Thu Sep 15 11:59:37.439656 2016] [mpm_event:notice] [pid 1564:tid 140279584745536] AH00489: Apache/2.4.6 (Red Hat Enterprise Linux) configured -- resuming normal operations
+  [Thu Sep 15 11:59:37.439665 2016] [core:notice] [pid 1564:tid 140279584745536] AH00094: Command line: '/usr/sbin/httpd -D FOREGROUND'
+  [Thu Sep 15 11:59:37.467927 2016] [mpm_event:notice] [pid 1564:tid 140279584745536] AH00493: SIGUSR1 received.  Doing graceful restart
+  [Thu Sep 15 11:59:37.505167 2016] [core:notice] [pid 1564] AH00060: seg fault or similar nasty error detected in the parent process
+  
+EXPECTED RESULTS:
+
+  httpd shouldn't segfault. With prefork, it doesn't -- at least it didn't for me after 17600+ reloads.
+
+ADDITIONAL INFO:
+
+  Inserting a tiny subsecond sleep (as little as .1sec) in between the signals prevents the issue.
+  
+  [root@a72 ~]# f() { ipcs -s | awk -v user=apache '$3==user {system("ipcrm -s "$2)}'; systemctl restart httpd; sleep 5; n=0; echo sleeping ${1:-0} between reload attempts ...; while :; do ((n++)); sleep ${1:-0}; systemctl reload httpd || break; ((n%500)) || echo reloaded $n times so far ...; done 2>/dev/null; echo reload failed after count=$n; }
+  [root@a72 ~]# f
+  sleeping 0 between reload attempts ...
+  reload failed after count=16
+  [root@a72 ~]# f
+  sleeping 0 between reload attempts ...
+  reload failed after count=10
+  [root@a72 ~]# f .01
+  sleeping .01 between reload attempts ...
+  reload failed after count=40
+  [root@a72 ~]# f .015
+  sleeping .015 between reload attempts ...
+  reload failed after count=23
+  [root@a72 ~]# dd if=/dev/zero bs=1M count=2048 of=/var/www/html/data
+  [root@a72 ~]# # Comment: right here I started hitting httpd with ab from my hypervisor -- with 50 concurrent connections (while :; do ab -c 50 -n 5000000 http://a72.example.com/data; done)
+  [root@a72 ~]# f .02
+  sleeping .02 between reload attempts ...
+  reloaded 500 times so far ...
+  reload failed after count=933
+  [root@a72 ~]# f .1
+  sleeping .1 between reload attempts ...
+  reloaded 500 times so far ...
+  reloaded 1000 times so far ...
+  reloaded 1500 times so far ...
+  reloaded 2000 times so far ...
+  reloaded 2500 times so far ...
+  reloaded 3000 times so far ...
+  reloaded 3500 times so far ...
+  ^C
+
+  In case it's not obvious, this issue is significant because:
+  (1) admins often add custom /etc/logrotate.d/ files such that on logrotate, httpd gets reloaded more than once. This is of course not ideal, but it happens nonetheless.
+  (2) admins sometimes do multiple reloads in quick succession because they don't understand how graceful works.
+  
+  I've seen a customer whose production machines regularly hit this issue with as little as two reloads in quick succession (due to 2 separate logrotate files).
+
+MORE INFO ON HTTPD VERSIONS AFFECTED:
+
+  As mentioned above, each RHEL7 version I attempted presented this issue. RHEL6 is another story. I couldn't reproduce in RHEL6 with service scripts at all (at first I chalked that up to the inefficiency of the SYSV startup process, i.e., bash service scripts vs systemd). However, even when I replace calls to `service <NAME> reload` with simply `kill -1 $(</PIDFILE)`, I can trigger the segfault, but it's comically-hard to do so (or in the case of RHEL's httpd-2.2, apparently impossible).
+  
+  RHEL6 httpd-2.2.15-54.el6_8.x86_64:
+  
+  [root@r68 ~]# sed -i '/^HTTPD=/s/^/#/' /etc/sysconfig/httpd; echo HTTPD=/usr/sbin/httpd.event >>/etc/sysconfig/httpd
+  [root@r68 ~]# f() { ipcs -s | awk -v user=apache '$3==user {system("ipcrm -s "$2)}'; service httpd restart; sleep 5; n=0; echo sleeping ${1:-0} between reload attempts ...; while :; do ((n++)); sleep ${1:-0}; kill -1 $(</var/run/httpd/httpd.pid) || break; ((n%500)) || echo reloaded $n times so far ...; done 2>/dev/null; echo reload failed after count=$n; }
+  [root@r68 ~]# f
+  Stopping httpd:                                            [  OK  ]
+  Starting httpd:                                            [  OK  ]
+  sleeping 0 between reload attempts ...
+  reloaded 500 times so far ...
+  <truncated>
+  reloaded 112000 times so far ...
+  ^C
+
+  RHSCL httpd24-httpd-2.4.18-11.el6.x86_64:
+  
+  [root@r68 ~]# sed -i -e '/^Load/s/^/#/' -e '/#Load.*event/s/^#//' /opt/rh/httpd24/root/etc/httpd/conf.modules.d/00-mpm.conf 
+  [root@r68 ~]# f() { ipcs -s | awk -v user=apache '$3==user {system("ipcrm -s "$2)}'; service httpd24-httpd restart; sleep 5; n=0; echo sleeping ${1:-0} between reload attempts ...; while :; do ((n++)); sleep ${1:-0}; kill -1 $(</opt/rh/httpd24/root/var/run/httpd/httpd.pid) || break; ((n%500)) || echo reloaded $n times so far ...; done 2>/dev/null; echo reload failed after count=$n; }
+  [root@r68 ~]# f
+  Stopping httpd:                                            [  OK  ]
+  Starting httpd:                                            [  OK  ]
+  sleeping 0 between reload attempts ...
+  reloaded 500 times so far ...
+  <truncated>
+  reloaded 13500 times so far ...
+  reload failed after count=13578
+
+  JBCS jbcs-httpd24-httpd-2.4.6-77.SP1.jbcs.el6.x86_64:
+
+  [root@r68 ~]# sed -i -e '/^Load/s/^/#/' -e '/#Load.*event/s/^#//' /opt/rh/jbcs-httpd24/root/etc/httpd/conf.modules.d/00-mpm.conf 
+  [root@r68 ~]# f() { ipcs -s | awk -v user=apache '$3==user {system("ipcrm -s "$2)}'; service jbcs-httpd24-httpd restart; sleep 5; n=0; echo sleeping ${1:-0} between reload attempts ...; while :; do ((n++)); sleep ${1:-0}; kill -1 $(</opt/rh/jbcs-httpd24/root/var/run/jbcs-httpd24-httpd/httpd.pid) || break; ((n%500)) || echo reloaded $n times so far ...; done 2>/dev/null; echo reload failed after count=$n; }
+  [root@r68 ~]# f
+  Stopping httpd:                                            [  OK  ]
+  Starting httpd:                                            [  OK  ]
+  sleeping 0 between reload attempts ...
+  reloaded 500 times so far ...
+  <truncated>
+  reloaded 7000 times so far ...
+  reload failed after count=7187
+  
+  I don't think we have any reason to worry about these packages. Clearly no one is going to hit that.
+
+* tags
+
+* is_private: False
+
+=== Comment 2
+
+* creation_time: 2016-09-16T14:33:17Z
+
+* creator: rsawhill@redhat.com
+
+* text: Created attachment 1201655
+abrt-captured coredump of httpd-2.4.6-40.el7_2.4.x86_64
+
+I used the exact steps from the HOW TO REPRODUCE section to generate this on a fresh RHEL7.2 machine updated to the latest packages.
+
+* tags
+
+* is_private: False
+
+=== Comment 3
+
+* creation_time: 2017-08-01T21:36:44Z
+
+* creator: errata-xmlrpc@redhat.com
+
+* text: Since the problem described in this bug report should be
+resolved in a recent advisory, it has been closed with a
+resolution of ERRATA.
+
+For information on the advisory, and where to find the updated
+files, follow the link below.
+
+If the solution does not work for you, open a new bug report.
+
+https://access.redhat.com/errata/RHBA-2017:2175
+
+* tags
+
+* is_private: False
+
+=== Comment 4
+
+* creation_time: 2017-12-19T06:28:45Z
+
+* creator: maeno.masaki@nttcom.co.jp
+
+* text: The problem (httpd with worker/event mpm segfaults after multiple successive graceful reloads) was fixed in 2.4.6-53.el7 (Development Version)
+
+* Tue Mar 07 2017 Luboš Uhliarik <luhliari@redhat.com> - 2.4.6-53
+- Resolves: #1376835 - httpd with worker/event mpm segfaults after multiple
+  successive graceful reloads
+
+httpd-2.4.6-mpm-segfault.patch
+============
+--- a/server/mpm/event/event.c
++++ a/server/mpm/event/event.c
+@@ -2735,6 +2735,7 @@ static int event_run(apr_pool_t * _pconf, apr_pool_t * plog, server_rec * s)
+
+     /* we've been told to restart */
+     apr_signal(SIGHUP, SIG_IGN);
++    apr_signal(AP_SIG_GRACEFUL, SIG_IGN);
+     if (one_process) {
+         /* not worth thinking about */
+============
+
+httpd in RHEL7 configured with worker/event mpm segfaults after receiving
+multiple SIGUSR1. (logrotate.conf example: size 1G and daily)
+2.4.6-67.el7_4.6.x86_64 also has problems. 
+
+I think that the aforementioned patch is not sufficient and need to add accurate exclusion control.
+
+* tags
+
+* is_private: False
+
+
+
+----------
+Report time: 2019-07-22 22:20:23.309630
+
+

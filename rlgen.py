@@ -10,17 +10,22 @@ from trackers.bugzilla_requester import History
 from trackers.bugzilla_requester import UserBugs
 from trackers.bugzilla_requester import UserInfo
 
+from trackers.bugzilla_requester_new import BugFields
+from trackers.bugzilla_requester_new import DataRetriever
+
 from trackers.jira_requester_issue import BasicDataRetriever
 from trackers.jira_requester_issue import CustomFieldDataRetriever
 from trackers.jira_requester_release_notes import TargetRelease
 
+from asciidoc_generator import GeneratorJiraReleaseNotes
 from asciidoc_generator import GeneratorJira
+from asciidoc_generator import GeneratorBugzillaReleaseNotes
 from asciidoc_generator import GeneratorBugzillaBug
 from asciidoc_generator import GeneratorBugzillaBugComments
 from asciidoc_generator import GeneratorBugzillaBugHistory
 from asciidoc_generator import GeneratorBugzillaUserBugs
 from asciidoc_generator import GeneratorBugzillaUserInfo
-from asciidoc_generator import GeneratorJiraReleaseNotes
+
 
 
 # create and configure a logger
@@ -68,7 +73,7 @@ conf_path = '/' + '/'.join(basic_desktop_path)
 
 class UserTrackerChoice:
     def __init__(self, tracker, issue, release_note, order, user, custom_field_name, custom_field_id,
-                 bug_function, user_operation):
+                 bug_function, user_operation, xrelease):
         self.tracker = tracker
         self.issue = issue
         self.user = user
@@ -78,6 +83,7 @@ class UserTrackerChoice:
         self.user_operation = user_operation
         self.release_note = release_note
         self.order = order
+        self.xrelease = xrelease
 
     def tracker_selection(self):
         # JIRA
@@ -165,96 +171,127 @@ class UserTrackerChoice:
             if path is '':
                 path = None
 
-            # creating the objects for retrieving the information from the API and printing the fetched data
-            if self.issue is None and self.user is None:
-                print('Please define an issue or a user to search for..')
-                raise Exception('Please define an issue with the -i argument OR a user with the -u argument.')
-            else:
-                # BUG INFO
-                # BUG FUNCTIONS
-                # Bug ID test to searching for in the REST API: 1144467
+            # calling the basic class for collecting the corresponding data from the bugzilla rest api
+            data_object = DataRetriever(bug_id=self.issue,
+                                        terms=self.custom_field_name,
+                                        user=self.user,
+                                        release=self.xrelease)
+
+            # FUNCTIONS: -f --function
+            # release notes
+            if self.bug_function is 'r' or self.bug_function is 'R':
+                if self.xrelease is not None:
+                    release_note = data_object.getting_target_release_notes()
+                    release_note_data = data_object.data_retriever(retrieval=release_note['retrieve'],
+                                                                   data=release_note['data_output'],
+                                                                   search_list=release_note['search_list_output'],
+                                                                   ascii_doc_data=release_note['ascii_target_release_list'])
+                    doc_release_note = GeneratorBugzillaReleaseNotes(user=user_name,
+                                                                     release=self.xrelease,
+                                                                     firstname=first_name,
+                                                                     lastname=last_name,
+                                                                     email_account=email,
+                                                                     data_basic=release_note_data,
+                                                                     path=path)
+                    doc_release_note.generating_doc_bugzilla()
+
+                else:
+                    print('Please define a release note.')
+            # bug info
+            elif self.bug_function is 'b' or self.bug_function is 'B':
                 if self.issue is not None:
-                    if self.bug_function is not None:
-                        if self.bug_function is 'i' or self.bug_function is 'I':
-                            # bug data
-                            bug_fetcher = BugRetriever(bug_id=self.issue)
-                            # bug doc
-                            doc_bug = GeneratorBugzillaBug(user=user_name,
-                                                           bug=self.issue,
-                                                           firstname=first_name,
-                                                           lastname=last_name,
-                                                           email_account=email,
-                                                           data_basic=bug_fetcher.data_retriever(),
-                                                           path=path)
-                            doc_bug.generating_doc_bugzilla()
-                        elif self.bug_function is 'c' or self.bug_function is 'C':
-                            # bug comments
-                            get_comments = Comments(bug_id=self.issue)
-                            # bug comments doc
-                            doc_bug_comments = GeneratorBugzillaBugComments(user=user_name,
-                                                                            bug=self.issue,
-                                                                            firstname=first_name,
-                                                                            lastname=last_name,
-                                                                            email_account=email,
-                                                                            data_comments=get_comments.getting_comments(),
-                                                                            path=path)
-                            doc_bug_comments.generating_doc_bug_comments()
-
-                        elif self.bug_function is 'h' or self.bug_function is 'H':
-                            # bug history
-                            get_history = History(bug_id=self.issue)
-                            # bug history doc
-                            doc_bug_history = GeneratorBugzillaBugHistory(user=user_name,
-                                                                          bug=self.issue,
-                                                                          firstname=first_name,
-                                                                          lastname=last_name,
-                                                                          email_account=email,
-                                                                          data_bug_history=get_history.getting_history(),
-                                                                          path=path)
-                            doc_bug_history.generating_doc_bug_history()
-                        else:
-                            print('Please enter a valid letter for function:\n'
-                                  '-f i: Bug Issue ID\n'
-                                  '-f c: Bug Comments\n'
-                                  '-f h: Bug History')
-                            raise Exception('Enter a valid value for that argument.')
-
-                # USER INFO
-                # USER OPERATIONS
-                # user_name test to searching for in the REST API: lhenry@mozilla.com
+                    bug_info = data_object.getting_bug_info()
+                    bug_info_data = data_object.data_retriever(bug_info['retrieve'],
+                                                               bug_info['data_output'],
+                                                               bug_info['search_list_output'],
+                                                               bug_info['ascii_bug_info_list'])
+                    # bug doc
+                    doc_bug = GeneratorBugzillaBug(user=user_name,
+                                                   bug=self.issue,
+                                                   firstname=first_name,
+                                                   lastname=last_name,
+                                                   email_account=email,
+                                                   data_basic=bug_info_data,
+                                                   path=path)
+                    doc_bug.generating_doc_bugzilla()
+                else:
+                    print('Please define a correct Bug ID.')
+            # user assigned bugs
+            elif self.bug_function is 'a' or self.bug_function is 'A':
                 if self.user is not None:
-                    if self.user_operation is not None:
-                        if self.user_operation is 'b' or self.user_operation is 'B':
-                            # bugs related to a user
-                            user_bugs = UserBugs(user='lhenry@mozilla.com')
-                            # user bugs doc
-                            doc_user_bugs = GeneratorBugzillaUserBugs(user=self.user,
-                                                                      firstname=first_name,
-                                                                      lastname=last_name,
-                                                                      email_account=email,
-                                                                      data_bugs_user=user_bugs.getting_user_bugs(),
-                                                                      path=path)
-                            doc_user_bugs.generating_doc_user_bugs()
-                        elif self.user_operation is 'i' or self.user_operation is 'I':
-                            # user information
-                            user_info = UserInfo(user=self.user)
-                            # user information
-                            doc_user_info = GeneratorBugzillaUserInfo(user=self.user,
-                                                                      firstname=first_name,
-                                                                      lastname=last_name,
-                                                                      email_account=email,
-                                                                      data_user=user_info.getting_user_info(),
-                                                                      path=path)
-                            doc_user_info.generating_doc_user_info()
-                        else:
-                            print('Please enter a valid letter for User operation:\n'
-                                  '-o b: User Bugs\n'
-                                  '-o i: User Information\n')
-                            logger_rlgen.warning('Please enter a valid letter for User operation:\n'
-                                                 '-o b: User Bugs\n'
-                                                 '-o i: User Information\n')
-                            raise Exception('Enter a valid value for that argument.')
-
+                    user_assigned_bugs = data_object.getting_user_assigned_bugs()
+                    user_assigned_bugs_data = data_object.data_retriever(retrieval=user_assigned_bugs['retrieve'],
+                                                                         data=user_assigned_bugs['data_output'],
+                                                                         search_list=user_assigned_bugs['search_list_output'],
+                                                                         ascii_doc_data=user_assigned_bugs['ascii_user_assigned_bugs_list'])
+                    doc_user_bugs = GeneratorBugzillaUserBugs(user=self.user,
+                                                              firstname=first_name,
+                                                              lastname=last_name,
+                                                              email_account=email,
+                                                              data_bugs_user=user_assigned_bugs_data,
+                                                              path=path)
+                    doc_user_bugs.generating_doc_user_bugs()
+                else:
+                    print('Please define a username or user email.')
+            # user info
+            elif self.bug_function is 'u' or self.bug_function is 'U':
+                if self.user is not None:
+                    user_info = data_object.getting_user_info()
+                    user_info_data = data_object.data_retriever(retrieval=user_info['retrieve'],
+                                                                data=user_info['data_output'],
+                                                                search_list=user_info['search_list_output'],
+                                                                ascii_doc_data=user_info['ascii_user_info_list'])
+                    doc_user_info = GeneratorBugzillaUserInfo(user=self.user,
+                                                              firstname=first_name,
+                                                              lastname=last_name,
+                                                              email_account=email,
+                                                              data_user=user_info_data,
+                                                              path=path)
+                    doc_user_info.generating_doc_user_info()
+                else:
+                    print('Please define a username or user email.')
+            # bug comments
+            elif self.bug_function is 'c' or self.bug_function is 'C':
+                if self.issue is not None:
+                    bug_comments = data_object.getting_bug_comments()
+                    bug_comments_data = data_object.data_retriever(retrieval=bug_comments['retrieve'],
+                                                                   data=bug_comments['data_output'],
+                                                                   search_list=bug_comments['search_list_output'],
+                                                                   ascii_doc_data=bug_comments['ascii_bug_comments_list'])
+                    doc_bug_comments = GeneratorBugzillaBugComments(user=user_name,
+                                                                    bug=self.issue,
+                                                                    firstname=first_name,
+                                                                    lastname=last_name,
+                                                                    email_account=email,
+                                                                    data_comments=bug_comments_data,
+                                                                    path=path)
+                    doc_bug_comments.generating_doc_bug_comments()
+                else:
+                    print('Please define a correct Bug ID.')
+            # bug history
+            elif self.bug_function is 'h' or self.bug_function is 'H':
+                if self.issue is not None:
+                    bug_history = data_object.getting_bug_history()
+                    bug_history_data = data_object.data_retriever(retrieval=bug_history['retrieve'],
+                                                                  data=bug_history['data_output'],
+                                                                  search_list=bug_history['search_list_output'],
+                                                                  ascii_doc_data=bug_history['ascii_bug_history_list'])
+                    doc_bug_history = GeneratorBugzillaBugHistory(user=user_name,
+                                                                  bug=self.issue,
+                                                                  firstname=first_name,
+                                                                  lastname=last_name,
+                                                                  email_account=email,
+                                                                  data_bug_history=bug_history_data,
+                                                                  path=path)
+                    doc_bug_history.generating_doc_bug_history()
+            else:
+                print('Please enter a valid letter for function:\n'
+                      '-f r: Release Note\n'
+                      '-f u: User Information\n'
+                      '-f b: Bug Information\n'
+                      '-f c: Bug Comments\n'
+                      '-f h: Bug History\n'
+                      '-f a: Bugs Assigned to a User')
         else:
             print('Please press a valid letter ("J" or "j" for JIRA / "B" or "b" for Bugzilla) '
                   'for choosing your tracker.')
@@ -313,6 +350,10 @@ def user_input(argv):
                         help="add the Target Release Name separated with the space character, inside quotes)",
                         metavar="<TARGET_RELEASE_NAME>",
                         type=str)
+    parser.add_argument("-x", "--xrelease",
+                        dest="xrelease",
+                        help="add the release for Bugzilla",
+                        metavar="<BUGZILLA_RELEASE>")
     parser.add_argument("-a", "--ascending",
                         dest="order_ascending",
                         help="add the operation you want for ascending/descending (a: ascending, b: descending)",
@@ -344,7 +385,8 @@ def user_input(argv):
             'user_operation': arguments.operation,
             'debug_level': arguments.debug_level,
             'order_ascending': arguments.order_ascending,
-            'release_note': arguments.release_note}
+            'release_note': arguments.release_note,
+            'xrelease': arguments.xrelease}
 
 
 if __name__ == '__main__':
@@ -359,7 +401,8 @@ if __name__ == '__main__':
                                        bug_function=tracker_issue_selection['bug_function'],
                                        user_operation=tracker_issue_selection['user_operation'],
                                        order=tracker_issue_selection['order_ascending'],
-                                       release_note=tracker_issue_selection['release_note'])
+                                       release_note=tracker_issue_selection['release_note'],
+                                       xrelease=tracker_issue_selection['xrelease'])
 
     tracker_choice.tracker_selection()
     print()
