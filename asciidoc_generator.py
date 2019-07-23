@@ -137,9 +137,8 @@ class GeneratorJira:
 
 
 class GeneratorBugzillaReleaseNotes:
-    def __init__(self, user, release, firstname, lastname, email_account, data_basic, path):
+    def __init__(self, user, firstname, lastname, email_account, data_basic, path):
         self.user = user
-        self.release = release
         self.firstname = firstname
         self.lastname = lastname
         self.email_account = email_account
@@ -158,11 +157,11 @@ class GeneratorBugzillaReleaseNotes:
         if self.lastname is '':
             self.lastname = ' - Unknown Lastname'
         if self.path is None:
-            f = open('release-notes-docs/bugzilla_Target_Release_{}_{}_{}.adoc'
-                     .format(self.release, self.user, now_str), 'w+')
+            f = open('release-notes-docs/bugzilla_Target_Release_{}_{}.adoc'
+                     .format(self.user, now_str), 'w+')
         else:
-            f = open('{}/bugzilla_Target_Release_{}_{}_{}.adoc'
-                     .format(self.path, self.release, self.user, now_str), 'w+')
+            f = open('{}/bugzilla_Target_Release_{}_{}.adoc'
+                     .format(self.path, self.user, now_str), 'w+')
         print('Writing file..')
         f.write('= Release Notes Generation Tool (RLGEN)')
         f.write('\n')

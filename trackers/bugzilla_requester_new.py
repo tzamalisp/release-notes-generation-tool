@@ -27,105 +27,128 @@ basic_desktop_path.append(new_path)
 conf_path = '/' + '/'.join(basic_desktop_path)
 
 
-class BugFields:
-    def __init__(self, bug_id):
-        self.bug_id = bug_id
-
-    def get_bug_fields(self):
-        api_connection = BugzillaReadConfigurationApiKey()
-        api_key_auth = api_connection.key_auth()['api_key_auth']
-        if api_key_auth is True:
-            api_key_reason = api_connection.key_auth()['api_key_reason']
-            logger.debug(api_key_reason)
-            api_key = api_connection.key_auth()['api_key']
-        else:
-            api_key_reason = api_connection.key_auth()['api_key_reason']
-            logger.warning(api_key_reason)
-            raise Exception(api_key_reason)
-
-        config = configparser.ConfigParser()
-        config.read('{}config.conf'.format(conf_path))
-        company = config['bugzilla_basic_auth']['company']
-        r = requests.get('https://bugzilla.{}/rest/bug/'.format(company), params={'ids': '{}'.format(self.bug_id),
-                                                                                  'api_key': '{}'.format(api_key)})
-        data = r.json()
-        # pprint(data)
-        if 'bugs' in data.keys():
-            print('Bug Fields:')
-            print()
-            keys = data.get('bugs')[0].keys()
-            for key in keys:
-                print(key)
-
-
-class DataRetriever:
-    def __init__(self, bug_id, terms, user, release):
-        self.bug_id = bug_id
+class TargetReleaseBugzilla:
+    def __init__(self, releases, terms):
+        self.releases = releases
         self.terms = terms
-        self.user = user
-        self.release = release
 
     # TARGET RELEASE
     def getting_target_release_notes(self):
         retrieve = 'target_release_notes'
+        print('Releases:', self.releases)
         ascii_target_release_list = []
         # for item in self.release:
-        print('Release:', self.release)
-        print('------------------')
-        ascii_target_release_list.append('== Release: {}'.format(self.release))
-        api_connection = BugzillaReadConfigurationApiKey()
-        api_key_auth = api_connection.key_auth()['api_key_auth']
-        if api_key_auth is True:
-            api_key_reason = api_connection.key_auth()['api_key_reason']
-            logger.debug(api_key_reason)
-            api_key = api_connection.key_auth()['api_key']
-        else:
-            api_key_reason = api_connection.key_auth()['api_key_reason']
-            logger.warning(api_key_reason)
-            raise Exception(api_key_reason)
+        for release in self.releases:
+            print('Release:', release)
+            print('------------------')
+            ascii_target_release_list.append('== Release: {}'.format(release))
+            api_connection = BugzillaReadConfigurationApiKey()
+            api_key_auth = api_connection.key_auth()['api_key_auth']
+            if api_key_auth is True:
+                api_key_reason = api_connection.key_auth()['api_key_reason']
+                logger.debug(api_key_reason)
+                api_key = api_connection.key_auth()['api_key']
+            else:
+                api_key_reason = api_connection.key_auth()['api_key_reason']
+                logger.warning(api_key_reason)
+                raise Exception(api_key_reason)
 
-        config = configparser.ConfigParser()
-        config.read('{}config.conf'.format(conf_path))
-        company = config['bugzilla_basic_auth']['company']
-        url = 'https://bugzilla.{}/rest/bug?target_release={}'.format(company, self.release)
-        r = requests.get(url, params={'api_key': '{}'.format(api_key)})
-        print('Retrieving the Target Release data from Bugzilla..')
-        data = r.json()
-        # pprint(data)
-        print('Successfully fetched the data.')
+            config = configparser.ConfigParser()
+            config.read('{}config.conf'.format(conf_path))
+            company = config['bugzilla_basic_auth']['company']
 
-        if data['bugs']:
-            data_output = data.get('bugs')
-            # pprint(data_output)
-        else:
-            data_output = None
+            # read fields from configuration
+            search_list_conf_input = config['target_release']['search_list']
+            search_list_conf_input = search_list_conf_input.replace(', ', ',')
+            search_list_conf_input = search_list_conf_input.replace(' ,', ',')
+            search_list_conf_input = search_list_conf_input.replace(' , ', ',')
+            search_list_conf_input = search_list_conf_input.split(',')
+            print('Fields from conf file:', search_list_conf_input)
+            print('Fields from terminal:', self.terms)
+            if self.terms is not None:
+                search_list_output = search_list_conf_input + self.terms
+                print(search_list_output)
 
-        # read fields from configuration
-        search_list_conf_input = config['target_release']['search_list']
-        search_list_conf_input = search_list_conf_input.replace(', ', ',')
-        search_list_conf_input = search_list_conf_input.replace(' ,', ',')
-        search_list_conf_input = search_list_conf_input.replace(' , ', ',')
-        search_list_conf_input = search_list_conf_input.split(',')
-        print('Fields from conf file:', search_list_conf_input)
-        if self.terms is not None:
-            search_list_output = search_list_conf_input.extend(self.terms)
+            elif self.terms is None:
+                search_list_output = search_list_conf_input
+                print(search_list_output)
 
-        else:
-            search_list_output = search_list_conf_input
+            url = 'https://bugzilla.{}/rest/bug?target_release={}'.format(company, release)
+            r = requests.get(url, params={'api_key': '{}'.format(api_key)})
+            print('Retrieving the Target Release data from Bugzilla..')
+            data = r.json()
+            # pprint(data)
+            print('Successfully fetched the data.')
 
-        print('Final fields to search:', search_list_output)
-        ascii_target_release_list.append('* Search Fields: {}'.format(search_list_output))
-        return {'retrieve': retrieve,
-                'data_output': data_output,
-                'search_list_output': search_list_output,
-                'ascii_target_release_list': ascii_target_release_list}
+            if data['bugs']:
+                data_release_bugs = data.get('bugs')
+                # pprint(data_release_bugs)
+                for bug in data_release_bugs:
+                    bug_keys_list = bug.keys()
+                    # print(bug_keys_list)
+                    # print(len(bug_keys_list))
+                    keys_to_retrieve = []
+                    if len(search_list_output) > 0:
+                        for key in search_list_output:
+                            if key in bug_keys_list:
+                                keys_to_retrieve.append(key)
+                            else:
+                                print('Some of the keys you entered do not match in the fields of the issue.')
+                    else:
+                        keys_to_retrieve = bug_keys_list
+                    # retrieving keys
+                    ascii_target_release_list.append('')
+                    ascii_target_release_list.append('=== Bug: {}'.format(bug.get('id')))
+                    for key in keys_to_retrieve:
+                        if type(bug.get(key)) is str or type(bug.get(key)) is bool or type(bug.get(key)) is int or type(bug.get(key)) is None:
+                            if bug.get(key) is '':
+                                print(key + ': ' + 'Nothing related to {} is now available.'.format(key))
+                                ascii_target_release_list.append('* ' + key + ': ' + 'Nothing related to {} is now available.'.format(key))
+                            else:
+                                print(key + ': ' + str(bug.get(key, 'Nothing related to {} is now available.'.format(key))))
+                                ascii_target_release_list.append('* ' + key + ': ' + str(bug.get(key, 'Nothing related to {} is now available.'.format(key))))
+                            # print(type(bug.get(key)))
+                            print()
+                        if type(bug.get(key)) is list:
+                            print(key + ':')
+                            ascii_target_release_list.append('* {}:'.format(key))
+                            counter__dictionary_items = 1
+                            for list_item in bug.get(key):
+                                if type(list_item) is dict:
+                                    print('\tItem: {}'.format(counter__dictionary_items))
+                                    ascii_target_release_list.append('** Item: {}'.format(counter__dictionary_items))
+                                    dictionary_keys = list_item.keys()
+                                    for dictionary_key in dictionary_keys:
+                                        # print(dictionary_keys)
+                                        print('\t\t' + dictionary_key + ': ' + str(list_item.get(dictionary_key)))
+                                        ascii_target_release_list.append('*** ' + dictionary_key + ': ' + str(list_item.get(dictionary_key)))
+                                    print()
+                                    counter__dictionary_items += 1
+                                else:
+                                    print('\t', list_item)
+                                    ascii_target_release_list.append('** {}'.format(list_item))
+                                    print()
+                    print()
+                    print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
+            else:
+                data_release_bugs = None
 
-        # for item in data['bugs']:
-        #     print(item.get('target_release'))
-        #     print(item.get('id'))
-        #     print(item.get('summary'))
-        #     print('+++++++++++++++++++++++++++++++++++++++++++++++++')
-        # print()
+            ascii_target_release_list.append('')
+
+        for item in ascii_target_release_list:
+            print(item)
+        return ascii_target_release_list
+
+
+
+""" CLASS FOR RETRIEVING THE DATA FROM BUGZILLA API"""
+
+
+class DataRetriever:
+    def __init__(self, bug_id, terms, user):
+        self.bug_id = bug_id
+        self.terms = terms
+        self.user = user
 
     # BUG INFORMATION
     def getting_bug_info(self):
@@ -505,8 +528,8 @@ class DataRetriever:
                             print(key + ':', str(bug.get(key)))
                             ascii_doc_data_list.append('* ' + key + ': ' + str(bug.get(key)))
                     print('+++++++++++++++++++++++++++++++++++++++++++++++++++')
-                # TARGET RELEASE | BUG INFORMATION | USER ASSIGNED BUGS
-                elif retrieval is 'target_release_notes' or retrieval is 'bug_info' or retrieval is 'user_assigned_bugs':
+                # BUG INFORMATION | USER ASSIGNED BUGS
+                elif retrieval is 'bug_info' or retrieval is 'user_assigned_bugs':
                     bug_keys_list = bug.keys()
                     # print(bug_keys_list)
                     # print(len(bug_keys_list))
@@ -520,11 +543,12 @@ class DataRetriever:
                     else:
                         keys_to_retrieve = bug_keys_list
                     # retrieving keys
-                    print('BUG ID:', bug.get('id'))
                     ascii_doc_data_list.append('')
                     if retrieval is 'bug_info':
+                        print('Bug Information')
                         ascii_doc_data_list.append('=== Bug Information')
                     else:
+                        print('BUG ID:', bug.get('id'))
                         ascii_doc_data_list.append('=== Bug: {}'.format(bug.get('id')))
                     for key in keys_to_retrieve:
                         if type(bug.get(key)) is str or type(bug.get(key)) is bool or type(bug.get(key)) is int or type(bug.get(key)) is None:
@@ -566,11 +590,6 @@ class DataRetriever:
             print(item)
         return ascii_doc_data_list
 
-# bugID = str(1376835)
-# bug_fields = BugFields(bug_id=bugID)
-# # bug_fields.get_bug_fields()
-# print()
-# print()
 
 
 

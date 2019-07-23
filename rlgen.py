@@ -10,7 +10,7 @@ from trackers.bugzilla_requester import History
 from trackers.bugzilla_requester import UserBugs
 from trackers.bugzilla_requester import UserInfo
 
-from trackers.bugzilla_requester_new import BugFields
+from trackers.bugzilla_requester_new import TargetReleaseBugzilla
 from trackers.bugzilla_requester_new import DataRetriever
 
 from trackers.jira_requester_issue import BasicDataRetriever
@@ -49,31 +49,12 @@ basic_desktop_path.append(new_path)
 conf_path = '/' + '/'.join(basic_desktop_path)
 
 
-"""CLASS FOR LOGGING ENVIRONMENT"""
-
-
-# class Logger:
-#     def __init__(self, level):
-#         self.level = level
-#
-#     def logger_setting(self):
-#         # create and configure a logger
-#         LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
-#         logging_file = logging.basicConfig(filename='log/rlgen.log',
-#                                            level=logging.DEBUG,
-#                                            format=LOG_FORMAT,
-#                                            filemode='w')
-#
-#         # root logger (without name)
-#         logger_rlgen = logging.getLogger()
-
-
 """ USER CHOICE OF ISSUE TRACKING PLATFORM """
 
 
 class UserTrackerChoice:
     def __init__(self, tracker, issue, release_note, order, user, custom_field_name, custom_field_id,
-                 bug_function, user_operation, xrelease):
+                 bug_function, user_operation):
         self.tracker = tracker
         self.issue = issue
         self.user = user
@@ -83,7 +64,6 @@ class UserTrackerChoice:
         self.user_operation = user_operation
         self.release_note = release_note
         self.order = order
-        self.xrelease = xrelease
 
     def tracker_selection(self):
         # JIRA
@@ -171,30 +151,26 @@ class UserTrackerChoice:
             if path is '':
                 path = None
 
+            # calling the class for the Target Releases
+
             # calling the basic class for collecting the corresponding data from the bugzilla rest api
             data_object = DataRetriever(bug_id=self.issue,
                                         terms=self.custom_field_name,
-                                        user=self.user,
-                                        release=self.xrelease)
+                                        user=self.user)
 
             # FUNCTIONS: -f --function
             # release notes
             if self.bug_function is 'r' or self.bug_function is 'R':
-                if self.xrelease is not None:
-                    release_note = data_object.getting_target_release_notes()
-                    release_note_data = data_object.data_retriever(retrieval=release_note['retrieve'],
-                                                                   data=release_note['data_output'],
-                                                                   search_list=release_note['search_list_output'],
-                                                                   ascii_doc_data=release_note['ascii_target_release_list'])
+                if self.release_note is not None:
+                    release_notes = TargetReleaseBugzilla(self.release_note, self.custom_field_name)
+                    release_notes_data = release_notes.getting_target_release_notes()
                     doc_release_note = GeneratorBugzillaReleaseNotes(user=user_name,
-                                                                     release=self.xrelease,
                                                                      firstname=first_name,
                                                                      lastname=last_name,
                                                                      email_account=email,
-                                                                     data_basic=release_note_data,
+                                                                     data_basic=release_notes_data,
                                                                      path=path)
                     doc_release_note.generating_doc_bugzilla()
-
                 else:
                     print('Please define a release note.')
             # bug info
@@ -350,10 +326,6 @@ def user_input(argv):
                         help="add the Target Release Name separated with the space character, inside quotes)",
                         metavar="<TARGET_RELEASE_NAME>",
                         type=str)
-    parser.add_argument("-x", "--xrelease",
-                        dest="xrelease",
-                        help="add the release for Bugzilla",
-                        metavar="<BUGZILLA_RELEASE>")
     parser.add_argument("-a", "--ascending",
                         dest="order_ascending",
                         help="add the operation you want for ascending/descending (a: ascending, b: descending)",
@@ -385,8 +357,7 @@ def user_input(argv):
             'user_operation': arguments.operation,
             'debug_level': arguments.debug_level,
             'order_ascending': arguments.order_ascending,
-            'release_note': arguments.release_note,
-            'xrelease': arguments.xrelease}
+            'release_note': arguments.release_note}
 
 
 if __name__ == '__main__':
@@ -401,8 +372,7 @@ if __name__ == '__main__':
                                        bug_function=tracker_issue_selection['bug_function'],
                                        user_operation=tracker_issue_selection['user_operation'],
                                        order=tracker_issue_selection['order_ascending'],
-                                       release_note=tracker_issue_selection['release_note'],
-                                       xrelease=tracker_issue_selection['xrelease'])
+                                       release_note=tracker_issue_selection['release_note'])
 
     tracker_choice.tracker_selection()
     print()

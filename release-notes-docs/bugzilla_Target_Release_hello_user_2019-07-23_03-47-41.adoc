@@ -1,0 +1,4688 @@
+= Release Notes Generation Tool (RLGEN)
+:author: Pantelis Tzamalis
+:email: tzamalis@ceid.upatras.gr
+
+== Release: 3.4
+
+
+
+=== Bug: 1696527
+
+* summary: Rebuild metapackage with latest scl-utils
+
+
+
+=== Bug: 1589846
+
+* summary: Consider updating objectweb-asm to 6.1.1
+
+
+
+=== Bug: 1725922
+
+* summary: duplicated cookie in Apache httpd with mod_session
+
+
+
+=== Bug: 1666810
+
+* summary: Investigate the impact of a malformed xml
+
+
+
+=== Bug: 1387162
+
+* summary: Test case failure: /CoreOS/mysql/testsuite - main.audit_plugin_2
+
+
+
+=== Bug: 1609061
+
+* summary: Addition of PHP Memcache module for RHSCL PHP 7.0 in software collections
+
+
+
+=== Bug: 1094100
+
+* summary: RFE: As a user, I would like to be able to bookmark language and document selections on version page
+
+
+
+=== Bug: 1699735
+
+* summary: [RFE]Python 3.7 container image in Red Hat Software collections
+
+
+
+=== Bug: 1625287
+
+* summary: Test case failure: /CoreOS/mysql/Security/CVE-2009-4030-symlink-problem-with-data-index-dir
+
+
+
+=== Bug: 1065790
+
+* summary: Admin manage search no longer shows time estimates
+
+
+
+=== Bug: 1116688
+
+* summary: Test DB cleanup does not remove the role assignment rules
+
+
+
+=== Bug: 1489412
+
+* summary: mysqld_safe doesn't sanitize commandline input
+
+
+
+=== Bug: 1062508
+
+* summary: Spell check changes are not saved after replacement
+
+
+
+=== Bug: 1086036
+
+* summary: Project / version language listing and inheritance issues
+
+
+
+=== Bug: 1614912
+
+* summary: [RFE] Support authenticated repositories on nodejs images
+
+
+
+=== Bug: 1569482
+
+* summary: Postgresql pod fails to recover automatically after OpenShift master failure
+
+
+
+=== Bug: 1387156
+
+* summary: Test case failure: /CoreOS/mysql/testsuite - rpl.rpl_multi_source_basic 'mix'
+
+
+
+=== Bug: 831479
+
+* summary: 500 internal error when REST client specifies invalid extensions
+
+
+
+=== Bug: 1103947
+
+* summary: [Translation Editor] Dialog "Invalid translation" failed to obtain input focus.
+
+
+
+=== Bug: 1707850
+
+* summary: [RFE] Include OpenResty in RHSCL (RHEL7)
+
+
+
+=== Bug: 1630863
+
+* summary: Test case failure: /CoreOS/mysql/testsuite - rpl.rpl_many_optimize 'mix'
+
+
+
+=== Bug: 1066796
+
+* summary: RFE: Implement new project page.
+
+
+
+=== Bug: 1100079
+
+* summary: Activity containing tags causes a broken dashboard
+
+
+
+=== Bug: 1109611
+
+* summary: Version drop down with quick actions not shown on Project page.
+
+
+
+=== Bug: 1662079
+
+* summary: rh-mysql57-mysql : Service unable to start with configuration in /etc/opt/rh/rh-mysql57/my.cnf
+
+
+
+=== Bug: 1700625
+
+* summary: "invalid distance too far back" error while using nodejs to connect Google API
+
+
+
+=== Bug: 1094071
+
+* summary: Copy Translations information not correct
+
+
+
+=== Bug: 1687855
+
+* summary: Test case failure: /CoreOS/mariadb55/testsuite - main.plugin_auth 'innodb'
+
+
+
+=== Bug: 1483380
+
+* summary: Request for TLS enabled PostgreSQL
+
+
+
+=== Bug: 1721226
+
+* summary: Queue#push seems to crash after fork
+
+
+
+=== Bug: 1387157
+
+* summary: Test case failure: /CoreOS/mysql/testsuite - rpl.rpl_multi_source_basic 'row'
+
+
+
+=== Bug: 1599262
+
+* summary: [vSphere][Cinder]Mysql pod crashes for failed to initialize
+
+
+
+=== Bug: 1638469
+
+* summary: [RFE] MongoDB 4.0 Support
+
+
+
+=== Bug: 1679722
+
+* summary: [RFE] Requesting keepalive_timeout and keepalive_requests directives from nginx 1.15.3
+
+
+
+=== Bug: 1103940
+
+* summary: Remove info level notification popup from the editor
+
+
+
+=== Bug: 1414576
+
+* summary: Mysql 5.7(latest) image pod does not start
+
+
+
+=== Bug: 1094106
+
+* summary: RFE: As project maintainer, I would like to select copyTrans option before running it
+
+
+
+=== Bug: 1552166
+
+* summary: [RFE] Provide ngx_http_mirror_module
+
+
+
+=== Bug: 1724349
+
+* summary: rh-python36 cannot unpickle datetime.date objects
+
+
+
+=== Bug: 1677710
+
+* summary: rh-nodejs10 npm does not work against repository.
+
+
+
+=== Bug: 1630821
+
+* summary: Test case failure: /CoreOS/mysql/testsuite - binlog_gtid.binlog_gtid_mysqldump / binlog_gtid.binlog_gtid_mysqlpump 'stmt'
+
+
+
+=== Bug: 1066756
+
+* summary: RFE: Merge user settings pages into dashboard
+
+
+
+=== Bug: 1697959
+
+* summary: many global modules are not linked
+
+
+
+=== Bug: 1655242
+
+* summary: [RFE] MOD_AUTH_CAS for PHP S2I image
+
+
+
+=== Bug: 1103538
+
+* summary: Exception thrown from Translate.zanata.org
+
+
+
+=== Bug: 1387147
+
+* summary: Test case failure: /CoreOS/mysql/testsuite - rpl.rpl_loaddata_m 'mix'
+
+
+
+=== Bug: 1080770
+
+* summary: Empty group "Add Project" button on languages tab doesn't work
+
+
+
+=== Bug: 1707831
+
+* summary: Permissions wrong on /var/opt/rh/rh-varnish6/log/varnish
+
+
+
+=== Bug: 1560896
+
+* summary: Test case failure: /CoreOS/mysql/Security/CVE-2010-3679-BINLOG-use-unassigned-memory
+
+
+
+=== Bug: 1531406
+
+* summary: Please provide php-pecl-imagick
+
+
+
+=== Bug: 1600579
+
+* summary: mod_proxy_hcheck Doesn't perform checks in VirtualHost
+
+
+
+=== Bug: 1569038
+
+* summary: RFE: provide the mod_auth_openidc module in RHSCL repository
+
+
+
+=== Bug: 1728181
+
+* summary: [s390x] httpd24-httpd segfaults during service restart
+
+
+
+=== Bug: 1572500
+
+* summary: rmtree with safe = 0 does not work
+
+
+
+=== Bug: 1637634
+
+* summary: Test case failure: /CoreOS/mysql/Regression/bz1149143-mysql-general-log-doesn-t-work-with-FIFO-file
+
+
+
+=== Bug: 1669213
+
+* summary: `ExtendedStatus Off` directive when using mod_systemd causes systemctl to hang
+
+
+
+=== Bug: 1607737
+
+* summary: TCP healthchecks failing falsely / not actually checking
+
+
+
+=== Bug: 1411436
+
+* summary: cpan client is vulnerable to CVE-2016-1238
+
+
+
+=== Bug: 1088122
+
+* summary: Release Zanata 3.4 to production
+
+
+
+=== Bug: 1719549
+
+* summary: rh-postgresql10-postgresql-devel provides  pkgconfig(libpq)
+
+
+
+=== Bug: 1025645
+
+* summary: Both GPL and LGPL license files are required for LGPLv2+ project
+
+
+
+=== Bug: 1699314
+
+* summary: [3.11] Unable to execute post lifecycle hook for postgresql image
+
+
+
+=== Bug: 1656021
+
+* summary: [RFE] [RHSCL] Add imap module to php 7.2
+
+
+
+=== Bug: 1689095
+
+* summary: scl enable fails in tcsh
+
+
+
+=== Bug: 1099400
+
+* summary: [Regression] Failed to  upload translation via JSF
+
+
+
+=== Bug: 1690549
+
+* summary: Test case failure: /CoreOS/mariadb/Regression/bz1535217-Mariadb-segfault-I-can-t-figure-out - random hang loading the database dump
+
+
+
+=== Bug: 1637891
+
+* summary: RHSCL httpd : mod_proxy should allow to specify Proxy-Authorization in ProxyRemote directive
+
+
+
+=== Bug: 1116169
+
+* summary: RFE: Ajax loading Feedback for the Version Group Page
+
+
+
+=== Bug: 1566219
+
+* summary: MySQL long passwords aren't accepted on the command line when using sha256_password authentification plugin
+
+
+
+=== Bug: 1102964
+
+* summary: CopyTrans takes excessively long hours to complete copying translations
+
+
+
+=== Bug: 1107882
+
+* summary: translate.zanata.org admin manage users screen can not be loaded
+
+
+
+=== Bug: 1100092
+
+* summary: Filter translation units by multiple fields in the editor should use ISO 8601 date format
+
+
+
+=== Bug: 1630877
+
+* summary: Test case failure: /CoreOS/mysql/testsuite - main.grant_alter_user_qa
+
+
+
+=== Bug: 1630866
+
+* summary: Test case failure: /CoreOS/mysql/testsuite - rpl.rpl_mysql_upgrade 'mix'
+
+
+
+=== Bug: 1393493
+
+* summary: Redis service is impossible to set to active slave mode.
+
+
+
+=== Bug: 882770
+
+* summary: RFE: Filter translation units by multiple fields in the editor.
+
+
+
+=== Bug: 1314484
+
+* summary: Requuest to have mailman 3 included in RHSCL
+
+
+
+=== Bug: 1505758
+
+* summary: Crash with Bus error in lex_scan
+
+
+
+=== Bug: 1696895
+
+* summary: "This package includes the python 2 version of the module"
+
+
+
+=== Bug: 1696153
+
+* summary: rh-nodejs10 npm does not work against repository. [rhscl-3.2.z]
+
+
+
+=== Bug: 1386246
+
+* summary: Provide %license macro for better compatibility between Fedora/RHEL7 and RHEL6
+
+
+
+=== Bug: 1711379
+
+* summary: Using the imagestream nginx:1.12 in a disconnected environment gives error because broken UBI repo access
+
+
+
+=== Bug: 1635751
+
+* summary: Test case failure: /CoreOS/mysql/Security/CVE-2010-3679-BINLOG-use-unassigned-memory
+
+
+
+=== Bug: 1066701
+
+* summary: RFE: As a Zanata user, I would like to be able to bookmark language and project selections in the groups page.
+
+
+
+=== Bug: 1630873
+
+* summary: Test case failure: /CoreOS/mysql/testsuite - rpl_gtid.rpl_perfschema_applier_status_by_worker_gtid_skipped_transaction_mts 'row'
+
+
+
+=== Bug: 1714225
+
+* summary: 'ZipArchive::setEncryptionName()' method not included in rh-php72
+
+
+
+=== Bug: 1478833
+
+* summary: Ruby shebang interpreter misinterpretation
+
+
+
+=== Bug: 1644334
+
+* summary: Test case failure: /CoreOS/mysql/Sanity/basic-functions-check
+
+
+
+=== Bug: 1553709
+
+* summary: Rebase to 7.0.28
+
+
+
+=== Bug: 1557430
+
+* summary: RFE: Add HA support for PostgreSQL
+
+
+
+=== Bug: 1002378
+
+* summary: RFE: Introduce a modular translation structure, and gwt generate the *Messages.properties files
+
+
+
+=== Bug: 1539849
+
+* summary: [RFE][RHSCL] Add interbase driver for rh-php71 in Software Collection repository for RHEL 7
+
+
+
+=== Bug: 1560049
+
+* summary: [RFE] Provide ModSecurity for nginx
+
+
+
+=== Bug: 1581730
+
+* summary: RFE  provide the pthreads php module for rh-php70
+
+
+
+=== Bug: 1304218
+
+* summary: [RFE] Add Csync2 package in RHSCL
+
+
+
+=== Bug: 1103930
+
+* summary: Noticeable delay on right column when selection are made on left column (ui design)
+
+
+
+=== Bug: 1557422
+
+* summary: RFE: Add Galera support in MariaDB sclorg images
+
+
+
+=== Bug: 1387164
+
+* summary: Test case failure: /CoreOS/mysql/testsuite - rpl.rpl_loaddata_m 'row'
+
+
+
+=== Bug: 1637518
+
+* summary: Test case failure: /CoreOS/mysql/Sanity/all-binaries-executable
+
+
+
+=== Bug: 1571634
+
+* summary: mod_proxy_fcgi (more) wrong behavior with 304 with collection php
+
+
+
+=== Bug: 1387155
+
+* summary: Test case failure: /CoreOS/mysql/testsuite - rpl.rpl_loaddata_m 'stmt'
+
+
+
+=== Bug: 1637922
+
+* summary: Conflict when installing alongside stock NodeJS 6 on EL7
+
+
+
+=== Bug: 1698589
+
+* summary: RFE: Red Hat supported installation/maintenance of Microsoft's Visual Studio Team Services and Team Foundation Services
+
+
+
+=== Bug: 1650653
+
+* summary: Issues while trying to deploy a MongoDB 3.6 ReplicaSet across multiple clusters using the scl image
+
+
+
+=== Bug: 1710823
+
+* summary: [abrt] [faf] rh-mariadb102-mariadb: unknown function(): /opt/rh/rh-mariadb102/root/usr/libexec/mysqld killed by 11
+
+
+
+=== Bug: 1696994
+
+* summary: Wrong exit code on init script failure
+
+
+
+=== Bug: 1384499
+
+* summary: scl wrapper does not replace self with command
+
+
+
+=== Bug: 1459594
+
+* summary: stream_filter_append error with fopen on an url
+
+
+
+=== Bug: 1098924
+
+* summary: Copy Translations copies translations that should not be copied
+
+
+
+=== Bug: 1098371
+
+* summary: Sort options in language and document lists on the version page do not take effect until a search is performed on the list
+
+
+
+=== Bug: 1098003
+
+* summary: Missing string for group request email notification sent
+
+
+
+=== Bug: 1392313
+
+* summary: [RFE][RHSCL] Add vim with python3 support
+
+
+
+=== Bug: 1419682
+
+* summary: RFE: add php-pecl-xdebug
+
+
+
+=== Bug: 1646368
+
+* summary: Test case failure: /CoreOS/mysql/Security/CVE-2014-0001-mysqlclient-buffer-overflow-long-server-version
+
+
+
+=== Bug: 1721387
+
+* summary: OpenSSL compatibility for rh-nodejs12
+
+
+
+=== Bug: 1500434
+
+* summary: /opt/rh/rh-php71/root/usr/lib64 is not owned by rh-php71 collection for some architectures
+
+
+
+=== Bug: 1707309
+
+* summary: rh-nodejs6 ships non-existent files causing yum/rpm to incorrectly compute the number of inodes required
+
+
+
+=== Bug: 1413935
+
+* summary: Rebase to latest 5.24 bug-fix release
+
+
+
+=== Bug: 1717200
+
+* summary: [RFE] [RHSCL] Add Older python-gssapi 0.6.4 to RHSCL
+
+
+
+=== Bug: 1472096
+
+* summary: [RFE] zone anti affinity for MongoDB replica sets
+
+
+
+=== Bug: 1730544
+
+* summary: Abort when reloading with a php module reloaded twice
+
+
+
+=== Bug: 1435798
+
+* summary: Provide the OpenSCAP python3 bindings in the Python3 SCL
+
+
+
+=== Bug: 1466659
+
+* summary: Builds should failed when start-build with a empty dir
+
+
+
+=== Bug: 1694874
+
+* summary: Chance for abuse of sudo using "scl" command
+
+
+
+=== Bug: 1630218
+
+* summary: installation conflicts
+
+
+
+=== Bug: 1630869
+
+* summary: Test case failure: /CoreOS/mysql/testsuite - rpl.rpl_innodb_info_tbl_slave_tmp_tbl_mismatch 'stmt'
+
+
+
+=== Bug: 1333500
+
+* summary: OSE mongodb images should be scalable
+
+
+
+=== Bug: 1480832
+
+* summary: [RFE]Include imagemagick in RHSCLto be used with RHSCL httpd 2.4 and PHP 7.
+
+
+
+=== Bug: 1630871
+
+* summary: Test case failure: /CoreOS/mysql/testsuite - rpl_gtid.rpl_perfschema_applier_status_by_worker_gtid_skipped_transaction 'row'
+
+
+
+=== Bug: 1451905
+
+* summary: rh-php70 Crash when lexing Bug #52752
+
+
+
+=== Bug: 1726978
+
+* summary: many global modules are not linked [rh-nodejs8]
+
+
+
+=== Bug: 1730712
+
+* summary: httpd24 service not starting, it thinks it is already running, php-fpm incorrectly recognized as httpd
+
+
+
+=== Bug: 1580472
+
+* summary: Missing provides attribute in rh-varnish5 metapackage RPM
+
+
+
+=== Bug: 1096564
+
+* summary: Entering garbage at the end of a projects url breaks navigation
+
+
+
+=== Bug: 1120016
+
+* summary: RFE: FAS-only authentication
+
+
+
+=== Bug: 1522963
+
+* summary: RFE Customer request for PyQt4 for rh-python36 in rhscl
+
+
+
+=== Bug: 1656110
+
+* summary: [RFE] [RHSCL] Add RRDtool in Software Collection repository
+
+
+
+=== Bug: 1375296
+
+* summary: RFE: Support for installing SCL using NFS mount of /opt/rh
+
+
+
+=== Bug: 1518242
+
+* summary: [RFE] [RHSCL] Add php-memcached for rh-php70 in Software Collection repository
+
+
+
+=== Bug: 1630879
+
+* summary: Test case failure: /CoreOS/mysql/testsuite - binlog.binlog_rewrite_order 'mix'
+
+
+
+=== Bug: 1088737
+
+* summary: Project type for a version is null after creation if the project type setting is not touched.
+
+
+
+=== Bug: 1697935
+
+* summary: python36-ldap3 is not functional. And error is thrown during import.
+
+
+
+=== Bug: 1493894
+
+* summary: /opt/rh/rh-nodejs8/root/usr/lib64/ is not owned by rh-nodejs8-runtime on aarch64 and ppc64le
+
+
+
+=== Bug: 1716378
+
+* summary: mod_auth_mellon-debuginfo file conflict
+
+
+
+=== Bug: 1596714
+
+* summary: Consider updating google-gson to 2.8.2
+
+
+
+=== Bug: 1723534
+
+* summary: Ruby 2.4 fails to compile unf_ext
+
+
+
+=== Bug: 1449928
+
+* summary: Root access to mysql pod at localhost
+
+
+
+=== Bug: 1493138
+
+* summary: failing uwsgi test in upstream testsuite
+
+
+
+=== Bug: 1280344
+
+* summary: Changing users permanently break enabled collections
+
+
+
+=== Bug: 1388090
+
+* summary: [RFE] verbose mode
+
+
+
+=== Bug: 1643025
+
+* summary: Fix the testsuite
+
+
+
+=== Bug: 1667021
+
+* summary: [abrt] [faf] httpd24-httpd: anonymous function(): /opt/rh/httpd24/root/usr/sbin/httpd killed by 11
+
+
+
+=== Bug: 1100131
+
+* summary: [webTran] filter translation by last modified date returns wrong result
+
+
+
+=== Bug: 1566614
+
+* summary: java.util.zip.ZipException: invalid entry compressed size during Eclipse build using xmvn
+
+
+
+=== Bug: 1396657
+
+* summary: parse_str() without a second argument leads to crash
+
+
+
+=== Bug: 1613864
+
+* summary: Pathing of SCLs built on top rh-ruby25 are wrong and lead to broken builds
+
+
+
+=== Bug: 988202
+
+* summary: RFE: REST API rate limiting
+
+
+
+=== Bug: 1691744
+
+* summary: [RFE] Retrieve certificates from secrets
+
+
+
+=== Bug: 1461451
+
+* summary: Test case failure: /CoreOS/mysql/Regression/bz1149143-mysql-general-log-doesn-t-work-with-FIFO-file
+
+
+
+=== Bug: 1130797
+
+* summary: Cache document statistic and overflow to disk
+
+
+
+=== Bug: 1696732
+
+* summary: Persistent Postgres Upgrade using Gluster File PVs fails on Socket Issue
+
+
+
+=== Bug: 1467960
+
+* summary: Bug 1413543 results in unexpected results during routine updates
+
+
+
+=== Bug: 1109653
+
+* summary: [Project Version] Failed to load language list for source file name that contains space " "
+
+
+
+=== Bug: 1705588
+
+* summary: /CoreOS/httpd/Regression/bz1372692-Apache-httpd-does-not-log-status-code-413-in test failure
+
+
+
+=== Bug: 1589113
+
+* summary: Consider enabling the bnd-maven-plugin module
+
+
+
+=== Bug: 1694875
+
+* summary: Chance for abuse of sudo using "scl" command
+
+
+
+=== Bug: 1399696
+
+* summary: [rfe] Add tcpflow into official software collections.
+
+
+
+=== Bug: 1326227
+
+* summary: apxs creates symlink to libphp
+
+
+
+=== Bug: 1033375
+
+* summary: Copy and Paste does not work when typing Italian in msgstr
+
+
+
+=== Bug: 1673019
+
+* summary: httpd can not be started with mod_md enabled
+
+
+
+=== Bug: 1687922
+
+* summary: httpd container image contains private key localhost.key and localhost.crt
+
+
+
+=== Bug: 1111012
+
+* summary: Admin edit user will always edit first user regardless row
+
+
+
+=== Bug: 1626509
+
+* summary: Test case failure: /CoreOS/unixODBC/mysql-simple
+
+
+
+=== Bug: 1387158
+
+* summary: Test case failure: /CoreOS/mysql/testsuite - rpl.rpl_multi_source_basic 'stmt'
+
+
+
+=== Bug: 1545447
+
+* summary: Include Passenger 5 in SCL
+
+
+
+=== Bug: 1111449
+
+* summary: Hold active tasks in a map, but cache finished tasks briefly
+
+
+
+=== Bug: 1508042
+
+* summary: [RFE][RHSCL] Add mongodb driver for rh-php71 in Software Collection repository for RHEL 7
+
+
+
+=== Bug: 1678819
+
+* summary: missing SELinux context for  redis-sentinel.conf
+
+
+
+=== Bug: 1707636
+
+* summary: fix a regression introduced in r1740928
+
+
+
+=== Bug: 1387153
+
+* summary: Test case failure: /CoreOS/mysql/testsuite - rpl.rpl_row_basic_11bugs 'row'
+
+
+
+=== Bug: 1641625
+
+* summary: PHP: Narrowing occurred during type inference.
+
+
+
+=== Bug: 1700257
+
+* summary: Typo in README
+
+
+
+=== Bug: 1728529
+
+* summary: Rebase ubi7/python-27 container image: rebuild for CVE-2019-9948, CVE-2019-10160
+
+
+
+=== Bug: 1557320
+
+* summary: empty error.log
+
+
+
+=== Bug: 1595362
+
+* summary: nodejs image doesn't contain enough, or correct, environment variables
+
+
+
+=== Bug: 1043720
+
+* summary: The project search field failed to found existing project using the project name
+
+
+
+=== Bug: 1117095
+
+* summary: Make sure csrf tokens match on client and serve
+
+
+
+=== Bug: 1715911
+
+* summary: pip failing due to SSL error
+
+
+
+=== Bug: 1097940
+
+* summary: New password field should have show/hide toggle
+
+
+
+=== Bug: 1487085
+
+* summary: rh-nginx112 doesn't own /opt/rh/rh-nginx112/root/usr/lib64
+
+
+
+=== Bug: 1585513
+
+* summary: postgresql-setup creates incorrect log directory
+
+
+
+=== Bug: 1387161
+
+* summary: Test case failure: /CoreOS/mysql/testsuite - main.datadir_permission
+
+
+
+=== Bug: 1088651
+
+* summary: New About tab does not handle existing project Seam text
+
+
+
+=== Bug: 1637631
+
+* summary: Test case failure: /CoreOS/mysql/Regression/bz1045401-mysqld-safe-removes-socket-of-other-running-server
+
+
+
+=== Bug: 1557338
+
+* summary: empty error.log
+
+
+
+=== Bug: 1630823
+
+* summary: Test case failure: /CoreOS/mysql/testsuite - federated.federated_server
+
+
+
+=== Bug: 1559806
+
+* summary: jzlib is missing OSGi metadata
+
+
+
+=== Bug: 1094090
+
+* summary: [Regression] TMX import/export blocked by api not providing user key
+
+
+
+=== Bug: 981085
+
+* summary: User not aware they can use underscores in username
+
+
+
+=== Bug: 1687175
+
+* summary: pip and setuptools versions need to be updated
+
+
+
+=== Bug: 1387163
+
+* summary: Test case failure: /CoreOS/mysql/testsuite - binlog.binlog_database 'mix'
+
+
+
+=== Bug: 1488591
+
+* summary: [RFE] Include "scl load" command in scl-utility
+
+
+
+=== Bug: 1729383
+
+* summary: Nginx container image build done by Freshmaker too big
+
+
+
+=== Bug: 1631185
+
+* summary: rh-postgresql10-postgresql.service doesn't `scl_enable`
+
+
+
+=== Bug: 1337549
+
+* summary: scl macro definition files should conflict
+
+
+
+=== Bug: 1077439
+
+* summary: RFE: Use lucene indexes to do Copy Trans.
+
+
+
+=== Bug: 1630875
+
+* summary: Test case failure: /CoreOS/mysql/testsuite - innodb_fts.mecab_sjis innodb_fts.mecab_ujis innodb_fts.mecab_utf8
+
+
+
+=== Bug: 1499990
+
+* summary: Unable to use babel/dates due missing pytz
+
+
+
+=== Bug: 1101332
+
+* summary: [OpenID] Fedora  authentication failed to redirect back to translate.zanata.org sometimes
+
+
+
+=== Bug: 1686867
+
+* summary: [Mariadb] Access denied for user 'UNKNOWN_MYSQL_USER' in mariadb.log
+
+
+
+=== Bug: 1626450
+
+* summary: Test case failure: /CoreOS/mysql/Security/CVE-2010-1626-table-destruction-via-data-index-dir-symlink
+
+
+
+=== Bug: 1694801
+
+* summary: PHP s2i builder will not start with SSL configuration
+
+== Release: 6.0
+
+
+
+=== Bug: 1366644
+
+* summary: chown.test failure
+
+
+
+=== Bug: 508242
+
+* summary: FEAT: Driver Update Disks (RHEL6 Anaconda Modification)
+
+
+
+=== Bug: 1026728
+
+* summary: Can't delete source model which imports VDB
+
+
+
+=== Bug: 1082001
+
+* summary: Teiid designer server management tasks fail for JBDS 7.1.1.GA + JBDSIS 7.0.1.CR2
+
+
+
+=== Bug: 484425
+
+* summary: [LTC 6.0 FEAT] Include jakata-commons-cli 201115
+
+
+
+=== Bug: 1053622
+
+* summary: Installer fails to configure maven repositories when it configures default maven settings.xml
+
+
+
+=== Bug: 463523
+
+* summary: [LTC 6.0 FEAT] 200949:Additional Power6 and related Power Optimizations in glibc
+
+
+
+=== Bug: 475425
+
+* summary: [NetApp 6.0 feat] A library interface to LVM2 tools
+
+
+
+=== Bug: 1034475
+
+* summary: Unable to import SAP NW-Gateway OData using sap-nw-gateway translator
+
+
+
+=== Bug: 465194
+
+* summary: [Broadcom 6.0 FEAT] Update tg3 to version 3.94+, add 5785 / 5717 / 57780 support
+
+
+
+=== Bug: 524273
+
+* summary: RHEL6 Alpha1: testVMX testsuite errors on P6
+
+
+
+=== Bug: 603911
+
+* summary: RHEL UV: x86_64: NMI Watchdog detected LOCKUP
+
+
+
+=== Bug: 462487
+
+* summary: FEAT RHEL6 (1337): anaconda enhancement request: MAC+link state
+
+
+
+=== Bug: 622515
+
+* summary: Can not start kvm guest after offline host's cpu
+
+
+
+=== Bug: 676118
+
+* summary: iscsi --target kickstart option not actually used
+
+
+
+=== Bug: 624493
+
+* summary: Unable copy rebuild images from remote client.
+
+
+
+=== Bug: 471356
+
+* summary: [NetApp 6.0 feat] No intelligence in block/filesystem layer to free space
+
+
+
+=== Bug: 463385
+
+* summary: [LTC 6.0 FEAT] 201251:Java6 SR6 for RHEl6
+
+
+
+=== Bug: 608092
+
+* summary: Libvirt not resolving symlinks correctly, resulting in failed access to relative paths
+
+
+
+=== Bug: 1011502
+
+* summary: CNF exception when getting data through infinispan-cache translator
+
+
+
+=== Bug: 522631
+
+* summary: [LTC 6.0 FEAT] Provide balloon driver for KVM guests [202025]
+
+
+
+=== Bug: 463563
+
+* summary: [LTC 6.0 FEAT] 201099:SLB shadow buffer support
+
+
+
+=== Bug: 527750
+
+* summary: Feature Request: RIT337427  - LTC:6.0:201049: mkinitrd support for DM-MP SCSI Hardware Handlers
+
+
+
+=== Bug: 463597
+
+* summary: [LTC 6.0 FEAT] 201166:Support IPv6 boot/install through yaboot
+
+
+
+=== Bug: 463645
+
+* summary: [LTC 6.0 FEAT] 201298:CPU Hotplug rewrite
+
+
+
+=== Bug: 618862
+
+* summary: Driver Update Disks containing updated/replacement drivers do not function
+
+
+
+=== Bug: 463667
+
+* summary: [LTC 6.0 FEAT] 201471:Web 2.0 - Inclusion of package perl-CGI-Session
+
+
+
+=== Bug: 780108
+
+* summary: Unable to set or update property through ModeShape's WebDav interface
+
+
+
+=== Bug: 463326
+
+* summary: [LTC 6.0 FEAT] 201722:system topology information interface
+
+
+
+=== Bug: 493407
+
+* summary: FEAT RHEL6.0: Include NTFS3G (on fuse) support
+
+
+
+=== Bug: 516786
+
+* summary: ypbind (NIS service) fails with NetworkMangler stifled.
+
+
+
+=== Bug: 463606
+
+* summary: [LTC 6.0 FEAT] 201177:Decimal floating point support in gcc backend (SW support)
+
+
+
+=== Bug: 1028027
+
+* summary: proactive buffering on an enhanced sort merge left outer join results in an assertionerror
+
+
+
+=== Bug: 463455
+
+* summary: [LTC 6.0 FEAT] 200785:Improved handling of dynamic subchannel mapping
+
+
+
+=== Bug: 479863
+
+* summary: Use SHA-2 in RPM signatures
+
+
+
+=== Bug: 462953
+
+* summary: [LTC 6.0 FEAT] 201594:Provide CMS script for initial IPL under z/VM
+
+
+
+=== Bug: 463219
+
+* summary: [LTC 6.0 FEAT] 201744:Cleanup of libICA Crypto library
+
+
+
+=== Bug: 1035002
+
+* summary: Running Developer Studio 7.1.0.CR1 with Teiid Designer 8.3 causes connection reset by peer exception in server
+
+
+
+=== Bug: 1047930
+
+* summary: Cannot connect to ModeShape server
+
+
+
+=== Bug: 463305
+
+* summary: RFE: [LTC 6.0] 201350:Linux Containers: libvirt support
+
+
+
+=== Bug: 604763
+
+* summary: Support for converged traffic during install to FCoE LUN
+
+
+
+=== Bug: 1362204
+
+* summary: Change DTS dockerfiles to match those used to build docker registry images
+
+
+
+=== Bug: 463530
+
+* summary: [LTC 6.0 FEAT] 201026:IPv6 support in NFS - kernel
+
+
+
+=== Bug: 601143
+
+* summary: attach-disk need more detailed manual for --type cdrom or floppy
+
+
+
+=== Bug: 1351770
+
+* summary: Rebase dyninst to 9.2.x in DTS 6.0
+
+
+
+=== Bug: 467899
+
+* summary: Anaconda enforces archaic LVM1 extent limit on LVM2 logical volumes
+
+
+
+=== Bug: 497184
+
+* summary: [LTC 6.0 FEAT] Task consolidation across nodes for single board NUMA machines [201927]
+
+
+
+=== Bug: 1002979
+
+* summary: DV ER1 contains wrong dashboard builder
+
+
+
+=== Bug: 463187
+
+* summary: [LTC 6.0 FEAT] 201688:Installer migration - Merge CTCMPC into CTC device driver
+
+
+
+=== Bug: 780616
+
+* summary: ODBC Driver fails on Solaris with [IM005][unixODBC][Driver Manager]Driver's SQLAllocHandle on SQL_HANDLE_DBC failed
+
+
+
+=== Bug: 1016111
+
+* summary: Hive translator pushdown improvements
+
+
+
+=== Bug: 463297
+
+* summary: [LTC 6.0 FEAT] 201315:File Capabilities - Kernel
+
+
+
+=== Bug: 553348
+
+* summary: [LTC 6.0 FEAT] VEPA support [202042] -- libvirt changes
+
+
+
+=== Bug: 1036600
+
+* summary: Updating Data Virtualization Configuration in JON fails
+
+
+
+=== Bug: 609156
+
+* summary: CPU usage of kipmi thread is too high..(95 to 98%)
+
+
+
+=== Bug: 675047
+
+* summary: System hang upon kexec (to the same currently running kernel)
+
+
+
+=== Bug: 533492
+
+* summary: [LTC 6.0 FEAT] 201085:zFCP portion of original BZ
+
+
+
+=== Bug: 609044
+
+* summary: virsh help pool-define-as information not inconsistency
+
+
+
+=== Bug: 463368
+
+* summary: [LTC 6.0 FEAT] 201023:Fix eHCA to tolerate memory DLPAR operations when module not loaded
+
+
+
+=== Bug: 533490
+
+* summary: [LTC 6.0 FEAT] 201085:cio_ignore - carry param to zipl.conf
+
+
+
+=== Bug: 1047927
+
+* summary: Cannot create connection profile to modeshape data source
+
+
+
+=== Bug: 463552
+
+* summary: [LTC 6.0 FEAT] 201065:Modularization of qdio and thin interrupt layer
+
+
+
+=== Bug: 463221
+
+* summary: [LTC 6.0 FEAT] 200660:User-space probes
+
+
+
+=== Bug: 612318
+
+* summary: ricci won't start if IPv6 is disabled
+
+
+
+=== Bug: 463365
+
+* summary: [LTC 6.0 FEAT] 200974:Kernel interface to performance monitor unit
+
+
+
+=== Bug: 1366631
+
+* summary: vhangup.test failure
+
+
+
+=== Bug: 1009872
+
+* summary: DB Driver Class name is not selected when editing Teiid custom datasource
+
+
+
+=== Bug: 1048953
+
+* summary: Concurrent changes under heavy load can produce corrupt data
+
+
+
+=== Bug: 888935
+
+* summary: Create a MongoDB connector for EDS - Feature Request
+
+
+
+=== Bug: 467713
+
+* summary: [NetApp 6.0 feat] Include a bundled dynamic SCSI rescan script
+
+
+
+=== Bug: 1383075
+
+* summary: -fstack-protector-strong: undefined reference to `.LCTOC0'
+
+
+
+=== Bug: 1059291
+
+* summary: Incorrect URL listed for JBDSIS download
+
+
+
+=== Bug: 463553
+
+* summary: [LTC 6.0 FEAT] 201067:In-kernel crypto generic algorithm fallback
+
+
+
+=== Bug: 678522
+
+* summary: fence_wti: Unable to parse output when splitted into several screens
+
+
+
+=== Bug: 1025466
+
+* summary: Plugin pack for DV6 (EDS6) must be renamed from "EDS" to "DV"
+
+
+
+=== Bug: 780724
+
+* summary: Indexes are not qualified when imported with Teiid Designer
+
+
+
+=== Bug: 1028467
+
+* summary: simple-client pom.xml is not updated correctly at build time
+
+
+
+=== Bug: 463516
+
+* summary: [LTC 6.0 FEAT] 200855:Linux on System z: Enhanced Linux System Layout
+
+
+
+=== Bug: 463605
+
+* summary: [LTC 6.0 FEAT] 201178:Decimal floating point support in gcc backend (HW support)
+
+
+
+=== Bug: 463699
+
+* summary: [LTC 6.0 FEAT] 201726:Extra kernel parameter via VMPARM
+
+
+
+=== Bug: 532064
+
+* summary: FEAT RHEL6.0: [makedumpfile] Support kdump-compressed format for input file(*)
+
+
+
+=== Bug: 609269
+
+* summary: FV_Network test fail on RH6 certification
+
+
+
+=== Bug: 1036189
+
+* summary: EAP module conflict with commons-logging
+
+
+
+=== Bug: 996292
+
+* summary: Unable to create multiple source functions under one physical model in EDS Teiid Designer
+
+
+
+=== Bug: 465823
+
+* summary: [LTC 6.0 FEAT] 201767:vt-d support for KVM userspace
+
+
+
+=== Bug: 1036644
+
+* summary: Newly Created VDB Editor Does Not Show UDF JAR
+
+
+
+=== Bug: 1057653
+
+* summary: Installer throws NumberFormatException when configuring security domain
+
+
+
+=== Bug: 909955
+
+* summary: RestEasy module in EAP 6.1 has been upgraded to reference 2.3.5 jar's and requires fix in Teiid 8.3 beta
+
+
+
+=== Bug: 553344
+
+* summary: [LTC 6.0 FEAT] VEPA support [202042] -- iproute2 update
+
+
+
+=== Bug: 463528
+
+* summary: [LTC 6.0 FEAT] 201034:Resource management
+
+
+
+=== Bug: 518248
+
+* summary: [LTC 6.0 FEAT] update tog-pegasus to 2.9.1 [202009]
+
+
+
+=== Bug: 463788
+
+* summary: [LTC 6.0 FEAT] 201037:Ext4
+
+
+
+=== Bug: 1022554
+
+* summary: DV Installer doesn't exit when run in completely automated mode
+
+
+
+=== Bug: 463623
+
+* summary: [LTC 6.0 FEAT] 201222:IPv6 Default Address Selection - User Configurable Policy Table
+
+
+
+=== Bug: 532760
+
+* summary: [LTC 6.0 FEAT] Applying port profile to virtual bridge [202044]
+
+
+
+=== Bug: 463652
+
+* summary: [LTC 6.0 FEAT] 201300:Thread scalability issues with TPC-C
+
+
+
+=== Bug: 555693
+
+* summary: [LTC 6.0 FEAT] KVM network performance: vhost-net patches
+
+
+
+=== Bug: 602451
+
+* summary: [Emulex 6.0 feat] Include SRIOV support to be2net
+
+
+
+=== Bug: 592491
+
+* summary: [Intel 6.0 Bug] SATA errors - Can not install RHEL 6.0 beta on a Supermicro system
+
+
+
+=== Bug: 463609
+
+* summary: [LTC 6.0 FEAT] 201185:Iconv character Conversion Routines Speedup.
+
+
+
+=== Bug: 628013
+
+* summary: fsck.gfs2 truncates directories with more than 100,000 entries
+
+
+
+=== Bug: 463642
+
+* summary: [LTC 6.0 FEAT] 201278:Use SLB size from the device tree
+
+
+
+=== Bug: 463288
+
+* summary: [LTC 6.0 FEAT] 201297:Scalable IPC tunables
+
+
+
+=== Bug: 533494
+
+* summary: [LTC 6.0 FEAT] 201085: unmask and wait for devices
+
+
+
+=== Bug: 677533
+
+* summary: [abrt] gnome-system-monitor-2.28.0-7.el6: Process /usr/bin/gnome-system-monitor was killed by signal 11 (SIGSEGV)
+
+
+
+=== Bug: 523222
+
+* summary: [RHEL6-Alpha1] [BUG]: Running bash memory testcases produce kernel bug
+
+
+
+=== Bug: 507541
+
+* summary: Cannot commit to disk after 5 attempts
+
+
+
+=== Bug: 1399658
+
+* summary: Request for Firefox Developer Edition in Red Hat Developer Toolset
+
+
+
+=== Bug: 593279
+
+* summary: FEAT [ipvsadm] status check without affecting system configuration
+
+
+
+=== Bug: 519736
+
+* summary: Feat: 6.0 Libvirt does not allow creation of more than 256 guests
+
+
+
+=== Bug: 1383086
+
+* summary: Fix printing of TLS (such as 'errno') regression
+
+
+
+=== Bug: 681525
+
+* summary: No usb passthrough on virtual machines
+
+
+
+=== Bug: 784725
+
+* summary: ModeShape persistence has changed in SOA 6 to use Infinispan
+
+
+
+=== Bug: 486223
+
+* summary: [LTC 6.0 FEAT] 201837: Exploit byte swap instructions lrv, lrvg
+
+
+
+=== Bug: 597356
+
+* summary: nfsd will not start reliably, reports setting version failed: errno 16
+
+
+
+=== Bug: 1032786
+
+* summary: Teiid Quickstarts contain both parent and dependencyManagement
+
+
+
+=== Bug: 1048153
+
+* summary: NodeIterator.hasNext() method returns wrong results
+
+
+
+=== Bug: 576973
+
+* summary: [LTC 6.0 FEAT] kvm hpet support [202011]
+
+
+
+=== Bug: 590667
+
+* summary: Pacemaker rebase for Beta2
+
+
+
+=== Bug: 463315
+
+* summary: [LTC 6.0 FEAT] 201405:Fast little endian implementation for System p AVE
+
+
+
+=== Bug: 1376017
+
+* summary: DWARF regression: fortran: Missing DW_AT_byte_stride for an array record array selection
+
+
+
+=== Bug: 1053627
+
+* summary: Can't create new maven settings.xml during installation
+
+
+
+=== Bug: 506150
+
+* summary: sysvinit-tools and redhat-release missing from distro RHEL6.0-20090611.15
+
+
+
+=== Bug: 463329
+
+* summary: [LTC 6.0 FEAT] 201660:Update SBLIM data gatherer to 2.1.6 or later
+
+
+
+=== Bug: 529925
+
+* summary: FEAT RHEL6.0: MAKE ixgbe driver legacy I/O port free
+
+
+
+=== Bug: 1366145
+
+* summary: dwz applied to a dts-compiled binary complains about section offsets not monotonically increasing
+
+
+
+=== Bug: 463185
+
+* summary: [LTC 6.0 FEAT] 201699:libcgroup (User space library for resource management)
+
+
+
+=== Bug: 463307
+
+* summary: [LTC 6.0 FEAT] 201331:openCryptoki Enhancements
+
+
+
+=== Bug: 613091
+
+* summary: PangoWarning: failed to choose a font, expect ugly output (via virt-manager)
+
+
+
+=== Bug: 1035478
+
+* summary: Hang generating war
+
+
+
+=== Bug: 696337
+
+* summary: Bond interface flapping and increasing rx_missed_errors
+
+
+
+=== Bug: 463280
+
+* summary: [LTC 6.0 FEAT] 201220:Ship the adapter firmware image with driver cxgb3.
+
+
+
+=== Bug: 604244
+
+* summary: GFS2: kernel NULL pointer dereference from dlm_astd
+
+
+
+=== Bug: 463518
+
+* summary: [LTC 6.0 FEAT] 200789:ETR support
+
+
+
+=== Bug: 503520
+
+* summary: [LTC 6.0 FEAT] Update Perl to 5.10 at a minimum in RHEL 6 [201945]
+
+
+
+=== Bug: 1035356
+
+* summary: Designer Create User Defined Function Dialog Result Set Tab Add Column Button Does Not Enable
+
+
+
+=== Bug: 463549
+
+* summary: [LTC 6.0 FEAT] 201047:Change GCC default to -mcpu=power4
+
+
+
+=== Bug: 622641
+
+* summary: dracut does not include "extra" and "weak-updates" directories in non-hostonly mode
+
+
+
+=== Bug: 678986
+
+* summary: flushing secondary device does not work
+
+
+
+=== Bug: 1002883
+
+* summary: Fix RestEASY warning about non-provider class being registered as a provider
+
+
+
+=== Bug: 463223
+
+* summary: [LTC 6.0 FEAT] 200979:Java Support support for OProfile
+
+
+
+=== Bug: 1001884
+
+* summary: ReBrand Teiid Dashboard
+
+
+
+=== Bug: 463208
+
+* summary: [LTC 6.0 FEAT] 201730:FCP - Performance data reports
+
+
+
+=== Bug: 896305
+
+* summary: Maximum length of string data type is not 4000
+
+
+
+=== Bug: 780131
+
+* summary: Teiid Designer: Refactor > Move source model produces preview errors
+
+
+
+=== Bug: 464179
+
+* summary: [LTC 6.0 FEAT] 201729:FCP - Performance data collection (blktrace)
+
+
+
+=== Bug: 1035892
+
+* summary: JDG resource adapter fails to start when starting server
+
+
+
+=== Bug: 463454
+
+* summary: [LTC 6.0 FEAT] 200770:Include Open Fabric Enterprise Distribution
+
+
+
+=== Bug: 463664
+
+* summary: [LTC 6.0 FEAT] 201429:Update OFED to version 1.5 for Infiniband enablement -- Kernel packages
+
+
+
+=== Bug: 463666
+
+* summary: [LTC 6.0 FEAT] 201469:Web 2.0 - Inclusion of package memcached
+
+
+
+=== Bug: 1037268
+
+* summary: DV installer uses "Teiid Dashboard" term rather than "Data Virtualization Dashboard"
+
+
+
+=== Bug: 465821
+
+* summary: [LTC 6.0 FEAT] 201766:Support for vt-d for KVM kernel interface
+
+
+
+=== Bug: 508234
+
+* summary: FEAT: Core RHEL6 Driver Update Program Technology Enablers
+
+
+
+=== Bug: 1378462
+
+* summary: systemtap-server SSL/TLS certificates needs to be unique per instance or install but this value is created at install-time and not during the first run.
+
+
+
+=== Bug: 463525
+
+* summary: [LTC 6.0 FEAT] 200970:Include CalIOC2 IOMMU Support (follow on to Calgary)
+
+
+
+=== Bug: 589813
+
+* summary: kernel bug: quota file size not a multiple of struct gfs2_quota
+
+
+
+=== Bug: 463281
+
+* summary: [LTC 6.0 FEAT] 201201:Large page flexibility for POWER
+
+
+
+=== Bug: 512226
+
+* summary: Need to login as 'root' user on RHEL6.0
+
+
+
+=== Bug: 1344702
+
+* summary: can't build an asan enabled srpm using devtoolset-4-gcc
+
+
+
+=== Bug: 463604
+
+* summary: [LTC 6.0 FEAT] 201179:Decimal Floating Point support in gcc backend - PFPO
+
+
+
+=== Bug: 528059
+
+* summary: multipathd should not need /etc/multipath.conf by default
+
+
+
+=== Bug: 523445
+
+* summary: Error while loading anaconda - No module named system_config_keyboard.keyboard
+
+
+
+=== Bug: 1046270
+
+* summary: Performance improvement when indexing updated nodes
+
+
+
+=== Bug: 1036803
+
+* summary: DV6 quickstarts contain dist module that is non existent
+
+
+
+=== Bug: 463279
+
+* summary: [LTC 6.0 FEAT] 201200:16GB huge pages for POWER
+
+
+
+=== Bug: 518062
+
+* summary: RFE: Expose information about  host CPU flags in capabilities
+
+
+
+=== Bug: 463514
+
+* summary: [LTC 6.0 FEAT] 200948:Support the C99 Decimal Floating point Standard extensions.
+
+
+
+=== Bug: 1369820
+
+* summary: compat arch tests not being run
+
+
+
+=== Bug: 484464
+
+* summary: [LTC 6.0 FEAT] Enable yaboot to boot ppc64 relocatable kernels [201806]
+
+
+
+=== Bug: 590023
+
+* summary: [6.0 FEAT] Request for update of libservicelog to 1.1.9+ API
+
+
+
+=== Bug: 1028023
+
+* summary: Buffer defrag not working
+
+
+
+=== Bug: 617300
+
+* summary: libvirt-guests initscript Fedora compliance.
+
+
+
+=== Bug: 590886
+
+* summary: [Stratus 6.0 bug] rpmbuild fails when buildroot is NFS mounted.
+
+
+
+=== Bug: 1010984
+
+* summary: Hive Metadata load incorrectly resolves data types
+
+
+
+=== Bug: 620439
+
+* summary: Resilient Storage and Faroese Support are in Uncategorized category
+
+
+
+=== Bug: 1002587
+
+* summary: Cloning workspaces does not update reference properties
+
+
+
+=== Bug: 999335
+
+* summary: WebDAV PROPFIND fails for multi-valued properties
+
+
+
+=== Bug: 463697
+
+* summary: [LTC 6.0 FEAT] 201725:Pre-allocated headers for HiperSockets (qeth driver)
+
+
+
+=== Bug: 463624
+
+* summary: [LTC 6.0 FEAT] 201230:single image boot (read-only) root file system (for iSCSI customers)
+
+
+
+=== Bug: 463333
+
+* summary: [LTC 6.0 FEAT] 200978:stapitrace
+
+
+
+=== Bug: 796965
+
+* summary: RFE: Implement Salesforce Bulk API for inserts/updates
+
+
+
+=== Bug: 518983
+
+* summary: [NetApp 6.0 feat] Add support for setting dev_loss_tmo and fast_io_fail_tmo in /etc/multipath.conf
+
+
+
+=== Bug: 463300
+
+* summary: [LTC 6.0 FEAT] 201330:eCryptfs Enhancements - User space: ecryptfs-utils
+
+
+
+=== Bug: 622868
+
+* summary: 'Failed to detect total system memory' on ppc
+
+
+
+=== Bug: 1028775
+
+* summary: Installer fails on Solaris 11
+
+
+
+=== Bug: 622872
+
+* summary: fence_scsi typo causes command to fail
+
+
+
+=== Bug: 1016307
+
+* summary: Eng. review of Installation Guide
+
+
+
+=== Bug: 1044746
+
+* summary: Unable to update database table with composite keys using OData
+
+
+
+=== Bug: 1045534
+
+* summary: Significant performance improvement when creating new nodes
+
+
+
+=== Bug: 780968
+
+* summary: modeshape sequencing performance predictability
+
+
+
+=== Bug: 1256513
+
+* summary: Support libipt for Broadwell+ Intel(R) Processor Trace
+
+
+
+=== Bug: 518701
+
+* summary: RFE: [LTC 6.0] Add async qemu machine protocol (qmp) to libvirt [202014]
+
+
+
+=== Bug: 1035475
+
+* summary: Rename re-factor action on model name does not change references every where
+
+
+
+=== Bug: 1324606
+
+* summary: DTS-4.0 regression: gdb remote.c due to "setfs" with RHEL gdbserver
+
+
+
+=== Bug: 1000286
+
+* summary: Workspace.clone does not clone the direct descendants of the root node
+
+
+
+=== Bug: 1016227
+
+* summary: Eng. review of Development Guild
+
+
+
+=== Bug: 622757
+
+* summary: [NetApp 6.0 Bug]: anaconda fails to install on multipath devices
+
+
+
+=== Bug: 595478
+
+* summary: NFS client upstream bug fixes
+
+
+
+=== Bug: 632718
+
+* summary: Unable to log in after install of RHEV-H to hard drive
+
+
+
+=== Bug: 600583
+
+* summary: "critical_disks" makes kdump unreliable
+
+
+
+=== Bug: 703578
+
+* summary: Kernel panic in cache_alloc_refill
+
+
+
+=== Bug: 591608
+
+* summary: [LSI 6.0 bug] IO session hang with max(256) Lun test with multipath enabled during exception test
+
+
+
+=== Bug: 516163
+
+* summary: block hardlimit (quota) doesn't work on ext4 filesystem.
+
+
+
+=== Bug: 583766
+
+* summary: [Emulex 6.0 bug] Update be2net 10GB NIC driver to version 2.102.239r - additional patches
+
+
+
+=== Bug: 548841
+
+* summary: [LTC 6.0 FEAT] Anaconda support for the pmcraid driver [202033]
+
+
+
+=== Bug: 602778
+
+* summary: libvirt does not block global hardware device addition from /etc/qemu config files
+
+
+
+=== Bug: 463649
+
+* summary: [LTC 6.0 FEAT] 201292:Sync up the eHEA driver with the latest mainline kernel.
+
+
+
+=== Bug: 463308
+
+* summary: [LTC 6.0 FEAT] 201403:OpenMPI support for POWER
+
+
+
+=== Bug: 605262
+
+* summary: DeviceNotFoundError: vda
+
+
+
+=== Bug: 607294
+
+* summary: libvirt network <tftp> element does not enable tftp port
+
+
+
+=== Bug: 1009460
+
+* summary: Keys are not imported by default when using dynamic VDB
+
+
+
+=== Bug: 464229
+
+* summary: [LTC 6.0 FEAT] 201180:Inclusion of libdfp
+
+
+
+=== Bug: 484271
+
+* summary: [LTC 6.0 FEAT] 201642: Include IB bonding feature from OFED recent release
+
+
+
+=== Bug: 516842
+
+* summary: [QLogic 6.0 feat] qla2xxx - Async login support.
+
+
+
+=== Bug: 1365531
+
+* summary: Statically linked binary segfaults
+
+
+
+=== Bug: 604929
+
+* summary: Add --uuid option to virsh vol-pool command
+
+
+
+=== Bug: 463319
+
+* summary: [LTC 6.0 FEAT] 201569:Update to latest version of ipmitool
+
+
+
+=== Bug: 463535
+
+* summary: [LTC 6.0 FEAT] 200975:System z support for processor degradation
+
+
+
+=== Bug: 463607
+
+* summary: [LTC 6.0 FEAT] 201176:Merge CTCMPC into CTC device driver for upstream integration
+
+
+
+=== Bug: 463532
+
+* summary: [LTC 6.0 FEAT] 201000:FICON: Hyper PAV enablement
+
+
+
+=== Bug: 1375553
+
+* summary: Regression: gdb --pid $(pidof qemu-system-x86_64) stopped working with gdb 7.11.1
+
+
+
+=== Bug: 595477
+
+* summary: [QLogic 6.0 bug] qla2xxx: Update to 8.03.01.05.06.0-k8
+
+
+
+=== Bug: 463621
+
+* summary: [LTC 6.0 FEAT] 201204:Greater than 2 way SMT
+
+
+
+=== Bug: 593379
+
+* summary: [NetApp 6.0 bug] DM-Multipath: Multipathd crash on RHEL6 Snap3
+
+
+
+=== Bug: 706037
+
+* summary: fence_xvm needs selinux policy additions
+
+
+
+=== Bug: 1021699
+
+* summary: Teiid Designer:  Importing DB2 JDBC Data Source throwing java.lang.NullPointerException
+
+
+
+=== Bug: 463544
+
+* summary: [LTC 6.0 FEAT] 201085:cio_ignore entry in generic.prm for LPARs
+
+
+
+=== Bug: 1000309
+
+* summary: jcr:mergeFailed cannot be set on a checked-in node, in case of a version merge failure
+
+
+
+=== Bug: 1015232
+
+* summary: Performance Issue: Proactive eviction of new batches reduces forward-only performance
+
+
+
+=== Bug: 518925
+
+* summary: FEAT: Driver Update Disks Support set the  file system label  of the diskette Image and ISO image.
+
+
+
+=== Bug: 982648
+
+* summary: Teiid Designer preference for Teiid Server version should default to 8.4
+
+
+
+=== Bug: 607093
+
+* summary: Use 24bpp framebuffer on g200se to avoid bandwidth limit
+
+
+
+=== Bug: 603735
+
+* summary: SPECsfs NFS V3 workload on RHEL6 running 2.6.32-33 fails with WARNING: at lib/kref.c:43 kref_get, BUG at fs/inode.c:1343, and a nfs service stop error
+
+
+
+=== Bug: 597328
+
+* summary: [RHEL6] kernel: Enable RDS on powerpc
+
+
+
+=== Bug: 602217
+
+* summary: add virsh vol-pool command
+
+
+
+=== Bug: 592449
+
+* summary: [Intel 6.0 Bug] Ethtool diagnostics on 82576/82580 devices causes kernel panic
+
+
+
+=== Bug: 601793
+
+* summary: [LSI 6.0 bug] iscsi-initiator-utils does not install over PXE
+
+
+
+=== Bug: 463317
+
+* summary: [LTC 6.0 FEAT] 201573:Update GDB to version 6.9 or later
+
+
+
+=== Bug: 540990
+
+* summary: [LTC 6.0 FEAT] Add Call Home data on halt and panic if running in LPAR [202050]
+
+
+
+=== Bug: 618470
+
+* summary: [Intel 6.0 Bug] Multipath failover takes 60 seconds and stops I/O on both interfaces for 60 seconds
+
+
+
+=== Bug: 463318
+
+* summary: [LTC 6.0 FEAT] 201572:Python scripting support in GDB
+
+
+
+=== Bug: 463309
+
+* summary: [LTC 6.0 FEAT] 201402:Report idle cycles to the HMC for dedicated processors
+
+
+
+=== Bug: 533386
+
+* summary: [LTC 6.0 FEAT] ock 2.3 Enhancements [202047]
+
+
+
+=== Bug: 1033056
+
+* summary: Wrong results with merge join SORT_DISTINCT with a full sort that is distinct beyond the join columns
+
+
+
+=== Bug: 1378147
+
+* summary: gdb crashes on some inferior function call scripts
+
+
+
+=== Bug: 601248
+
+* summary: DeviceNotFoundError: vda
+
+
+
+=== Bug: 694894
+
+* summary: fenc_apc cannot fence an APC AP-8941
+
+
+
+=== Bug: 463388
+
+* summary: [LTC 6.0 FEAT] 201154:LoP Upgrade binutils to 2.18 or higher
+
+
+
+=== Bug: 616783
+
+* summary: avc: denied  { read execute } for ... comm="vhostmd" name="libvirtd" ...
+
+
+
+=== Bug: 463862
+
+* summary: [LTC 6.0 FEAT] 201257:KVM high performance multinode support
+
+
+
+=== Bug: 647940
+
+* summary: [libvirt] libvirt crash on multiple migration [Segmentation fault]
+
+
+
+=== Bug: 486222
+
+* summary: [LTC 6.0 FEAT] Linux to add Call Home data - Kernel Interface [201801]
+
+
+
+=== Bug: 1042907
+
+* summary: Designer deletes data role "condition" information
+
+
+
+=== Bug: 463285
+
+* summary: [LTC 6.0 FEAT] 201240:ACPI C3/C4 Support
+
+
+
+=== Bug: 462935
+
+* summary: [LTC 6.0 FEAT] 201485:Lx86: Strong Access Ordering
+
+
+
+=== Bug: 463296
+
+* summary: [LTC 6.0 FEAT] 201317:File Capabilities - Userspace
+
+
+
+=== Bug: 1004372
+
+* summary: Quickstarts are missing in the DV 6 ER1
+
+
+
+=== Bug: 463835
+
+* summary: [LTC 6.0 FEAT] 201206:Update OpenHPI to 2.12.1 (at a minimum) for RHEL6
+
+
+
+=== Bug: 463335
+
+* summary: [LTC 6.0 FEAT] 201745:update libtool to version 2.2.x
+
+
+
+=== Bug: 1032601
+
+* summary: JON Plugin throws errors when agent discovers stock EAP6
+
+
+
+=== Bug: 1024875
+
+* summary: Teiid connection metadata import leaves padding spaces for Hive column names
+
+
+
+=== Bug: 749719
+
+* summary: Many error occurred in rhel6.1 hwcert with v7-1.4.30 in intel Romely Platform
+
+
+
+=== Bug: 463713
+
+* summary: [LTC 6.0 FEAT] 200829:UEFI support - gnu-efi
+
+
+
+=== Bug: 516922
+
+* summary: RHEL6 (Alpha) request for more GRUB install options
+
+
+
+=== Bug: 463706
+
+* summary: [LTC 6.0 FEAT] 201736:Suport for HiperSockets Sniffer
+
+
+
+=== Bug: 603933
+
+* summary: [Broadcom 6.0 bug] tg3: Memory leak on 5717 / 57765 / 5719 devices
+
+
+
+=== Bug: 1036588
+
+* summary: JON operations/metrics are not working for DV6
+
+
+
+=== Bug: 999974
+
+* summary: Can't create data provider from teiid datasource
+
+
+
+=== Bug: 1000311
+
+* summary: Merge of versioned items fails to work on eventual successor versions
+
+
+
+=== Bug: 463180
+
+* summary: [LTC 6.0 FEAT] 201687:Installer - QETH Componentization
+
+
+
+=== Bug: 1023216
+
+* summary: Teiid Connection Importer is using the pool-name instead of jndi name
+
+
+
+=== Bug: 516918
+
+* summary: RHEL6 (Alpha) Please disable anaconda screen saver/blanker
+
+
+
+=== Bug: 984852
+
+* summary: Hive's Binary Type Handling by Teiid
+
+
+
+=== Bug: 470351
+
+* summary: FEAT RHEL6 (1383): Support for systems with 46 bits of (physical) address space during the lifespan of RHEL6
+
+
+
+=== Bug: 602660
+
+* summary: [vdsm] [libvirt intg] libvirtd hangs while qemu process dies during domain save operation
+
+
+
+=== Bug: 463374
+
+* summary: [LTC 6.0 FEAT] 201491:Enhance LSI driver mptsas with EEH native recovery
+
+
+
+=== Bug: 539318
+
+* summary: [LTC 6.0 FEAT] Extended H_CEDE [201918]
+
+
+
+=== Bug: 475668
+
+* summary: [LTC 6 FEAT] Fix text mode corruption found with Matrox G200EV Video controller on the IBM Integrated BMC [201798]
+
+
+
+=== Bug: 590662
+
+* summary: Cluster-glue rebase for beta2
+
+
+
+=== Bug: 462954
+
+* summary: [LTC 6.0 FEAT] 201587:Enable eHEA with kdump support
+
+
+
+=== Bug: 463371
+
+* summary: [LTC 6.0 FEAT] 201110:Broadcom iSCSI support - bnx2iscsi
+
+
+
+=== Bug: 1367225
+
+* summary: dyninst testsuite test_fork and test4_{234} fail on x86_64
+
+
+
+=== Bug: 1042914
+
+* summary: Unable to deploy VDB because use Source Name didn't match datasource Pool Name
+
+
+
+=== Bug: 746579
+
+* summary: Default route and ip-down.local handled incorrectly
+
+
+
+=== Bug: 1171937
+
+* summary: Teiid JDBC Driver needs to be made available on the customer portal
+
+
+
+=== Bug: 1035018
+
+* summary: AdminShell - the *.sh files were not executable by default
+
+
+
+=== Bug: 1158229
+
+* summary: Staypuft 10-23 pre-release puddle RPM repo packages fail to install during network configuration steps
+
+
+
+=== Bug: 1384947
+
+* summary: Can't rebuild devtoolset-6-gdb.src.rpm without devtoolset-6-build.rpm installed
+
+
+
+=== Bug: 463558
+
+* summary: [LTC 6.0 FEAT] 201137:Overriding of built-in kernel modules during install
+
+
+
+=== Bug: 594887
+
+* summary: Installation fails with RHEL6.0-20100521.n.0_nfs-Server-x86_64 on dell pet610
+
+
+
+=== Bug: 616480
+
+* summary: virtinst incorrectly sets cache=none for physical CDROM/DVD device
+
+
+
+=== Bug: 1018994
+
+* summary: JBoss DV Installer does not work on Mac OSX (and Windows?)
+
+
+
+=== Bug: 461946
+
+* summary: modify per-process resource limit settings at runtime
+
+
+
+=== Bug: 497369
+
+* summary: [LTC 6.0 FEAT] Lightweight and dynamic cpu/node evacuation [201928]
+
+
+
+=== Bug: 591837
+
+* summary: ntpd -q does not exit when no servers are defined in /etc/ntpd.conf
+
+
+
+=== Bug: 602325
+
+* summary: kdump to network target fails over bridge device
+
+
+
+=== Bug: 999534
+
+* summary: Can't create data provider from teiid datasource
+
+
+
+=== Bug: 630561
+
+* summary: [Intel 6.0] rpmbuild failed with -70 kernel source
+
+
+
+=== Bug: 753710
+
+* summary: Hibernate Fail in RHEL6.0 64bit in fake raid 0 mode
+
+
+
+=== Bug: 537496
+
+* summary: [LTC 6.0 FEAT] OSA QDIO Data Connection Isolation [201899]
+
+
+
+=== Bug: 602911
+
+* summary: [ Intel 6.0 bug ] FCoE interface is not selectable when performing FTP install to FCoE LUN on the same interface
+
+
+
+=== Bug: 1033077
+
+* summary: Apply latest fixes for MongoDB
+
+
+
+=== Bug: 684213
+
+* summary: Turkey DST Update (RHEL 6)
+
+
+
+=== Bug: 463384
+
+* summary: [LTC 6.0 FEAT] 201250:Java5 SR10 for RHEL6
+
+
+
+=== Bug: 1000181
+
+* summary: The default datasource for the dashboard should use persistence
+
+
+
+=== Bug: 463559
+
+* summary: [LTC 6.0 FEAT] 201140:Standby memory add via SCLP
+
+
+
+=== Bug: 1042910
+
+* summary: When pasting a role condition it always is pasted twice
+
+
+
+=== Bug: 590851
+
+* summary: [RHEL 6.0] Serial console hangs after entering username
+
+
+
+=== Bug: 1035073
+
+* summary: Server Development: Add Maven links
+
+
+
+=== Bug: 523954
+
+* summary: parted must support sector size larger than 512 bytes
+
+
+
+=== Bug: 463872
+
+* summary: [LTC 6.0 FEAT] 201264:EDAC Support
+
+
+
+=== Bug: 462957
+
+* summary: [LTC 6.0 FEAT] 201598:FCP - HBA API followup for upstream
+
+
+
+=== Bug: 463613
+
+* summary: [LTC 6.0 FEAT] 201194:libhugetlbfs package update
+
+
+
+=== Bug: 580798
+
+* summary: [LTC 6.0 FEAT] 201066:QETH Componentization
+
+
+
+=== Bug: 595591
+
+* summary: [Broadcom 6.0 bug] brcm_iscsiuio may place stale packets on the wire
+
+
+
+=== Bug: 598690
+
+* summary: [LTC 6.0]: Update SBLIM data gatherer to 2.2.1
+
+
+
+=== Bug: 1044863
+
+* summary: High concurrent updates in a cluster with Infinispan partial deltas enabled results in lots of exceptions
+
+
+
+=== Bug: 463550
+
+* summary: [LTC 6.0 FEAT] 201049:DM-MP SCSI Hardware Handlers - bug fixes
+
+
+
+=== Bug: 680050
+
+* summary: RHEL6 x64 PXEboot kernel not compatible with WDSLinux
+
+
+
+=== Bug: 463331
+
+* summary: [LTC 6.0 FEAT] 201247:sysdiag package
+
+
+
+=== Bug: 463813
+
+* summary: [LTC 6.0 FEAT] 201751:HiperSockets Layer3 support for IPv6
+
+
+
+=== Bug: 599499
+
+* summary: Add condrestart to fcoe service
+
+
+
+=== Bug: 463618
+
+* summary: [LTC 6.0 FEAT] 201224:Enable IPv6 support in tftp client/server
+
+
+
+=== Bug: 463387
+
+* summary: [LTC 6.0 FEAT] 201154:LoP Upgrade to glibc 2.7+
+
+
+
+=== Bug: 618676
+
+* summary: [RHEL6-Beta1 – NFSoRDMA] - Unable to enable listening port for NFS RDMA mounts ,on the NFSoRDMA server.
+
+
+
+=== Bug: 1018818
+
+* summary: Use community bom for Teiid
+
+
+
+=== Bug: 516805
+
+* summary: [LTC 6.0 FEAT] Suspend / Resume support [201901]
+
+
+
+=== Bug: 462977
+
+* summary: [LTC 6.0 FEAT] 201675:Pick up latest version of libica
+
+
+
+=== Bug: 634973
+
+* summary: Detect and recover from cxgb3 adapter parity errors [rhel-6.0.z]
+
+
+
+=== Bug: 463534
+
+* summary: [LTC 6.0 FEAT] 200982:Provide Linux Containers functionality
+
+
+
+=== Bug: 463310
+
+* summary: [LTC 6.0 FEAT] 201399:Update ibmvscsi driver with upstream fixes and enhancements
+
+
+
+=== Bug: 1365418
+
+* summary: Symbol __gmon_start__ missing on ppc64 and s390x
+
+
+
+=== Bug: 1016243
+
+* summary: Tuples lost in a with clause item.
+
+
+
+=== Bug: 591949
+
+* summary: Segmentation fault during imsm container creation
+
+
+
+=== Bug: 1011558
+
+* summary: Default datasource for Dashboard saves data into home directory
+
+
+
+=== Bug: 985578
+
+* summary: Teiid Designer is unable to perform web services data preview multiple times without restarting server
+
+
+
+=== Bug: 479995
+
+* summary: Enable SHA2 file digests in RPMs
+
+
+
+=== Bug: 463596
+
+* summary: [LTC 6.0 FEAT] 201165:Linux KVM
+
+
+
+=== Bug: 531789
+
+* summary: TypeError: '_ped.DiskType' object is not callable
+
+
+
+=== Bug: 1004770
+
+* summary: NoClassDefFoundError when trying to run adminshell
+
+
+
+=== Bug: 1356268
+
+* summary: Rebase Systemtap to 3.x in DTS 6.0
+
+
+
+=== Bug: 463677
+
+* summary: [LTC 6.0 FEAT] 201579:Linux struct page elimination
+
+
+
+=== Bug: 1035473
+
+* summary: Refreshing a server that's not started results in Exception & dialog
+
+
+
+=== Bug: 1029064
+
+* summary: Login page with invalid credentials message remains displayed even after successful login
+
+
+
+=== Bug: 604729
+
+* summary: [Emulex 6.0 bug] Update be2net 10GB NIC driver to version 2.102.380r - additional patches
+
+
+
+=== Bug: 616083
+
+* summary: Clicking 'Login' on GDM screen of livecd does not work
+
+
+
+=== Bug: 1391820
+
+* summary: rpmbuild --rebuild devtoolset-6-ltrace-0.7.91-15.el7.src.rpm results in "Installed (but unpackaged) file(s) found" on ppc64
+
+
+
+=== Bug: 463873
+
+* summary: [LTC 6.0 FEAT] 201196:Idle CPU power management
+
+
+
+=== Bug: 907204
+
+* summary: SIGSEGV in tool_mm_flush()
+
+
+
+=== Bug: 463177
+
+* summary: [LTC 6.0 FEAT] 201686:Installer - HiperSockets MAC Layer Routing Support
+
+
+
+=== Bug: 597244
+
+* summary: [LTC 6.0 FEAT] Update SBLIM JSR48 CIM Client to 2.1.3
+
+
+
+=== Bug: 1040038
+
+* summary: Quickstarts instruct users to use standalone-teiid.xml in the readme
+
+
+
+=== Bug: 532759
+
+* summary: [LTC 6.0 FEAT] Bridge MIBs [202043]
+
+
+
+=== Bug: 463619
+
+* summary: [LTC 6.0 FEAT] 201223:DHCPv6 updates
+
+
+
+=== Bug: 463582
+
+* summary: [LTC 6.0 FEAT] 201164:Support dynamic config'ed iSCSI SW boot/install
+
+
+
+=== Bug: 1043354
+
+* summary: Installation guides: Incorrect installer JAR name
+
+
+
+=== Bug: 518284
+
+* summary: [LTC 6.0 FEAT] Backport Intel watchdog emulation [202012]
+
+
+
+=== Bug: 624647
+
+* summary: DUD failed to load for ppc64.
+
+
+
+=== Bug: 559507
+
+* summary: KeyError: 'cciss!c0d0'
+
+
+
+=== Bug: 1378332
+
+* summary: devtoolset-6-libatomic-devel.aarch64 does not install on rhel-7.2
+
+
+
+=== Bug: 1037603
+
+* summary: QE Review: JBoss Data Virtualization Getting Started Guide (GA)
+
+
+
+=== Bug: 613929
+
+* summary: Cannot install RHEL6 via TFTP netboot using ppc64.img
+
+
+
+=== Bug: 486244
+
+* summary: [Intel 6.0 FEAT] Add FCoE boot capability
+
+
+
+=== Bug: 620500
+
+* summary: rhel5 -> rhel6 kickstart migration guide
+
+
+
+=== Bug: 603696
+
+* summary: virsh does not provide the ability to determine pool nor domain persistence
+
+
+
+=== Bug: 674790
+
+* summary: [abrt] java-1.6.0-sun-1.6.0.22-1jpp.1.el6: g_logv: Process /usr/lib/jvm/java-1.6.0-sun-1.6.0.22.x86_64/jre/bin/java was killed by signal 6 (SIGABRT)
+
+
+
+=== Bug: 590010
+
+* summary: [6.0 FEAT] Update request for Servicelog
+
+
+
+=== Bug: 1051292
+
+* summary: Server Development: Add info on functions and precedence
+
+
+
+=== Bug: 1055741
+
+* summary: JBDS 7/Designer 8.3 having issues connecting to a EDS 5.x server
+
+
+
+=== Bug: 463795
+
+* summary: [LTC 6.0 FEAT] 201184:Provide DFP hardware accelerated libgcc
+
+
+
+=== Bug: 463655
+
+* summary: [LTC 6.0 FEAT] 201339:Package update request for openMPI
+
+
+
+=== Bug: 520481
+
+* summary: [Emulex 6.0 feat] be2net request_firmware() support in Ethtool-cmd-with-flash-for-RH6
+
+
+
+=== Bug: 462973
+
+* summary: [LTC 6.0 FEAT] 201679:Change list of Anaconda network alternatives to indicate supported devices on System z
+
+
+
+=== Bug: 463712
+
+* summary: [LTC 6.0 FEAT] 200829:UEFI support - grub
+
+
+
+=== Bug: 607761
+
+* summary: RHEL6-Snapshot: Display toggle HotKeys Fn+F8 does not generate KEY_SWITCHVIDEOMODE
+
+
+
+=== Bug: 508938
+
+* summary: Installing from NFS ISOs is no longer easily possible
+
+
+
+=== Bug: 488879
+
+* summary: [DELL 6.0 FEAT] Update QEMU to use gPXE roms for iSCSI boot support
+
+
+
+=== Bug: 1026892
+
+* summary: JDBC importer adds wrong column type for columns of type integer, when importing(Reusing) VDB
+
+
+
+=== Bug: 618484
+
+* summary: [Intel 6.0 Bug] [libvirt] libvirt doesn't release the virt slot when detach device
+
+
+
+=== Bug: 610814
+
+* summary: [RHEL6 beta 1] ixgbe doesn't support 128 cpus
+
+
+
+=== Bug: 1092144
+
+* summary: only a single inlined_subroutine DIE is emitted during loop unrolling
+
+
+
+=== Bug: 525413
+
+* summary: Add hmaccalc to RHEL6 distro
+
+
+
+=== Bug: 593785
+
+* summary: libvirt: 'disk' pool startup error after creating volume
+
+
+
+=== Bug: 463457
+
+* summary: [LTC 6.0 FEAT] 200336:Qlogic driver update for OF boot and FCODE update
+
+
+
+=== Bug: 984853
+
+* summary: HiveMetadata procesor typo in importer property name
+
+
+
+=== Bug: 621254
+
+* summary: NetworkManager is incompatible with virtualization
+
+
+
+=== Bug: 463704
+
+* summary: [LTC 6.0 FEAT] 201739:CMM2 Lite
+
+
+
+=== Bug: 598727
+
+* summary: [Intel 6.0 Bug] Could not create a new guest or open an old guest image on RHEL6.0, it always reports errors
+
+
+
+=== Bug: 514239
+
+* summary: Install nautilus-open-terminal by default in RHEL6
+
+
+
+=== Bug: 549537
+
+* summary: include instructions on how to create USB bootable media
+
+
+
+=== Bug: 462959
+
+* summary: [LTC 6.0 FEAT] 201667:eHEA support for 16GB memory page
+
+
+
+=== Bug: 1057191
+
+* summary: Identify the ODBC files to be released to the portal
+
+
+
+=== Bug: 463562
+
+* summary: [LTC 6.0 FEAT] 201100:POWER6 SPURR support
+
+
+
+=== Bug: 486228
+
+* summary: [LTC 6.0 FEAT] 201857: Kernel vdso support
+
+
+
+=== Bug: 462975
+
+* summary: [LTC 6.0 FEAT] 201676:Improve checking mechanisms and workflow of Linux on System z Anaconda install process
+
+
+
+=== Bug: 623937
+
+* summary: Network doesn't start on installed system
+
+
+
+=== Bug: 604943
+
+* summary: Kconfig bug with XEN_BLKDEV_FRONTEND
+
+
+
+=== Bug: 603936
+
+* summary: [Broadcom 6.0 bug] tg3: TX BD corruption can happen on all devices 5755 and newer
+
+
+
+=== Bug: 618899
+
+* summary: Describe ABI compatibility
+
+
+
+=== Bug: 592279
+
+* summary: Crash while configuring RAID1 partitions using kickstart
+
+
+
+=== Bug: 463844
+
+* summary: [LTC 6.0 FEAT] 201301:Add sblim-sfcb
+
+
+
+=== Bug: 463389
+
+* summary: [LTC 6.0 FEAT] 201313:Block layer I/O cancel (abort) capability
+
+
+
+=== Bug: 506540
+
+* summary: [Dell 6.0 FEAT] redhat-lsb doesn't split core and graphics
+
+
+
+=== Bug: 589465
+
+* summary: [RFE] start a domain in paused mode
+
+
+
+=== Bug: 612679
+
+* summary: kernel SPEC file requires an urgent update to ensure ordering of /sbin/weak-modules calls
+
+
+
+=== Bug: 825293
+
+* summary: Validating WSDL imported from Amazon.com fails with NPE
+
+
+
+=== Bug: 462948
+
+* summary: [LTC 6.0 FEAT] 201580:Update the ethtool
+
+
+
+=== Bug: 1016228
+
+* summary: Eng. Review of Reference Guild
+
+
+
+=== Bug: 580631
+
+* summary: [LTC 6.0 FEAT] 201594:Provide CMS script for initial IPL under z/VM
+
+
+
+=== Bug: 523112
+
+* summary: Booting from tftp failed - Open Firmware exception handler entered from non-OF code
+
+
+
+=== Bug: 463560
+
+* summary: [LTC 6.0 FEAT] 201132:Dynamic CPU hotplug daemon for System z
+
+
+
+=== Bug: 607691
+
+* summary: UV - File allocation tends to allocate on alternate nodes
+
+
+
+=== Bug: 518662
+
+* summary: update images/README with instructions on how to create USB bootable media
+
+
+
+=== Bug: 463393
+
+* summary: [LTC 6.0 FEAT] 200303:ADTools  Oprofile Java Profiling Enhancements
+
+
+
+=== Bug: 993651
+
+* summary: Teiid Designer cannot connect to remote ModeShape server
+
+
+
+=== Bug: 996550
+
+* summary: Sybase15 subquery using HAVING clause failing
+
+
+
+=== Bug: 462976
+
+* summary: [LTC 6.0 FEAT] 201674:Pick up latest version of s390-tools
+
+
+
+=== Bug: 996622
+
+* summary: JBDS 7 Core refers to an installable package as "JBoss Data Services" - but this is not JBoss EDS
+
+
+
+=== Bug: 438760
+
+* summary: kernel dm multipath: Dynamic Load balancing
+
+
+
+=== Bug: 555537
+
+* summary: [LTC 6.0 FEAT] KVM UDP network performance: UFO patches
+
+
+
+=== Bug: 713036
+
+* summary: Please fail reboot test when kdump is not running.
+
+
+
+=== Bug: 463800
+
+* summary: [LTC 6.0 FEAT] 201588:Enable RDS in OFED InfiniBand kernel and include RDS user tools
+
+
+
+=== Bug: 575749
+
+* summary: AttributeError: 'NoneType' object has no attribute 'name'
+
+
+
+=== Bug: 497182
+
+* summary: [LTC 6.0 FEAT] Tunable sched_mc_powersavings=n framework [201924]
+
+
+
+=== Bug: 463311
+
+* summary: [LTC 6.0 FEAT] 201382:libvpd C interface
+
+
+
+=== Bug: 622677
+
+* summary: [NetApp 6.0 bug] 'service iscsi status' doesn't display anything
+
+
+
+=== Bug: 463584
+
+* summary: [LTC 6.0 FEAT] 201159:System z ZFCP Performance Statistics
+
+
+
+=== Bug: 1028016
+
+* summary: Very large sorts are inefficient
+
+
+
+=== Bug: 1382733
+
+* summary: arm_neon.h not installed
+
+
+
+=== Bug: 612790
+
+* summary: Regression for confusing 'mount request from unknown host' messages
+
+
+
+=== Bug: 477220
+
+* summary: FEAT: RHEL 6.0: Dom0 notices DomU media eject events
+
+
+
+=== Bug: 624691
+
+* summary: fsck.gfs2 deletes directories if they get too big
+
+
+
+=== Bug: 463304
+
+* summary: [LTC 6.0 FEAT] 201381:New inventory module in librtas
+
+
+
+=== Bug: 463284
+
+* summary: [LTC 6.0 FEAT] 201246:servicelog package
+
+
+
+=== Bug: 463386
+
+* summary: [LTC 6.0 FEAT] 201163:libvirt-cim package update request
+
+
+
+=== Bug: 727426
+
+* summary: python-lxml causes memory leak
+
+
+
+=== Bug: 519983
+
+* summary: [LTC 6.0 FEAT] Support ACPI S3/S4 Sleeping States [201941]
+
+
+
+=== Bug: 463841
+
+* summary: [LTC 6.0 FEAT] 201208:WBEM-SMT instrumentation of DHCP
+
+
+
+=== Bug: 1039027
+
+* summary: Request POWER architecture support in DTS
+
+
+
+=== Bug: 549538
+
+* summary: include instructions on how to create USB bootable media
+
+
+
+=== Bug: 548584
+
+* summary: Enable the USB RNDIS device in KVM
+
+
+
+=== Bug: 599264
+
+* summary: [Intel 6.0 Bug] RHEL, low fcoe throughput (~20MB) on out of box rhel6.0 kernel
+
+
+
+=== Bug: 1356661
+
+* summary: Need to rebase the binutils for DTS 6
+
+
+
+=== Bug: 515285
+
+* summary: RFE: support configuration of hugepages for guests
+
+
+
+=== Bug: 595185
+
+* summary: [Cisco 6.0 bug] libfc: Fix remote port restart problem
+
+
+
+=== Bug: 1036601
+
+* summary: JON Plugin doesn't publish any configuration information about Teiid VDBs nor Teiid
+
+
+
+=== Bug: 463796
+
+* summary: [LTC 6.0 FEAT] 201183:System z optimizations for gcc 2007
+
+
+
+=== Bug: 591311
+
+* summary: RHEL6.0 Beta 1 fails to reboot after kickstart install
+
+
+
+=== Bug: 569570
+
+* summary: [LTC 6.0 FEAT] VEPA support [202042]- libvirt-CIM for macvtap
+
+
+
+=== Bug: 515213
+
+* summary: RFE: Allow specifying -cpu model/flags for qemu
+
+
+
+=== Bug: 512338
+
+* summary: [NetApp 6.0 feat] Add a multipath option to help ascertain whether dm-multipath has stabilized during configuration
+
+
+
+=== Bug: 1366677
+
+* summary: Some rhel6 specific internal testsuite failures of devtoolset-6-strace-4.12-2.el6.src.rpm
+
+
+
+=== Bug: 1366230
+
+* summary: distort gfortran string variable content
+
+
+
+=== Bug: 597002
+
+* summary: gfs2_grow /dev/gfs2_vg/lv0 gfs2_grow: Filesystem /dev/gfs2_vg/lv0 is not GFS2.
+
+
+
+=== Bug: 1028464
+
+* summary: Dependencies are missing in the DV6 Maven Repo, which causes compilation errors in the Quickstarts - blocks testing Quickstarts in ER3
+
+
+
+=== Bug: 464173
+
+* summary: [LTC 6.0 FEAT] 201163:Package add/update request for libcmpiutils
+
+
+
+=== Bug: 1356527
+
+* summary: devtoolset-meta refresh for DTS 6.0 [RHEL 6 / 7]
+
+
+
+=== Bug: 463290
+
+* summary: [LTC 6.0 FEAT] 201280:Subpage protection for PowerVM Lx86
+
+
+
+=== Bug: 463320
+
+* summary: [LTC 6.0 FEAT] 201443:Support barrier synchronization facility in POWER5 and POWER6 CPUs
+
+
+
+=== Bug: 1006329
+
+* summary: Metamatrix simple-types xsd import prevents generation of cxf war file on a windows OS
+
+
+
+=== Bug: 1048217
+
+* summary: CMIS WAR for CR1 is cannot be deployed
+
+
+
+=== Bug: 697723
+
+* summary: test bug
+
+
+
+=== Bug: 591885
+
+* summary: Disable CONFIG_DEBUG_RODATA on kernel-debug package
+
+
+
+=== Bug: 463637
+
+* summary: [LTC 6.0 FEAT] 201260:Emulex 8GB FC Driver Update
+
+
+
+=== Bug: 522829
+
+* summary: KVM: Command 'virsh vcpuinfo' returns libvirt error in RHEL6
+
+
+
+=== Bug: 253481
+
+* summary: Implement online driver update infrastructure
+
+
+
+=== Bug: 463369
+
+* summary: [LTC 6.0 FEAT] 200977:PAPI runtime and development
+
+
+
+=== Bug: 463547
+
+* summary: [LTC 6.0 FEAT] 201074:Pre/post install hooks needed in Kernel module packaging infrastructure.
+
+
+
+=== Bug: 463551
+
+* summary: [LTC 6.0 FEAT] 201064:Standby cpu activation/deactivation.
+
+
+
+=== Bug: 1361355
+
+* summary: RFE: Add Docker Image for Developer Toolset 6 for perftools
+
+
+
+=== Bug: 999546
+
+* summary: ModeShape XML sequencer fails when document overwrites default root namespace
+
+
+
+=== Bug: 612752
+
+* summary: clustermon won't start if IPv6 is disabled
+
+
+
+=== Bug: 460173
+
+* summary: [QLogic 6.0 feat] qla2xxx - MultiQueue
+
+
+
+=== Bug: 463651
+
+* summary: [LTC 6.0 FEAT] 201320:IPv6 support in NFS (user space)
+
+
+
+=== Bug: 1035479
+
+* summary: JDBC Credential Changes are Reset After Save
+
+
+
+=== Bug: 463650
+
+* summary: [LTC 6.0 FEAT] 201303:Provide a utmp format that is compatible between 32 and 64 bit.
+
+
+
+=== Bug: 615834
+
+* summary: libXi may corrupt other extension events
+
+
+
+=== Bug: 999339
+
+* summary: Deleting a workspace does not remove all the workspace nodes
+
+
+
+=== Bug: 612608
+
+* summary: GFS2: kernel BUG at fs/gfs2/glock.c:173! running brawl w/flocks
+
+
+
+=== Bug: 463653
+
+* summary: [LTC 6.0 FEAT] 201299:Large Pages: Dynamic resize of hugepage Pool
+
+
+
+=== Bug: 600508
+
+* summary: [Intel 6.0 Bug] X segfaults during DVD install
+
+
+
+=== Bug: 463681
+
+* summary: [LTC 6.0 FEAT] 201542:FCP - Enhanced Trace Facility
+
+
+
+=== Bug: 579599
+
+* summary: [LTC 6.0 FEAT] 201171:FCP Automatic Port Discovery
+
+
+
+=== Bug: 624387
+
+* summary: Pull Final PCI ids from SourceForge
+
+
+
+=== Bug: 463847
+
+* summary: [LTC 6.0 FEAT] 201641:Update SBLIM Java CIM Client to 1.3.6 or later
+
+
+
+=== Bug: 1378080
+
+* summary: RFE: Add Docker Image for Developer Toolset 6 for toolchain
+
+
+
+=== Bug: 623217
+
+* summary: [Intel 6.0 bug] Device ID string for device 0x10ED is incorrect
+
+
+
+=== Bug: 601665
+
+* summary: IO hang during all path failure with no_path_retry enabled
+
+
+
+=== Bug: 1041281
+
+* summary: File translator override for encoding defaults to UTF-8 in Designer but doesn't write to the vdb.xml
+
+
+
+=== Bug: 463541
+
+* summary: [LTC 6.0 FEAT] 201066:QETH Componentization
+
+
+
+=== Bug: 463367
+
+* summary: [LTC 6.0 FEAT] 201036:Application checkpoint/restart
+
+
+
+=== Bug: 597625
+
+* summary: anaconda writes own rule to 70-persistent-net.rules instead of copying existing
+
+
+
+=== Bug: 463529
+
+* summary: [LTC 6.0 FEAT] 201027:Tickless idle for Power
+
+
+
+=== Bug: 463282
+
+* summary: [LTC 6.0 FEAT] 201167:Linux to add Call Home data
+
+
+
+=== Bug: 629734
+
+* summary: Cpuscaling test failed on RH6 x86 snapshot 12 with v7-1.2-18 certification kit
+
+
+
+=== Bug: 1242081
+
+* summary: RHEL7 ships with a broken version of make
+
+
+
+=== Bug: 629391
+
+* summary: [LSI 6.0 bug] clvmd needs selinux policy changes to run in enforcing mode [LSI CR183677]
+
+
+
+=== Bug: 520912
+
+* summary: Update scsi_dh_rdac.c for Dell PowerVault storage MD32xx and MD32xxi for RHEL 6
+
+
+
+=== Bug: 622576
+
+* summary: fsck.gfs2 segfaults if journals are missing
+
+
+
+=== Bug: 516843
+
+* summary: [QLogic 6.0 feat] qla2xxx - BSG support for management
+
+
+
+=== Bug: 463537
+
+* summary: [LTC 6.0 FEAT] 200994:Linux CPU Node Affinity
+
+
+
+=== Bug: 678303
+
+* summary: [abrt] thunderbird-3.1.7-3.el6_0 killed by signal 11 [gfxASurface::SurfaceDestroyFunc]
+
+
+
+=== Bug: 621745
+
+* summary: Shadowman logo only displays with default theme
+
+
+
+=== Bug: 462947
+
+* summary: [LTC 6.0 FEAT] 201586:Validation Only - Enable eHEA with DLPAR memory remove support
+
+
+
+=== Bug: 1035471
+
+* summary: Oracle import not setting columns to correct types
+
+
+
+=== Bug: 607696
+
+* summary: x86, uv: uv_global_gru_mmr_address() macro fix
+
+
+
+=== Bug: 596876
+
+* summary: s390x kprobes unregistration problem
+
+
+
+=== Bug: 1004389
+
+* summary: Wrong layer directory structure
+
+
+
+=== Bug: 1386922
+
+* summary: RFC: Brace initialization bug
+
+
+
+=== Bug: 463603
+
+* summary: [LTC 6.0 FEAT] 201168:Linux Support for Dynamic Memory Detach
+
+
+
+=== Bug: 1004643
+
+* summary: Tika extractor fails while attempting to extract metadata from images
+
+
+
+=== Bug: 532165
+
+* summary: [LTC 6.0 FEAT] Inclusion of Apache 2.2.x 31bit [202046]
+
+
+
+=== Bug: 233200
+
+* summary: improved festival package cures all ills.
+
+
+
+=== Bug: 591648
+
+* summary: [Emulex 6.0 bug] Update lpfc driver to 8.3.5.13
+
+
+
+=== Bug: 780971
+
+* summary: Teiid Designer - Using Flat File Importer, it doesn't recognize "\n" or "\r\n" in the file
+
+
+
+=== Bug: 1022609
+
+* summary: Support JDG 6.2 as a data source
+
+
+
+=== Bug: 513011
+
+* summary: [INTEL 6.0 FEAT] Add DCB support for FCoE Boot
+
+
+
+=== Bug: 603242
+
+* summary: [Intel 6.0 Bug] fcoe-utils requires device-mapper-multipath
+
+
+
+=== Bug: 1035372
+
+* summary: Incorrect Wizard Error Message When Creating A User Defined Function
+
+
+
+=== Bug: 463839
+
+* summary: [LTC 6.0 FEAT] 201450:SBLIM JSR48 CIM Client (a.k.a. SBLIM CIM Client v2)
+
+
+
+=== Bug: 570019
+
+* summary: powerpc: export data from new hcall H_EM_GET_PARMS
+
+
+
+=== Bug: 463291
+
+* summary: [LTC 6.0 FEAT] 201279:Use 1TB segments
+
+
+
+=== Bug: 553337
+
+* summary: [LTC 6.0 FEAT] VEPA support [202042] -- macvtap driver
+
+
+
+=== Bug: 1177258
+
+* summary: Error downloading packages: No more mirrors to try.
+
+
+
+=== Bug: 463614
+
+* summary: [LTC 6.0 FEAT] 201191:Allow DLPARs to shrink memory
+
+
+
+=== Bug: 463517
+
+* summary: [LTC 6.0 FEAT] 200829:UEFI support - kernel
+
+
+
+=== Bug: 984880
+
+* summary: When running DSP 6.0 dashboard on non-english system locale, dashboard will throw an exception
+
+
+
+=== Bug: 1029914
+
+* summary: TEIID-2633 change can have a negative impact in certain situations
+
+
+
+=== Bug: 517584
+
+* summary: kdump not working in RHEL6 alpha
+
+
+
+=== Bug: 868964
+
+* summary: Teiid depends on a JBoss AS change that will support deployment of its rar's as modules and managed appropriately
+
+
+
+=== Bug: 464180
+
+* summary: [LTC 6.0 FEAT] 201719:Reipl support
+
+
+
+=== Bug: 492785
+
+* summary: [NetApp 6.0 feat]Anaconda installer should also support wwid based DM-Multipath device names during OS installation for root multipath scenarios
+
+
+
+=== Bug: 472446
+
+* summary: Add Powertop package to RHEL6 as part of Power Management
+
+
+
+=== Bug: 1365552
+
+* summary: stap -c CMD run-time limited to 60s due to uncleared alarm()
+
+
+
+=== Bug: 1367352
+
+* summary: Many DTS-4 references in DTS-6 Dockerfiles
+
+
+
+=== Bug: 508235
+
+* summary: FEAT: Yum repository driver update plugin
+
+
+
+=== Bug: 1040035
+
+* summary: Can't compile simple-client quickstart
+
+
+
+=== Bug: 1006961
+
+* summary: Teiid OData Servlet throws java.lang.NullPointerException on every GET
+
+
+
+=== Bug: 703583
+
+* summary: Kernel panic in inet_csk_bind_conflict
+
+
+
+=== Bug: 999521
+
+* summary: Undefined Test query when creating new Teiid datasource
+
+
+
+=== Bug: 594548
+
+* summary: DUD from non-removable devices
+
+
+
+=== Bug: 533495
+
+* summary: [LTC 6.0 FEAT] 201085:cio_ignore - add wait to s-c-network
+
+
+
+=== Bug: 463616
+
+* summary: [LTC 6.0 FEAT] 201187:Binutils: Decimal Floating Point support - PFPO
+
+
+
+=== Bug: 463690
+
+* summary: [LTC 6.0 FEAT] 201583:Include ACPI tstate support (processor throttling control)
+
+
+
+=== Bug: 949667
+
+* summary: JBDS 6.0 update site includes old Teiid Designer
+
+
+
+=== Bug: 613892
+
+* summary: [SR-IOV]VF device can not start on 32bit Windows2008 SP2
+
+
+
+=== Bug: 1376201
+
+* summary: Regression: Can't step or next into OMP parallel section
+
+
+
+=== Bug: 598365
+
+* summary: vol-* commands help description is inaccurate
+
+
+
+=== Bug: 1058350
+
+* summary: Weird behaviour when configuring JSSE
+
+
+
+=== Bug: 1041220
+
+* summary: Designer generates wrong view model transformations for some SOAP services
+
+
+
+=== Bug: 540991
+
+* summary: [LTC 6.0 FEAT] HiperSockets SIGA Retry on CC2 RC16 [202049]
+
+
+
+=== Bug: 463545
+
+* summary: [LTC 6.0 FEAT] 201083:install compat-libstdc++ (33 & 296) RPMs by default
+
+
+
+=== Bug: 551377
+
+* summary: [ml_IN] anaconda missing some translation
+
+
+
+=== Bug: 1046501
+
+* summary: Unable to import ModeShape metadata using Teiid Designer option --> Import using Teiid Connection
+
+
+
+=== Bug: 463617
+
+* summary: [LTC 6.0 FEAT] 201186:Binutils: Decimal Floating Point support
+
+
+
+=== Bug: 463183
+
+* summary: [LTC 6.0 FEAT] 201700:Support Intel 10Gb Ethernet (Knox) with MSI-X interrupt enabled.
+
+
+
+=== Bug: 597223
+
+* summary: TypeError: list indices must be integers, not str
+
+
+
+=== Bug: 508243
+
+* summary: FEAT: Driver Update Disks (RHEL6 ddiskit Modification)
+
+
+
+=== Bug: 1043376
+
+* summary: QE Review: Installing S-RAMP
+
+
+
+=== Bug: 504155
+
+* summary: Anaconda doesn't find/use the driver disc if on SATA device
+
+
+
+=== Bug: 625610
+
+* summary: [Intel 6.0 Bug] URL installation method does not ask to configure network interface
+
+
+
+=== Bug: 604776
+
+* summary: DeviceNotFoundError: vda
+
+
+
+=== Bug: 462974
+
+* summary: [LTC 6.0 FEAT] 201677:Dialog defaults for Linux on System z specific Anaconda
+
+
+
+=== Bug: 531730
+
+* summary: TypeError: '_ped.DiskType' object is not callable
+
+
+
+=== Bug: 607291
+
+* summary: UV - Insufficient PIDs to boot large system
+
+
+
+=== Bug: 555698
+
+* summary: [LTC 6.0 FEAT] KVM network performance: Defer skb allocation in virtio-net
+
+
+
+=== Bug: 607404
+
+* summary: UV support: makedumpfile: output files filling ramdisk
+
+
+
+----------
+Report time: 2019-07-23 03:47:41.328322
+
+
