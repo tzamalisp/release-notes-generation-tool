@@ -1,8 +1,11 @@
-DEBUG 2019-07-23 04:00:48,949 - Hello Tracker!
-DEBUG 2019-07-23 04:00:48,951 - ---------------------------------BUGZILLA------------------------------------
-DEBUG 2019-07-23 04:00:48,952 - API Key configuration is defined.
-DEBUG 2019-07-23 04:00:48,967 - Starting new HTTPS connection (1): bugzilla.redhat.com
-DEBUG 2019-07-23 04:00:53,360 - https://bugzilla.redhat.com:443 "GET /rest/bug?target_release=3.4&api_key=M96V1T2SVmTX6MBzhRut3r43hKu32UxMbS5aOWok HTTP/1.1" 200 37804
-DEBUG 2019-07-23 04:00:53,574 - API Key configuration is defined.
-DEBUG 2019-07-23 04:00:53,581 - Starting new HTTPS connection (1): bugzilla.redhat.com
-DEBUG 2019-07-23 04:00:55,723 - https://bugzilla.redhat.com:443 "GET /rest/bug?target_release=3.6&api_key=M96V1T2SVmTX6MBzhRut3r43hKu32UxMbS5aOWok HTTP/1.1" 200 10241
+DEBUG 2019-07-23 23:23:44,195 - Hello Tracker!
+DEBUG 2019-07-23 23:23:44,197 - ---------------------------------BUGZILLA------------------------------------
+DEBUG 2019-07-23 23:23:44,200 - API Key configuration is defined.
+DEBUG 2019-07-23 23:23:44,282 - Starting new HTTPS connection (1): bugzilla.redhat.com
+DEBUG 2019-07-23 23:23:48,730 - https://bugzilla.redhat.com:443 "GET /rest/bug?target_release=3.4&api_key=M96V1T2SVmTX6MBzhRut3r43hKu32UxMbS5aOWok HTTP/1.1" 200 37806
+DEBUG 2019-07-23 23:23:48,946 - API Key configuration is defined.
+DEBUG 2019-07-23 23:23:48,949 - Starting new HTTPS connection (1): bugzilla.redhat.com
+DEBUG 2019-07-23 23:23:50,731 - https://bugzilla.redhat.com:443 "GET /rest/bug?target_release=3.6&api_key=M96V1T2SVmTX6MBzhRut3r43hKu32UxMbS5aOWok HTTP/1.1" 200 10241
+DEBUG 2019-07-23 23:23:50,747 - API Key configuration is defined.
+DEBUG 2019-07-23 23:23:50,750 - Starting new HTTPS connection (1): bugzilla.redhat.com
+DEBUG 2019-07-23 23:23:52,947 - https://bugzilla.redhat.com:443 "GET /rest/bug?target_release=3.7&api_key=M96V1T2SVmTX6MBzhRut3r43hKu32UxMbS5aOWok HTTP/1.1" 200 8936

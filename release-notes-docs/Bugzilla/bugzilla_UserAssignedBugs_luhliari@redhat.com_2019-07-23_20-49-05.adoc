@@ -1,6 +1,7 @@
 = Release Notes Generation Tool (RLGEN)
 :author: Pantelis Tzamalis
 :email: tzamalis@ceid.upatras.gr
+:username: hello_user
 
 == User: luhliari@redhat.com
 
@@ -8493,6 +8494,6 @@
 
 
 ----------
-Report time: 2019-07-22 22:04:35.534488
+Report time: 2019-07-23 20:49:05.762782
 
 

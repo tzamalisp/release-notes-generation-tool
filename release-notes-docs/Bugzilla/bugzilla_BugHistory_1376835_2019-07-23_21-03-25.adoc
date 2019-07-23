@@ -1,0 +1,607 @@
+= Release Notes Generation Tool (RLGEN)
+:author: Pantelis Tzamalis
+:email: tzamalis@ceid.upatras.gr
+:username: hello_user
+
+== Bug ID: 1376835
+
+* Search Fields: ['when', 'who', 'changes']
+
+
+
+=== History 1
+
+* when: 2016-09-16T14:26:12Z
+
+* who: rsawhill@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: 
+
+*** added: Red Hat Knowledge Base (Solution) 2626601
+
+*** field_name: ext_bz_bug_map.ext_bz_bug_id
+
+
+
+=== History 2
+
+* when: 2016-09-19T14:59:48Z
+
+* who: zpytela@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: 
+
+*** added: zpytela@redhat.com
+
+*** field_name: cc
+
+
+
+=== History 3
+
+* when: 2016-09-20T15:07:47Z
+
+* who: luhliari@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: 
+
+*** added: Patch
+
+*** field_name: keywords
+
+** Item 2
+
+*** removed: NEW
+
+*** added: ASSIGNED
+
+*** field_name: status
+
+
+
+=== History 4
+
+* when: 2016-09-20T15:18:02Z
+
+* who: luhliari@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: webstack-team@redhat.com
+
+*** added: luhliari@redhat.com
+
+*** field_name: assigned_to
+
+
+
+=== History 5
+
+* when: 2016-09-21T13:50:28Z
+
+* who: zpytela@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: 
+
+*** added: needinfo?(luhliari@redhat.com)
+
+*** field_name: flagtypes.name
+
+
+
+=== History 6
+
+* when: 2016-09-21T14:09:05Z
+
+* who: luhliari@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: needinfo?(luhliari@redhat.com)
+
+*** added: 
+
+*** field_name: flagtypes.name
+
+
+
+=== History 7
+
+* when: 2016-09-21T14:16:43Z
+
+* who: luhliari@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: ASSIGNED
+
+*** added: MODIFIED
+
+*** field_name: status
+
+** Item 2
+
+*** removed: 
+
+*** added: squid-3.5.20-2.el7
+
+*** field_name: cf_fixed_in
+
+
+
+=== History 8
+
+* when: 2016-09-21T14:17:51Z
+
+* who: luhliari@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: MODIFIED
+
+*** added: ASSIGNED
+
+*** field_name: status
+
+** Item 2
+
+*** removed: squid-3.5.20-2.el7
+
+*** added: 
+
+*** field_name: cf_fixed_in
+
+
+
+=== History 9
+
+* when: 2016-09-22T12:52:30Z
+
+* who: ville@torhonen.fi
+
+* changes:
+
+** Item 1
+
+*** removed: 
+
+*** added: ville@torhonen.fi
+
+*** field_name: cc
+
+
+
+=== History 10
+
+* when: 2016-09-30T12:48:19Z
+
+* who: fkrska@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: 
+
+*** added: fkrska@redhat.com
+
+*** field_name: cc
+
+** Item 2
+
+*** removed: 
+
+*** added: 1298243
+
+*** field_name: blocks
+
+
+
+=== History 11
+
+* when: 2016-09-30T15:12:08Z
+
+* who: ruben.van.de.put@telenetgroup.be
+
+* changes:
+
+** Item 1
+
+*** removed: 
+
+*** added: ruben.van.de.put@telenetgroup.be
+
+*** field_name: cc
+
+
+
+=== History 12
+
+* when: 2016-11-24T11:30:18Z
+
+* who: mfrodl@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: 
+
+*** added: mfrodl@redhat.com
+
+*** field_name: cc
+
+
+
+=== History 13
+
+* when: 2017-01-04T12:26:56Z
+
+* who: rule-engine@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: 
+
+*** added: minor_ack7 autoapproval
+
+*** field_name: rh_rule
+
+
+
+=== History 14
+
+* when: 2017-02-07T10:42:31Z
+
+* who: jorton@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: 
+
+*** added: jorton@redhat.com
+
+*** field_name: cc
+
+
+
+=== History 15
+
+* when: 2017-02-15T16:15:16Z
+
+* who: zpytela@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: 
+
+*** added: needinfo?(luhliari@redhat.com)
+
+*** field_name: flagtypes.name
+
+
+
+=== History 16
+
+* when: 2017-02-16T09:55:50Z
+
+* who: fkrska@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: 
+
+*** added: qe-baseos-apps@redhat.com
+
+*** field_name: cc
+
+** Item 2
+
+*** removed: needinfo?(luhliari@redhat.com) 
+
+*** added: needinfo?(qe-baseos-apps@redhat.com)
+
+*** field_name: flagtypes.name
+
+
+
+=== History 17
+
+* when: 2017-02-27T12:43:18Z
+
+* who: isenfeld@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: 
+
+*** added: isenfeld@redhat.com
+
+*** field_name: cc
+
+** Item 2
+
+*** removed: needinfo?(qe-baseos-apps@redhat.com)
+
+*** added: 
+
+*** field_name: flagtypes.name
+
+
+
+=== History 18
+
+* when: 2017-02-27T12:43:26Z
+
+* who: rule-engine@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: 
+
+*** added: set_qe_test_coverage
+
+*** field_name: rh_rule
+
+** Item 2
+
+*** removed: 
+
+*** added: RHEL7 Approve
+
+*** field_name: rh_rule
+
+
+
+=== History 19
+
+* when: 2017-03-07T14:09:50Z
+
+* who: luhliari@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: ASSIGNED
+
+*** added: MODIFIED
+
+*** field_name: status
+
+** Item 2
+
+*** removed: 
+
+*** added: httpd-2.4.6-53.el7
+
+*** field_name: cf_fixed_in
+
+
+
+=== History 20
+
+* when: 2017-03-09T04:15:05Z
+
+* who: unixi@freeshell.org
+
+* changes:
+
+** Item 1
+
+*** removed: 
+
+*** added: unixi@freeshell.org
+
+*** field_name: cc
+
+
+
+=== History 21
+
+* when: 2017-03-20T14:51:21Z
+
+* who: errata-xmlrpc@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: MODIFIED
+
+*** added: ON_QA
+
+*** field_name: status
+
+
+
+=== History 22
+
+* when: 2017-04-18T12:44:50Z
+
+* who: pbajenez@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: 
+
+*** added: pbajenez@redhat.com
+
+*** field_name: cc
+
+
+
+=== History 23
+
+* when: 2017-04-25T10:44:19Z
+
+* who: jhouska@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: ON_QA
+
+*** added: VERIFIED
+
+*** field_name: status
+
+** Item 2
+
+*** removed: 
+
+*** added: jhouska@redhat.com
+
+*** field_name: cc
+
+
+
+=== History 24
+
+* when: 2017-04-26T22:34:31Z
+
+* who: dkutalek@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: qe-baseos-apps@redhat.com
+
+*** added: jhouska@redhat.com
+
+*** field_name: qa_contact
+
+
+
+=== History 25
+
+* when: 2017-07-12T07:24:01Z
+
+* who: pragshar@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: 
+
+*** added: pragshar@redhat.com
+
+*** field_name: cc
+
+
+
+=== History 26
+
+* when: 2017-08-01T21:36:44Z
+
+* who: errata-xmlrpc@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: VERIFIED
+
+*** added: CLOSED
+
+*** field_name: status
+
+** Item 2
+
+*** removed: 
+
+*** added: ERRATA
+
+*** field_name: resolution
+
+** Item 3
+
+*** removed: 
+
+*** added: 2017-08-01 17:36:44
+
+*** field_name: cf_last_closed
+
+
+
+=== History 27
+
+* when: 2017-12-19T06:28:45Z
+
+* who: maeno.masaki@nttcom.co.jp
+
+* changes:
+
+** Item 1
+
+*** removed: 
+
+*** added: maeno.masaki@nttcom.co.jp
+
+*** field_name: cc
+
+
+
+=== History 28
+
+* when: 2017-12-20T02:48:37Z
+
+* who: msugaya@redhat.com
+
+* changes:
+
+** Item 1
+
+*** removed: 
+
+*** added: msugaya@redhat.com
+
+*** field_name: cc
+
+
+
+----------
+Report time: 2019-07-23 21:03:25.411610
+
+

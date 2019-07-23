@@ -1,6 +1,7 @@
 = Release Notes Generation Tool (RLGEN)
 :author: Pantelis Tzamalis
 :email: tzamalis@ceid.upatras.gr
+:username: hello_user
 
 == Bug ID: 1376835
 
@@ -218,6 +219,6 @@ I think that the aforementioned patch is not sufficient and need to add accurate
 
 
 ----------
-Report time: 2019-07-22 22:20:23.309630
+Report time: 2019-07-23 21:00:54.736426
 
 

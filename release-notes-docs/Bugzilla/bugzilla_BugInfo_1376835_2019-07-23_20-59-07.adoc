@@ -1,0 +1,43 @@
+= Release Notes Generation Tool (RLGEN)
+:author: Pantelis Tzamalis
+:email: tzamalis@ceid.upatras.gr
+:username: hello_user
+
+== Bug ID: 1376835
+
+* Search Fields: ['summary', 'assigned_to', 'target_release', 'target_milestone', 'status', 'creation_time', 'cf_fixed_in', 'classification', 'op_sys', 'priority', 'product']
+
+
+
+=== Bug Information
+
+* summary: httpd with worker/event mpm segfaults after multiple successive graceful reloads
+
+* assigned_to: luhliari@redhat.com
+
+* target_release:
+
+** ---
+
+* target_milestone: rc
+
+* status: CLOSED
+
+* creation_time: 2016-09-16T14:24:30Z
+
+* cf_fixed_in: httpd-2.4.6-53.el7
+
+* classification: Red Hat
+
+* op_sys: Linux
+
+* priority: medium
+
+* product: Red Hat Enterprise Linux 7
+
+
+
+----------
+Report time: 2019-07-23 20:59:07.613330
+
+

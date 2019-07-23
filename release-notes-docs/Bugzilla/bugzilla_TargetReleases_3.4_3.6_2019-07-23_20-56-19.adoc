@@ -1,6 +1,7 @@
 = Release Notes Generation Tool (RLGEN)
 :author: Pantelis Tzamalis
 :email: tzamalis@ceid.upatras.gr
+:username: hello_user
 
 == Release: 3.4
 
@@ -10,15 +11,11 @@
 
 * summary: Rebuild metapackage with latest scl-utils
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1589846
 
 * summary: Consider updating objectweb-asm to 6.1.1
-
-* product: Red Hat Software Collections
 
 
 
@@ -26,15 +23,11 @@
 
 * summary: duplicated cookie in Apache httpd with mod_session
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1666810
 
 * summary: Investigate the impact of a malformed xml
-
-* product: Red Hat Software Collections
 
 
 
@@ -42,15 +35,11 @@
 
 * summary: Test case failure: /CoreOS/mysql/testsuite - main.audit_plugin_2
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1609061
 
 * summary: Addition of PHP Memcache module for RHSCL PHP 7.0 in software collections
-
-* product: Red Hat Software Collections
 
 
 
@@ -58,15 +47,11 @@
 
 * summary: RFE: As a user, I would like to be able to bookmark language and document selections on version page
 
-* product: Zanata
-
 
 
 === Bug: 1699735
 
 * summary: [RFE]Python 3.7 container image in Red Hat Software collections
-
-* product: Red Hat Software Collections
 
 
 
@@ -74,15 +59,11 @@
 
 * summary: Test case failure: /CoreOS/mysql/Security/CVE-2009-4030-symlink-problem-with-data-index-dir
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1065790
 
 * summary: Admin manage search no longer shows time estimates
-
-* product: Zanata
 
 
 
@@ -90,15 +71,11 @@
 
 * summary: Test DB cleanup does not remove the role assignment rules
 
-* product: Zanata
-
 
 
 === Bug: 1489412
 
 * summary: mysqld_safe doesn't sanitize commandline input
-
-* product: Red Hat Software Collections
 
 
 
@@ -106,15 +83,11 @@
 
 * summary: Spell check changes are not saved after replacement
 
-* product: Zanata
-
 
 
 === Bug: 1086036
 
 * summary: Project / version language listing and inheritance issues
-
-* product: Zanata
 
 
 
@@ -122,15 +95,11 @@
 
 * summary: [RFE] Support authenticated repositories on nodejs images
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1569482
 
 * summary: Postgresql pod fails to recover automatically after OpenShift master failure
-
-* product: Red Hat Software Collections
 
 
 
@@ -138,15 +107,11 @@
 
 * summary: Test case failure: /CoreOS/mysql/testsuite - rpl.rpl_multi_source_basic 'mix'
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 831479
 
 * summary: 500 internal error when REST client specifies invalid extensions
-
-* product: Zanata
 
 
 
@@ -154,15 +119,11 @@
 
 * summary: [Translation Editor] Dialog "Invalid translation" failed to obtain input focus.
 
-* product: Zanata
-
 
 
 === Bug: 1707850
 
 * summary: [RFE] Include OpenResty in RHSCL (RHEL7)
-
-* product: Red Hat Software Collections
 
 
 
@@ -170,15 +131,11 @@
 
 * summary: Test case failure: /CoreOS/mysql/testsuite - rpl.rpl_many_optimize 'mix'
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1066796
 
 * summary: RFE: Implement new project page.
-
-* product: Zanata
 
 
 
@@ -186,15 +143,11 @@
 
 * summary: Activity containing tags causes a broken dashboard
 
-* product: Zanata
-
 
 
 === Bug: 1109611
 
 * summary: Version drop down with quick actions not shown on Project page.
-
-* product: Zanata
 
 
 
@@ -202,15 +155,11 @@
 
 * summary: rh-mysql57-mysql : Service unable to start with configuration in /etc/opt/rh/rh-mysql57/my.cnf
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1700625
 
 * summary: "invalid distance too far back" error while using nodejs to connect Google API
-
-* product: Red Hat Software Collections
 
 
 
@@ -218,15 +167,11 @@
 
 * summary: Copy Translations information not correct
 
-* product: Zanata
-
 
 
 === Bug: 1687855
 
 * summary: Test case failure: /CoreOS/mariadb55/testsuite - main.plugin_auth 'innodb'
-
-* product: Red Hat Software Collections
 
 
 
@@ -234,15 +179,11 @@
 
 * summary: Request for TLS enabled PostgreSQL
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1721226
 
 * summary: Queue#push seems to crash after fork
-
-* product: Red Hat Software Collections
 
 
 
@@ -250,15 +191,11 @@
 
 * summary: Test case failure: /CoreOS/mysql/testsuite - rpl.rpl_multi_source_basic 'row'
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1599262
 
 * summary: [vSphere][Cinder]Mysql pod crashes for failed to initialize
-
-* product: Red Hat Software Collections
 
 
 
@@ -266,15 +203,11 @@
 
 * summary: [RFE] MongoDB 4.0 Support
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1679722
 
 * summary: [RFE] Requesting keepalive_timeout and keepalive_requests directives from nginx 1.15.3
-
-* product: Red Hat Software Collections
 
 
 
@@ -282,15 +215,11 @@
 
 * summary: Remove info level notification popup from the editor
 
-* product: Zanata
-
 
 
 === Bug: 1414576
 
 * summary: Mysql 5.7(latest) image pod does not start
-
-* product: Red Hat Software Collections
 
 
 
@@ -298,15 +227,11 @@
 
 * summary: RFE: As project maintainer, I would like to select copyTrans option before running it
 
-* product: Zanata
-
 
 
 === Bug: 1552166
 
 * summary: [RFE] Provide ngx_http_mirror_module
-
-* product: Red Hat Software Collections
 
 
 
@@ -314,15 +239,11 @@
 
 * summary: rh-python36 cannot unpickle datetime.date objects
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1677710
 
 * summary: rh-nodejs10 npm does not work against repository.
-
-* product: Red Hat Software Collections
 
 
 
@@ -330,15 +251,11 @@
 
 * summary: Test case failure: /CoreOS/mysql/testsuite - binlog_gtid.binlog_gtid_mysqldump / binlog_gtid.binlog_gtid_mysqlpump 'stmt'
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1066756
 
 * summary: RFE: Merge user settings pages into dashboard
-
-* product: Zanata
 
 
 
@@ -346,15 +263,11 @@
 
 * summary: many global modules are not linked
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1655242
 
 * summary: [RFE] MOD_AUTH_CAS for PHP S2I image
-
-* product: Red Hat Software Collections
 
 
 
@@ -362,15 +275,11 @@
 
 * summary: Exception thrown from Translate.zanata.org
 
-* product: Zanata
-
 
 
 === Bug: 1387147
 
 * summary: Test case failure: /CoreOS/mysql/testsuite - rpl.rpl_loaddata_m 'mix'
-
-* product: Red Hat Software Collections
 
 
 
@@ -378,15 +287,11 @@
 
 * summary: Empty group "Add Project" button on languages tab doesn't work
 
-* product: Zanata
-
 
 
 === Bug: 1707831
 
 * summary: Permissions wrong on /var/opt/rh/rh-varnish6/log/varnish
-
-* product: Red Hat Software Collections
 
 
 
@@ -394,15 +299,11 @@
 
 * summary: Test case failure: /CoreOS/mysql/Security/CVE-2010-3679-BINLOG-use-unassigned-memory
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1531406
 
 * summary: Please provide php-pecl-imagick
-
-* product: Red Hat Software Collections
 
 
 
@@ -410,15 +311,11 @@
 
 * summary: mod_proxy_hcheck Doesn't perform checks in VirtualHost
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1569038
 
 * summary: RFE: provide the mod_auth_openidc module in RHSCL repository
-
-* product: Red Hat Software Collections
 
 
 
@@ -426,15 +323,11 @@
 
 * summary: [s390x] httpd24-httpd segfaults during service restart
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1572500
 
 * summary: rmtree with safe = 0 does not work
-
-* product: Red Hat Software Collections
 
 
 
@@ -442,15 +335,11 @@
 
 * summary: Test case failure: /CoreOS/mysql/Regression/bz1149143-mysql-general-log-doesn-t-work-with-FIFO-file
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1669213
 
 * summary: `ExtendedStatus Off` directive when using mod_systemd causes systemctl to hang
-
-* product: Red Hat Software Collections
 
 
 
@@ -458,15 +347,11 @@
 
 * summary: TCP healthchecks failing falsely / not actually checking
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1411436
 
 * summary: cpan client is vulnerable to CVE-2016-1238
-
-* product: Red Hat Software Collections
 
 
 
@@ -474,15 +359,11 @@
 
 * summary: Release Zanata 3.4 to production
 
-* product: Zanata
-
 
 
 === Bug: 1719549
 
 * summary: rh-postgresql10-postgresql-devel provides  pkgconfig(libpq)
-
-* product: Red Hat Software Collections
 
 
 
@@ -490,15 +371,11 @@
 
 * summary: Both GPL and LGPL license files are required for LGPLv2+ project
 
-* product: Zanata
-
 
 
 === Bug: 1699314
 
 * summary: [3.11] Unable to execute post lifecycle hook for postgresql image
-
-* product: Red Hat Software Collections
 
 
 
@@ -506,15 +383,11 @@
 
 * summary: [RFE] [RHSCL] Add imap module to php 7.2
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1689095
 
 * summary: scl enable fails in tcsh
-
-* product: Red Hat Software Collections
 
 
 
@@ -522,15 +395,11 @@
 
 * summary: [Regression] Failed to  upload translation via JSF
 
-* product: Zanata
-
 
 
 === Bug: 1690549
 
 * summary: Test case failure: /CoreOS/mariadb/Regression/bz1535217-Mariadb-segfault-I-can-t-figure-out - random hang loading the database dump
-
-* product: Red Hat Software Collections
 
 
 
@@ -538,15 +407,11 @@
 
 * summary: RHSCL httpd : mod_proxy should allow to specify Proxy-Authorization in ProxyRemote directive
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1116169
 
 * summary: RFE: Ajax loading Feedback for the Version Group Page
-
-* product: Zanata
 
 
 
@@ -554,15 +419,11 @@
 
 * summary: MySQL long passwords aren't accepted on the command line when using sha256_password authentification plugin
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1102964
 
 * summary: CopyTrans takes excessively long hours to complete copying translations
-
-* product: Zanata
 
 
 
@@ -570,15 +431,11 @@
 
 * summary: translate.zanata.org admin manage users screen can not be loaded
 
-* product: Zanata
-
 
 
 === Bug: 1100092
 
 * summary: Filter translation units by multiple fields in the editor should use ISO 8601 date format
-
-* product: Zanata
 
 
 
@@ -586,15 +443,11 @@
 
 * summary: Test case failure: /CoreOS/mysql/testsuite - main.grant_alter_user_qa
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1630866
 
 * summary: Test case failure: /CoreOS/mysql/testsuite - rpl.rpl_mysql_upgrade 'mix'
-
-* product: Red Hat Software Collections
 
 
 
@@ -602,15 +455,11 @@
 
 * summary: Redis service is impossible to set to active slave mode.
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 882770
 
 * summary: RFE: Filter translation units by multiple fields in the editor.
-
-* product: Zanata
 
 
 
@@ -618,15 +467,11 @@
 
 * summary: Requuest to have mailman 3 included in RHSCL
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1505758
 
 * summary: Crash with Bus error in lex_scan
-
-* product: Red Hat Software Collections
 
 
 
@@ -634,15 +479,11 @@
 
 * summary: "This package includes the python 2 version of the module"
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1696153
 
 * summary: rh-nodejs10 npm does not work against repository. [rhscl-3.2.z]
-
-* product: Red Hat Software Collections
 
 
 
@@ -650,15 +491,11 @@
 
 * summary: Provide %license macro for better compatibility between Fedora/RHEL7 and RHEL6
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1711379
 
 * summary: Using the imagestream nginx:1.12 in a disconnected environment gives error because broken UBI repo access
-
-* product: Red Hat Software Collections
 
 
 
@@ -666,15 +503,11 @@
 
 * summary: Test case failure: /CoreOS/mysql/Security/CVE-2010-3679-BINLOG-use-unassigned-memory
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1066701
 
 * summary: RFE: As a Zanata user, I would like to be able to bookmark language and project selections in the groups page.
-
-* product: Zanata
 
 
 
@@ -682,15 +515,11 @@
 
 * summary: Test case failure: /CoreOS/mysql/testsuite - rpl_gtid.rpl_perfschema_applier_status_by_worker_gtid_skipped_transaction_mts 'row'
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1714225
 
 * summary: 'ZipArchive::setEncryptionName()' method not included in rh-php72
-
-* product: Red Hat Software Collections
 
 
 
@@ -698,15 +527,11 @@
 
 * summary: Ruby shebang interpreter misinterpretation
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1644334
 
 * summary: Test case failure: /CoreOS/mysql/Sanity/basic-functions-check
-
-* product: Red Hat Software Collections
 
 
 
@@ -714,15 +539,11 @@
 
 * summary: Rebase to 7.0.28
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1557430
 
 * summary: RFE: Add HA support for PostgreSQL
-
-* product: Red Hat Software Collections
 
 
 
@@ -730,15 +551,11 @@
 
 * summary: RFE: Introduce a modular translation structure, and gwt generate the *Messages.properties files
 
-* product: Zanata
-
 
 
 === Bug: 1539849
 
 * summary: [RFE][RHSCL] Add interbase driver for rh-php71 in Software Collection repository for RHEL 7
-
-* product: Red Hat Software Collections
 
 
 
@@ -746,15 +563,11 @@
 
 * summary: [RFE] Provide ModSecurity for nginx
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1581730
 
 * summary: RFE  provide the pthreads php module for rh-php70
-
-* product: Red Hat Software Collections
 
 
 
@@ -762,15 +575,11 @@
 
 * summary: [RFE] Add Csync2 package in RHSCL
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1103930
 
 * summary: Noticeable delay on right column when selection are made on left column (ui design)
-
-* product: Zanata
 
 
 
@@ -778,15 +587,11 @@
 
 * summary: RFE: Add Galera support in MariaDB sclorg images
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1387164
 
 * summary: Test case failure: /CoreOS/mysql/testsuite - rpl.rpl_loaddata_m 'row'
-
-* product: Red Hat Software Collections
 
 
 
@@ -794,15 +599,11 @@
 
 * summary: Test case failure: /CoreOS/mysql/Sanity/all-binaries-executable
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1571634
 
 * summary: mod_proxy_fcgi (more) wrong behavior with 304 with collection php
-
-* product: Red Hat Software Collections
 
 
 
@@ -810,15 +611,11 @@
 
 * summary: Test case failure: /CoreOS/mysql/testsuite - rpl.rpl_loaddata_m 'stmt'
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1637922
 
 * summary: Conflict when installing alongside stock NodeJS 6 on EL7
-
-* product: Red Hat Software Collections
 
 
 
@@ -826,15 +623,11 @@
 
 * summary: RFE: Red Hat supported installation/maintenance of Microsoft's Visual Studio Team Services and Team Foundation Services
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1650653
 
 * summary: Issues while trying to deploy a MongoDB 3.6 ReplicaSet across multiple clusters using the scl image
-
-* product: Red Hat Software Collections
 
 
 
@@ -842,15 +635,11 @@
 
 * summary: [abrt] [faf] rh-mariadb102-mariadb: unknown function(): /opt/rh/rh-mariadb102/root/usr/libexec/mysqld killed by 11
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1696994
 
 * summary: Wrong exit code on init script failure
-
-* product: Red Hat Software Collections
 
 
 
@@ -858,15 +647,11 @@
 
 * summary: scl wrapper does not replace self with command
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1459594
 
 * summary: stream_filter_append error with fopen on an url
-
-* product: Red Hat Software Collections
 
 
 
@@ -874,15 +659,11 @@
 
 * summary: Copy Translations copies translations that should not be copied
 
-* product: Zanata
-
 
 
 === Bug: 1098371
 
 * summary: Sort options in language and document lists on the version page do not take effect until a search is performed on the list
-
-* product: Zanata
 
 
 
@@ -890,15 +671,11 @@
 
 * summary: Missing string for group request email notification sent
 
-* product: Zanata
-
 
 
 === Bug: 1392313
 
 * summary: [RFE][RHSCL] Add vim with python3 support
-
-* product: Red Hat Software Collections
 
 
 
@@ -906,15 +683,11 @@
 
 * summary: RFE: add php-pecl-xdebug
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1646368
 
 * summary: Test case failure: /CoreOS/mysql/Security/CVE-2014-0001-mysqlclient-buffer-overflow-long-server-version
-
-* product: Red Hat Software Collections
 
 
 
@@ -922,15 +695,11 @@
 
 * summary: OpenSSL compatibility for rh-nodejs12
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1500434
 
 * summary: /opt/rh/rh-php71/root/usr/lib64 is not owned by rh-php71 collection for some architectures
-
-* product: Red Hat Software Collections
 
 
 
@@ -938,15 +707,11 @@
 
 * summary: rh-nodejs6 ships non-existent files causing yum/rpm to incorrectly compute the number of inodes required
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1413935
 
 * summary: Rebase to latest 5.24 bug-fix release
-
-* product: Red Hat Software Collections
 
 
 
@@ -954,15 +719,11 @@
 
 * summary: [RFE] [RHSCL] Add Older python-gssapi 0.6.4 to RHSCL
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1472096
 
 * summary: [RFE] zone anti affinity for MongoDB replica sets
-
-* product: Red Hat Software Collections
 
 
 
@@ -970,15 +731,11 @@
 
 * summary: Abort when reloading with a php module reloaded twice
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1435798
 
 * summary: Provide the OpenSCAP python3 bindings in the Python3 SCL
-
-* product: Red Hat Software Collections
 
 
 
@@ -986,15 +743,11 @@
 
 * summary: Builds should failed when start-build with a empty dir
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1694874
 
 * summary: Chance for abuse of sudo using "scl" command
-
-* product: Red Hat Software Collections
 
 
 
@@ -1002,15 +755,11 @@
 
 * summary: installation conflicts
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1630869
 
 * summary: Test case failure: /CoreOS/mysql/testsuite - rpl.rpl_innodb_info_tbl_slave_tmp_tbl_mismatch 'stmt'
-
-* product: Red Hat Software Collections
 
 
 
@@ -1018,15 +767,11 @@
 
 * summary: OSE mongodb images should be scalable
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1480832
 
 * summary: [RFE]Include imagemagick in RHSCLto be used with RHSCL httpd 2.4 and PHP 7.
-
-* product: Red Hat Software Collections
 
 
 
@@ -1034,15 +779,11 @@
 
 * summary: Test case failure: /CoreOS/mysql/testsuite - rpl_gtid.rpl_perfschema_applier_status_by_worker_gtid_skipped_transaction 'row'
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1451905
 
 * summary: rh-php70 Crash when lexing Bug #52752
-
-* product: Red Hat Software Collections
 
 
 
@@ -1050,15 +791,11 @@
 
 * summary: many global modules are not linked [rh-nodejs8]
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1730712
 
 * summary: httpd24 service not starting, it thinks it is already running, php-fpm incorrectly recognized as httpd
-
-* product: Red Hat Software Collections
 
 
 
@@ -1066,15 +803,11 @@
 
 * summary: Missing provides attribute in rh-varnish5 metapackage RPM
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1096564
 
 * summary: Entering garbage at the end of a projects url breaks navigation
-
-* product: Zanata
 
 
 
@@ -1082,15 +815,11 @@
 
 * summary: RFE: FAS-only authentication
 
-* product: Zanata
-
 
 
 === Bug: 1522963
 
 * summary: RFE Customer request for PyQt4 for rh-python36 in rhscl
-
-* product: Red Hat Software Collections
 
 
 
@@ -1098,15 +827,11 @@
 
 * summary: [RFE] [RHSCL] Add RRDtool in Software Collection repository
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1375296
 
 * summary: RFE: Support for installing SCL using NFS mount of /opt/rh
-
-* product: Red Hat Software Collections
 
 
 
@@ -1114,15 +839,11 @@
 
 * summary: [RFE] [RHSCL] Add php-memcached for rh-php70 in Software Collection repository
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1630879
 
 * summary: Test case failure: /CoreOS/mysql/testsuite - binlog.binlog_rewrite_order 'mix'
-
-* product: Red Hat Software Collections
 
 
 
@@ -1130,15 +851,11 @@
 
 * summary: Project type for a version is null after creation if the project type setting is not touched.
 
-* product: Zanata
-
 
 
 === Bug: 1697935
 
 * summary: python36-ldap3 is not functional. And error is thrown during import.
-
-* product: Red Hat Software Collections
 
 
 
@@ -1146,15 +863,11 @@
 
 * summary: /opt/rh/rh-nodejs8/root/usr/lib64/ is not owned by rh-nodejs8-runtime on aarch64 and ppc64le
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1716378
 
 * summary: mod_auth_mellon-debuginfo file conflict
-
-* product: Red Hat Software Collections
 
 
 
@@ -1162,15 +875,11 @@
 
 * summary: Consider updating google-gson to 2.8.2
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1723534
 
 * summary: Ruby 2.4 fails to compile unf_ext
-
-* product: Red Hat Software Collections
 
 
 
@@ -1178,15 +887,11 @@
 
 * summary: Root access to mysql pod at localhost
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1493138
 
 * summary: failing uwsgi test in upstream testsuite
-
-* product: Red Hat Software Collections
 
 
 
@@ -1194,15 +899,11 @@
 
 * summary: Changing users permanently break enabled collections
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1388090
 
 * summary: [RFE] verbose mode
-
-* product: Red Hat Software Collections
 
 
 
@@ -1210,15 +911,11 @@
 
 * summary: Fix the testsuite
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1667021
 
 * summary: [abrt] [faf] httpd24-httpd: anonymous function(): /opt/rh/httpd24/root/usr/sbin/httpd killed by 11
-
-* product: Red Hat Software Collections
 
 
 
@@ -1226,15 +923,11 @@
 
 * summary: [webTran] filter translation by last modified date returns wrong result
 
-* product: Zanata
-
 
 
 === Bug: 1566614
 
 * summary: java.util.zip.ZipException: invalid entry compressed size during Eclipse build using xmvn
-
-* product: Red Hat Software Collections
 
 
 
@@ -1242,15 +935,11 @@
 
 * summary: parse_str() without a second argument leads to crash
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1613864
 
 * summary: Pathing of SCLs built on top rh-ruby25 are wrong and lead to broken builds
-
-* product: Red Hat Software Collections
 
 
 
@@ -1258,15 +947,11 @@
 
 * summary: RFE: REST API rate limiting
 
-* product: Zanata
-
 
 
 === Bug: 1691744
 
 * summary: [RFE] Retrieve certificates from secrets
-
-* product: Red Hat Software Collections
 
 
 
@@ -1274,15 +959,11 @@
 
 * summary: Test case failure: /CoreOS/mysql/Regression/bz1149143-mysql-general-log-doesn-t-work-with-FIFO-file
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1130797
 
 * summary: Cache document statistic and overflow to disk
-
-* product: Zanata
 
 
 
@@ -1290,15 +971,11 @@
 
 * summary: Persistent Postgres Upgrade using Gluster File PVs fails on Socket Issue
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1467960
 
 * summary: Bug 1413543 results in unexpected results during routine updates
-
-* product: Red Hat Software Collections
 
 
 
@@ -1306,15 +983,11 @@
 
 * summary: [Project Version] Failed to load language list for source file name that contains space " "
 
-* product: Zanata
-
 
 
 === Bug: 1705588
 
 * summary: /CoreOS/httpd/Regression/bz1372692-Apache-httpd-does-not-log-status-code-413-in test failure
-
-* product: Red Hat Software Collections
 
 
 
@@ -1322,15 +995,11 @@
 
 * summary: Consider enabling the bnd-maven-plugin module
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1694875
 
 * summary: Chance for abuse of sudo using "scl" command
-
-* product: Red Hat Software Collections
 
 
 
@@ -1338,15 +1007,11 @@
 
 * summary: [rfe] Add tcpflow into official software collections.
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1326227
 
 * summary: apxs creates symlink to libphp
-
-* product: Red Hat Software Collections
 
 
 
@@ -1354,15 +1019,11 @@
 
 * summary: Copy and Paste does not work when typing Italian in msgstr
 
-* product: Zanata
-
 
 
 === Bug: 1673019
 
 * summary: httpd can not be started with mod_md enabled
-
-* product: Red Hat Software Collections
 
 
 
@@ -1370,15 +1031,11 @@
 
 * summary: httpd container image contains private key localhost.key and localhost.crt
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1111012
 
 * summary: Admin edit user will always edit first user regardless row
-
-* product: Zanata
 
 
 
@@ -1386,15 +1043,11 @@
 
 * summary: Test case failure: /CoreOS/unixODBC/mysql-simple
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1387158
 
 * summary: Test case failure: /CoreOS/mysql/testsuite - rpl.rpl_multi_source_basic 'stmt'
-
-* product: Red Hat Software Collections
 
 
 
@@ -1402,15 +1055,11 @@
 
 * summary: Include Passenger 5 in SCL
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1111449
 
 * summary: Hold active tasks in a map, but cache finished tasks briefly
-
-* product: Zanata
 
 
 
@@ -1418,15 +1067,11 @@
 
 * summary: [RFE][RHSCL] Add mongodb driver for rh-php71 in Software Collection repository for RHEL 7
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1678819
 
 * summary: missing SELinux context for  redis-sentinel.conf
-
-* product: Red Hat Software Collections
 
 
 
@@ -1434,15 +1079,11 @@
 
 * summary: fix a regression introduced in r1740928
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1387153
 
 * summary: Test case failure: /CoreOS/mysql/testsuite - rpl.rpl_row_basic_11bugs 'row'
-
-* product: Red Hat Software Collections
 
 
 
@@ -1450,15 +1091,11 @@
 
 * summary: PHP: Narrowing occurred during type inference.
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1700257
 
 * summary: Typo in README
-
-* product: Red Hat Software Collections
 
 
 
@@ -1466,15 +1103,11 @@
 
 * summary: Rebase ubi7/python-27 container image: rebuild for CVE-2019-9948, CVE-2019-10160
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1557320
 
 * summary: empty error.log
-
-* product: Red Hat Software Collections
 
 
 
@@ -1482,15 +1115,11 @@
 
 * summary: nodejs image doesn't contain enough, or correct, environment variables
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1043720
 
 * summary: The project search field failed to found existing project using the project name
-
-* product: Zanata
 
 
 
@@ -1498,15 +1127,11 @@
 
 * summary: Make sure csrf tokens match on client and serve
 
-* product: Zanata
-
 
 
 === Bug: 1715911
 
 * summary: pip failing due to SSL error
-
-* product: Red Hat Software Collections
 
 
 
@@ -1514,15 +1139,11 @@
 
 * summary: New password field should have show/hide toggle
 
-* product: Zanata
-
 
 
 === Bug: 1487085
 
 * summary: rh-nginx112 doesn't own /opt/rh/rh-nginx112/root/usr/lib64
-
-* product: Red Hat Software Collections
 
 
 
@@ -1530,15 +1151,11 @@
 
 * summary: postgresql-setup creates incorrect log directory
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1387161
 
 * summary: Test case failure: /CoreOS/mysql/testsuite - main.datadir_permission
-
-* product: Red Hat Software Collections
 
 
 
@@ -1546,15 +1163,11 @@
 
 * summary: New About tab does not handle existing project Seam text
 
-* product: Zanata
-
 
 
 === Bug: 1637631
 
 * summary: Test case failure: /CoreOS/mysql/Regression/bz1045401-mysqld-safe-removes-socket-of-other-running-server
-
-* product: Red Hat Software Collections
 
 
 
@@ -1562,15 +1175,11 @@
 
 * summary: empty error.log
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1630823
 
 * summary: Test case failure: /CoreOS/mysql/testsuite - federated.federated_server
-
-* product: Red Hat Software Collections
 
 
 
@@ -1578,15 +1187,11 @@
 
 * summary: jzlib is missing OSGi metadata
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1094090
 
 * summary: [Regression] TMX import/export blocked by api not providing user key
-
-* product: Zanata
 
 
 
@@ -1594,15 +1199,11 @@
 
 * summary: User not aware they can use underscores in username
 
-* product: Zanata
-
 
 
 === Bug: 1687175
 
 * summary: pip and setuptools versions need to be updated
-
-* product: Red Hat Software Collections
 
 
 
@@ -1610,15 +1211,11 @@
 
 * summary: Test case failure: /CoreOS/mysql/testsuite - binlog.binlog_database 'mix'
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1488591
 
 * summary: [RFE] Include "scl load" command in scl-utility
-
-* product: Red Hat Software Collections
 
 
 
@@ -1626,15 +1223,11 @@
 
 * summary: Nginx container image build done by Freshmaker too big
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1631185
 
 * summary: rh-postgresql10-postgresql.service doesn't `scl_enable`
-
-* product: Red Hat Software Collections
 
 
 
@@ -1642,15 +1235,11 @@
 
 * summary: scl macro definition files should conflict
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1077439
 
 * summary: RFE: Use lucene indexes to do Copy Trans.
-
-* product: Zanata
 
 
 
@@ -1658,15 +1247,11 @@
 
 * summary: Test case failure: /CoreOS/mysql/testsuite - innodb_fts.mecab_sjis innodb_fts.mecab_ujis innodb_fts.mecab_utf8
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1499990
 
 * summary: Unable to use babel/dates due missing pytz
-
-* product: Red Hat Software Collections
 
 
 
@@ -1674,15 +1259,11 @@
 
 * summary: [OpenID] Fedora  authentication failed to redirect back to translate.zanata.org sometimes
 
-* product: Zanata
-
 
 
 === Bug: 1686867
 
 * summary: [Mariadb] Access denied for user 'UNKNOWN_MYSQL_USER' in mariadb.log
-
-* product: Red Hat Software Collections
 
 
 
@@ -1690,15 +1271,11 @@
 
 * summary: Test case failure: /CoreOS/mysql/Security/CVE-2010-1626-table-destruction-via-data-index-dir-symlink
 
-* product: Red Hat Software Collections
-
 
 
 === Bug: 1694801
 
 * summary: PHP s2i builder will not start with SSL configuration
-
-* product: Red Hat Software Collections
 
 
 
@@ -1710,15 +1287,11 @@
 
 * summary: RFE: Copy version button on project version listing
 
-* product: Zanata
-
 
 
 === Bug: 1088137
 
 * summary: Translation Editor: Alpha 1 Prototype
-
-* product: Zanata
 
 
 
@@ -1726,15 +1299,11 @@
 
 * summary: [Fedora] Large translated document push times are inconsistent
 
-* product: Zanata
-
 
 
 === Bug: 1325332
 
 * summary: There was no appliance RPM built for 3.6.4 release of OVirt
-
-* product: ovirt-appliance
 
 
 
@@ -1742,15 +1311,11 @@
 
 * summary: [REGRESSION] Copy from previous version stuck on true
 
-* product: Zanata
-
 
 
 === Bug: 1135921
 
 * summary: OVIRT36 - [RFE] ovirt-node-registration - a generic node registration
-
-* product: ovirt-node
 
 
 
@@ -1758,15 +1323,11 @@
 
 * summary: Update pages in admin section
 
-* product: Zanata
-
 
 
 === Bug: 1154555
 
 * summary: [Administration] Failed to load  Process manager
-
-* product: Zanata
 
 
 
@@ -1774,15 +1335,11 @@
 
 * summary: Placeholder text in server config ToU field valid, but rejected
 
-* product: Zanata
-
 
 
 === Bug: 1205046
 
 * summary: Key shortcuts are not all visible on a small window
-
-* product: Zanata
 
 
 
@@ -1790,15 +1347,11 @@
 
 * summary: [RFE] [Fedora] Allow anonymous pull from Zanata
 
-* product: Zanata
-
 
 
 === Bug: 1249641
 
 * summary: Fix HA client behavior for not relying on config file existence but on config file content
-
-* product: ovirt-node
 
 
 
@@ -1806,15 +1359,11 @@
 
 * summary: Normal user can access copy to new version action for non-maintained project
 
-* product: Zanata
-
 
 
 === Bug: 1172392
 
 * summary: Project tab on dashboard does not show for users with no projects.
-
-* product: Zanata
 
 
 
@@ -1822,15 +1371,11 @@
 
 * summary: RFE: Zanata overlay and installer
 
-* product: Zanata
-
 
 
 === Bug: 1044261
 
 * summary: RFE: Drupal integration with Zanata
-
-* product: Zanata
 
 
 
@@ -1838,15 +1383,11 @@
 
 * summary: Editor options panel cannot scroll on small screens
 
-* product: Zanata
-
 
 
 === Bug: 1192271
 
 * summary: For gettext plural project, project-version statistics was inconsistent between language and document ( sometime more than 100%)
-
-* product: Zanata
 
 
 
@@ -1854,15 +1395,11 @@
 
 * summary: [Fedora] RFE: "web hooks" callback API
 
-* product: Zanata
-
 
 
 === Bug: 1160651
 
 * summary: Regression: Admin server config save no longer shows success message
-
-* product: Zanata
 
 
 
@@ -1870,15 +1407,11 @@
 
 * summary: Release 3.6.1
 
-* product: Zanata
-
 
 
 === Bug: 1082448
 
 * summary: Dashboard shows incorrect number of maintained projects
-
-* product: Zanata
 
 
 
@@ -1886,15 +1419,11 @@
 
 * summary: Add plurals to the new editor
 
-* product: Zanata
-
 
 
 === Bug: 1186997
 
 * summary: Introduction of hornetq-ra breaks the overlay installer
-
-* product: Zanata
 
 
 
@@ -1902,15 +1431,11 @@
 
 * summary: [Regression] Sorting mechanism broken on Languages page
 
-* product: Zanata
-
 
 
 === Bug: 1279329
 
 * summary: RHEV-M page crash after setup root password
-
-* product: ovirt-node
 
 
 
@@ -1918,15 +1443,11 @@
 
 * summary: RFE: Drupal plugin should split content into meaningful chunks
 
-* product: Zanata
-
 
 
 === Bug: 1120457
 
 * summary: RFE: Email notify the user when the language team permission change
-
-* product: Zanata
 
 
 
@@ -1934,15 +1455,11 @@
 
 * summary: Emails to administrators are sent in the current interface language.
 
-* product: Zanata
-
 
 
 === Bug: 1203566
 
 * summary: Deploy zanata-server-3.6.2
-
-* product: Zanata
 
 
 
@@ -1950,15 +1467,11 @@
 
 * summary: Release Zanata 3.6
 
-* product: Zanata
-
 
 
 === Bug: 1180988
 
 * summary: Unable to add arbitrary language to Zanata in new admin page
-
-* product: Zanata
 
 
 
@@ -1966,15 +1479,11 @@
 
 * summary: Font in TM and font in Editor Not matching
 
-* product: Zanata
-
 
 
 === Bug: 1078009
 
 * summary: PROTOTYPE: Drupal plugin to push and pull Zanata translations
-
-* product: Zanata
 
 
 
@@ -1982,15 +1491,11 @@
 
 * summary: [Fedora] Could not generate API Key. Nothing done.
 
-* product: Zanata
-
 
 
 === Bug: 1185170
 
 * summary: Create version in a project is always created as read only
-
-* product: Zanata
 
 
 
@@ -1998,15 +1503,11 @@
 
 * summary: Admin user management list datascroller is broken
 
-* product: Zanata
-
 
 
 === Bug: 1092193
 
 * summary: RFE: Individual Translator Statistics
-
-* product: Zanata
 
 
 
@@ -2014,15 +1515,11 @@
 
 * summary: oVirt Hosted Engine Appliance intermittently loses connectivity due to inability to restart network.service
 
-* product: ovirt-appliance
-
 
 
 === Bug: 1132271
 
 * summary: Access contact admin url without logging in will trigger an exception
-
-* product: Zanata
 
 
 
@@ -2030,15 +1527,11 @@
 
 * summary: Statistic on last page in document list view in Editor always loading
 
-* product: Zanata
-
 
 
 === Bug: 1150373
 
 * summary: [Zanata-SPA] Keyboard shortcut
-
-* product: Zanata
 
 
 
@@ -2046,15 +1539,11 @@
 
 * summary: Migration Guide for community users
 
-* product: Zanata
-
 
 
 === Bug: 1149968
 
 * summary: Translation history should *never* show last modifier as "Someone offline"
-
-* product: Zanata
 
 
 
@@ -2062,15 +1551,11 @@
 
 * summary: RFE: Document Drupal plugin manual installation method
 
-* product: Zanata
-
 
 
 === Bug: 1194543
 
 * summary: Manual document re-upload makes previous translations fuzzy
-
-* product: Zanata
 
 
 
@@ -2078,15 +1563,11 @@
 
 * summary: [SPA editor] Save on Invalid entry should not cause NullPointerException
 
-* product: Zanata
-
 
 
 === Bug: 1294517
 
 * summary: Unable to start hosted-engine VM due to internal error
-
-* product: ovirt-node
 
 
 
@@ -2094,15 +1575,11 @@
 
 * summary: [Fedora][Project View][Regression] There should be visual clues to indicate active, readonly, and archived versions.
 
-* product: Zanata
-
 
 
 === Bug: 875965
 
 * summary: RFE: [WebTrans] enable visible white space in source
-
-* product: Zanata
 
 
 
@@ -2110,15 +1587,11 @@
 
 * summary: WebUI is very slow if users cannot access Google
 
-* product: Zanata
-
 
 
 === Bug: 1150822
 
 * summary: RFE: Make webdriver wait times configurable
-
-* product: Zanata
 
 
 
@@ -2126,15 +1599,11 @@
 
 * summary: Empty string in adding a language causes a broken language to be added
 
-* product: Zanata
-
 
 
 === Bug: 1097464
 
 * summary: "Manage search" results in freeze state if performed when there are no selections
-
-* product: Zanata
 
 
 
@@ -2142,13 +1611,11 @@
 
 * summary: Bookmarked url (selected language or selected doc) in version page, bookmarked url (selected language, selected  project) in version-group page not working
 
-* product: Zanata
-
 
 
 
 
 ----------
-Report time: 2019-07-23 04:00:55.738564
+Report time: 2019-07-23 20:56:19.709782
 
 
