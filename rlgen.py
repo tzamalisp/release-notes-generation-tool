@@ -154,6 +154,7 @@ class UserTrackerChoice:
             # calling the class for the Target Releases
 
             # calling the basic class for collecting the corresponding data from the bugzilla rest api
+            # functions: bug info, bug comments, bug history, user info, user assigned bugs
             data_object = DataRetriever(bug_id=self.issue,
                                         terms=self.custom_field_name,
                                         user=self.user)
@@ -162,6 +163,8 @@ class UserTrackerChoice:
             # release notes
             if self.bug_function is 'r' or self.bug_function is 'R':
                 if self.release_note is not None:
+                    # calling the class for making the release notes object
+                    # function: target release notes
                     release_notes = TargetReleaseBugzilla(self.release_note, self.custom_field_name)
                     release_notes_data = release_notes.getting_target_release_notes()
                     doc_release_note = GeneratorBugzillaReleaseNotes(user=user_name,
