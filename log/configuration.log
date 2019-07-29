@@ -1,11 +1,4 @@
-DEBUG 2019-07-23 23:23:44,195 - Hello Tracker!
-DEBUG 2019-07-23 23:23:44,197 - ---------------------------------BUGZILLA------------------------------------
-DEBUG 2019-07-23 23:23:44,200 - API Key configuration is defined.
-DEBUG 2019-07-23 23:23:44,282 - Starting new HTTPS connection (1): bugzilla.redhat.com
-DEBUG 2019-07-23 23:23:48,730 - https://bugzilla.redhat.com:443 "GET /rest/bug?target_release=3.4&api_key=M96V1T2SVmTX6MBzhRut3r43hKu32UxMbS5aOWok HTTP/1.1" 200 37806
-DEBUG 2019-07-23 23:23:48,946 - API Key configuration is defined.
-DEBUG 2019-07-23 23:23:48,949 - Starting new HTTPS connection (1): bugzilla.redhat.com
-DEBUG 2019-07-23 23:23:50,731 - https://bugzilla.redhat.com:443 "GET /rest/bug?target_release=3.6&api_key=M96V1T2SVmTX6MBzhRut3r43hKu32UxMbS5aOWok HTTP/1.1" 200 10241
-DEBUG 2019-07-23 23:23:50,747 - API Key configuration is defined.
-DEBUG 2019-07-23 23:23:50,750 - Starting new HTTPS connection (1): bugzilla.redhat.com
-DEBUG 2019-07-23 23:23:52,947 - https://bugzilla.redhat.com:443 "GET /rest/bug?target_release=3.7&api_key=M96V1T2SVmTX6MBzhRut3r43hKu32UxMbS5aOWok HTTP/1.1" 200 8936
+DEBUG 2019-07-29 16:04:56,998 - Starting new HTTPS connection (1): issues.jboss.org:443
+DEBUG 2019-07-29 16:04:59,116 - https://issues.jboss.org:443 "GET /rest/api/latest/issue/JBCS-535 HTTP/1.1" 200 None
+DEBUG 2019-07-29 16:04:59,129 - Starting new HTTPS connection (1): issues.jboss.org:443
+DEBUG 2019-07-29 16:05:02,468 - https://issues.jboss.org:443 "GET /rest/api/latest/search?jql=%22Target%20Release%22=%22httpd%202.4.37%20GA%22 HTTP/1.1" 200 None

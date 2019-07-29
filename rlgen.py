@@ -7,9 +7,8 @@ import os
 from trackers.bugzilla_requester import TargetReleaseBugzilla
 from trackers.bugzilla_requester import DataRetriever
 
-from trackers.jira_requester_issue import BasicDataRetriever
-from trackers.jira_requester_issue import CustomFieldDataRetriever
-from trackers.jira_requester_release_notes import TargetRelease
+from trackers.jira_requester import TargetReleaseJira
+from trackers.jira_requester import IssueDataRetrieverJira
 
 from asciidoc_generator import GeneratorJiraReleaseNotes
 from asciidoc_generator import GeneratorJira
@@ -70,14 +69,44 @@ class UserTrackerChoice:
             first_name = config['author']['firstname']
             last_name = config['author']['lastname']
             email = config['author']['email']
-            release_name = config['release']['name']
+            release_name = config['jira_target_release']['name']
             if release_name is '':
                 release_name = None
             path = config['path']['directory']
             if path is '':
                 path = None
 
-            # BASIC JIRA DATA RETRIEVER
+            # calling the class for making the the Target Release notes object
+            # self.release_note is type of list
+            release_notes = TargetReleaseJira(release_name=release_name,
+                                              release=self.release_note,
+                                              order=self.order)
+
+            # calling the basic class for collecting the corresponding data from the bugzilla rest api
+            # functions: bug info, bug comments, bug history, user info, user assigned bugs
+            issue_object = IssueDataRetrieverJira(issue=self.issue,
+                                                  terms=None,
+                                                  cf_name=None,
+                                                  cf_id=None)
+
+            report_field = 'No report field is specified.'
+            data_report = ['* No data were fetched from the REST API.']
+
+            # JIRA RELEASE NOTES
+            if self.bug_function is 'r' or self.bug_function is 'R':
+                if release_name is not None and self.release_note is not None:
+                    print(self.release_note)
+                    data_report = release_notes.get_release_notes()
+                    doc_release_notes = GeneratorJiraReleaseNotes(user=user_name,
+                                                                  release_name=release_name,
+                                                                  release=self.release_note,
+                                                                  firstname=first_name,
+                                                                  lastname=last_name,
+                                                                  email_account=email,
+                                                                  data_basic=data_report,
+                                                                  path=path)
+                    doc_release_notes.generating_doc_jira()
+            elif self.bug_function is 'b' or self.bug_function is 'B'
             if self.issue is not None:
                 logger_rlgen.debug('BASIC DATA RETRIEVER OBJECT')
                 jira_basic_data = BasicDataRetriever(self.issue)
@@ -100,20 +129,6 @@ class UserTrackerChoice:
                 doc_basic.generating_doc_jira()
 
                 logger_rlgen.debug('>>> Calling JIRA API and printing Issue parts is now completed successfully!')
-            elif release_name is not None and self.release_note is not None:
-                print(self.release_note)
-                jira_release_notes = TargetRelease(release_name=release_name,
-                                                   release=self.release_note,
-                                                   order=self.order)
-                doc_release_notes = GeneratorJiraReleaseNotes(user=user_name,
-                                                              release_name=release_name,
-                                                              release=self.release_note,
-                                                              firstname=first_name,
-                                                              lastname=last_name,
-                                                              email_account=email,
-                                                              data_basic=jira_release_notes.get_release_notes(),
-                                                              path=path)
-                doc_release_notes.generating_doc_jira()
             else:
                 if self.release_note is None:
                     print('Please define at least a Release Note to search for..')

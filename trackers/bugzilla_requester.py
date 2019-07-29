@@ -8,7 +8,7 @@ from conf.confparse import BugzillaReadConfigurationApiKey
 
 # create and configure a logger
 LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
-logging_file = logging.basicConfig(filename='log/bugzilla_request_new.log',
+logging_file = logging.basicConfig(filename='log/bugzilla_request.log',
                                    level=logging.DEBUG,
                                    format=LOG_FORMAT,
                                    filemode='w')
@@ -58,7 +58,7 @@ class TargetReleaseBugzilla:
             company = config['bugzilla_basic_auth']['company']
 
             # read fields from configuration
-            search_list_conf_input = config['target_release']['search_list']
+            search_list_conf_input = config['bugzilla_target_release']['search_list']
             search_list_conf_input = search_list_conf_input.replace(', ', ',')
             search_list_conf_input = search_list_conf_input.replace(' ,', ',')
             search_list_conf_input = search_list_conf_input.replace(' , ', ',')
@@ -173,7 +173,7 @@ class DataRetriever:
         company = config['bugzilla_basic_auth']['company']
 
         # read fields from configuration
-        search_list_conf_input = config['bug']['search_list']
+        search_list_conf_input = config['bugzilla_bug']['search_list']
         search_list_conf_input = search_list_conf_input.replace(', ', ',')
         search_list_conf_input = search_list_conf_input.replace(' ,', ',')
         search_list_conf_input = search_list_conf_input.replace(' , ', ',')
@@ -229,7 +229,7 @@ class DataRetriever:
         company = config['bugzilla_basic_auth']['company']
 
         # read fields from configuration
-        search_list_conf_input = config['user_assigned_bugs']['search_list']
+        search_list_conf_input = config['bugzilla_user_assigned_bugs']['search_list']
         search_list_conf_input = search_list_conf_input.replace(', ', ',')
         search_list_conf_input = search_list_conf_input.replace(' ,', ',')
         search_list_conf_input = search_list_conf_input.replace(' , ', ',')
@@ -288,7 +288,7 @@ class DataRetriever:
         company = config['bugzilla_basic_auth']['company']
 
         # read fields from configuration
-        search_list_conf_input = config['user_info']['search_list']
+        search_list_conf_input = config['bugzilla_user_info']['search_list']
         search_list_conf_input = search_list_conf_input.replace(', ', ',')
         search_list_conf_input = search_list_conf_input.replace(' ,', ',')
         search_list_conf_input = search_list_conf_input.replace(' , ', ',')
@@ -344,7 +344,7 @@ class DataRetriever:
         company = config['bugzilla_basic_auth']['company']
 
         # read fields from configuration
-        search_list_conf_input = config['comments']['search_list']
+        search_list_conf_input = config['bugzilla_comments']['search_list']
         search_list_conf_input = search_list_conf_input.replace(', ', ',')
         search_list_conf_input = search_list_conf_input.replace(' ,', ',')
         search_list_conf_input = search_list_conf_input.replace(' , ', ',')
@@ -403,7 +403,7 @@ class DataRetriever:
         company = config['bugzilla_basic_auth']['company']
 
         # read fields from configuration
-        search_list_conf_input = config['bug_history']['search_list']
+        search_list_conf_input = config['bugzilla_bug_history']['search_list']
         search_list_conf_input = search_list_conf_input.replace(', ', ',')
         search_list_conf_input = search_list_conf_input.replace(' ,', ',')
         search_list_conf_input = search_list_conf_input.replace(' , ', ',')

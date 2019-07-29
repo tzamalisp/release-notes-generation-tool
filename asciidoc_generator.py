@@ -77,7 +77,7 @@ class GeneratorJiraReleaseNotes:
 
 
 class GeneratorJira:
-    def __init__(self, user, bug, firstname, lastname, email_account, data_basic, data_custom, path):
+    def __init__(self, kind_of_report, releases, bug, user, firstname, lastname, email_account, data_basic, data_custom, path):
         self.user = user
         self.bug = bug
         self.firstname = firstname
@@ -98,6 +98,9 @@ class GeneratorJira:
             self.firstname = 'Unknown Firstname - '
         if self.lastname is '':
             self.lastname = ' - Unknown Lastname'
+
+
+
         if self.path is None:
             f = open('release-notes-docs/jira_bug_info_{}_{}_{}.adoc'.format(self.bug, self.user, now_str), 'w+')
         else:

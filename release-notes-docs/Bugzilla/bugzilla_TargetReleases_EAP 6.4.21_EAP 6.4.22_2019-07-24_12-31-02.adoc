@@ -1,0 +1,651 @@
+= Release Notes Generation Tool (RLGEN)
+:author: Pantelis Tzamalis
+:email: tzamalis@ceid.upatras.gr
+:username: hello_user
+
+== Release: EAP 6.4.21
+
+
+
+=== Bug: 1578830
+
+* summary: (6.4.z) Upgrade hibernate-validator from 4.3.3 to 4.3.4
+
+* resolution: ERRATA
+
+
+
+=== Bug: 1610340
+
+* summary: [GSS](6.4.z) HORNETQ-1571 Try Original Connector when Live and Backup are both restarted
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1580398
+
+* summary: [LP - RHV product] (6.4.x) Upgrade to jackson-1.9.9-12 in EAP 6.4.20.CR1 breaks RHV
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1611770
+
+* summary: [GSS](6.4.z) Upgrade Ironjacamar from 1.0.41 to 1.0.42
+
+* resolution: ERRATA
+
+
+
+=== Bug: 1610742
+
+* summary: [GSS](6.4.z) Upgrade JBoss Web from 7.5.28 to 7.5.29
+
+* resolution: ERRATA
+
+
+
+=== Bug: 1615347
+
+* summary: [GSS](6.4.z) Upgrade PicketLink from 2.5.4.SP18-redhat-1 to 2.5.4.SP18-redhat-2
+
+* resolution: ERRATA
+
+
+
+=== Bug: 1614400
+
+* summary: RHEL5 RPMs: Upgrade jboss-vfs2 to 3.2.13.Final-redhat-1
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1614388
+
+* summary: RHEL5 RPMs: Upgrade jboss-ejb-client to 1.0.41.Final-redhat-1
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1593650
+
+* summary: [GSS](6.4.z) Try Original Connector when Live and Backup are both restarted
+
+* resolution: WONTFIX
+
+
+
+=== Bug: 1610355
+
+* summary: [GSS](6.4.z) Upgrade HornetQ from 2.3.25.SP24 to 2.3.25.SP28
+
+* resolution: ERRATA
+
+
+
+=== Bug: 1618383
+
+* summary: RHEL5 RPMs: Upgrade ironjacamar-eap6 to 1.0.42.Final-redhat-2
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1602226
+
+* summary: [GSS](6.4.z) Upgrade xerces from 2.9.1.redhat-6 to 2.9.1.redhat-8
+
+* resolution: ERRATA
+
+
+
+=== Bug: 1614393
+
+* summary: RHEL6 RPMs: Upgrade jboss-modules to 1.3.11.Final-redhat-1
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1580975
+
+* summary: [GSS](6.4.z) RemotingConnectionEJBReceiver initialModuleAvailabilityLatch timeout not configurable
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1542685
+
+* summary: [GSS] (6.4.z) PicketLink - configure the signature algorithm for IDP and SP
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1622313
+
+* summary: [GSS](6.4.z) XERCESJ-1456 - Regular expression is incorrectly handled in pattern facet
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1614394
+
+* summary: RHEL5 RPMs: Upgrade jboss-modules to 1.3.11.Final-redhat-1
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1597680
+
+* summary: (6.4.z) Web Services Integration Tests using Expired Self Signed Certificate
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1570200
+
+* summary: [GSS](6.4.z) Upgrade JBoss Modules from 1.3.10 to 1.3.11
+
+* resolution: ERRATA
+
+
+
+=== Bug: 1467848
+
+* summary: [GSS](6.4.z) CLI to add a socket-binding fails first time
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1614390
+
+* summary: RHEL6 RPMs: Upgrade hibernate4-validator to 4.3.4.Final-redhat-1
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1580440
+
+* summary: [GSS](6.4.z) Upgrade xnio from 3.0.16 to 3.0.17
+
+* resolution: ERRATA
+
+
+
+=== Bug: 1614391
+
+* summary: RHEL5 RPMs: Upgrade hibernate4-validator to 4.3.4.Final-redhat-1
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1614389
+
+* summary: RHEL7 RPMs: Upgrade jboss-ejb-client to 1.0.41.Final-redhat-1
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1594389
+
+* summary: [GSS](6.4.z) The fix for CVE-2017-2582 breaks the feature of attribute replacement with system property in picketlink.xml
+
+* resolution: ERRATA
+
+
+
+=== Bug: 1609964
+
+* summary: [GSS](6.4.z) tearDown may interrupt wrong threads after failures
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1600900
+
+* summary: [GSS](6.4.z)  StackOverflowError due to the bug XERCESJ-589
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1569958
+
+* summary: [GSS] (6.4.z) Invalid Secret Key when using a vault and JDK 1.8.0_171
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1614411
+
+* summary: RHEL6 RPMs: Upgrade jboss-xnio-base to 3.0.17.GA-redhat-1
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1614413
+
+* summary: RHEL7 RPMs: Upgrade jboss-xnio-base to 3.0.17.GA-redhat-1
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1613424
+
+* summary: [GSS](6.4.z) JBJCA-1371 - Deadlock for threads executing org.jboss.jca.adapters.jdbc.xa.XAManagedConnectionFactory.isEqual
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1615380
+
+* summary: [GSS](6.4.z) Upgrade Guava from 13.0.1.redhat-2 to 13.0.1.redhat-3
+
+* resolution: ERRATA
+
+
+
+=== Bug: 1261190
+
+* summary: [GSS](6.4.z) Upgrade jboss-ejb-client from 1.0.40 to 1.0.41
+
+* resolution: ERRATA
+
+
+
+=== Bug: 1580986
+
+* summary: [GSS](6.4.z) raise default timeouts in ejbclient: reconnect.tasks.timeout, version handshake
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1614395
+
+* summary: RHEL7 RPMs: Upgrade jboss-modules to 1.3.11.Final-redhat-1
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1614401
+
+* summary: RHEL7 RPMs: Upgrade jboss-vfs2 to 3.2.13.Final-redhat-1
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1606334
+
+* summary: [GSS](6.4.z) Upgrade JBoss VFS from 3.2.12 to 3.2.13
+
+* resolution: ERRATA
+
+
+
+=== Bug: 1567790
+
+* summary: EAP 6.4.21 (CP21) Payload Tracker
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1614412
+
+* summary: RHEL5 RPMs: Upgrade jboss-xnio-base to 3.0.17.GA-redhat-1
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1614392
+
+* summary: RHEL7 RPMs: Upgrade hibernate4-validator to 4.3.4.Final-redhat-1
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1614406
+
+* summary: RHEL6 RPMs: Upgrade jbossweb to 7.5.29.Final-redhat-1
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1599851
+
+* summary: [GSS](6.4.z) URL.getContent() returns VirtualFile instead of ImageProducer
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1614408
+
+* summary: RHEL5 RPMs: Upgrade jbossweb to 7.5.29.Final-redhat-1
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1603973
+
+* summary: [GSS](6.4.z) HornetQ cannot failover with network disconnected
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1614398
+
+* summary: RHEL6 RPMs: Upgrade jboss-vfs2 to 3.2.13.Final-redhat-1
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1618382
+
+* summary: RHEL6 RPMs: Upgrade ironjacamar-eap6 to 1.0.42.Final-redhat-2
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1610342
+
+* summary: [GSS](6.4.z) HORNETQ-1572 Client fail over fails when live shut down too soon
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1599625
+
+* summary: [GSS](6.4.z) Host controllers can not connect to domain after creating a rollout plan and restarting the master host controller
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1614410
+
+* summary: RHEL7 RPMs: Upgrade jbossweb to 7.5.29.Final-redhat-1
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1590198
+
+* summary: [GSS](6.4.z) SECURITY-992: org.jboss.security.Base64Encoder doesn't work for certain lengths (1026 or 3072 for example)
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1593129
+
+* summary: [GSS](6.4.z) loginmodule.logout() is not invoked when session replicated
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1613494
+
+* summary: [GSS](6.4.z) Wrong classLoader used in hornetq RA Reconnect
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1614448
+
+* summary: [GSS](6.4.z) Upgrade Jackson from 1.9.9.redhat-6 to 1.9.9.redhat-7
+
+* resolution: ERRATA
+
+
+
+=== Bug: 1612123
+
+* summary: [GSS](6.4.z) MySQLValidConnectionChecker swallow a root cause of the exception
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1618384
+
+* summary: RHEL7 RPMs: Upgrade ironjacamar-eap6 to 1.0.42.Final-redhat-2
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1614387
+
+* summary: RHEL6 RPMs: Upgrade jboss-ejb-client to 1.0.41.Final-redhat-1
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+== Release: EAP 6.4.22
+
+
+
+=== Bug: 1613428
+
+* summary: [GSS](6.4.z) Upgrade Ironjacamar from 1.0.42 to 1.0.43
+
+* resolution: ERRATA
+
+
+
+=== Bug: 1631773
+
+* summary: [GSS](6.4.z) Upgrade HornetQ from 2.3.25.SP28 to 2.3.25.SP29
+
+* resolution: ERRATA
+
+
+
+=== Bug: 1695652
+
+* summary: dom4j was built with target JDK version 1.7, needs to be 1.6
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1646860
+
+* summary: (6.4.z) JBAS016012; Japanese log message is wrong on EAP 6.x
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1434141
+
+* summary: [GSS](6.4.z) NullPointerException when removing configuration history
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1694076
+
+* summary: (6.4.z) HORNETQ-1578 Exceptions are swallowed, making it hard to diagnose issues
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1675138
+
+* summary: [GSS](6.4.z) Code-Injection via JSONP-Injection in REST-Services
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1654454
+
+* summary: [GSS](6.4.z) WARN if system-property is already set and is being overridden
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1643557
+
+* summary: [GSS](6.4.z) Upgrade HAL from 2.5.17 to 2.5.19
+
+* resolution: ERRATA
+
+
+
+=== Bug: 1619815
+
+* summary: [GSS](6.4.z) JDK 8 causes SOAP element order to change
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1648762
+
+* summary: [GSS](6.4.z) Lock is not released when JTS is enabled and a timer is cancelled inside a transaction
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1691399
+
+* summary: [GSS](6.4.z) Remote Naming EJB Invocation is not releasing EJBClientContext after close and leaking memory
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1691431
+
+* summary: [GSS](6.4.z) Upgrade JBoss Remote Naming from 1.0.13 to 1.0.15
+
+* resolution: ERRATA
+
+
+
+=== Bug: 1689163
+
+* summary: (6.4.z) Ldaps tests failing on JDK 8u181
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1640047
+
+* summary: [GSS](6.4.z) EAP Management console does not display more than 100 profiles
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1630928
+
+* summary: [GSS](6.4.z) Upgrade JBoss Web from 7.5.29 to 7.5.30
+
+* resolution: ERRATA
+
+
+
+=== Bug: 1631775
+
+* summary: [GSS](6.4.z) HORNETQ-1575 Fix new connection establishment after failure during failover
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1688362
+
+* summary: (6.4.z) HORNETQ-1559 Page.write() should throw exception if file is closed
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1539985
+
+* summary: [GSS](6.4.x) Deployment fails with "IllegalArgumentException: Empty module specification" when Dependencies is empty in a jars manifest
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1675264
+
+* summary: [GSS](6.4.z) Upgrade RESTEasy from 2.3.22 to 2.3.23
+
+* resolution: ERRATA
+
+
+
+=== Bug: 1630924
+
+* summary: [GSS](6.4.z) Upgrade Apache CXF from 2.7.18.SP6 to 2.7.18.SP7
+
+* resolution: ERRATA
+
+
+
+=== Bug: 1613417
+
+* summary: EAP 6.4.22 (CP22) Payload Tracker
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+=== Bug: 1611765
+
+* summary: [GSS](6.4.z) Destroy managed connection on failed reconnect
+
+* resolution: Nothing related to resolution is now available.
+
+
+
+
+
+----------
+Report time: 2019-07-24 12:31:02.328737
+
+
