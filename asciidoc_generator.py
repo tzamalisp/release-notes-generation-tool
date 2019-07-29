@@ -77,19 +77,21 @@ class GeneratorJiraReleaseNotes:
 
 
 class GeneratorJira:
-    def __init__(self, kind_of_report, releases, bug, user, firstname, lastname, email_account, data_basic, data_custom, path):
+    def __init__(self, kind_of_report, releases, bug, user, firstname, lastname, email_account, data_basic, path):
+        self.kind_of_report = kind_of_report
+        self.releases = releases
         self.user = user
         self.bug = bug
         self.firstname = firstname
         self.lastname = lastname
         self.email_account = email_account
         self.data_basic = data_basic
-        self.data_custom = data_custom
         self.path = path
 
     def generating_doc_jira(self):
         now = datetime.now()
         now_str = now.strftime("%Y-%m-%d_%H-%M-%S")
+        report_fields = []
         if self.user is None:
             self.user = 'unknown_username'
         if self.email_account is '':
@@ -98,13 +100,26 @@ class GeneratorJira:
             self.firstname = 'Unknown Firstname - '
         if self.lastname is '':
             self.lastname = ' - Unknown Lastname'
-
-
-
+        # kind of report
+        report_fields.append(self.kind_of_report)
+        print(report_fields)
+        # releases input
+        if self.releases is not None:
+            for release in self.releases:
+                report_fields.append(release)
+        # bug/issue input
+        if self.bug is not None:
+            report_fields.append(self.bug)
+        # user input
+        if self.user is not None:
+            report_fields.append(self.user)
+        report_fields_string = '_'.join(report_fields)
         if self.path is None:
-            f = open('release-notes-docs/jira_bug_info_{}_{}_{}.adoc'.format(self.bug, self.user, now_str), 'w+')
+            f = open('release-notes-docs/JIRA/jira_{}_{}.adoc'
+                     .format(report_fields_string, now_str), 'w+')
         else:
-            f = open('{}/jira_bug_info_{}_{}_{}.adoc'.format(self.path, self.bug, self.user, now_str), 'w+')
+            f = open('{}/jira_{}_{}.adoc'
+                     .format(self.path, report_fields_string, now_str), 'w+')
         print('Writing file..')
         f.write('= Release Notes Generation Tool (RLGEN)')
         f.write('\n')
@@ -115,13 +130,6 @@ class GeneratorJira:
         f.write('\n')
         if self.data_basic:
             for item in self.data_basic:
-                f.write(item)
-                f.write('\n')
-                f.write('\n')
-        f.write('\n')
-        f.write('\n')
-        if self.data_custom:
-            for item in self.data_custom:
                 f.write(item)
                 f.write('\n')
                 f.write('\n')

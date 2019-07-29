@@ -96,39 +96,40 @@ class UserTrackerChoice:
             if self.bug_function is 'r' or self.bug_function is 'R':
                 if release_name is not None and self.release_note is not None:
                     print(self.release_note)
-                    data_report = release_notes.get_release_notes()
-                    doc_release_notes = GeneratorJiraReleaseNotes(user=user_name,
-                                                                  release_name=release_name,
-                                                                  release=self.release_note,
-                                                                  firstname=first_name,
-                                                                  lastname=last_name,
-                                                                  email_account=email,
-                                                                  data_basic=data_report,
-                                                                  path=path)
+                    report_field = 'TargetReleases'
+                    release_notes_data = release_notes.get_release_notes()
+                    data_report = release_notes_data
+                    doc_release_notes = GeneratorJira(kind_of_report=report_field,
+                                                      releases=self.release_note,
+                                                      bug=self.issue,
+                                                      user=user_name,
+                                                      firstname=first_name,
+                                                      lastname=last_name,
+                                                      email_account=email,
+                                                      data_basic=data_report,
+                                                      path=path)
                     doc_release_notes.generating_doc_jira()
-            elif self.bug_function is 'b' or self.bug_function is 'B'
-            if self.issue is not None:
-                logger_rlgen.debug('BASIC DATA RETRIEVER OBJECT')
-                jira_basic_data = BasicDataRetriever(self.issue)
-                # CUSTOM FIELD DATA RETRIEVER
-                logger_rlgen.debug('CUSTOM FIELD DATA RETRIEVER OBJECT')
-                jira_custom_field_data = CustomFieldDataRetriever(self.issue,
-                                                                  self.custom_field_name,
-                                                                  self.custom_field_id)
-
-                # doc basic + custom fields
-                logger_rlgen.debug('JIRA Doc including Basic + Custom Fields')
-                doc_basic = GeneratorJira(user=user_name,
-                                          bug=self.issue,
-                                          firstname=first_name,
-                                          lastname=last_name,
-                                          email_account=email,
-                                          data_basic=jira_basic_data.data_retriever(),
-                                          data_custom=jira_custom_field_data.data_retriever(),
-                                          path=path)
-                doc_basic.generating_doc_jira()
-
-                logger_rlgen.debug('>>> Calling JIRA API and printing Issue parts is now completed successfully!')
+            elif self.bug_function is 'b' or self.bug_function is 'B':
+                if self.issue is not None:
+                    logger_rlgen.debug('BASIC DATA RETRIEVER OBJECT')
+                    # CUSTOM FIELD DATA RETRIEVER
+                    logger_rlgen.debug('CUSTOM FIELD DATA RETRIEVER OBJECT')
+                    issue_data = issue_object.get_data()
+                    # print(issue_data)
+                    issue_info_data = issue_object.get_basic_issue_data(issue_data)
+                    data_report = issue_info_data
+                    # doc basic + custom fields
+                    logger_rlgen.debug('JIRA Doc including Basic + Custom Fields')
+                    doc_basic = GeneratorJira(kind_of_report=report_field,
+                                              releases=self.release_note,
+                                              user=user_name,
+                                              bug=self.issue,
+                                              firstname=first_name,
+                                              lastname=last_name,
+                                              email_account=email,
+                                              data_basic=data_report,
+                                              path=path)
+                    doc_basic.generating_doc_jira()
             else:
                 if self.release_note is None:
                     print('Please define at least a Release Note to search for..')

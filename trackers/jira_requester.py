@@ -144,8 +144,8 @@ class TargetReleaseJira:
         options = connection.connection_jira()
 
         # Start making the AsciiDoc from the release notes
-        ascii_data_list.append('== Issues')
-        ascii_data_list.append('\n')
+        # ascii_data_list.append('== Issues')
+        # ascii_data_list.append('\n')
         for release_item in self.release:
             print('Release Note:', release_item)
             ascii_data_list.append('== Release Note: {}'.format(release_item))
@@ -232,10 +232,14 @@ class IssueDataRetrieverJira:
     def get_basic_issue_data(self, data):
 
         if data is not None:
+            ascii_data_list = []
+
             # READ FIELDS FROM CONF or USER INPUT
             search_list_output = []
             search_list = ConfigData('jira_fields', self.terms)
             search_list_output = search_list.get_config_search_data()
+
+            ascii_data_list.append('== Issue: {}'.format(self.issue))
 
             # pprint(data_layer_1)
             data_keys_layer_1 = data.keys()
