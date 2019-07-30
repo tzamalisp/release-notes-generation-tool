@@ -41,7 +41,7 @@ conf_path = '/' + '/'.join(basic_desktop_path)
 
 class UserTrackerChoice:
     def __init__(self, tracker, issue, release_note, order, user, custom_field_name, custom_field_id,
-                 bug_function):
+                 bug_function, output_path):
         self.tracker = tracker
         self.issue = issue
         self.user = user
@@ -50,6 +50,7 @@ class UserTrackerChoice:
         self.bug_function = bug_function
         self.release_note = release_note
         self.order = order
+        self.output_path = output_path
 
     def tracker_selection(self):
         # JIRA
@@ -69,11 +70,21 @@ class UserTrackerChoice:
             last_name = config['author']['lastname']
             email = config['author']['email']
             release_name = config['jira_target_release']['name']
+
+            # RELEASE NAME
             if release_name is '':
                 release_name = None
-            path = config['path']['directory']
-            if path is '':
+
+            # PATH value
+            if self.output_path is None:
                 path = None
+            elif config['path']['directory'] is '':
+                path = None
+            else:
+                path = config['path']['directory']
+
+
+
 
             # calling the class for making the the Target Release notes object
             # self.release_note is type of list
@@ -322,11 +333,10 @@ def user_input(argv):
                         dest="order_ascending",
                         help="add the operation you want for ascending/descending (a: ascending, b: descending)",
                         metavar="<USER_OPERATION>")
-
-    # parser.add_argument("-p", "--path",
-    #                     dest="path",
-    #                     help="add the path directory yoy want to save the Asciidoc export files",
-    #                     metavar="<PATH>")
+    parser.add_argument("-o", "--output",
+                        dest="output_path",
+                        help="add the path directory yoy want to save the Asciidoc export files",
+                        metavar="<OUTPUT_PATH>")
 
     # ARGUMENTS --> extra
     parser.add_argument("-q", "--quiet",
@@ -348,7 +358,8 @@ def user_input(argv):
             'bug_function': arguments.function,
             'debug_level': arguments.debug_level,
             'order_ascending': arguments.order_ascending,
-            'release_note': arguments.release_note}
+            'release_note': arguments.release_note,
+            'output_path': arguments.output_path}
 
 
 if __name__ == '__main__':
@@ -362,7 +373,8 @@ if __name__ == '__main__':
                                        custom_field_id=tracker_issue_selection['custom_field_id'],
                                        bug_function=tracker_issue_selection['bug_function'],
                                        order=tracker_issue_selection['order_ascending'],
-                                       release_note=tracker_issue_selection['release_note'])
+                                       release_note=tracker_issue_selection['release_note'],
+                                       output_path=tracker_issue_selection['output_path'])
 
     tracker_choice.tracker_selection()
     print()

@@ -359,7 +359,7 @@ class IssueDataRetrieverJira:
                 counter_comments = 1
                 for comment_item in data_layer_2_comments:
                     print(('Comment {}:'.format(counter_comments)))
-                    ascii_data_list.append('== Comment {}:'.format(counter_comments))
+                    ascii_data_list.append('=== Comment {}:'.format(counter_comments))
                     comment_keys_list = comment_item.keys()
                     # print(comment_keys_list)
                     # for key in search_list_output:
@@ -373,15 +373,17 @@ class IssueDataRetrieverJira:
                             if type(comment_item[key]) is str or type(comment_item[key]) is int or type(comment_item[key]) is bool:
                                 if key in search_list_output:
                                     # print('\t\t' + key + ': ' + str(comment_item[key]))
-                                    list_of_fields.append(key + ': ' + str(comment_item[key]))
+                                    list_of_fields.append('* {}: {}'.format(key, str(comment_item[key])))
                             if type(comment_item[key]) is dict:
                                 nested_comment_item = comment_item[key]
                                 nested_comment_item_keys = nested_comment_item.keys()
                                 for nested_key in nested_comment_item_keys:
                                     if nested_key in search_list_output:
-                                        # print('\t\t' + nested_key + ': ' + str(nested_comment_item[nested_key]))
-                                        list_of_fields.append(nested_key + ': ' + str(nested_comment_item[nested_key]))
+                                        list_of_fields.append('* {}: {}'.format(nested_key, str(nested_comment_item[nested_key])))
                     final_list_of_fields = list(dict.fromkeys(list_of_fields))
+                    for item in final_list_of_fields:
+                        ascii_data_list.append(item)
+
                     for item in final_list_of_fields:
                         print('\t' + item)
 

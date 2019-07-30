@@ -1,0 +1,36 @@
+= Release Notes Generation Tool (RLGEN)
+:author: Pantelis Tzamalis
+:email: tzamalis@ceid.upatras.gr
+
+== Issue: JBCS-535
+
+=== Comment 1:
+
+* displayName: Jean-Frederic Clere
+
+* body: cherry picked by http://git.app.eng.bos.redhat.com/git/httpd.git/commit/?h=jbcs-httpd-2.4.29&id=e6bdf2632b254c15c79a7ace850ad52b59152256
+
+* created: 2018-04-16T08:10:16.000-0400
+
+=== Comment 2:
+
+* displayName: Jean-Frederic Clere
+
+* body: The upstream branch 2.4.x is OK. Weird.
+
+* created: 2018-04-17T11:51:39.000-0400
+
+=== Comment 3:
+
+* displayName: Jean-Frederic Clere
+
+* body: [~gzaronikas] The patch we had in 2.4.29 are missing in 2.4.37
+
+* created: 2019-06-06T05:54:05.000-0400
+
+
+
+----------
+Report time: 2019-07-30 22:08:49.133475
+
+
