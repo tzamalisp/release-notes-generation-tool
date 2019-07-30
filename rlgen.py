@@ -31,6 +31,10 @@ directories_list = current_d.split('/')
 # print(directories_list)
 # print(directories_list[1:4])
 basic_desktop_path = directories_list[1:4]
+print('Path Desktop')
+print(basic_desktop_path)
+print()
+print()
 new_path = 'conf/'
 basic_desktop_path.append(new_path)
 conf_path = '/' + '/'.join(basic_desktop_path)
@@ -75,16 +79,17 @@ class UserTrackerChoice:
             if release_name is '':
                 release_name = None
 
-            # PATH value
-            if self.output_path is None:
-                path = None
-            elif config['path']['directory'] is '':
-                path = None
+            # PATH value from user
+            path = None
+            print('Path input from user:', self.output_path)
+            if self.output_path is not None:
+                path = self.output_path
             else:
-                path = config['path']['directory']
-
-
-
+                if config['path']['directory'] is '':
+                    path = None
+                elif config['path']['directory'] is not '':
+                    path = config['path']['directory']
+            print('Final path value:', path)
 
             # calling the class for making the the Target Release notes object
             # self.release_note is type of list
@@ -143,6 +148,7 @@ class UserTrackerChoice:
                       '-f r: Release Note\n'
                       '-f c: Bug Comments\n')
             # MAKING DOC REPORT -> ASCIIDOC
+            print('Generating DOC..')
             doc_basic = GeneratorJira(kind_of_report=report_field,
                                       releases=self.release_note,
                                       user=user_name,
@@ -164,9 +170,18 @@ class UserTrackerChoice:
             first_name = config['author']['firstname']
             last_name = config['author']['lastname']
             email = config['author']['email']
-            path = config['path']['directory']
-            if path is '':
-                path = None
+
+            # PATH value from user
+            path = None
+            print('Path input from user:', self.output_path)
+            if self.output_path is not None:
+                path = self.output_path
+            else:
+                if config['path']['directory'] is '':
+                    path = None
+                elif config['path']['directory'] is not '':
+                    path = config['path']['directory']
+            print('Final path value:', path)
 
             # calling the class for making the the Target Release notes object
             # self.release_note is type of list
