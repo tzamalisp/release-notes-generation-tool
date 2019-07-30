@@ -231,15 +231,17 @@ class IssueDataRetrieverJira:
     # GETTING BASIC ISSUE DATA
     def get_basic_issue_data(self, data):
 
+        ascii_data_list = []
+
+        # Issue header
+        ascii_data_list.append('== Issue: {}'.format(self.issue))
+
         if data is not None:
-            ascii_data_list = []
 
             # READ FIELDS FROM CONF or USER INPUT
             search_list_output = []
             search_list = ConfigData('jira_fields', self.terms)
             search_list_output = search_list.get_config_search_data()
-
-            ascii_data_list.append('== Issue: {}'.format(self.issue))
 
             # pprint(data_layer_1)
             data_keys_layer_1 = data.keys()
@@ -325,9 +327,18 @@ class IssueDataRetrieverJira:
                                 else:
                                     print('\t' + item_key + ': {}'.format(dict_item.get(item_key)))
                 print()
+        else:
+            ascii_data_list.append('* There is no data available for that issue or check the issue name.')
+
+        return ascii_data_list
+
 
     # COMMENTS
     def getting_comments_data(self, data):
+        ascii_data_list = []
+
+        # Issue header
+        ascii_data_list.append('== Issue: {}'.format(self.issue))
         if data is not None:
             # READ FIELDS FROM CONF or USER INPUT
             search_list = ConfigData('jira_comments', self.terms)
@@ -365,6 +376,10 @@ class IssueDataRetrieverJira:
                         print('\t' + item)
 
                     counter_comments += 1
+        else:
+            ascii_data_list.append('* There is no data available for that issue or check the issue name.')
+
+        return ascii_data_list
 
 
 if __name__ == '__main__':

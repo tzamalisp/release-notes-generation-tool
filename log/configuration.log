@@ -1,8 +1,5 @@
-DEBUG 2019-07-30 00:41:45,098 - Hello Tracker!
-DEBUG 2019-07-30 00:41:45,099 - ---------------------------JIRA------------------------------------
-DEBUG 2019-07-30 00:41:45,099 - Entered JIRA environment
-DEBUG 2019-07-30 00:41:45,101 - BASIC DATA RETRIEVER OBJECT
-DEBUG 2019-07-30 00:41:45,101 - CUSTOM FIELD DATA RETRIEVER OBJECT
-DEBUG 2019-07-30 00:41:45,113 - Starting new HTTPS connection (1): issues.jboss.org
-DEBUG 2019-07-30 00:41:47,012 - https://issues.jboss.org:443 "GET /rest/api/latest/issue/JBCS-535 HTTP/1.1" 200 None
-DEBUG 2019-07-30 00:41:47,019 - JIRA Doc including Basic + Custom Fields
+DEBUG 2019-07-30 18:12:52,773 - Hello Tracker!
+DEBUG 2019-07-30 18:12:52,775 - ---------------------------JIRA------------------------------------
+DEBUG 2019-07-30 18:12:52,776 - Entered JIRA environment
+DEBUG 2019-07-30 18:12:52,925 - Starting new HTTPS connection (1): issues.jboss.org
+DEBUG 2019-07-30 18:12:55,447 - https://issues.jboss.org:443 "GET /rest/api/latest/issue/JBCS-535 HTTP/1.1" 200 None

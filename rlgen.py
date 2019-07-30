@@ -10,7 +10,6 @@ from trackers.bugzilla_requester import DataRetriever
 from trackers.jira_requester import TargetReleaseJira
 from trackers.jira_requester import IssueDataRetrieverJira
 
-from asciidoc_generator import GeneratorJiraReleaseNotes
 from asciidoc_generator import GeneratorJira
 from asciidoc_generator import GeneratorBugzillaReport
 
@@ -99,47 +98,50 @@ class UserTrackerChoice:
                     report_field = 'TargetReleases'
                     release_notes_data = release_notes.get_release_notes()
                     data_report = release_notes_data
-                    doc_release_notes = GeneratorJira(kind_of_report=report_field,
-                                                      releases=self.release_note,
-                                                      bug=self.issue,
-                                                      user=user_name,
-                                                      firstname=first_name,
-                                                      lastname=last_name,
-                                                      email_account=email,
-                                                      data_basic=data_report,
-                                                      path=path)
-                    doc_release_notes.generating_doc_jira()
+                else:
+                    if self.release_note is None:
+                        print('Please define at least a Release Note to search for..')
+                        logger_rlgen.warning('Please define at least a Release Note with the -r argument.')
+                        raise Exception('Please define at least a Release Note with the -r argument.')
+                    elif release_name is None:
+                        print(
+                            'Please define the Release Name field of the custom field of JIRA inside the configuration '
+                            'file.')
+                        raise Exception('Please define the Release Name field of the custom field of JIRA inside the '
+                                        'configuration file')
+                    else:
+                        print('Both Release Name and Release notes fields are note defined.')
             elif self.bug_function is 'b' or self.bug_function is 'B':
                 if self.issue is not None:
-                    logger_rlgen.debug('BASIC DATA RETRIEVER OBJECT')
-                    # CUSTOM FIELD DATA RETRIEVER
-                    logger_rlgen.debug('CUSTOM FIELD DATA RETRIEVER OBJECT')
+                    report_field = 'BugInfo'
                     issue_data = issue_object.get_data()
-                    # print(issue_data)
                     issue_info_data = issue_object.get_basic_issue_data(issue_data)
                     data_report = issue_info_data
-                    # doc basic + custom fields
-                    logger_rlgen.debug('JIRA Doc including Basic + Custom Fields')
-                    doc_basic = GeneratorJira(kind_of_report=report_field,
-                                              releases=self.release_note,
-                                              user=user_name,
-                                              bug=self.issue,
-                                              firstname=first_name,
-                                              lastname=last_name,
-                                              email_account=email,
-                                              data_basic=data_report,
-                                              path=path)
-                    doc_basic.generating_doc_jira()
+                else:
+                    print('Please define an issue.')
+            elif self.bug_function is 'c' or self.bug_function is 'C':
+                if self.issue is not None:
+                    report_field = 'BugComments'
+                    issue_data = issue_object.get_data()
+                    issue_comments_data = issue_object.getting_comments_data(issue_data)
+                    data_report = issue_comments_data
+                else:
+                    print('Please define an issue.')
             else:
-                if self.release_note is None:
-                    print('Please define at least a Release Note to search for..')
-                    logger_rlgen.warning('Please define at least a Release Note with the -r argument.')
-                    raise Exception('Please define at least a Release Note with the -r argument.')
-                elif release_name is None:
-                    print('Please define the Release Name field of the custom field of JIRA inside the configuration '
-                          'file.')
-                    raise Exception('Please define the Release Name field of the custom field of JIRA inside the '
-                                    'configuration file')
+                print('Please enter a valid letter for function:\n'
+                      '-f r: Release Note\n'
+                      '-f c: Bug Comments\n')
+            # MAKING DOC REPORT -> ASCIIDOC
+            doc_basic = GeneratorJira(kind_of_report=report_field,
+                                      releases=self.release_note,
+                                      user=user_name,
+                                      bug=self.issue,
+                                      firstname=first_name,
+                                      lastname=last_name,
+                                      email_account=email,
+                                      data_basic=data_report,
+                                      path=path)
+            doc_basic.generating_doc_jira()
 
         # BUGZILLA
         elif self.tracker is 'B' or self.tracker is 'b':
