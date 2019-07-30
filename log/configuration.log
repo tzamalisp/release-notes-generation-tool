@@ -1,5 +1,5 @@
-DEBUG 2019-07-30 18:12:52,773 - Hello Tracker!
-DEBUG 2019-07-30 18:12:52,775 - ---------------------------JIRA------------------------------------
-DEBUG 2019-07-30 18:12:52,776 - Entered JIRA environment
-DEBUG 2019-07-30 18:12:52,925 - Starting new HTTPS connection (1): issues.jboss.org
-DEBUG 2019-07-30 18:12:55,447 - https://issues.jboss.org:443 "GET /rest/api/latest/issue/JBCS-535 HTTP/1.1" 200 None
+DEBUG 2019-07-30 19:05:52,386 - Hello Tracker!
+DEBUG 2019-07-30 19:05:52,387 - ---------------------------JIRA------------------------------------
+DEBUG 2019-07-30 19:05:52,387 - Entered JIRA environment
+DEBUG 2019-07-30 19:05:52,487 - Starting new HTTPS connection (1): issues.jboss.org
+DEBUG 2019-07-30 19:05:55,209 - https://issues.jboss.org:443 "GET /rest/api/latest/issue/JBCS-535 HTTP/1.1" 200 None

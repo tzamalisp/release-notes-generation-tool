@@ -293,8 +293,10 @@ class IssueDataRetrieverJira:
                 if key in data_keys_layer_2:
                     if type(data_layer_2.get(key)) is str:
                         print(key + ': ' + data_layer_2.get(key))
+                        ascii_data_list.append('* {}: {}'.format(key, data_layer_2.get(key)))
                     if type(data_layer_2.get(key)) is list:
                         print(key + ':')
+                        ascii_data_list.append('* {}:'.format(key))
                         keys_list = data_layer_2.get(key)
                         counter_dict_list = 1
                         for key_list_item in keys_list:
@@ -302,30 +304,37 @@ class IssueDataRetrieverJira:
                                 dict_list_item_keys = key_list_item.keys()
                                 # print(dict_list_item_keys)
                                 print('\tItem {}'.format(counter_dict_list))
+                                ascii_data_list.append('** Item {}'.format(counter_dict_list))
                                 for key_item in dict_list_item_keys:
                                     if key_item != 'self':
-                                        print('\t\t' + str(key_list_item.get(key_item)))
+                                        print('\t\t {}: '.format(key_item) + str(key_list_item.get(key_item)))
+                                        ascii_data_list.append('*** {}: {}'.format(key_item, key_list_item.get(key_item)))
                                 counter_dict_list += 1
                             else:
                                 print('\t' + str(key_list_item))
                     if type(data_layer_2.get(key)) is dict:
                         if key.startswith('customfield_'):
                             print(name + ':')
+                            ascii_data_list.append('* {}:'.format(name))
                         else:
                             print(key + ':')
+                            ascii_data_list.append('* {}:'.format(key))
                         dict_item = data_layer_2.get(key)
                         dict_item_keys_list = dict_item.keys()
                         for item_key in dict_item_keys_list:
                             if item_key != 'self' and item_key != 'iconUrl' and item_key != 'avatarUrls':
                                 if type(dict_item.get(item_key)) is dict:
                                     print('\t' + item_key + ':')
+                                    ascii_data_list.append('** {}:'.format(item_key))
                                     data_dict = dict_item.get(item_key)
                                     data_dict_keys = data_dict.keys()
                                     for data_key in data_dict_keys:
                                         if data_key != 'self' and data_key != 'iconUrl' and data_key != 'avatarUrls':
                                             print('\t\t\t' + data_key + ': ' + data_dict.get(data_key))
+                                            ascii_data_list.append('*** {}: {}'.format(data_key, data_dict.get(data_key)))
                                 else:
                                     print('\t' + item_key + ': {}'.format(dict_item.get(item_key)))
+                                    ascii_data_list.append('** {}: {}'.format(item_key, dict_item.get(item_key)))
                 print()
         else:
             ascii_data_list.append('* There is no data available for that issue or check the issue name.')
@@ -350,6 +359,7 @@ class IssueDataRetrieverJira:
                 counter_comments = 1
                 for comment_item in data_layer_2_comments:
                     print(('Comment {}:'.format(counter_comments)))
+                    ascii_data_list.append('== Comment {}:'.format(counter_comments))
                     comment_keys_list = comment_item.keys()
                     # print(comment_keys_list)
                     # for key in search_list_output:
@@ -376,22 +386,11 @@ class IssueDataRetrieverJira:
                         print('\t' + item)
 
                     counter_comments += 1
+
+            return ascii_data_list
         else:
             ascii_data_list.append('* There is no data available for that issue or check the issue name.')
 
         return ascii_data_list
 
-
-if __name__ == '__main__':
-
-    # ISSUE
-    search_extra = ['id']
-    issue = IssueDataRetrieverJira(issue='JBCS-535', terms=None, cf_name=None, cf_id=None)
-    issue_data = issue.get_data()
-    issue.get_basic_issue_data(issue_data)
-    # issue.getting_comments_data(issue_data)
-
-    # TARGET RELEASE
-    # release = TargetReleaseJira(release_name='Target Release', release=['httpd 2.4.37 GA'], order=None)
-    # release.get_release_notes()
 

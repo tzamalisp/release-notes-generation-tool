@@ -1,0 +1,110 @@
+= Release Notes Generation Tool (RLGEN)
+:author: Pantelis Tzamalis
+:email: tzamalis@ceid.upatras.gr
+
+== Issue: JBCS-535
+
+* summary: CheckCaseOnly On does not stop Multiple Choices based on common basename
+
+* description: Tests for https://issues.jboss.org/browse/JBCS-57 are failing again...did we forget to backport the patch?
+
+* watches:
+
+** watchCount: 4
+
+** isWatching: False
+
+* labels:
+
+* versions:
+
+** Item 1
+
+*** id: 12337224
+
+*** description: DR2 Build of httpd 2.4.29 release
+
+*** name: httpd 2.4.29 DR2
+
+*** archived: False
+
+*** released: True
+
+*** releaseDate: 2018-03-26
+
+** Item 2
+
+*** id: 12337285
+
+*** description: DR3 Build of httpd 2.4.29 releas
+
+*** name: httpd 2.4.29 DR3
+
+*** archived: False
+
+*** released: True
+
+*** releaseDate: 2018-04-09
+
+* issuetype:
+
+** id: 1
+
+** description: A problem which impairs or prevents the functions of the product.
+
+** name: Bug
+
+** subtask: False
+
+** avatarId: 13263
+
+* project:
+
+** id: 12317125
+
+** key: JBCS
+
+** name: JBoss Core Services
+
+** projectCategory:
+
+*** id: 10030
+
+*** description: Projects related to JBoss Enterprise Middleware products.
+
+*** name: n) JBoss Enterprise Middleware
+
+* assignee:
+
+** name: gzaronikas
+
+** key: gzaronikas
+
+** emailAddress: gzaronik@redhat.com
+
+** displayName: George Zaronikas
+
+** active: True
+
+** timeZone: America/New_York
+
+* updated: 2019-07-26T09:12:24.000-0400
+
+* Target Release:
+
+** id: 12340980
+
+** description: JBCS-2.4.37
+
+** name: httpd 2.4.37 GA
+
+** archived: False
+
+** released: False
+
+
+
+----------
+Report time: 2019-07-30 18:56:13.208178
+
+
