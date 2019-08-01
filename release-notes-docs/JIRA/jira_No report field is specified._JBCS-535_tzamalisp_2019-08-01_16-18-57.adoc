@@ -1,0 +1,12 @@
+= Release Notes Generation Tool (RLGEN)
+:author: Pantelis Tzamalis
+:email: tzamalis@ceid.upatras.gr
+
+* No data were fetched from the REST API.
+
+
+
+----------
+Report time: 2019-08-01 16:18:57.564074
+
+

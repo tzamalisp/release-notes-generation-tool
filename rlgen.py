@@ -13,17 +13,37 @@ from trackers.jira_requester import IssueDataRetrieverJira
 from asciidoc_generator import GeneratorJira
 from asciidoc_generator import GeneratorBugzillaReport
 
+from logger_creation import LoggerSetup
+
+# formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+
+# # create and configure a logger
+# LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
+# logging_file_main = logging.basicConfig(filename='log/rlgen.log',
+#                                    level=logging.DEBUG,
+#                                    format=LOG_FORMAT,
+#                                    filemode='w')
+#
+# # root logger (without name)
+# logger_rlgen_main = logging.getLogger()
+
+logger_rlgen = LoggerSetup(name='main_logger', log_file='main.log', level=logging.DEBUG)
+logger_rlgen_main = logger_rlgen.setup_logger()
 
 
-# create and configure a logger
-LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
-logging_file = logging.basicConfig(filename='log/rlgen.log',
-                                   level=logging.DEBUG,
-                                   format=LOG_FORMAT,
-                                   filemode='w')
-
-# root logger (without name)
-logger_rlgen = logging.getLogger()
+# def setup_logger(name, log_file, level=logging.DEBUG):
+#     """Function setup as many loggers as you want"""
+#
+#     handler = logging.FileHandler(log_file)
+#     handler.setFormatter(formatter)
+#
+#     logger = logging.getLogger(name)
+#     logger.setLevel(level)
+#     logger.addHandler(handler)
+#
+#     return logger
+#
+# logger_rlgen_main = setup_logger('first_logger', 'first_logfile.log')
 
 current_d = os.getcwd()
 # print(current_d)
@@ -59,21 +79,26 @@ class UserTrackerChoice:
     def tracker_selection(self):
         # JIRA
         if self.tracker is 'J' or self.tracker is 'j':
-            logger_rlgen.debug('---------------------------JIRA------------------------------------')
+            logger_rlgen_main.debug('---------------------------JIRA------------------------------------')
             print('Entered JIRA environment')
-            logger_rlgen.debug('Entered JIRA environment')
+            logger_rlgen_main.debug('Entered JIRA environment')
             # # CONNECTION TO JIRA
-            # logger.debug('CONNECTION TO JIRA')
+            # logger_rlgen_main.debug('CONNECTION TO JIRA')
             # test_connector = Connector()
             # test_connector.jira_connector()
 
+            # JIRA user authentication configuration file reading
             config = configparser.ConfigParser()
             config.read('{}config.conf'.format(conf_path))
             user_name = config['jira_basic_auth']['username']
             first_name = config['author']['firstname']
             last_name = config['author']['lastname']
             email = config['author']['email']
-            release_name = config['jira_target_release']['name']
+
+            # JIRA search terms configuration file reading
+            search_terms_config = configparser.ConfigParser()
+            search_terms_config.read('conf/search_terms.conf')
+            release_name = search_terms_config['jira_target_release']['name']
 
             # RELEASE NAME
             if release_name is '':
@@ -117,14 +142,14 @@ class UserTrackerChoice:
                 else:
                     if self.release_note is None:
                         print('Please define at least a Release Note to search for..')
-                        logger_rlgen.warning('Please define at least a Release Note with the -r argument.')
-                        raise Exception('Please define at least a Release Note with the -r argument.')
+                        logger_rlgen_main.warning('Please define at least a Release Note with the -r argument.')
+                        # raise Exception('Please define at least a Release Note with the -r argument.')
                     elif release_name is None:
                         print(
                             'Please define the Release Name field of the custom field of JIRA inside the configuration '
                             'file.')
-                        raise Exception('Please define the Release Name field of the custom field of JIRA inside the '
-                                        'configuration file')
+                        # raise Exception('Please define the Release Name field of the custom field of JIRA inside the '
+                        #                 'configuration file')
                     else:
                         print('Both Release Name and Release notes fields are note defined.')
             elif self.bug_function is 'b' or self.bug_function is 'B':
@@ -162,7 +187,7 @@ class UserTrackerChoice:
 
         # BUGZILLA
         elif self.tracker is 'B' or self.tracker is 'b':
-            logger_rlgen.debug('---------------------------------BUGZILLA------------------------------------')
+            logger_rlgen_main.debug('---------------------------------BUGZILLA------------------------------------')
             print('Entered Bugzilla environment')
             config = configparser.ConfigParser()
             config.read('{}config.conf'.format(conf_path))
@@ -293,7 +318,7 @@ class UserTrackerChoice:
         else:
             print('Please press a valid letter ("J" or "j" for JIRA / "B" or "b" for Bugzilla) '
                   'for choosing your tracker.')
-            logger_rlgen.warning('Please press a valid letter ("J" or "j" for JIRA / "B" or "b" for Bugzilla) '
+            logger_rlgen_main.warning('Please press a valid letter ("J" or "j" for JIRA / "B" or "b" for Bugzilla) '
                                  'for choosing your tracker.')
 
 
@@ -378,7 +403,7 @@ def user_input(argv):
 
 
 if __name__ == '__main__':
-    logger_rlgen.debug('Hello Tracker!')
+    logger_rlgen_main.debug('Hello Tracker!')
     tracker_issue_selection = user_input(sys.argv[1:])
     # User Choice
     tracker_choice = UserTrackerChoice(tracker=tracker_issue_selection['tracker'],

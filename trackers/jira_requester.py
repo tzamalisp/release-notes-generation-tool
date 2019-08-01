@@ -1,3 +1,4 @@
+import logging
 import requests
 import configparser
 import os
@@ -8,6 +9,17 @@ from conf.confparse import JiraReadConfigurationServer
 from conf.confparse import JiraReadConfigurationBasicAuth
 from conf.confparse import JiraReadConfigurationOAuth
 
+# create and configure a logger
+LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
+logging_file_jira = logging.basicConfig(filename='log/jira_request.log',
+                                        level=logging.DEBUG,
+                                        format=LOG_FORMAT,
+                                        filemode='w')
+
+# root logger (without name)
+logger_jira = logging.getLogger(__name__)
+
+
 current_d = os.getcwd()
 # print(current_d)
 directories_list = current_d.split('/')
@@ -17,6 +29,8 @@ basic_desktop_path = directories_list[1:4]
 new_path = 'conf/'
 basic_desktop_path.append(new_path)
 conf_path = '/' + '/'.join(basic_desktop_path)
+working_directory_path = directories_list[1:]
+configuration_directory_path = '/' + '/'.join(working_directory_path)
 
 """ CONNECTING TO JIRA API WITH THE CORRESPONDING AUTHENTICATION WAY """
 
@@ -24,7 +38,7 @@ conf_path = '/' + '/'.join(basic_desktop_path)
 class Connector:
 
     def connection_jira(self):
-
+        logger_jira.debug('Connection to JIRA API')
         # AUTHENTICATION
         options = {}
         # JIRA connection credentials
@@ -110,7 +124,10 @@ class ConfigData:
         config = configparser.ConfigParser()
         config.read('{}config.conf'.format(conf_path))
         # read fields from configuration
-        search_list_conf_input = config[self.search_field]['search_list']
+        # JIRA search terms configuration file reading
+        search_terms_config = configparser.ConfigParser()
+        search_terms_config.read('{}/conf/search_terms.conf'.format(configuration_directory_path))
+        search_list_conf_input = search_terms_config[self.search_field]['search_list']
         search_list_conf_input = search_list_conf_input.replace(', ', ',')
         search_list_conf_input = search_list_conf_input.replace(' ,', ',')
         search_list_conf_input = search_list_conf_input.replace(' , ', ',')
@@ -267,12 +284,14 @@ class IssueDataRetrieverJira:
             print()
             print('Fetching the data - Layer 2:')
 
-            config = configparser.ConfigParser()
-            config.read('{}config.conf'.format(conf_path))
-            custom_field_names = config['jira_custom_fields']['name']
+            # read fields from configuration
+            # JIRA search terms configuration file reading
+            search_terms_config = configparser.ConfigParser()
+            search_terms_config.read('{}/conf/search_terms.conf'.format(configuration_directory_path))
+            custom_field_names = search_terms_config['jira_custom_fields']['name']
             custom_field_names_list = custom_field_names.split(',')
 
-            custom_field_ids = config['jira_custom_fields']['id']
+            custom_field_ids = search_terms_config['jira_custom_fields']['id']
             custom_field_ids_list = custom_field_ids.split(',')
             for index, id in enumerate(custom_field_ids_list):
                 custom_field_ids_list[index] = 'customfield_' + str(id)

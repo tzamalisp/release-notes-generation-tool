@@ -8,13 +8,13 @@ from conf.confparse import BugzillaReadConfigurationApiKey
 
 # create and configure a logger
 LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
-logging_file = logging.basicConfig(filename='log/bugzilla_request.log',
+logging_file_bugzilla = logging.basicConfig(filename='log/bugzilla_request.log',
                                    level=logging.DEBUG,
                                    format=LOG_FORMAT,
                                    filemode='w')
 
 # root logger (without name)
-logger = logging.getLogger(__name__)
+logger_bugzilla = logging.getLogger(__name__)
 
 current_d = os.getcwd()
 # print(current_d)
@@ -25,6 +25,10 @@ basic_desktop_path = directories_list[1:4]
 new_path = 'conf/'
 basic_desktop_path.append(new_path)
 conf_path = '/' + '/'.join(basic_desktop_path)
+print('Path rlgen is found:')
+working_directory_path = directories_list[1:]
+configuration_directory_path = '/' + '/'.join(working_directory_path)
+print(configuration_directory_path)
 
 
 class TargetReleaseBugzilla:
@@ -46,11 +50,11 @@ class TargetReleaseBugzilla:
             api_key_auth = api_connection.key_auth()['api_key_auth']
             if api_key_auth is True:
                 api_key_reason = api_connection.key_auth()['api_key_reason']
-                logger.debug(api_key_reason)
+                logger_bugzilla.debug(api_key_reason)
                 api_key = api_connection.key_auth()['api_key']
             else:
                 api_key_reason = api_connection.key_auth()['api_key_reason']
-                logger.warning(api_key_reason)
+                logger_bugzilla.warning(api_key_reason)
                 raise Exception(api_key_reason)
 
             config = configparser.ConfigParser()
@@ -58,7 +62,10 @@ class TargetReleaseBugzilla:
             company = config['bugzilla_basic_auth']['company']
 
             # read fields from configuration
-            search_list_conf_input = config['bugzilla_target_release']['search_list']
+            # Bugzilla search terms configuration file reading
+            search_terms_config = configparser.ConfigParser()
+            search_terms_config.read('{}/conf/search_terms.conf'.format(configuration_directory_path))
+            search_list_conf_input = search_terms_config['bugzilla_target_release']['search_list']
             search_list_conf_input = search_list_conf_input.replace(', ', ',')
             search_list_conf_input = search_list_conf_input.replace(' ,', ',')
             search_list_conf_input = search_list_conf_input.replace(' , ', ',')
@@ -160,11 +167,11 @@ class DataRetriever:
         api_key_auth = api_connection.key_auth()['api_key_auth']
         if api_key_auth is True:
             api_key_reason = api_connection.key_auth()['api_key_reason']
-            logger.debug(api_key_reason)
+            logger_bugzilla.debug(api_key_reason)
             api_key = api_connection.key_auth()['api_key']
         else:
             api_key_reason = api_connection.key_auth()['api_key_reason']
-            logger.warning(api_key_reason)
+            logger_bugzilla.warning(api_key_reason)
             raise Exception(api_key_reason)
 
         config = configparser.ConfigParser()
@@ -173,7 +180,10 @@ class DataRetriever:
         company = config['bugzilla_basic_auth']['company']
 
         # read fields from configuration
-        search_list_conf_input = config['bugzilla_bug']['search_list']
+        # Bugzilla search terms configuration file reading
+        search_terms_config = configparser.ConfigParser()
+        search_terms_config.read('{}/conf/search_terms.conf'.format(configuration_directory_path))
+        search_list_conf_input = search_terms_config['bugzilla_bug']['search_list']
         search_list_conf_input = search_list_conf_input.replace(', ', ',')
         search_list_conf_input = search_list_conf_input.replace(' ,', ',')
         search_list_conf_input = search_list_conf_input.replace(' , ', ',')
@@ -218,18 +228,21 @@ class DataRetriever:
         api_key_auth = api_connection.key_auth()['api_key_auth']
         if api_key_auth is True:
             api_key_reason = api_connection.key_auth()['api_key_reason']
-            logger.debug(api_key_reason)
+            logger_bugzilla.debug(api_key_reason)
             api_key = api_connection.key_auth()['api_key']
         else:
             api_key_reason = api_connection.key_auth()['api_key_reason']
-            logger.warning(api_key_reason)
+            logger_bugzilla.warning(api_key_reason)
             raise Exception(api_key_reason)
         config = configparser.ConfigParser()
         config.read('{}config.conf'.format(conf_path))
         company = config['bugzilla_basic_auth']['company']
 
         # read fields from configuration
-        search_list_conf_input = config['bugzilla_user_assigned_bugs']['search_list']
+        # Bugzilla search terms configuration file reading
+        search_terms_config = configparser.ConfigParser()
+        search_terms_config.read('{}/conf/search_terms.conf'.format(configuration_directory_path))
+        search_list_conf_input = search_terms_config['bugzilla_user_assigned_bugs']['search_list']
         search_list_conf_input = search_list_conf_input.replace(', ', ',')
         search_list_conf_input = search_list_conf_input.replace(' ,', ',')
         search_list_conf_input = search_list_conf_input.replace(' , ', ',')
@@ -276,11 +289,11 @@ class DataRetriever:
         api_key_auth = api_connection.key_auth()['api_key_auth']
         if api_key_auth is True:
             api_key_reason = api_connection.key_auth()['api_key_reason']
-            logger.debug(api_key_reason)
+            logger_bugzilla.debug(api_key_reason)
             api_key = api_connection.key_auth()['api_key']
         else:
             api_key_reason = api_connection.key_auth()['api_key_reason']
-            logger.warning(api_key_reason)
+            logger_bugzilla.warning(api_key_reason)
             raise Exception(api_key_reason)
 
         config = configparser.ConfigParser()
@@ -288,7 +301,10 @@ class DataRetriever:
         company = config['bugzilla_basic_auth']['company']
 
         # read fields from configuration
-        search_list_conf_input = config['bugzilla_user_info']['search_list']
+        # Bugzilla search terms configuration file reading
+        search_terms_config = configparser.ConfigParser()
+        search_terms_config.read('{}/conf/search_terms.conf'.format(configuration_directory_path))
+        search_list_conf_input = search_terms_config['bugzilla_user_info']['search_list']
         search_list_conf_input = search_list_conf_input.replace(', ', ',')
         search_list_conf_input = search_list_conf_input.replace(' ,', ',')
         search_list_conf_input = search_list_conf_input.replace(' , ', ',')
@@ -333,18 +349,21 @@ class DataRetriever:
         api_key_auth = api_connection.key_auth()['api_key_auth']
         if api_key_auth is True:
             api_key_reason = api_connection.key_auth()['api_key_reason']
-            logger.debug(api_key_reason)
+            logger_bugzilla.debug(api_key_reason)
             api_key = api_connection.key_auth()['api_key']
         else:
             api_key_reason = api_connection.key_auth()['api_key_reason']
-            logger.warning(api_key_reason)
+            logger_bugzilla.warning(api_key_reason)
             raise Exception(api_key_reason)
         config = configparser.ConfigParser()
         config.read('{}config.conf'.format(conf_path))
         company = config['bugzilla_basic_auth']['company']
 
         # read fields from configuration
-        search_list_conf_input = config['bugzilla_comments']['search_list']
+        # Bugzilla search terms configuration file reading
+        search_terms_config = configparser.ConfigParser()
+        search_terms_config.read('{}/conf/search_terms.conf'.format(configuration_directory_path))
+        search_list_conf_input = search_terms_config['bugzilla_comments']['search_list']
         search_list_conf_input = search_list_conf_input.replace(', ', ',')
         search_list_conf_input = search_list_conf_input.replace(' ,', ',')
         search_list_conf_input = search_list_conf_input.replace(' , ', ',')
@@ -392,18 +411,21 @@ class DataRetriever:
         api_key_auth = api_connection.key_auth()['api_key_auth']
         if api_key_auth is True:
             api_key_reason = api_connection.key_auth()['api_key_reason']
-            logger.debug(api_key_reason)
+            logger_bugzilla.debug(api_key_reason)
             api_key = api_connection.key_auth()['api_key']
         else:
             api_key_reason = api_connection.key_auth()['api_key_reason']
-            logger.warning(api_key_reason)
+            logger_bugzilla.warning(api_key_reason)
             raise Exception(api_key_reason)
         config = configparser.ConfigParser()
         config.read('{}config.conf'.format(conf_path))
         company = config['bugzilla_basic_auth']['company']
 
         # read fields from configuration
-        search_list_conf_input = config['bugzilla_bug_history']['search_list']
+        # Bugzilla search terms configuration file reading
+        search_terms_config = configparser.ConfigParser()
+        search_terms_config.read('{}/conf/search_terms.conf'.format(configuration_directory_path))
+        search_list_conf_input = search_terms_config['bugzilla_bug_history']['search_list']
         search_list_conf_input = search_list_conf_input.replace(', ', ',')
         search_list_conf_input = search_list_conf_input.replace(' ,', ',')
         search_list_conf_input = search_list_conf_input.replace(' , ', ',')
