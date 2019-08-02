@@ -1,4 +1,12 @@
 from datetime import datetime
+import logging
+
+from logger_creation import LoggerSetup
+
+logging__asciidoc = LoggerSetup(name='asciidoc_logger', log_file='log/asciidoc_generator.log', level=None)
+logger_asciidoc = logging__asciidoc.setup_logger()
+
+logger_asciidoc.debug('Entering AsciiDoc Generator Classes')
 
 
 class GeneratorJira:

@@ -9,16 +9,21 @@ from conf.confparse import JiraReadConfigurationServer
 from conf.confparse import JiraReadConfigurationBasicAuth
 from conf.confparse import JiraReadConfigurationOAuth
 
-# create and configure a logger
-LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
-logging_file_jira = logging.basicConfig(filename='log/jira_request.log',
-                                        level=logging.DEBUG,
-                                        format=LOG_FORMAT,
-                                        filemode='w')
+from logger_creation import LoggerSetup
 
-# root logger (without name)
-logger_jira = logging.getLogger(__name__)
+# # create and configure a logger
+# LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
+# logging_file_jira = logging.basicConfig(filename='log/jira_request.log',
+#                                         level=logging.DEBUG,
+#                                         format=LOG_FORMAT,
+#                                         filemode='w')
+#
+# # root logger (without name)
+# logger_jira = logging.getLogger(__name__)
 
+
+logging_jira = LoggerSetup(name='jira_logger', log_file='log/jira_requester.log', level=None)
+logger_jira = logging_jira.setup_logger()
 
 current_d = os.getcwd()
 # print(current_d)
@@ -31,6 +36,10 @@ basic_desktop_path.append(new_path)
 conf_path = '/' + '/'.join(basic_desktop_path)
 working_directory_path = directories_list[1:]
 configuration_directory_path = '/' + '/'.join(working_directory_path)
+
+
+logger_jira.debug('Entering JIRA Requester Classes')
+
 
 """ CONNECTING TO JIRA API WITH THE CORRESPONDING AUTHENTICATION WAY """
 

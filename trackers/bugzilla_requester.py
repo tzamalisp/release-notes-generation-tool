@@ -6,15 +6,10 @@ import os
 
 from conf.confparse import BugzillaReadConfigurationApiKey
 
-# create and configure a logger
-LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
-logging_file_bugzilla = logging.basicConfig(filename='log/bugzilla_request.log',
-                                   level=logging.DEBUG,
-                                   format=LOG_FORMAT,
-                                   filemode='w')
+from logger_creation import LoggerSetup
 
-# root logger (without name)
-logger_bugzilla = logging.getLogger(__name__)
+logging_bugzilla = LoggerSetup(name='bugzilla_logger', log_file='log/bugzilla_requester.log', level=None)
+logger_bugzilla = logging_bugzilla.setup_logger()
 
 current_d = os.getcwd()
 # print(current_d)
@@ -29,6 +24,8 @@ print('Path rlgen is found:')
 working_directory_path = directories_list[1:]
 configuration_directory_path = '/' + '/'.join(working_directory_path)
 print(configuration_directory_path)
+
+logger_bugzilla.debug('Entering Bugzilla Requester Classes')
 
 
 class TargetReleaseBugzilla:

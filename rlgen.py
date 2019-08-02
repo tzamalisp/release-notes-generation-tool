@@ -13,7 +13,7 @@ from trackers.jira_requester import IssueDataRetrieverJira
 from asciidoc_generator import GeneratorJira
 from asciidoc_generator import GeneratorBugzillaReport
 
-from logger_creation import LoggerSetup
+# from logger_creation import LoggerSetup
 
 # formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
 
@@ -27,8 +27,49 @@ from logger_creation import LoggerSetup
 # # root logger (without name)
 # logger_rlgen_main = logging.getLogger()
 
-logger_rlgen = LoggerSetup(name='main_logger', log_file='main.log', level=logging.DEBUG)
-logger_rlgen_main = logger_rlgen.setup_logger()
+""""""
+
+
+formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+
+
+class LoggerSetup:
+    def __init__(self, name, log_file, level):
+        self.name = name
+        self.log_file = log_file
+        self.level = level
+
+# def setup_logger(name, log_file, level=logging.INFO):
+    def setup_logger(self):
+        """Function setup as many loggers as you want"""
+
+        handler = logging.FileHandler(self.log_file, mode='w')
+        handler.setFormatter(formatter)
+
+        logger_object = logging.getLogger(self.name)
+        if self.level is None:
+            logger_object.setLevel(logging.DEBUG)
+        elif self.level is 0:
+            logger_object.setLevel(logging.DEBUG)
+        elif self.level is 1:
+            logger_object.setLevel(logging.INFO)
+        elif self.level is 2:
+            logger_object.setLevel(logging.WARNING)
+        elif self.level is 3:
+            logger_object.setLevel(logging.ERROR)
+        elif self.level is 4:
+            logger_object.setLevel(logging.CRITICAL)
+        else:
+            print('Please define correct one of the Debug Levels:\n'
+                  '0: DEBUG\n'
+                  '1: INFO\n'
+                  '2: WARNING\n'
+                  '3: ERROR\n'
+                  '4: CRITICAL')
+
+        logger_object.addHandler(handler)
+
+        return logger_object
 
 
 # def setup_logger(name, log_file, level=logging.DEBUG):
@@ -58,7 +99,6 @@ print()
 new_path = 'conf/'
 basic_desktop_path.append(new_path)
 conf_path = '/' + '/'.join(basic_desktop_path)
-
 
 """ USER CHOICE OF ISSUE TRACKING PLATFORM """
 
@@ -319,7 +359,7 @@ class UserTrackerChoice:
             print('Please press a valid letter ("J" or "j" for JIRA / "B" or "b" for Bugzilla) '
                   'for choosing your tracker.')
             logger_rlgen_main.warning('Please press a valid letter ("J" or "j" for JIRA / "B" or "b" for Bugzilla) '
-                                 'for choosing your tracker.')
+                                      'for choosing your tracker.')
 
 
 """ USER TERMINAL INPUTS """
@@ -359,10 +399,6 @@ def user_input(argv):
                         help="add the function you want to use for Bugzilla (i: bug information, c: bug comments, "
                              "h: bug history)",
                         metavar="<BUG_FUNCTION>")
-    parser.add_argument("-d", "--debug",
-                        dest="debug_level",
-                        help="add the level of debugging (0: DEBUG, 1: INFO, 2: WARNING)",
-                        metavar="<DEBUG_LEVEL>")
     parser.add_argument("-r", "--release",
                         dest="release_note",
                         nargs='+',
@@ -377,6 +413,11 @@ def user_input(argv):
                         dest="output_path",
                         help="add the path directory yoy want to save the Asciidoc export files",
                         metavar="<OUTPUT_PATH>")
+    parser.add_argument("-d", "--debug",
+                        dest="debug_level",
+                        help="define the level of debugging (0: DEBUG, 1: INFO, 2: WARNING)",
+                        metavar="<DEBUG_LEVEL>",
+                        type=int)
 
     # ARGUMENTS --> extra
     parser.add_argument("-q", "--quiet",
@@ -396,15 +437,23 @@ def user_input(argv):
             'custom_field_name': arguments.custom_field_name,
             'custom_field_id': arguments.custom_field_id,
             'bug_function': arguments.function,
-            'debug_level': arguments.debug_level,
             'order_ascending': arguments.order_ascending,
             'release_note': arguments.release_note,
-            'output_path': arguments.output_path}
+            'output_path': arguments.output_path,
+            'debug_level': arguments.debug_level}
 
 
 if __name__ == '__main__':
-    logger_rlgen_main.debug('Hello Tracker!')
     tracker_issue_selection = user_input(sys.argv[1:])
+    logging_rlgen = LoggerSetup(name='main_logger',
+                                log_file='log/rlgen_main.log',
+                                level=tracker_issue_selection['debug_level'])
+
+    logger_rlgen_main = logging_rlgen.setup_logger()
+
+    logger_rlgen_main.info('Entering the RLGEN Tool')
+
+    logger_rlgen_main.debug('Hello Tracker!')
     # User Choice
     tracker_choice = UserTrackerChoice(tracker=tracker_issue_selection['tracker'],
                                        issue=tracker_issue_selection['issue'],

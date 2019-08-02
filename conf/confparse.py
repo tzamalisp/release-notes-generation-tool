@@ -2,15 +2,10 @@ import configparser
 import logging
 import os
 
-# create and configure a logger
-LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
-logging_file = logging.basicConfig(filename='log/configuration.log',
-                                   level=logging.DEBUG,
-                                   format=LOG_FORMAT,
-                                   filemode='w')
+from logger_creation import LoggerSetup
 
-# root logger (without name)
-logger = logging.getLogger()
+logging__configuration = LoggerSetup(name='configuration_logger', log_file='log/configuration_user.log', level=None)
+logger_configuration = logging__configuration.setup_logger()
 
 current_d = os.getcwd()
 # print(current_d)
@@ -43,6 +38,9 @@ conf_path = '/' + '/'.join(basic_desktop_path)
 #     print()
 #     print('Writing..')
 #     print('Configuration file was created successfully!')
+
+
+logger_configuration.debug('Entering JIRA / Bugzilla Configuration Classes')
 
 
 """READING JIRA - BUGZILLA CONFIGURATION FILE CLASSES"""
