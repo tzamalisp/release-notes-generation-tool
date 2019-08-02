@@ -8,9 +8,6 @@ from conf.confparse import BugzillaReadConfigurationApiKey
 
 from logger_creation import LoggerSetup
 
-logging_bugzilla = LoggerSetup(name='bugzilla_logger', log_file='log/bugzilla_requester.log', level=None)
-logger_bugzilla = logging_bugzilla.setup_logger()
-
 current_d = os.getcwd()
 # print(current_d)
 directories_list = current_d.split('/')
@@ -25,7 +22,7 @@ working_directory_path = directories_list[1:]
 configuration_directory_path = '/' + '/'.join(working_directory_path)
 print(configuration_directory_path)
 
-logger_bugzilla.debug('Entering Bugzilla Requester Classes')
+# logger_bugzilla.debug('Entering Bugzilla Requester Classes')
 
 
 class TargetReleaseBugzilla:
@@ -35,6 +32,9 @@ class TargetReleaseBugzilla:
 
     # TARGET RELEASE
     def getting_target_release_notes(self):
+        logging_bugzilla = LoggerSetup(name='bugzilla_logger', log_file='log/bugzilla_requester.log', level=None)
+        logger_bugzilla = logging_bugzilla.setup_logger()
+        logger_bugzilla.debug('entered bugzilla release notes function')
         retrieve = 'target_release_notes'
         print('Releases:', self.releases)
         ascii_target_release_list = []
@@ -155,6 +155,9 @@ class DataRetriever:
 
     # BUG INFORMATION
     def getting_bug_info(self):
+        logging_bugzilla = LoggerSetup(name='bugzilla_logger', log_file='log/bugzilla_requester.log', level=None)
+        logger_bugzilla = logging_bugzilla.setup_logger()
+        logger_bugzilla.debug('entered bugzilla getting bug information function')
         retrieve = 'bug_info'
         ascii_bug_info_list = []
         print('Bug ID:', self.bug_id)
@@ -461,6 +464,9 @@ class DataRetriever:
 
     # MAIN CLASS FUNCTION FOR DATA RETRIEVING FROM EACH QUERY TO THE REST API
     def data_retriever(self, retrieval, data, search_list, ascii_doc_data):
+        logging_bugzilla_main = LoggerSetup(name='bugzilla_main_logger', log_file='log/bugzilla_main_requester.log', level=None)
+        logger_bugzilla_main = logging_bugzilla_main.setup_logger()
+        logger_bugzilla_main.debug('entered main bugzilla function')
         ascii_doc_data_list = []
         print('Search List:', search_list)
         print('Search List Length:', len(search_list))

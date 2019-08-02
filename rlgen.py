@@ -13,78 +13,7 @@ from trackers.jira_requester import IssueDataRetrieverJira
 from asciidoc_generator import GeneratorJira
 from asciidoc_generator import GeneratorBugzillaReport
 
-# from logger_creation import LoggerSetup
-
-# formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
-
-# # create and configure a logger
-# LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
-# logging_file_main = logging.basicConfig(filename='log/rlgen.log',
-#                                    level=logging.DEBUG,
-#                                    format=LOG_FORMAT,
-#                                    filemode='w')
-#
-# # root logger (without name)
-# logger_rlgen_main = logging.getLogger()
-
-""""""
-
-
-formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
-
-
-class LoggerSetup:
-    def __init__(self, name, log_file, level):
-        self.name = name
-        self.log_file = log_file
-        self.level = level
-
-# def setup_logger(name, log_file, level=logging.INFO):
-    def setup_logger(self):
-        """Function setup as many loggers as you want"""
-
-        handler = logging.FileHandler(self.log_file, mode='w')
-        handler.setFormatter(formatter)
-
-        logger_object = logging.getLogger(self.name)
-        if self.level is None:
-            logger_object.setLevel(logging.DEBUG)
-        elif self.level is 0:
-            logger_object.setLevel(logging.DEBUG)
-        elif self.level is 1:
-            logger_object.setLevel(logging.INFO)
-        elif self.level is 2:
-            logger_object.setLevel(logging.WARNING)
-        elif self.level is 3:
-            logger_object.setLevel(logging.ERROR)
-        elif self.level is 4:
-            logger_object.setLevel(logging.CRITICAL)
-        else:
-            print('Please define correct one of the Debug Levels:\n'
-                  '0: DEBUG\n'
-                  '1: INFO\n'
-                  '2: WARNING\n'
-                  '3: ERROR\n'
-                  '4: CRITICAL')
-
-        logger_object.addHandler(handler)
-
-        return logger_object
-
-
-# def setup_logger(name, log_file, level=logging.DEBUG):
-#     """Function setup as many loggers as you want"""
-#
-#     handler = logging.FileHandler(log_file)
-#     handler.setFormatter(formatter)
-#
-#     logger = logging.getLogger(name)
-#     logger.setLevel(level)
-#     logger.addHandler(handler)
-#
-#     return logger
-#
-# logger_rlgen_main = setup_logger('first_logger', 'first_logfile.log')
+from logger_creation import LoggerSetup
 
 current_d = os.getcwd()
 # print(current_d)
