@@ -389,6 +389,7 @@ def user_input(argv):
 
 
 if __name__ == '__main__':
+    print('Starting RLGen Tool')
     tracker_issue_selection = user_input(sys.argv[1:])
     logging_rlgen = LoggerSetup(name='main_logger',
                                 log_file='log/rlgen_main.log',
