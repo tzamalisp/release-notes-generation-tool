@@ -1,0 +1,43 @@
+= Release Notes Generation Tool (RLGEN)
+:author: Pantelis Tzamalis
+:email: tzamalis@ceid.upatras.gr
+:username: hello_user
+
+== Bug ID: 1409196
+
+* Search Fields: ['summary', 'assigned_to', 'target_release', 'target_milestone', 'status', 'creation_time', 'cf_fixed_in', 'classification', 'op_sys', 'priority', 'product']
+
+
+
+=== Bug Information
+
+* summary: When enabled "<IfModule mod_deflate.c>", refresh page 2nd or 3rd time, "304" code will not appear.
+
+* assigned_to: weli@redhat.com
+
+* target_release:
+
+** ---
+
+* target_milestone: ---
+
+* status: NEW
+
+* creation_time: 2016-12-30T06:38:51Z
+
+* cf_fixed_in: Nothing related to cf_fixed_in is now available.
+
+* classification: Retired
+
+* op_sys: All
+
+* priority: unspecified
+
+* product: JBoss Web Server 3
+
+
+
+----------
+Report time: 2019-08-06 11:33:42.633025
+
+

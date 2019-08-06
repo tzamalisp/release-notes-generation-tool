@@ -22,17 +22,18 @@ working_directory_path = directories_list[1:]
 configuration_directory_path = '/' + '/'.join(working_directory_path)
 print(configuration_directory_path)
 
-# logger_bugzilla.debug('Entering Bugzilla Requester Classes')
-
 
 class TargetReleaseBugzilla:
-    def __init__(self, releases, terms):
+    def __init__(self, releases, terms, debug_level):
         self.releases = releases
         self.terms = terms
+        self.debug_level = debug_level
 
     # TARGET RELEASE
     def getting_target_release_notes(self):
-        logging_bugzilla = LoggerSetup(name='bugzilla_logger', log_file='log/bugzilla_requester.log', level=None)
+        logging_bugzilla = LoggerSetup(name='bugzilla_target_releases_logger',
+                                       log_file='log/bugzilla_target_releases_requester.log',
+                                       level=self.debug_level)
         logger_bugzilla = logging_bugzilla.setup_logger()
         logger_bugzilla.debug('entered bugzilla release notes function')
         retrieve = 'target_release_notes'
@@ -148,14 +149,17 @@ class TargetReleaseBugzilla:
 
 
 class DataRetriever:
-    def __init__(self, bug_id, terms, user):
+    def __init__(self, bug_id, terms, user, debug_level):
         self.bug_id = bug_id
         self.terms = terms
         self.user = user
+        self.debug_level = debug_level
 
     # BUG INFORMATION
     def getting_bug_info(self):
-        logging_bugzilla = LoggerSetup(name='bugzilla_logger', log_file='log/bugzilla_requester.log', level=None)
+        logging_bugzilla = LoggerSetup(name='bugzilla_logger',
+                                       log_file='log/bugzilla_function_requester.log',
+                                       level=self.debug_level)
         logger_bugzilla = logging_bugzilla.setup_logger()
         logger_bugzilla.debug('entered bugzilla getting bug information function')
         retrieve = 'bug_info'
@@ -219,6 +223,11 @@ class DataRetriever:
 
     # USER ASSIGNED BUGS
     def getting_user_assigned_bugs(self):
+        logging_bugzilla = LoggerSetup(name='bugzilla_logger',
+                                       log_file='log/bugzilla_function_requester.log',
+                                       level=self.debug_level)
+        logger_bugzilla = logging_bugzilla.setup_logger()
+        logger_bugzilla.debug('entered bugzilla user assigned bugs function')
         retrieve = 'user_assigned_bugs'
         ascii_user_assigned_bugs_list = []
         print('User:', self.user)
@@ -280,6 +289,11 @@ class DataRetriever:
 
     # USER INFORMATION
     def getting_user_info(self):
+        logging_bugzilla = LoggerSetup(name='bugzilla_logger',
+                                       log_file='log/bugzilla_function_requester.log',
+                                       level=self.debug_level)
+        logger_bugzilla = logging_bugzilla.setup_logger()
+        logger_bugzilla.debug('entered bugzilla user info function')
         retrieve = 'user_info'
         ascii_user_info_list = []
         print('User:', self.user)
@@ -340,6 +354,11 @@ class DataRetriever:
 
     # BUG COMMENTS
     def getting_bug_comments(self):
+        logging_bugzilla = LoggerSetup(name='bugzilla_logger',
+                                       log_file='log/bugzilla_function_requester.log',
+                                       level=self.debug_level)
+        logger_bugzilla = logging_bugzilla.setup_logger()
+        logger_bugzilla.debug('entered bugzilla bug comments function')
         retrieve = 'bug_comments'
         ascii_bug_comments_list = []
         print('Bug ID:', self.bug_id)
@@ -402,6 +421,11 @@ class DataRetriever:
 
     # BUG HISTORY
     def getting_bug_history(self):
+        logging_bugzilla = LoggerSetup(name='bugzilla_logger',
+                                       log_file='log/bugzilla_function_requester.log',
+                                       level=self.debug_level)
+        logger_bugzilla = logging_bugzilla.setup_logger()
+        logger_bugzilla.debug('entered bugzilla bug history function')
         retrieve = 'bug_history'
         ascii_bug_history_list = []
         print('Bug ID:', self.bug_id)
@@ -464,7 +488,9 @@ class DataRetriever:
 
     # MAIN CLASS FUNCTION FOR DATA RETRIEVING FROM EACH QUERY TO THE REST API
     def data_retriever(self, retrieval, data, search_list, ascii_doc_data):
-        logging_bugzilla_main = LoggerSetup(name='bugzilla_main_logger', log_file='log/bugzilla_main_requester.log', level=None)
+        logging_bugzilla_main = LoggerSetup(name='bugzilla_main_logger',
+                                            log_file='log/bugzilla_bug_data_retriever.log',
+                                            level=self.debug_level)
         logger_bugzilla_main = logging_bugzilla_main.setup_logger()
         logger_bugzilla_main.debug('entered main bugzilla function')
         ascii_doc_data_list = []

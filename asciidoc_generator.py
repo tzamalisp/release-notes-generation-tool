@@ -5,7 +5,7 @@ from logger_creation import LoggerSetup
 
 
 class GeneratorJira:
-    def __init__(self, kind_of_report, releases, bug, user, firstname, lastname, email_account, data_basic, path):
+    def __init__(self, kind_of_report, releases, bug, user, firstname, lastname, email_account, data_basic, path, time):
         self.kind_of_report = kind_of_report
         self.releases = releases
         self.user = user
@@ -15,6 +15,7 @@ class GeneratorJira:
         self.email_account = email_account
         self.data_basic = data_basic
         self.path = path
+        self.time = time
 
     def generating_doc_jira(self):
         logging__asciidoc = LoggerSetup(name='asciidoc_logger', log_file='log/asciidoc_generator.log', level=None)
@@ -22,8 +23,16 @@ class GeneratorJira:
 
         logger_asciidoc.debug('Entering AsciiDoc Generator Classes')
         logger_asciidoc.info('TEST PRINT JIRA ASCIIDOC')
-        now = datetime.now()
-        now_str = now.strftime("%Y-%m-%d_%H-%M-%S")
+        if self.time is 1:
+            now = datetime.now()
+            now_str = now.strftime("%Y-%m-%d_%H-%M-%S")
+        elif self.time is None:
+            now_str = 'NoReportTime'
+        elif self.time is 0:
+            now_str = 'NoReportTime'
+        else:
+            logger_asciidoc.warning('Please define a correct value for enabling/disabling the Report Time mode '
+                                    '(0: Disable, 1: Enable) - by default is Disabled')
         report_fields = []
         if self.user is None:
             self.user = 'unknown_username'
@@ -81,7 +90,7 @@ class GeneratorJira:
 
 
 class GeneratorBugzillaReport:
-    def __init__(self, kind_of_report, releases, bug, user, username, firstname, lastname, email_account, data_basic, path):
+    def __init__(self, kind_of_report, releases, bug, user, username, firstname, lastname, email_account, data_basic, path, time):
         self.kind_of_report = kind_of_report
         self.releases = releases
         self.bug = bug
@@ -92,6 +101,7 @@ class GeneratorBugzillaReport:
         self.email_account = email_account
         self.data_basic = data_basic
         self.path = path
+        self.time = time
 
     def generating_doc_bugzilla(self):
         logging__asciidoc = LoggerSetup(name='asciidoc_logger', log_file='log/asciidoc_generator.log', level=None)
@@ -99,8 +109,16 @@ class GeneratorBugzillaReport:
 
         logger_asciidoc.debug('Entering AsciiDoc Generator Classes')
         logger_asciidoc.info('TEST PRINT BUGZILLA ASCIIDOC')
-        now = datetime.now()
-        now_str = now.strftime("%Y-%m-%d_%H-%M-%S")
+        if self.time is 1:
+            now = datetime.now()
+            now_str = now.strftime("%Y-%m-%d_%H-%M-%S")
+        elif self.time is None:
+            now_str = 'NoReportTime'
+        elif self.time is 0:
+            now_str = 'NoReportTime'
+        else:
+            logger_asciidoc.warning('Please define a correct value for enabling/disabling the Report Time mode '
+                                    '(0: Disable, 1: Enable) - by default is Disabled')
         report_fields = []
         if self.username is '':
             self.username = 'unknown_username'

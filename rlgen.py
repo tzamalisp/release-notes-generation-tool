@@ -34,7 +34,7 @@ conf_path = '/' + '/'.join(basic_desktop_path)
 
 class UserTrackerChoice:
     def __init__(self, tracker, issue, release_note, order, user, custom_field_name, custom_field_id,
-                 bug_function, output_path):
+                 bug_function, output_path, debug_level, time):
         self.tracker = tracker
         self.issue = issue
         self.user = user
@@ -44,6 +44,9 @@ class UserTrackerChoice:
         self.release_note = release_note
         self.order = order
         self.output_path = output_path
+        self.debug_level = debug_level
+        self.time = time
+
 
     def tracker_selection(self):
         # JIRA
@@ -89,14 +92,16 @@ class UserTrackerChoice:
             # self.release_note is type of list
             release_notes = TargetReleaseJira(release_name=release_name,
                                               release=self.release_note,
-                                              order=self.order)
+                                              order=self.order,
+                                              debug_level=self.debug_level)
 
             # calling the basic class for collecting the corresponding data from the bugzilla rest api
             # functions: bug info, bug comments, bug history, user info, user assigned bugs
             issue_object = IssueDataRetrieverJira(issue=self.issue,
                                                   terms=None,
                                                   cf_name=None,
-                                                  cf_id=None)
+                                                  cf_id=None,
+                                                  debug_level=self.debug_level)
 
             report_field = 'No report field is specified.'
             data_report = ['* No data were fetched from the REST API.']
@@ -151,7 +156,8 @@ class UserTrackerChoice:
                                       lastname=last_name,
                                       email_account=email,
                                       data_basic=data_report,
-                                      path=path)
+                                      path=path,
+                                      time=self.time)
             doc_basic.generating_doc_jira()
 
         # BUGZILLA
@@ -179,13 +185,16 @@ class UserTrackerChoice:
 
             # calling the class for making the the Target Release notes object
             # self.release_note is type of list
-            release_notes = TargetReleaseBugzilla(self.release_note, self.custom_field_name)
+            release_notes = TargetReleaseBugzilla(releases=self.release_note,
+                                                  terms=self.custom_field_name,
+                                                  debug_level=self.debug_level)
 
             # calling the basic class for collecting the corresponding data from the bugzilla rest api
             # functions: bug info, bug comments, bug history, user info, user assigned bugs
             data_object = DataRetriever(bug_id=self.issue,
                                         terms=self.custom_field_name,
-                                        user=self.user)
+                                        user=self.user,
+                                        debug_level=self.debug_level)
 
             report_field = 'No report field is specified.'
             data_report = ['* No data were fetched from the REST API.']
@@ -282,7 +291,8 @@ class UserTrackerChoice:
                                              lastname=last_name,
                                              email_account=email,
                                              data_basic=data_report,
-                                             path=path)
+                                             path=path,
+                                             time=self.time)
             report.generating_doc_bugzilla()
         else:
             print('Please press a valid letter ("J" or "j" for JIRA / "B" or "b" for Bugzilla) '
@@ -342,6 +352,11 @@ def user_input(argv):
                         dest="output_path",
                         help="add the path directory yoy want to save the Asciidoc export files",
                         metavar="<OUTPUT_PATH>")
+    parser.add_argument("-z", "--zone_time",
+                        dest="zone_time",
+                        help="enable/disable the Report Time mode (0: Disable, 1: Enable) - by default is Disabled",
+                        metavar="<ZONE_TIME>",
+                        type=int)
     parser.add_argument("-d", "--debug",
                         dest="debug_level",
                         help="define the level of debugging (0: DEBUG, 1: INFO, 2: WARNING)",
@@ -369,7 +384,8 @@ def user_input(argv):
             'order_ascending': arguments.order_ascending,
             'release_note': arguments.release_note,
             'output_path': arguments.output_path,
-            'debug_level': arguments.debug_level}
+            'debug_level': arguments.debug_level,
+            'zone_time': arguments.zone_time}
 
 
 if __name__ == '__main__':
@@ -380,7 +396,7 @@ if __name__ == '__main__':
 
     logger_rlgen_main = logging_rlgen.setup_logger()
 
-    logger_rlgen_main.info('Entering the RLGEN Tool')
+    logger_rlgen_main.info('Entering the RLGen Tool')
 
     logger_rlgen_main.debug('Hello Tracker!')
     # User Choice
@@ -392,7 +408,9 @@ if __name__ == '__main__':
                                        bug_function=tracker_issue_selection['bug_function'],
                                        order=tracker_issue_selection['order_ascending'],
                                        release_note=tracker_issue_selection['release_note'],
-                                       output_path=tracker_issue_selection['output_path'])
+                                       output_path=tracker_issue_selection['output_path'],
+                                       debug_level=tracker_issue_selection['debug_level'],
+                                       time=tracker_issue_selection['zone_time'])
 
     tracker_choice.tracker_selection()
     print()

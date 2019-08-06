@@ -1,5 +1,11 @@
 import logging
+import os
 formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+
+current_d = os.getcwd()
+print(current_d)
+if not os.path.exists(os.path.join(current_d, 'log')):
+    os.makedirs(os.path.join(current_d, 'log'))
 
 
 class LoggerSetup:

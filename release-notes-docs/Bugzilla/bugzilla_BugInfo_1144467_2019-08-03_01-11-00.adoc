@@ -1,0 +1,43 @@
+= Release Notes Generation Tool (RLGEN)
+:author: Pantelis Tzamalis
+:email: tzamalis@ceid.upatras.gr
+:username: hello_user
+
+== Bug ID: 1144467
+
+* Search Fields: ['summary', 'assigned_to', 'target_release', 'target_milestone', 'status', 'creation_time', 'cf_fixed_in', 'classification', 'op_sys', 'priority', 'product']
+
+
+
+=== Bug Information
+
+* summary: Globally uncaught exception  while installing remote agent on windows
+
+* assigned_to: miburman@redhat.com
+
+* target_release:
+
+** JON 3.3.0
+
+* target_milestone: ER04
+
+* status: CLOSED
+
+* creation_time: 2014-09-19T13:04:28Z
+
+* cf_fixed_in: Nothing related to cf_fixed_in is now available.
+
+* classification: JBoss
+
+* op_sys: Unspecified
+
+* priority: unspecified
+
+* product: JBoss Operations Network
+
+
+
+----------
+Report time: 2019-08-03 01:11:00.799883
+
+
