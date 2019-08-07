@@ -239,9 +239,88 @@ The docs zip distribution provided by JWS (e.g. jws-docs-3.1.0.zip) includes an 
 
 ============================
 
+== Release Note: httpd 2.4.backlog.GA
+
+* Total Jiras: 5
+
+==== JBCS-783
+
+* Summary: Prepare smoke testing for mod_brotli on RHEL and Windows
+
+* Description:
+
+============================
+
+ * mod_brotli as a part of upstream 2.4.37 enters our product
+ * we need to check it works, simple smoke tests suffices as it is battle tested at Google and community 
+
+============================
+
+==== JBCS-782
+
+* Summary: add mod_brotli to rhel6/7 and windows
+
+* Description:
+
+============================
+
+None
+
+============================
+
+==== JBCS-749
+
+* Summary: Apache plugin doesn't discover Virtual Hosts on Windows
+
+* Description:
+
+============================
+
+The Apache plugin will not discover Apache Virtual Hosts on Windows, it appears the plugin uses Augeas for the discovery and it's not totally supported on Windows.  Can something else be used to discover Virtual Hosts configured in separate files.
+
+============================
+
+==== JBCS-747
+
+* Summary: JWS3.0-Document that httpd module mod_proxy_hcheck is not provided on windows
+
+* Description:
+
+============================
+
+Document that httpd module mod_proxy_hcheck is not provided on windows
+
+https://access.redhat.com/solutions/2823881
+
+============================
+
+==== JBCS-451
+
+* Summary: mod_proxy_http incorrectly requires continue response after already sending response data
+
+* Description:
+
+============================
+
+mod_proxy_http always requires a continue response from the back end for a proxied POST.  This is incorrect when it has already sent response data.  The [RFC7231|https://tools.ietf.org/pdf/rfc7231.pdf#nameddest=78] related to HTTP1.1 section 5.1.1 states:
+{code}
+A server MAY omit sending a 100 (Continue) response if it has
+      already received some or all of the message body for the
+      corresponding request, or if the framing indicates that there is
+      no message body
+{code}
+
+So then mod_proxy_http sends the Expect header along with the request body and then waits for the 100-continue, which could be an issue if the backend chooses to omit it per the spec above.  That can lead to POST requests hitting the ping timeout undesirably.
+
+This was never a concern with EAP 6/JBossWeb since it always sent the 100-continue regardless.  But currently, EAP 7/Undertow chooses to omit it in this scenario, which causes request failures and error states from ping timeouts.  This also impacts mod_cluster if proxying over http.
+
+If mod_proxy_http is always going to require a 100-continue response, then we have to ensure it doesn't send the request body before that response.  Or it may be helpful to provide some other means of disabling this POST 100-continue ping besides force-proxy-request-1.0.
+
+============================
+
 
 
 ----------
-Report time: 2019-08-07 11:27:15.879129
+Report time: 2019-08-07 11:28:31.944696
 
 

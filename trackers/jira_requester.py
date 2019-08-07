@@ -283,7 +283,7 @@ class IssueDataRetrieverJira:
     # GETTING BASIC ISSUE DATA
     def get_basic_issue_data(self, data):
         logging_jira_issue_basic_data = LoggerSetup(name='jira_issue_basic_data_logger',
-                                                    log_file='log/jira_issue_basic_data_function_requester.log',
+                                                    log_file='log/jira_issue_data.log',
                                                     level=self.debug_level)
         logger_jira_issue_basic_data = logging_jira_issue_basic_data.setup_logger()
         logger_jira_issue_basic_data.debug('entered JIRA basic issue information function')
@@ -319,6 +319,7 @@ class IssueDataRetrieverJira:
                 for item in data['errorMessages']:
                     ascii_data_list.append('* {}'.format(item))
                     print('\t' + item)
+                    logger_jira_issue_basic_data.info(str(item))
             else:
                 data_layer_2 = data['fields']
                 # pprint(data_layer_2)
@@ -327,6 +328,7 @@ class IssueDataRetrieverJira:
                 print()
                 print()
                 print('Fetching the data - Layer 2:')
+                logger_jira_issue_basic_data.info('Fetching the data - Layer 2')
 
                 # read fields from configuration
                 # JIRA search terms configuration file reading
@@ -340,13 +342,16 @@ class IssueDataRetrieverJira:
                 for index, id in enumerate(custom_field_ids_list):
                     custom_field_ids_list[index] = 'customfield_' + str(id)
                 print(custom_field_ids_list)
+                logger_jira_issue_basic_data.debug(str(custom_field_ids_list))
 
                 if len(custom_field_names_list) == len(custom_field_ids_list):
                     custom_fields_list = list(zip(custom_field_names_list, custom_field_ids_list))
                     print(custom_fields_list)
+                    logger_jira_issue_basic_data.debug(str(custom_fields_list))
                     search_list_output = search_list_output + custom_fields_list
                 print(search_list_output)
-
+                logger_jira_issue_basic_data.debug(str(search_list_output))
+                logger_jira_issue_basic_data.debug('Getting the Key/Value data..')
                 for key in search_list_output:
                     if type(key) is tuple:
                         name = key[0]
@@ -401,13 +406,14 @@ class IssueDataRetrieverJira:
                     print()
         else:
             ascii_data_list.append('* There is no data available for that issue or check the issue name.')
+            logger_jira_issue_basic_data.info('There is no data available for that issue or check the issue name.')
 
         return ascii_data_list
 
     # COMMENTS
     def getting_comments_data(self, data):
         logging_jira_issue_basic_data = LoggerSetup(name='jira_issue_basic_data_logger',
-                                                    log_file='log/jira_issue_basic_data_function_requester.log',
+                                                    log_file='log/jira_issue_data.log',
                                                     level=self.debug_level)
         logger_jira_issue_basic_data = logging_jira_issue_basic_data.setup_logger()
         logger_jira_issue_basic_data.debug('entered JIRA issue comments function')
