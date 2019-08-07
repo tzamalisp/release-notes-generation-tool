@@ -182,14 +182,15 @@ class TargetReleaseJira:
         ascii_data_list = []
 
         # Connecting to JIRA REST API
-        logger_jira_release_notes.debug('Calling Connection to JIRA API Class')
+        logger_jira_release_notes.info('Calling Connection to JIRA API Class')
         connection = Connector(debug_level=self.debug_level)
         options = connection.connection_jira()
 
         # Retrieving the Release Notes from the API
-        logger_jira_release_notes.debug('Retrieving the Release Notes from the API')
+        logger_jira_release_notes.info('Retrieving the Release Notes from the API')
         for release_item in self.release:
             print('Release Note:', release_item)
+            logger_jira_release_notes.info('Release Note: ' + release_item)
             ascii_data_list.append('== Release Note: {}'.format(release_item))
             release_name_url = '{}'.format(self.release_name)
             release_url = '{}'.format(release_item)
