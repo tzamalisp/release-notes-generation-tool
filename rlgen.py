@@ -346,8 +346,9 @@ def user_input(argv):
                         type=str)
     parser.add_argument("-a", "--ascending",
                         dest="order_ascending",
-                        help="add the operation you want for ascending/descending (a: ascending, b: descending)",
-                        metavar="<USER_OPERATION>")
+                        help="add the operation you want for ascending/descending order of the results"
+                             " (a: ascending, d: descending)",
+                        metavar="<ASC/DESC_ORDER>")
     parser.add_argument("-o", "--output",
                         dest="output_path",
                         help="add the path directory yoy want to save the Asciidoc export files",
