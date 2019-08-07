@@ -346,8 +346,8 @@ def user_input(argv):
                         type=str)
     parser.add_argument("-a", "--ascending",
                         dest="order_ascending",
-                        help="add the operation you want for ascending/descending order of the results"
-                             " (a: ascending, d: descending)",
+                        help="add the operation you want for ascending/descending order of the release note results "
+                             "retrieved from JIRA API (a: ascending, d: descending)",
                         metavar="<ASC/DESC_ORDER>")
     parser.add_argument("-o", "--output",
                         dest="output_path",
