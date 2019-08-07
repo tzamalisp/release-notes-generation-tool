@@ -20,14 +20,15 @@ current_d = os.getcwd()
 directories_list = current_d.split('/')
 # print(directories_list)
 # print(directories_list[1:4])
-basic_desktop_path = directories_list[1:4]
-print('Path Desktop')
-print(basic_desktop_path)
-print()
-print()
-new_path = 'conf/'
-basic_desktop_path.append(new_path)
-conf_path = '/' + '/'.join(basic_desktop_path)
+# basic_desktop_path = directories_list[1:4]
+# print('Path Desktop')
+# print(basic_desktop_path)
+# print()
+# print()
+conf_path = 'conf/'
+# new_path = 'conf/'
+# basic_desktop_path.append(new_path)
+# conf_path = '/' + '/'.join(basic_desktop_path)
 
 """ USER CHOICE OF ISSUE TRACKING PLATFORM """
 
@@ -46,7 +47,6 @@ class UserTrackerChoice:
         self.output_path = output_path
         self.debug_level = debug_level
         self.time = time
-
 
     def tracker_selection(self):
         # JIRA

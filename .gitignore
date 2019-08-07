@@ -154,3 +154,5 @@ fabric.properties
 */*.log
 
 log/
+
+conf/config\.conf

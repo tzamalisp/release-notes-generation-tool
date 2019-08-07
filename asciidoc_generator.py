@@ -1,5 +1,4 @@
 from datetime import datetime
-import logging
 
 from logger_creation import LoggerSetup
 
@@ -22,7 +21,7 @@ class GeneratorJira:
         logger_asciidoc = logging__asciidoc.setup_logger()
 
         logger_asciidoc.debug('Entering AsciiDoc Generator Classes')
-        logger_asciidoc.info('TEST PRINT JIRA ASCIIDOC')
+        logger_asciidoc.info('Creating JIRA AsciiDoc..')
         if self.time is 1:
             now = datetime.now()
             now_str = now.strftime("%Y-%m-%d_%H-%M-%S")
@@ -45,6 +44,7 @@ class GeneratorJira:
         # kind of report
         report_fields.append(self.kind_of_report)
         print(report_fields)
+        logger_asciidoc.debug(str(report_fields))
         # releases input
         if self.releases is not None:
             for release in self.releases:
@@ -63,6 +63,7 @@ class GeneratorJira:
             f = open('{}/jira_{}_{}.adoc'
                      .format(self.path, report_fields_string, now_str), 'w+')
         print('Writing file..')
+        logger_asciidoc.info('Writing file..')
         f.write('= Release Notes Generation Tool (RLGEN)')
         f.write('\n')
         f.write(':author: {} {}'.format(self.firstname, self.lastname))
@@ -83,7 +84,8 @@ class GeneratorJira:
         f.write('\n')
         f.write('\n')
         f.close()
-        print('File AsciiDoc is written successfully!')
+        print('AsciiDoc file has been created successfully!')
+        logger_asciidoc.info('AsciiDoc file has been created successfully!')
 
 
 """ BUGZILLA REPORT GENERATION CLASS """
@@ -108,7 +110,7 @@ class GeneratorBugzillaReport:
         logger_asciidoc = logging__asciidoc.setup_logger()
 
         logger_asciidoc.debug('Entering AsciiDoc Generator Classes')
-        logger_asciidoc.info('TEST PRINT BUGZILLA ASCIIDOC')
+        logger_asciidoc.info('Creating Bugzilla AsciiDoc..')
         if self.time is 1:
             now = datetime.now()
             now_str = now.strftime("%Y-%m-%d_%H-%M-%S")
@@ -131,6 +133,7 @@ class GeneratorBugzillaReport:
         # kind of report
         report_fields.append(self.kind_of_report)
         print(report_fields)
+        logger_asciidoc.debug(str(report_fields))
         # releases input
         if self.releases is not None:
             for release in self.releases:
@@ -149,6 +152,7 @@ class GeneratorBugzillaReport:
             f = open('{}/bugzilla_{}_{}.adoc'
                      .format(self.path, report_fields_string, now_str), 'w+')
         print('Writing file..')
+        logger_asciidoc.info('Writing file..')
         f.write('= Release Notes Generation Tool (RLGEN)')
         f.write('\n')
         f.write(':author: {} {}'.format(self.firstname, self.lastname))
@@ -171,4 +175,5 @@ class GeneratorBugzillaReport:
         f.write('\n')
         f.write('\n')
         f.close()
-        print('File AsciiDoc is written successfully!')
+        print('AsciiDoc file has been created successfully!')
+        logger_asciidoc.info('AsciiDoc file has been created successfully!')

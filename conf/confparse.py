@@ -12,33 +12,11 @@ current_d = os.getcwd()
 directories_list = current_d.split('/')
 # print(directories_list)
 # print(directories_list[1:4])
-basic_desktop_path = directories_list[1:4]
-new_path = 'conf/'
-basic_desktop_path.append(new_path)
-conf_path = '/' + '/'.join(basic_desktop_path)
-
-
-"""CREATING JIRA CONFIGURATION FILE"""
-
-
-# def user_write_authorization(server, username, password, access_token, access_token_secret, consumer_key, key_cert):
-#
-#     config = configparser.ConfigParser()
-#     config['jira_hosting_server'] = {'server': server}
-#     config['jira_basic_auth'] = {'username': username,
-#                                  'password': password
-#                                  }
-#     config['jira_oauth'] = {'access_token': access_token,
-#                             'access_token_secret': access_token_secret,
-#                             'consumer_key': consumer_key,
-#                             'key_cert': key_cert
-#                             }
-#     with open('authentication.conf', 'w') as configfile:
-#         config.write(configfile)
-#     print()
-#     print('Writing..')
-#     print('Configuration file was created successfully!')
-
+# basic_desktop_path = directories_list[1:4]
+conf_path = 'conf/'
+# new_path = 'conf/'
+# basic_desktop_path.append(new_path)
+# conf_path = '/' + '/'.join(basic_desktop_path)
 
 logger_configuration.debug('Entering JIRA / Bugzilla Configuration Classes')
 
