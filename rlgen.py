@@ -341,7 +341,7 @@ def user_input(argv):
     parser.add_argument("-r", "--release",
                         dest="release_note",
                         nargs='+',
-                        help="add the Target Release Name separated with the space character, inside quotes)",
+                        help="add each Target Release Name separated with SPACE character, inside quotes)",
                         metavar="<TARGET_RELEASE_NAME>",
                         type=str)
     parser.add_argument("-a", "--ascending",
