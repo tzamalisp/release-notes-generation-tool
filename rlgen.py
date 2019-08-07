@@ -352,7 +352,7 @@ def user_input(argv):
                         dest="output_path",
                         help="add the path directory yoy want to save the Asciidoc export files",
                         metavar="<OUTPUT_PATH>")
-    parser.add_argument("-z", "--zone_time",
+    parser.add_argument("-z", "--zonetime",
                         dest="zone_time",
                         help="enable/disable the Report Time mode (0: Disable, 1: Enable) - by default is Disabled",
                         metavar="<ZONE_TIME>",
