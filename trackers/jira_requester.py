@@ -366,7 +366,7 @@ class IssueDataRetrieverJira:
                     search_list_output = search_list_output + custom_fields_list
                 print(search_list_output)
                 logger_jira_issue_basic_data.debug(str(search_list_output))
-                logger_jira_issue_basic_data.debug('Getting the Key/Value data..')
+                logger_jira_issue_basic_data.debug('Getting the Issue data..')
                 for key in search_list_output:
                     if type(key) is tuple:
                         name = key[0]
@@ -377,9 +377,12 @@ class IssueDataRetrieverJira:
                         if type(data_layer_2.get(key)) is str:
                             print(key + ': ' + data_layer_2.get(key))
                             ascii_data_list.append('* {}: {}'.format(key, data_layer_2.get(key)))
+                            logger_jira_issue_basic_data.info('Collected successfully the key: ' + str(key))
+                            logger_jira_issue_basic_data.debug('{}: {}'.format(key, data_layer_2.get(key)))
                         if type(data_layer_2.get(key)) is list:
                             print(key + ':')
                             ascii_data_list.append('* {}:'.format(key))
+                            logger_jira_issue_basic_data.info('Collecting the listed items for the key: ' + str(key))
                             keys_list = data_layer_2.get(key)
                             counter_dict_list = 1
                             for key_list_item in keys_list:
@@ -388,13 +391,17 @@ class IssueDataRetrieverJira:
                                     # print(dict_list_item_keys)
                                     print('\tItem {}'.format(counter_dict_list))
                                     ascii_data_list.append('** Item {}'.format(counter_dict_list))
+                                    logger_jira_issue_basic_data.info('Collecting Dictionary listed Item ' + str(counter_dict_list))
                                     for key_item in dict_list_item_keys:
                                         if key_item != 'self':
                                             print('\t\t {}: '.format(key_item) + str(key_list_item.get(key_item)))
                                             ascii_data_list.append('*** {}: {}'.format(key_item, key_list_item.get(key_item)))
+                                            logger_jira_issue_basic_data.info('Collected successfully the dictionary key: ' + str(key_item))
+                                            logger_jira_issue_basic_data.debug('{}: {}'.format(str(key_item), str(key_list_item.get(key_item))))
                                     counter_dict_list += 1
                                 else:
                                     print('\t' + str(key_list_item))
+                                    logger_jira_issue_basic_data.debug(str(key_list_item))
                         if type(data_layer_2.get(key)) is dict:
                             if key.startswith('customfield_'):
                                 print(name + ':')
@@ -419,6 +426,7 @@ class IssueDataRetrieverJira:
                                         print('\t' + item_key + ': {}'.format(dict_item.get(item_key)))
                                         ascii_data_list.append('** {}: {}'.format(item_key, dict_item.get(item_key)))
                     print()
+                logger_jira_issue_basic_data.info('Collected successfully the listed items.')
         else:
             ascii_data_list.append('* There is no data available for that issue or check the issue name.')
             logger_jira_issue_basic_data.info('There is no data available for that issue or check the issue name.')
@@ -459,14 +467,9 @@ class IssueDataRetrieverJira:
                     counter_comments = 1
                     for comment_item in data_layer_2_comments:
                         print(('Comment {}:'.format(counter_comments)))
-                        logger_jira_issue_basic_data.info('Collecting data for Comment {}'.format(counter_comments))
+                        logger_jira_issue_basic_data.info('Collecting data for COMMENT {}'.format(counter_comments))
                         ascii_data_list.append('=== Comment {}:'.format(counter_comments))
                         comment_keys_list = comment_item.keys()
-                        # print(comment_keys_list)
-                        # for key in search_list_output:
-                        #     if key in comment_keys_list:
-                        #         if type(comment_item[key]) is str:
-                        #             print('\t' + key + ': ' + str(comment_item[key]))
                         list_of_fields = []
                         for key in comment_keys_list:
                             if key != 'updateAuthor':
@@ -475,13 +478,15 @@ class IssueDataRetrieverJira:
                                     if key in search_list_output:
                                         # print('\t\t' + key + ': ' + str(comment_item[key]))
                                         list_of_fields.append('* {}: {}'.format(key, str(comment_item[key])))
-                                        logger_jira_issue_basic_data.debug(str(key) + ': ' + str(comment_item[key]))
+                                        logger_jira_issue_basic_data.info('Key collected successfully: ' + str(key))
+                                        logger_jira_issue_basic_data.debug('{}: {}'.format(key, str(comment_item[key])))
                                 if type(comment_item[key]) is dict:
                                     nested_comment_item = comment_item[key]
                                     nested_comment_item_keys = nested_comment_item.keys()
                                     for nested_key in nested_comment_item_keys:
                                         if nested_key in search_list_output:
                                             list_of_fields.append('* {}: {}'.format(nested_key, str(nested_comment_item[nested_key])))
+                                            logger_jira_issue_basic_data.info('Nested Key collected successfully: ' + str(nested_key))
                                             logger_jira_issue_basic_data.debug('{}: {}'.format(str(nested_key), str(nested_comment_item[nested_key])))
                         final_list_of_fields = list(dict.fromkeys(list_of_fields))
                         for item in final_list_of_fields:
