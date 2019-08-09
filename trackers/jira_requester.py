@@ -35,11 +35,13 @@ class Connector:
         self.debug_level = debug_level
 
     def connection_jira(self):
+        # Setting JIRA Connection Logger
         logging_jira_connection = LoggerSetup(name='jira_connection_logger',
                                               log_file='log/jira_connection.log',
                                               level=self.debug_level)
         logger_jira_connection = logging_jira_connection.setup_logger()
-        logger_jira_connection.debug('Connection to JIRA API')
+
+        logger_jira_connection.info('Connection to JIRA API')
         # AUTHENTICATION
         options = {}
         # JIRA connection credentials
@@ -55,6 +57,7 @@ class Connector:
             server_reason_value = server_connection.read_server_conf()['server_reason']
             logger_jira_connection.warning(server_reason_value)
             # raise Exception(server_reason_value)
+
         # Authentication objects
         jira_basic_auth = JiraReadConfigurationBasicAuth()
         jira_oauth = JiraReadConfigurationOAuth()
@@ -456,6 +459,7 @@ class IssueDataRetrieverJira:
                     counter_comments = 1
                     for comment_item in data_layer_2_comments:
                         print(('Comment {}:'.format(counter_comments)))
+                        logger_jira_issue_basic_data.info('Collecting data for Comment {}'.format(counter_comments))
                         ascii_data_list.append('=== Comment {}:'.format(counter_comments))
                         comment_keys_list = comment_item.keys()
                         # print(comment_keys_list)
@@ -471,12 +475,14 @@ class IssueDataRetrieverJira:
                                     if key in search_list_output:
                                         # print('\t\t' + key + ': ' + str(comment_item[key]))
                                         list_of_fields.append('* {}: {}'.format(key, str(comment_item[key])))
+                                        logger_jira_issue_basic_data.debug(str(key) + ': ' + str(comment_item[key]))
                                 if type(comment_item[key]) is dict:
                                     nested_comment_item = comment_item[key]
                                     nested_comment_item_keys = nested_comment_item.keys()
                                     for nested_key in nested_comment_item_keys:
                                         if nested_key in search_list_output:
                                             list_of_fields.append('* {}: {}'.format(nested_key, str(nested_comment_item[nested_key])))
+                                            logger_jira_issue_basic_data.debug('{}: {}'.format(str(nested_key), str(nested_comment_item[nested_key])))
                         final_list_of_fields = list(dict.fromkeys(list_of_fields))
                         for item in final_list_of_fields:
                             ascii_data_list.append(item)
@@ -489,6 +495,7 @@ class IssueDataRetrieverJira:
             return ascii_data_list
         else:
             ascii_data_list.append('* There is no data available for that issue or check the issue name.')
+            logger_jira_issue_basic_data.info('There is no data available for that issue or check the issue name.')
 
         return ascii_data_list
 
