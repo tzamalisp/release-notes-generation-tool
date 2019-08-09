@@ -47,7 +47,10 @@ class Connector:
         server_auth = server_connection.read_server_conf()['server_auth']
         if server_auth is True:
             server_value = server_connection.read_server_conf()['server']
+            server_reason = server_connection.read_server_conf()['server_reason']
             options['server'] = server_value
+            logger_jira_connection.info(server_reason)
+            logger_jira_connection.debug('Server: ' + str(server_value))
         else:
             server_reason_value = server_connection.read_server_conf()['server_reason']
             logger_jira_connection.warning(server_reason_value)
@@ -73,7 +76,10 @@ class Connector:
                 password_reason_value = jira_basic_auth.read_user_basic_auth()['password_reason']
                 options['authentication'] = (username_value, password_value)
                 logger_jira_connection.info(basic_auth_reason_value)
-                # logger_jira_connection.debug(str(options['authentication']))
+                logger_jira_connection.info(username_reason_value)
+                logger_jira_connection.debug('Username: ' + str(username_value))
+                logger_jira_connection.info(password_reason_value)
+                logger_jira_connection.debug('Password: ' + str(password_value))
             elif oauth is True:
                 oauth_reason_value = jira_oauth.read_oauth()['oauth_reason']
                 access_token_value = jira_oauth.read_oauth()['access_token']
@@ -83,18 +89,23 @@ class Connector:
                 consumer_key_value = jira_oauth.read_oauth()['consumer_key']
                 consumer_key_reason_value = jira_oauth.read_oauth()['consumer_key_reason']
                 logger_jira_connection.info(oauth_reason_value)
+                logger_jira_connection.debug()
                 logger_jira_connection.info(access_token_reason_value)
+                logger_jira_connection.debug('Access Token: ' + str(access_token_value))
                 logger_jira_connection.info(access_token_secret_reason_value)
+                logger_jira_connection.debug('Access Token Secret: ' + str(access_token_secret_value))
                 logger_jira_connection.info(consumer_key_reason_value)
+                logger_jira_connection.debug('Consumer Key: ' + str(consumer_key_value))
                 # (TO DEFINE THE IF STATEMENT HERE):
                 if key_cert_data is not None:
                     # OAuth1('YOUR_APP_KEY', 'YOUR_APP_SECRET', 'USER_OAUTH_TOKEN', 'USER_OAUTH_TOKEN_SECRET')
+                    logger_jira_connection.info('Key Certification Data is defined.')
                     options['authentication'] = OAuth1(access_token_value,
                                                        access_token_secret_value,
                                                        consumer_key_value,
                                                        key_cert_data)
                 else:
-                    logger_jira_connection.warning('Please add the key certification data.')
+                    logger_jira_connection.warning('Please add the Key Certification Data.')
                     # raise Exception('Please add the key certification data.')
         else:
             if basic_auth is False:
@@ -104,10 +115,10 @@ class Connector:
                 print(basic_auth_reason_value)
                 print(username_reason_value)
                 print(password_reason_value)
+                logger_jira_connection.warning('Basic Authentication failed.')
                 logger_jira_connection.warning(basic_auth_reason_value)
                 logger_jira_connection.warning(username_reason_value)
                 logger_jira_connection.warning(password_reason_value)
-                logger_jira_connection.warning('Basic Authentication failed.')
                 # raise Exception('Basic Authentication failed.')
             elif oauth is False:
                 oauth_reason_value = jira_oauth.read_oauth()['oauth_reason']
@@ -118,11 +129,11 @@ class Connector:
                 print(access_token_reason_value)
                 print(access_token_secret_reason_value)
                 print(consumer_key_reason_value)
+                logger_jira_connection.warning('OAuth Authentication failed.')
                 logger_jira_connection.warning(oauth_reason_value)
                 logger_jira_connection.warning(access_token_reason_value)
                 logger_jira_connection.warning(access_token_secret_reason_value)
                 logger_jira_connection.warning(consumer_key_reason_value)
-                logger_jira_connection.warning('OAuth Authentication failed.')
                 # raise Exception('OAuth Authentication failed.')
 
         return options
@@ -314,6 +325,7 @@ class IssueDataRetrieverJira:
 
             # layer 2
             print('Inserting into Issue data.')
+            logger_jira_issue_basic_data.debug('Inserting into Issue data.')
             # print(data.keys())
             if 'errorMessages' in data.keys():
                 for item in data['errorMessages']:
@@ -422,6 +434,7 @@ class IssueDataRetrieverJira:
 
         # Issue header
         ascii_data_list.append('== Issue: {}'.format(self.issue))
+        logger_jira_issue_basic_data.info('Issue: {}'.format(self.issue))
         if data is not None:
             # READ FIELDS FROM CONF or USER INPUT
             search_list = ConfigData('jira_comments', self.terms)
@@ -429,11 +442,13 @@ class IssueDataRetrieverJira:
 
             # layer 2
             print('Inserting into Issue Comments data.')
+            logger_jira_issue_basic_data.debug('Inserting into Issue Comments data.')
             # print(data.keys())
             if 'errorMessages' in data.keys():
                 for item in data['errorMessages']:
                     ascii_data_list.append('* {}'.format(item))
                     print('\t' + item)
+                    logger_jira_issue_basic_data.info(str(item))
             else:
                 # data 2 layer for comments
                 data_layer_2_comments = data['fields']['comment']['comments']

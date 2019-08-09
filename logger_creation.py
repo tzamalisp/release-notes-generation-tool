@@ -24,7 +24,7 @@ class LoggerSetup:
 
         logger_object = logging.getLogger(self.name)
         if self.level is None:
-            logger_object.setLevel(logging.DEBUG)
+            logger_object.setLevel(logging.INFO)
         elif self.level is 0:
             logger_object.setLevel(logging.DEBUG)
         elif self.level is 1:
