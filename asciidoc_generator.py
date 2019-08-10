@@ -1,6 +1,12 @@
 from datetime import datetime
-
+import os
 from logger_creation import LoggerSetup
+
+# If log directory does not exist, create one
+current_d = os.getcwd()
+print(current_d)
+if not os.path.exists(os.path.join(current_d, 'release-notes-docs')):
+    os.makedirs(os.path.join(current_d, 'release-notes-docs'))
 
 
 class GeneratorJira:
@@ -57,7 +63,7 @@ class GeneratorJira:
             report_fields.append(self.user)
         report_fields_string = '_'.join(report_fields)
         if self.path is None:
-            f = open('release-notes-docs/JIRA/jira_{}_{}.adoc'
+            f = open('release-notes-docs/jira_{}_{}.adoc'
                      .format(report_fields_string, now_str), 'w+')
         else:
             f = open('{}/jira_{}_{}.adoc'
@@ -146,7 +152,7 @@ class GeneratorBugzillaReport:
             report_fields.append(self.user)
         report_fields_string = '_'.join(report_fields)
         if self.path is None:
-            f = open('release-notes-docs/Bugzilla/bugzilla_{}_{}.adoc'
+            f = open('release-notes-docs/bugzilla_{}_{}.adoc'
                      .format(report_fields_string, now_str), 'w+')
         else:
             f = open('{}/bugzilla_{}_{}.adoc'

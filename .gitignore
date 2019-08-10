@@ -156,3 +156,5 @@ fabric.properties
 log/
 
 conf/config\.conf
+
+release-notes-docs/
