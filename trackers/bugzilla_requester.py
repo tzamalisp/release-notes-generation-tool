@@ -274,7 +274,7 @@ class DataRetriever:
         # pprint(data)
         print('Successfully fetched the data.')
 
-        if data['bugs']:
+        if data['bugs'] and len(data['bugs']) > 0:
             data_output = data.get('bugs')
             # pprint(data_output)
         else:
@@ -539,122 +539,126 @@ class DataRetriever:
                 print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
                 print()
         else:
-            for bug in data:
-                # BUG HISTORY
-                if retrieval is 'bug_history' and bug['history']:
-                    history = bug.get('history')
-                    counter_history = 1
-                    for item_history in history:
-                        item_history_keys_list = item_history.keys()
-                        # print('BUGKEYSALL:', item_history_keys_list)
+            if data is not None:
+                for bug in data:
+                    # BUG HISTORY
+                    if retrieval is 'bug_history' and bug['history']:
+                        history = bug.get('history')
+                        counter_history = 1
+                        for item_history in history:
+                            item_history_keys_list = item_history.keys()
+                            # print('BUGKEYSALL:', item_history_keys_list)
+                            keys_to_retrieve = []
+                            if len(search_list) > 0:
+                                for key in search_list:
+                                    if key in item_history_keys_list:
+                                        keys_to_retrieve.append(key)
+                                    else:
+                                        print('Some of the keys you entered do not match in the fields of the issue.')
+                            else:
+                                keys_to_retrieve = item_history_keys_list
+                            ascii_doc_data_list.append('')
+                            ascii_doc_data_list.append('=== History {}'.format(counter_history))
+                            for key in keys_to_retrieve:
+                                if type(item_history.get(key)) is str:
+                                    print(key + ':', item_history.get(key))
+                                    ascii_doc_data_list.append('* ' + key + ': ' + item_history.get(key))
+                                if type(item_history.get(key)) is list:
+                                    print(key + ':')
+                                    ascii_doc_data_list.append('* {}:'.format(key))
+                                    item_history_list = item_history.get(key)
+                                    counter_item_list = 1
+                                    for item_list in item_history_list:
+                                        item_list_keys = item_list.keys()
+                                        print('\tItem {}'.format(counter_item_list))
+                                        ascii_doc_data_list.append('** Item {}'.format(counter_item_list))
+                                        for key in item_list_keys:
+                                            print('\t\t' + key + ':', str(item_list.get(key)))
+                                            ascii_doc_data_list.append('*** ' + key + ': ' + str(item_list.get(key)))
+                                        print()
+                                        counter_item_list += 1
+                            counter_history += 1
+                            print()
+                            print('++++++++++++++++++++++++++++++++++++++++++++++++')
+                            print()
+                    # USER INFORMATION
+                    elif retrieval is 'user_info':
+                        user_keys_list = bug.keys()
+                        # print('USERKEYSALL:', user_keys_list)
                         keys_to_retrieve = []
                         if len(search_list) > 0:
                             for key in search_list:
-                                if key in item_history_keys_list:
+                                if key in user_keys_list:
                                     keys_to_retrieve.append(key)
                                 else:
                                     print('Some of the keys you entered do not match in the fields of the issue.')
                         else:
-                            keys_to_retrieve = item_history_keys_list
+                            keys_to_retrieve = user_keys_list
+
                         ascii_doc_data_list.append('')
-                        ascii_doc_data_list.append('=== History {}'.format(counter_history))
+                        ascii_doc_data_list.append('=== User Fields')
                         for key in keys_to_retrieve:
-                            if type(item_history.get(key)) is str:
-                                print(key + ':', item_history.get(key))
-                                ascii_doc_data_list.append('* ' + key + ': ' + item_history.get(key))
-                            if type(item_history.get(key)) is list:
+                            if key in user_keys_list:
+                                print(key + ':', str(bug.get(key)))
+                                ascii_doc_data_list.append('* ' + key + ': ' + str(bug.get(key)))
+                        print('+++++++++++++++++++++++++++++++++++++++++++++++++++')
+                    # BUG INFORMATION | USER ASSIGNED BUGS
+                    elif retrieval is 'bug_info' or retrieval is 'user_assigned_bugs':
+                        bug_keys_list = bug.keys()
+                        # print(bug_keys_list)
+                        # print(len(bug_keys_list))
+                        keys_to_retrieve = []
+                        if len(search_list) > 0:
+                            for key in search_list:
+                                if key in bug_keys_list:
+                                    keys_to_retrieve.append(key)
+                                else:
+                                    print('Some of the keys you entered do not match in the fields of the issue.')
+                        else:
+                            keys_to_retrieve = bug_keys_list
+                        # retrieving keys
+                        ascii_doc_data_list.append('')
+                        if retrieval is 'bug_info':
+                            print('Bug Information')
+                            ascii_doc_data_list.append('=== Bug Information')
+                        else:
+                            print('BUG ID:', bug.get('id'))
+                            ascii_doc_data_list.append('=== Bug: {}'.format(bug.get('id')))
+                        for key in keys_to_retrieve:
+                            if type(bug.get(key)) is str or type(bug.get(key)) is bool or type(bug.get(key)) is int or type(bug.get(key)) is None:
+                                if bug.get(key) is '':
+                                    print(key + ': ' + 'Nothing related to {} is now available.'.format(key))
+                                    ascii_doc_data_list.append('* ' + key + ': ' + 'Nothing related to {} is now available.'.format(key))
+                                else:
+                                    print(key + ': ' + str(bug.get(key, 'Nothing related to {} is now available.'.format(key))))
+                                    ascii_doc_data_list.append('* ' + key + ': ' + str(bug.get(key, 'Nothing related to {} is now available.'.format(key))))
+                                # print(type(bug.get(key)))
+                                print()
+                            if type(bug.get(key)) is list:
                                 print(key + ':')
                                 ascii_doc_data_list.append('* {}:'.format(key))
-                                item_history_list = item_history.get(key)
-                                counter_item_list = 1
-                                for item_list in item_history_list:
-                                    item_list_keys = item_list.keys()
-                                    print('\tItem {}'.format(counter_item_list))
-                                    ascii_doc_data_list.append('** Item {}'.format(counter_item_list))
-                                    for key in item_list_keys:
-                                        print('\t\t' + key + ':', str(item_list.get(key)))
-                                        ascii_doc_data_list.append('*** ' + key + ': ' + str(item_list.get(key)))
-                                    print()
-                                    counter_item_list += 1
-                        counter_history += 1
+                                counter__dictionary_items = 1
+                                for list_item in bug.get(key):
+                                    if type(list_item) is dict:
+                                        print('\tItem: {}'.format(counter__dictionary_items))
+                                        ascii_doc_data_list.append('** Item: {}'.format(counter__dictionary_items))
+                                        dictionary_keys = list_item.keys()
+                                        for dictionary_key in dictionary_keys:
+                                            # print(dictionary_keys)
+                                            print('\t\t' + dictionary_key + ': ' + str(list_item.get(dictionary_key)))
+                                            ascii_doc_data_list.append('*** ' + dictionary_key + ': ' + str(list_item.get(dictionary_key)))
+                                        print()
+                                        counter__dictionary_items += 1
+                                    else:
+                                        print('\t', list_item)
+                                        ascii_doc_data_list.append('** {}'.format(list_item))
+                                        print()
                         print()
-                        print('++++++++++++++++++++++++++++++++++++++++++++++++')
+                        print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
                         print()
-                # USER INFORMATION
-                elif retrieval is 'user_info':
-                    user_keys_list = bug.keys()
-                    # print('USERKEYSALL:', user_keys_list)
-                    keys_to_retrieve = []
-                    if len(search_list) > 0:
-                        for key in search_list:
-                            if key in user_keys_list:
-                                keys_to_retrieve.append(key)
-                            else:
-                                print('Some of the keys you entered do not match in the fields of the issue.')
-                    else:
-                        keys_to_retrieve = user_keys_list
-
-                    ascii_doc_data_list.append('')
-                    ascii_doc_data_list.append('=== User Fields')
-                    for key in keys_to_retrieve:
-                        if key in user_keys_list:
-                            print(key + ':', str(bug.get(key)))
-                            ascii_doc_data_list.append('* ' + key + ': ' + str(bug.get(key)))
-                    print('+++++++++++++++++++++++++++++++++++++++++++++++++++')
-                # BUG INFORMATION | USER ASSIGNED BUGS
-                elif retrieval is 'bug_info' or retrieval is 'user_assigned_bugs':
-                    bug_keys_list = bug.keys()
-                    # print(bug_keys_list)
-                    # print(len(bug_keys_list))
-                    keys_to_retrieve = []
-                    if len(search_list) > 0:
-                        for key in search_list:
-                            if key in bug_keys_list:
-                                keys_to_retrieve.append(key)
-                            else:
-                                print('Some of the keys you entered do not match in the fields of the issue.')
-                    else:
-                        keys_to_retrieve = bug_keys_list
-                    # retrieving keys
-                    ascii_doc_data_list.append('')
-                    if retrieval is 'bug_info':
-                        print('Bug Information')
-                        ascii_doc_data_list.append('=== Bug Information')
-                    else:
-                        print('BUG ID:', bug.get('id'))
-                        ascii_doc_data_list.append('=== Bug: {}'.format(bug.get('id')))
-                    for key in keys_to_retrieve:
-                        if type(bug.get(key)) is str or type(bug.get(key)) is bool or type(bug.get(key)) is int or type(bug.get(key)) is None:
-                            if bug.get(key) is '':
-                                print(key + ': ' + 'Nothing related to {} is now available.'.format(key))
-                                ascii_doc_data_list.append('* ' + key + ': ' + 'Nothing related to {} is now available.'.format(key))
-                            else:
-                                print(key + ': ' + str(bug.get(key, 'Nothing related to {} is now available.'.format(key))))
-                                ascii_doc_data_list.append('* ' + key + ': ' + str(bug.get(key, 'Nothing related to {} is now available.'.format(key))))
-                            # print(type(bug.get(key)))
-                            print()
-                        if type(bug.get(key)) is list:
-                            print(key + ':')
-                            ascii_doc_data_list.append('* {}:'.format(key))
-                            counter__dictionary_items = 1
-                            for list_item in bug.get(key):
-                                if type(list_item) is dict:
-                                    print('\tItem: {}'.format(counter__dictionary_items))
-                                    ascii_doc_data_list.append('** Item: {}'.format(counter__dictionary_items))
-                                    dictionary_keys = list_item.keys()
-                                    for dictionary_key in dictionary_keys:
-                                        # print(dictionary_keys)
-                                        print('\t\t' + dictionary_key + ': ' + str(list_item.get(dictionary_key)))
-                                        ascii_doc_data_list.append('*** ' + dictionary_key + ': ' + str(list_item.get(dictionary_key)))
-                                    print()
-                                    counter__dictionary_items += 1
-                                else:
-                                    print('\t', list_item)
-                                    ascii_doc_data_list.append('** {}'.format(list_item))
-                                    print()
-                    print()
-                    print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
-                    print()
+            else:
+                print('No data is now available for that query.')
+                ascii_doc_data_list.append('* No data is now available for that query.')
 
         # returning all the data for the AsciiDoc file
         print()
