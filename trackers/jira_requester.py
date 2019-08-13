@@ -21,10 +21,8 @@ conf_path = 'conf/'
 # new_path = 'conf/'
 # basic_desktop_path.append(new_path)
 # conf_path = '/' + '/'.join(basic_desktop_path)
-print('Path rlgen is found:')
 working_directory_path = directories_list[1:]
 configuration_directory_path = '/' + '/'.join(working_directory_path)
-print(configuration_directory_path)
 
 
 """ CONNECTING TO JIRA API WITH THE CORRESPONDING AUTHENTICATION WAY """
@@ -230,34 +228,39 @@ class TargetReleaseJira:
             logger_jira_release_notes.debug('Data retrieved from the REST API')
             r = requests.get(url, auth=options['authentication'])
             data = r.json()
-
             keys_list = data.keys()
+            print('KEYS LIST:', str(keys_list))
+            print(len(keys_list))
             logger_jira_release_notes.debug(str(keys_list))
-
-            for key in keys_list:
-                if key == 'errorMessages':
-                    logger_jira_release_notes.warning(
-                        'This Field does not exist or you do not have permission to view it.')
-                    ascii_data_list.append('* This Field does not exist or you do not have permission to view it.')
-                    # raise Exception('This Field does not exist or you do not have permission to view it.')
-                elif key == 'issues':
-                    logger_jira_release_notes.info('Total Jiras found based on that release: {}'.format(data.get('total')))
+            if 'errorMessages' in keys_list:
+                item = data['errorMessages']
+                ascii_data_list.append('* {}'.format(item))
+                print('\t' + str(item))
+                logger_jira_release_notes.info(str(item))
+            else:
+                if 'issues' in keys_list:
+                    logger_jira_release_notes.info(
+                        'Total Jiras found based on that release: {}'.format(data.get('total')))
                     ascii_data_list.append('* Total Jiras: {}'.format(data.get('total')))
                     print()
                     jiras = data['issues']
                     for issue in jiras:
-                        logger_jira_release_notes.info('Collecting Key: {}'.format(issue.get('key')))
+                        logger_jira_release_notes.info('Collecting Issue: {}'.format(issue.get('key')))
                         print('Collecting Key:', issue.get('key'))
                         # print('taking selected fields..')
                         ascii_data_list.append('==== {}'.format(issue.get('key')))
                         issue_fields = issue.get('fields')
                         ascii_data_list.append('* Summary: {}'.format(issue_fields.get('summary'),
                                                                       'No summary is provided here.'))
+                        logger_jira_release_notes.debug(
+                            'Collected successfully the Summary for the Issue: {}'.format(issue.get('key')))
                         ascii_data_list.append('* Description:')
                         ascii_data_list.append('============================')
                         ascii_data_list.append('{}'.format(issue_fields.get('description',
                                                                             'No description is provided here.')))
                         ascii_data_list.append('============================')
+                        logger_jira_release_notes.debug(
+                            'Collected successfully the Description for the Issue: {}'.format(issue.get('key')))
                         # print()
             print()
             print('----------------------------')
@@ -396,7 +399,7 @@ class IssueDataRetrieverJira:
                                         if key_item != 'self':
                                             print('\t\t {}: '.format(key_item) + str(key_list_item.get(key_item)))
                                             ascii_data_list.append('*** {}: {}'.format(key_item, key_list_item.get(key_item)))
-                                            logger_jira_issue_basic_data.info('Collected successfully the dictionary key: ' + str(key_item))
+                                            logger_jira_issue_basic_data.info('Collected successfully the listed dictionary key: ' + str(key_item))
                                             logger_jira_issue_basic_data.debug('{}: {}'.format(str(key_item), str(key_list_item.get(key_item))))
                                     counter_dict_list += 1
                                 else:
@@ -406,9 +409,11 @@ class IssueDataRetrieverJira:
                             if key.startswith('customfield_'):
                                 print(name + ':')
                                 ascii_data_list.append('* {}:'.format(name))
+                                logger_jira_issue_basic_data.info('Collecting Dict customfield: ' + str(name))
                             else:
                                 print(key + ':')
                                 ascii_data_list.append('* {}:'.format(key))
+                                logger_jira_issue_basic_data.info('Collecting Dict: ' + str(key))
                             dict_item = data_layer_2.get(key)
                             dict_item_keys_list = dict_item.keys()
                             for item_key in dict_item_keys_list:
@@ -416,15 +421,20 @@ class IssueDataRetrieverJira:
                                     if type(dict_item.get(item_key)) is dict:
                                         print('\t' + item_key + ':')
                                         ascii_data_list.append('** {}:'.format(item_key))
+                                        logger_jira_issue_basic_data.info('Collecting Dict key: ' + str(item_key))
                                         data_dict = dict_item.get(item_key)
                                         data_dict_keys = data_dict.keys()
                                         for data_key in data_dict_keys:
                                             if data_key != 'self' and data_key != 'iconUrl' and data_key != 'avatarUrls':
                                                 print('\t\t\t' + data_key + ': ' + data_dict.get(data_key))
                                                 ascii_data_list.append('*** {}: {}'.format(data_key, data_dict.get(data_key)))
+                                                logger_jira_issue_basic_data.info('Collected successfully Dict key: ' + str(data_key))
+                                                logger_jira_issue_basic_data.debug('{}: {}'.format(data_key, str(data_dict.get(data_key))))
                                     else:
                                         print('\t' + item_key + ': {}'.format(dict_item.get(item_key)))
                                         ascii_data_list.append('** {}: {}'.format(item_key, dict_item.get(item_key)))
+                                        logger_jira_issue_basic_data.info('Collected successfully: ' + str(item_key))
+                                        logger_jira_issue_basic_data.debug('{}: {}'.format(item_key, dict_item.get(item_key)))
                     print()
                 logger_jira_issue_basic_data.info('Collected successfully the listed items.')
         else:

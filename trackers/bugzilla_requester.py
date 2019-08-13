@@ -18,10 +18,10 @@ conf_path = 'conf/'
 # new_path = 'conf/'
 # basic_desktop_path.append(new_path)
 # conf_path = '/' + '/'.join(basic_desktop_path)
-print('Path rlgen is found:')
+# print('Path rlgen is found:')
 working_directory_path = directories_list[1:]
 configuration_directory_path = '/' + '/'.join(working_directory_path)
-print(configuration_directory_path)
+# print(configuration_directory_path)
 
 
 class TargetReleaseBugzilla:
