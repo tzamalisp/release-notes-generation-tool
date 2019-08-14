@@ -32,11 +32,11 @@ class TargetReleaseBugzilla:
 
     # TARGET RELEASE
     def getting_target_release_notes(self):
-        logging_bugzilla = LoggerSetup(name='bugzilla_target_releases_logger',
-                                       log_file='log/bugzilla_target_releases_requester.log',
-                                       level=self.debug_level)
-        logger_bugzilla = logging_bugzilla.setup_logger()
-        logger_bugzilla.debug('entered bugzilla release notes function')
+        logging_bugzilla_target_releases = LoggerSetup(name='bugzilla_target_releases_requester',
+                                                       log_file='log/bugzilla_target_releases_requester.log',
+                                                       level=self.debug_level)
+        logger_bugzilla_tr = logging_bugzilla_target_releases.setup_logger()
+        logger_bugzilla_tr.debug('Entered bugzilla release notes function')
         retrieve = 'target_release_notes'
         print('Releases:', self.releases)
         ascii_target_release_list = []
@@ -49,11 +49,11 @@ class TargetReleaseBugzilla:
             api_key_auth = api_connection.key_auth()['api_key_auth']
             if api_key_auth is True:
                 api_key_reason = api_connection.key_auth()['api_key_reason']
-                logger_bugzilla.debug(api_key_reason)
+                logger_bugzilla_tr.debug(api_key_reason)
                 api_key = api_connection.key_auth()['api_key']
             else:
                 api_key_reason = api_connection.key_auth()['api_key_reason']
-                logger_bugzilla.warning(api_key_reason)
+                logger_bugzilla_tr.warning(api_key_reason)
                 raise Exception(api_key_reason)
 
             config = configparser.ConfigParser()
@@ -74,7 +74,6 @@ class TargetReleaseBugzilla:
             if self.terms is not None:
                 search_list_output = search_list_conf_input + self.terms
                 print(search_list_output)
-
             elif self.terms is None:
                 search_list_output = search_list_conf_input
                 print(search_list_output)
@@ -86,58 +85,68 @@ class TargetReleaseBugzilla:
             # pprint(data)
             print('Successfully fetched the data.')
 
-            if data['bugs']:
+            if 'error' in data.keys():
+                for key in search_list_output:
+                    if key in data.keys():
+                        ascii_target_release_list.append('{}: {}'.format(key, data.get(key)))
+            elif 'bugs' in data.keys():
                 data_release_bugs = data.get('bugs')
-                # pprint(data_release_bugs)
-                for bug in data_release_bugs:
-                    bug_keys_list = bug.keys()
-                    # print(bug_keys_list)
-                    # print(len(bug_keys_list))
-                    keys_to_retrieve = []
-                    if len(search_list_output) > 0:
-                        for key in search_list_output:
-                            if key in bug_keys_list:
-                                keys_to_retrieve.append(key)
-                            else:
-                                print('Some of the keys you entered do not match in the fields of the issue.')
-                    else:
-                        keys_to_retrieve = bug_keys_list
-                    # retrieving keys
-                    ascii_target_release_list.append('')
-                    ascii_target_release_list.append('=== Bug: {}'.format(bug.get('id')))
-                    for key in keys_to_retrieve:
-                        if type(bug.get(key)) is str or type(bug.get(key)) is bool or type(bug.get(key)) is int or type(bug.get(key)) is None:
-                            if bug.get(key) is '':
-                                print(key + ': ' + 'Nothing related to {} is now available.'.format(key))
-                                ascii_target_release_list.append('* ' + key + ': ' + 'Nothing related to {} is now available.'.format(key))
-                            else:
-                                print(key + ': ' + str(bug.get(key, 'Nothing related to {} is now available.'.format(key))))
-                                ascii_target_release_list.append('* ' + key + ': ' + str(bug.get(key, 'Nothing related to {} is now available.'.format(key))))
-                            # print(type(bug.get(key)))
-                            print()
-                        if type(bug.get(key)) is list:
-                            print(key + ':')
-                            ascii_target_release_list.append('* {}:'.format(key))
-                            counter__dictionary_items = 1
-                            for list_item in bug.get(key):
-                                if type(list_item) is dict:
-                                    print('\tItem: {}'.format(counter__dictionary_items))
-                                    ascii_target_release_list.append('** Item: {}'.format(counter__dictionary_items))
-                                    dictionary_keys = list_item.keys()
-                                    for dictionary_key in dictionary_keys:
-                                        # print(dictionary_keys)
-                                        print('\t\t' + dictionary_key + ': ' + str(list_item.get(dictionary_key)))
-                                        ascii_target_release_list.append('*** ' + dictionary_key + ': ' + str(list_item.get(dictionary_key)))
-                                    print()
-                                    counter__dictionary_items += 1
+                if len(data_release_bugs) > 0:
+                    # pprint(data_release_bugs)
+                    for bug in data_release_bugs:
+                        bug_keys_list = bug.keys()
+                        # print(bug_keys_list)
+                        # print(len(bug_keys_list))
+                        keys_to_retrieve = []
+                        if len(search_list_output) > 0:
+                            for key in search_list_output:
+                                if key in bug_keys_list:
+                                    keys_to_retrieve.append(key)
                                 else:
-                                    print('\t', list_item)
-                                    ascii_target_release_list.append('** {}'.format(list_item))
-                                    print()
-                    print()
-                    print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
-            else:
-                data_release_bugs = None
+                                    print('Some of the keys you entered do not match in the fields of the issue.')
+                        else:
+                            keys_to_retrieve = bug_keys_list
+                        # retrieving keys
+                        ascii_target_release_list.append('')
+                        ascii_target_release_list.append('=== Bug: {}'.format(bug.get('id')))
+                        for key in keys_to_retrieve:
+                            if type(bug.get(key)) is str or type(bug.get(key)) is bool or type(bug.get(key)) is int or type(bug.get(key)) is None:
+                                if bug.get(key) is '':
+                                    print(key + ': ' + 'Nothing related to {} is now available.'.format(key))
+                                    ascii_target_release_list.append('* ' + key + ': ' + 'Nothing related to {} is now available.'.format(key))
+                                else:
+                                    print(key + ': ' + str(bug.get(key, 'Nothing related to {} is now available.'.format(key))))
+                                    ascii_target_release_list.append('* ' + key + ': ' + str(bug.get(key, 'Nothing related to {} is now available.'.format(key))))
+                                # print(type(bug.get(key)))
+                                print()
+                            if type(bug.get(key)) is list:
+                                print(key + ':')
+                                ascii_target_release_list.append('* {}:'.format(key))
+                                counter__dictionary_items = 1
+                                for list_item in bug.get(key):
+                                    if type(list_item) is dict:
+                                        print('\tItem: {}'.format(counter__dictionary_items))
+                                        ascii_target_release_list.append('** Item: {}'.format(counter__dictionary_items))
+                                        dictionary_keys = list_item.keys()
+                                        for dictionary_key in dictionary_keys:
+                                            # print(dictionary_keys)
+                                            print('\t\t' + dictionary_key + ': ' + str(list_item.get(dictionary_key)))
+                                            ascii_target_release_list.append('*** ' + dictionary_key + ': ' + str(list_item.get(dictionary_key)))
+                                        print()
+                                        counter__dictionary_items += 1
+                                    else:
+                                        print('\t', list_item)
+                                        ascii_target_release_list.append('** {}'.format(list_item))
+                                        print()
+                        print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
+                        logger_bugzilla_tr.debug('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
+                else:
+                    ascii_target_release_list.append('* There is no Target Release with that name or there are no '
+                                                     'issues related to that Target Release.')
+                    logger_bugzilla_tr.info('There is no Target Release with that name or there are no issues related '
+                                            'to that Target Release.')
+                    print('\t There is no Target Release with that name or there are no issues related to that Target '
+                          'Release.')
 
             ascii_target_release_list.append('')
 
@@ -209,7 +218,9 @@ class DataRetriever:
         data = r.json()
         print('Successfully fetched the data.')
 
-        if data['bugs']:
+        if 'error' in data.keys():
+            data_output = [data]
+        elif 'bugs' in data.keys():
             data_output = data.get('bugs')
             # pprint(data_output)
         else:
@@ -274,15 +285,13 @@ class DataRetriever:
         # pprint(data)
         print('Successfully fetched the data.')
 
-        if data['bugs'] and len(data['bugs']) > 0:
+        if 'bugs' in data.keys() and len(data['bugs']) > 0:
             data_output = data.get('bugs')
-            # pprint(data_output)
         else:
             data_output = None
 
         print('Final fields to search:', search_list_output)
         ascii_user_assigned_bugs_list.append('* Search Fields: {}'.format(search_list_output))
-        print('Final fields to search:', search_list_output)
         return {'retrieve': retrieve,
                 'data_output': data_output,
                 'search_list_output': search_list_output,
@@ -340,9 +349,10 @@ class DataRetriever:
         data = r.json()
         print('Successfully fetched the data.')
 
-        if data['users']:
+        if 'error' in data.keys():
+            data_output = [data]
+        elif 'users' in data.keys():
             data_output = data.get('users')
-            # pprint(data_output)
         else:
             data_output = None
 
@@ -407,7 +417,11 @@ class DataRetriever:
         data = r.json()
         print('Successfully fetched the data.')
 
-        if data['bugs']:
+        # if 'error' in data.keys():
+        #     data_output = data
+        if 'error' in data.keys():
+            data_output = data
+        elif 'bugs' in data.keys():
             data_output = data.get('bugs')
             # pprint(data_output)
         else:
@@ -474,7 +488,9 @@ class DataRetriever:
         data = r.json()
         print('Successfully fetched the data.')
 
-        if data['bugs']:
+        if 'error' in data.keys():
+            data_output = [{'history': [data]}]
+        elif 'bugs' in data.keys():
             data_output = data.get('bugs')
             # pprint(data_output)
         else:
@@ -500,7 +516,7 @@ class DataRetriever:
         print()
         ascii_doc_data_list.extend(ascii_doc_data)
         # BUG COMMENTS
-        if retrieval is 'bug_comments' and data[self.bug_id]['comments']:
+        if retrieval is 'bug_comments' and self.bug_id in data.keys():
             comments = data[self.bug_id]['comments']
             counter_comment = 1
             for comment in comments:
@@ -538,6 +554,11 @@ class DataRetriever:
                 print()
                 print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
                 print()
+        elif retrieval is 'bug_comments' and 'error' in data.keys():
+            for key in search_list:
+                if key in data.keys():
+                    print('\t{}: {}'.format(key, data.get(key)))
+                    ascii_doc_data_list.append('* {}: {}'.format(key, data.get(key)))
         else:
             if data is not None:
                 for bug in data:
@@ -553,8 +574,8 @@ class DataRetriever:
                                 for key in search_list:
                                     if key in item_history_keys_list:
                                         keys_to_retrieve.append(key)
-                                    else:
-                                        print('Some of the keys you entered do not match in the fields of the issue.')
+                                    # else:
+                                    #     print('Some of the keys you entered do not match in the fields of the issue.')
                             else:
                                 keys_to_retrieve = item_history_keys_list
                             ascii_doc_data_list.append('')
@@ -584,7 +605,6 @@ class DataRetriever:
                     # USER INFORMATION
                     elif retrieval is 'user_info':
                         user_keys_list = bug.keys()
-                        # print('USERKEYSALL:', user_keys_list)
                         keys_to_retrieve = []
                         if len(search_list) > 0:
                             for key in search_list:
@@ -657,7 +677,7 @@ class DataRetriever:
                         print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
                         print()
             else:
-                print('No data is now available for that query.')
+                print('* No data is now available for that query.')
                 ascii_doc_data_list.append('* No data is now available for that query.')
 
         # returning all the data for the AsciiDoc file
