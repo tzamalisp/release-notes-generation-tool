@@ -108,8 +108,8 @@ class TargetReleaseBugzilla:
             logger_bugzilla_tr.info('Retrieving the Target Release data from Bugzilla..')
             data = r.json()
             # pprint(data)
-            print('Successfully fetched the data.')
-            logger_bugzilla_tr.info('Successfully fetched the data.')
+            print('The API response was successful..')
+            logger_bugzilla_tr.info('The API response was successful..')
 
             if 'error' in data.keys():
                 logger_bugzilla_tr.warning('Error in fetching the queried data.')
@@ -120,6 +120,7 @@ class TargetReleaseBugzilla:
             elif 'bugs' in data.keys():
                 data_release_bugs = data.get('bugs')
                 if len(data_release_bugs) > 0:
+                    logger_bugzilla_tr.debug('The data retrieval related to the query is successful.')
                     # pprint(data_release_bugs)
                     for bug in data_release_bugs:
                         bug_keys_list = bug.keys()
@@ -130,8 +131,8 @@ class TargetReleaseBugzilla:
                             for key in search_list_output:
                                 if key in bug_keys_list:
                                     keys_to_retrieve.append(key)
-                                else:
-                                    print('Some of the keys you entered do not match in the fields of the issue.')
+                                # else:
+                                #     print('Some of the keys you entered do not match in the fields of the issue.')
                         else:
                             keys_to_retrieve = bug_keys_list
                         # retrieving keys
@@ -174,6 +175,8 @@ class TargetReleaseBugzilla:
                 else:
                     ascii_target_release_list.append('* There is no Target Release with that name or there are no '
                                                      'issues related to that Target Release.')
+                    logger_bugzilla_tr.warning('Error on querying the data. The username is not right or there are no '
+                                               'assigned bugs yet to that username.')
                     logger_bugzilla_tr.info('There is no Target Release with that name or there are no issues related '
                                             'to that Target Release.')
                     print('\t There is no Target Release with that name or there are no issues related to that Target '
@@ -217,11 +220,11 @@ class DataRetriever:
         api_key = ''
         if api_key_auth is True:
             api_key_reason = api_connection.key_auth()['api_key_reason']
-            logging_bugzilla_func.debug(api_key_reason)
+            logger_bugzilla_func.debug(api_key_reason)
             api_key = api_connection.key_auth()['api_key']
         else:
             api_key_reason = api_connection.key_auth()['api_key_reason']
-            logging_bugzilla_func.warning(api_key_reason)
+            logger_bugzilla_func.warning(api_key_reason)
             # raise Exception(api_key_reason)
 
         # Retrieving the company link from the conf file to insert it later into the API request
@@ -263,8 +266,8 @@ class DataRetriever:
         print('Retrieving the Bug Information data from Bugzilla..')
         logger_bugzilla_func.info('Retrieving the Target Release data from Bugzilla..')
         data = r.json()
-        print('Successfully fetched the data.')
-        logger_bugzilla_func.info('Successfully fetched the data.')
+        print('The API response was successfully.')
+        logger_bugzilla_func.info('The API response was successfully..')
 
         if 'error' in data.keys():
             data_output = [data]
@@ -347,15 +350,16 @@ class DataRetriever:
         print('Retrieving the User Assigned Bugs data from Bugzilla..')
         logger_bugzilla_func.info('Retrieving the Target Release data from Bugzilla..')
         data = r.json()
-        print('Successfully fetched the data.')
-        logger_bugzilla_func.info('Successfully fetched the data.')
+        print('The API response was successful.')
+        logger_bugzilla_func.info('The API response was successful.')
 
         if 'bugs' in data.keys() and len(data['bugs']) > 0:
             data_output = data.get('bugs')
             logger_bugzilla_func.debug('The data retrieval related to the query is successful.')
         else:
             data_output = None
-            logger_bugzilla_func.warning('Error on querying the data.')
+            logger_bugzilla_func.warning('Error on querying the data. The username is not right or there are no '
+                                         'assigned bugs yet to that username.')
 
         # Show in AsciiDoc the fields to search for in Bugzilla API JSON response
         # ascii_user_assigned_bugs_list.append('* Search Fields: {}'.format(search_list_output))
@@ -677,8 +681,8 @@ class DataRetriever:
                             for key in search_list:
                                 if key in user_keys_list:
                                     keys_to_retrieve.append(key)
-                                else:
-                                    print('Some of the keys you entered do not match in the fields of the issue.')
+                                # else:
+                                #     print('Some of the keys you entered do not match in the fields of the issue.')
                         else:
                             keys_to_retrieve = user_keys_list
 
@@ -699,8 +703,8 @@ class DataRetriever:
                             for key in search_list:
                                 if key in bug_keys_list:
                                     keys_to_retrieve.append(key)
-                                else:
-                                    print('Some of the keys you entered do not match in the fields of the issue.')
+                                # else:
+                                #     print('Some of the keys you entered do not match in the fields of the issue.')
                         else:
                             keys_to_retrieve = bug_keys_list
                         # retrieving keys
