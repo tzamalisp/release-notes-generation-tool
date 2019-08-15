@@ -30,23 +30,35 @@ class TargetReleaseBugzilla:
         self.terms = terms
         self.debug_level = debug_level
 
-    # TARGET RELEASE
+    # TARGET RELEASE FUNCTION
     def getting_target_release_notes(self):
-        logging_bugzilla_target_releases = LoggerSetup(name='bugzilla_target_releases_requester',
-                                                       log_file='log/bugzilla_target_releases_requester.log',
+        # logger creation
+        logging_bugzilla_target_releases = LoggerSetup(name='bugzilla_target_releases',
+                                                       log_file='log/bugzilla_target_releases.log',
                                                        level=self.debug_level)
         logger_bugzilla_tr = logging_bugzilla_target_releases.setup_logger()
-        logger_bugzilla_tr.debug('Entered bugzilla release notes function')
+        logger_bugzilla_tr.info('Entered Bugzilla - Release Notes Function')
+
+        # release notes defined in user input
         retrieve = 'target_release_notes'
-        print('Releases:', self.releases)
+        print('Releases defined by the user input:', self.releases)
+        logger_bugzilla_tr.debug('Releases defined by the user inputs: {}'.format(str(self.releases)))
+
         ascii_target_release_list = []
-        # for item in self.release:
+
+        # Entering releases field to collect information.
+        logger_bugzilla_tr.info('Entering releases field to collect information.')
         for release in self.releases:
             print('Release:', release)
+            logger_bugzilla_tr.info('Release: {}'.format(release))
             print('------------------')
             ascii_target_release_list.append('== Release: {}'.format(release))
+
+            # Retrieving Bugzilla API Authentication Key from the configuration file.
+            logger_bugzilla_tr.debug('Retrieving Bugzilla API Authentication Key from the configuration file.')
             api_connection = BugzillaReadConfigurationApiKey()
             api_key_auth = api_connection.key_auth()['api_key_auth']
+            api_key = ''
             if api_key_auth is True:
                 api_key_reason = api_connection.key_auth()['api_key_reason']
                 logger_bugzilla_tr.debug(api_key_reason)
@@ -54,14 +66,20 @@ class TargetReleaseBugzilla:
             else:
                 api_key_reason = api_connection.key_auth()['api_key_reason']
                 logger_bugzilla_tr.warning(api_key_reason)
-                raise Exception(api_key_reason)
+                # raise Exception(api_key_reason)
 
+            # Retrieving the company link from the conf file to insert it later into the API request
+            logger_bugzilla_tr.info('Retrieving the company link from the conf file to insert it later '
+                                    'into the API request.')
             config = configparser.ConfigParser()
             config.read('{}config.conf'.format(conf_path))
+            # read company data from configuration file
             company = config['bugzilla_basic_auth']['company']
+            logger_bugzilla_tr.debug('Company link: {}'.format(company))
 
             # read fields from configuration
             # Bugzilla search terms configuration file reading
+            logger_bugzilla_tr.info('Retrieving Bugzilla search terms (fields) from the configuration file.')
             search_terms_config = configparser.ConfigParser()
             search_terms_config.read('{}/conf/search_terms.conf'.format(configuration_directory_path))
             search_list_conf_input = search_terms_config['bugzilla_target_release']['search_list']
@@ -69,26 +87,36 @@ class TargetReleaseBugzilla:
             search_list_conf_input = search_list_conf_input.replace(' ,', ',')
             search_list_conf_input = search_list_conf_input.replace(' , ', ',')
             search_list_conf_input = search_list_conf_input.split(',')
-            print('Fields from conf file:', search_list_conf_input)
-            print('Fields from terminal:', self.terms)
+            print('Fields to search from conf file:', search_list_conf_input)
+            logger_bugzilla_tr.debug('Fields from conf file: {}'.format(str(search_list_conf_input)))
+            print('Fields to search from terminal:', self.terms)
+            logger_bugzilla_tr.debug('Fields from user input in terminal: {}'.format(str(self.terms)))
             if self.terms is not None:
                 search_list_output = search_list_conf_input + self.terms
-                print(search_list_output)
             elif self.terms is None:
                 search_list_output = search_list_conf_input
-                print(search_list_output)
+            print('Final fields to search (conf file + terminal):', str(search_list_output))
+            logger_bugzilla_tr.info('Final fields to search (conf file + terminal): {}'.format(str(search_list_output)))
 
             url = 'https://bugzilla.{}/rest/bug?target_release={}'.format(company, release)
+            # Connecting to Bugzilla API
+            logger_bugzilla_tr.info('Connecting to Bugzilla API')
+            logger_bugzilla_tr.debug('URL: {}'.format(url))
+            logger_bugzilla_tr.debug('API Key: {}'.format(api_key))
             r = requests.get(url, params={'api_key': '{}'.format(api_key)})
             print('Retrieving the Target Release data from Bugzilla..')
+            logger_bugzilla_tr.info('Retrieving the Target Release data from Bugzilla..')
             data = r.json()
             # pprint(data)
             print('Successfully fetched the data.')
+            logger_bugzilla_tr.info('Successfully fetched the data.')
 
             if 'error' in data.keys():
+                logger_bugzilla_tr.warning('Error in fetching the queried data.')
                 for key in search_list_output:
                     if key in data.keys():
                         ascii_target_release_list.append('{}: {}'.format(key, data.get(key)))
+                        logger_bugzilla_tr.warning('{}: {}'.format(key, data.get(key)))
             elif 'bugs' in data.keys():
                 data_release_bugs = data.get('bugs')
                 if len(data_release_bugs) > 0:
@@ -109,35 +137,38 @@ class TargetReleaseBugzilla:
                         # retrieving keys
                         ascii_target_release_list.append('')
                         ascii_target_release_list.append('=== Bug: {}'.format(bug.get('id')))
+                        print('Bug:', bug.get('id'))
+                        logger_bugzilla_tr.info('Collecting information for the Bug: {}'.format(bug.get('id')))
                         for key in keys_to_retrieve:
                             if type(bug.get(key)) is str or type(bug.get(key)) is bool or type(bug.get(key)) is int or type(bug.get(key)) is None:
                                 if bug.get(key) is '':
                                     print(key + ': ' + 'Nothing related to {} is now available.'.format(key))
                                     ascii_target_release_list.append('* ' + key + ': ' + 'Nothing related to {} is now available.'.format(key))
+                                    logger_bugzilla_tr.debug('{}: Nothing related to {} is now available.'.format(key, key))
                                 else:
                                     print(key + ': ' + str(bug.get(key, 'Nothing related to {} is now available.'.format(key))))
                                     ascii_target_release_list.append('* ' + key + ': ' + str(bug.get(key, 'Nothing related to {} is now available.'.format(key))))
-                                # print(type(bug.get(key)))
-                                print()
+                                    logger_bugzilla_tr.debug(str(key) + ': ' + str(bug.get(key, 'Nothing related to {} is now available.'.format(key))))
                             if type(bug.get(key)) is list:
                                 print(key + ':')
                                 ascii_target_release_list.append('* {}:'.format(key))
+                                logger_bugzilla_tr.info('Collecting listed Key: {}'.format(key))
                                 counter__dictionary_items = 1
                                 for list_item in bug.get(key):
                                     if type(list_item) is dict:
                                         print('\tItem: {}'.format(counter__dictionary_items))
                                         ascii_target_release_list.append('** Item: {}'.format(counter__dictionary_items))
+                                        logger_bugzilla_tr.debug('Item: {}'.format(counter__dictionary_items))
                                         dictionary_keys = list_item.keys()
                                         for dictionary_key in dictionary_keys:
-                                            # print(dictionary_keys)
                                             print('\t\t' + dictionary_key + ': ' + str(list_item.get(dictionary_key)))
                                             ascii_target_release_list.append('*** ' + dictionary_key + ': ' + str(list_item.get(dictionary_key)))
-                                        print()
+                                            logger_bugzilla_tr.debug(str(dictionary_key) + ': ' + str(list_item.get(dictionary_key)))
                                         counter__dictionary_items += 1
                                     else:
                                         print('\t', list_item)
                                         ascii_target_release_list.append('** {}'.format(list_item))
-                                        print()
+                                        logger_bugzilla_tr.debug(str(list_item))
                         print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
                         logger_bugzilla_tr.debug('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
                 else:
@@ -149,9 +180,9 @@ class TargetReleaseBugzilla:
                           'Release.')
 
             ascii_target_release_list.append('')
-
-        for item in ascii_target_release_list:
-            print(item)
+        # print AsciiDoc data
+        # for item in ascii_target_release_list:
+        #     print(item)
         return ascii_target_release_list
 
 
@@ -167,31 +198,40 @@ class DataRetriever:
 
     # BUG INFORMATION
     def getting_bug_info(self):
-        logging_bugzilla = LoggerSetup(name='bugzilla_logger',
-                                       log_file='log/bugzilla_function_requester.log',
-                                       level=self.debug_level)
-        logger_bugzilla = logging_bugzilla.setup_logger()
-        logger_bugzilla.debug('entered bugzilla getting bug information function')
+        logging_bugzilla_func = LoggerSetup(name='bugzilla_exec_function',
+                                            log_file='log/bugzilla_exec_function.log',
+                                            level=self.debug_level)
+        logger_bugzilla_func = logging_bugzilla_func.setup_logger()
+        logger_bugzilla_func.info('Entered Bugzilla - Bug Information Function')
         retrieve = 'bug_info'
         ascii_bug_info_list = []
         print('Bug ID:', self.bug_id)
+        logger_bugzilla_func.info('Bug: {}'.format(self.bug_id))
         print('------------------')
         ascii_bug_info_list.append('== Bug ID: {}'.format(self.bug_id))
+
+        # Retrieving Bugzilla API Authentication Key from the configuration file.
+        logger_bugzilla_func.debug('Retrieving Bugzilla API Authentication Key from the configuration file.')
         api_connection = BugzillaReadConfigurationApiKey()
         api_key_auth = api_connection.key_auth()['api_key_auth']
+        api_key = ''
         if api_key_auth is True:
             api_key_reason = api_connection.key_auth()['api_key_reason']
-            logger_bugzilla.debug(api_key_reason)
+            logging_bugzilla_func.debug(api_key_reason)
             api_key = api_connection.key_auth()['api_key']
         else:
             api_key_reason = api_connection.key_auth()['api_key_reason']
-            logger_bugzilla.warning(api_key_reason)
-            raise Exception(api_key_reason)
+            logging_bugzilla_func.warning(api_key_reason)
+            # raise Exception(api_key_reason)
 
+        # Retrieving the company link from the conf file to insert it later into the API request
+        logger_bugzilla_func.info('Retrieving the company link from the conf file to insert it later '
+                                  'into the API request.')
         config = configparser.ConfigParser()
         config.read('{}config.conf'.format(conf_path))
         # read company data from configuration file
         company = config['bugzilla_basic_auth']['company']
+        logger_bugzilla_func.debug('Company link: {}'.format(company))
 
         # read fields from configuration
         # Bugzilla search terms configuration file reading
@@ -202,32 +242,41 @@ class DataRetriever:
         search_list_conf_input = search_list_conf_input.replace(' ,', ',')
         search_list_conf_input = search_list_conf_input.replace(' , ', ',')
         search_list_conf_input = search_list_conf_input.split(',')
-        print('Fields from conf file:', search_list_conf_input)
-        print('Fields from terminal:', self.terms)
+        print('Fields to search from conf file:', search_list_conf_input)
+        logger_bugzilla_func.debug('Fields from conf file: {}'.format(str(search_list_conf_input)))
+        print('Fields to search from terminal:', self.terms)
+        logger_bugzilla_func.debug('Fields from user input in terminal: {}'.format(str(self.terms)))
         if self.terms is not None:
             search_list_output = search_list_conf_input + self.terms
-            print(search_list_output)
-
         elif self.terms is None:
             search_list_output = search_list_conf_input
-            print(search_list_output)
+        print('Final fields to search (conf file + terminal):', str(search_list_output))
+        logger_bugzilla_func.info('Final fields to search (conf file + terminal): {}'.format(str(search_list_output)))
 
         r = requests.get('https://bugzilla.{}/rest/bug/'.format(company), params={'ids': '{}'.format(self.bug_id),
                                                                                   'api_key': '{}'.format(api_key)})
+        # Connecting to Bugzilla API
+        logger_bugzilla_func.info('Connecting to Bugzilla API')
+        logger_bugzilla_func.debug('API Key: {}'.format(api_key))
         print('Retrieving the Bug Information data from Bugzilla..')
+        logger_bugzilla_func.info('Retrieving the Target Release data from Bugzilla..')
         data = r.json()
         print('Successfully fetched the data.')
+        logger_bugzilla_func.info('Successfully fetched the data.')
 
         if 'error' in data.keys():
             data_output = [data]
+            logger_bugzilla_func.warning('Error on querying the data.')
+            logger_bugzilla_func.warning(str(data['message']))
         elif 'bugs' in data.keys():
             data_output = data.get('bugs')
+            logger_bugzilla_func.debug('The data response related to the query is successful.')
             # pprint(data_output)
         else:
             data_output = None
 
-        print('Final fields to search:', search_list_output)
-        ascii_bug_info_list.append('* Search Fields: {}'.format(search_list_output))
+        # Show in AsciiDoc the fields to search for in Bugzilla API JSON response
+        # ascii_bug_info_list.append('* Search Fields: {}'.format(search_list_output))
         return {'retrieve': retrieve,
                 'data_output': data_output,
                 'search_list_output': search_list_output,
@@ -239,7 +288,7 @@ class DataRetriever:
                                        log_file='log/bugzilla_function_requester.log',
                                        level=self.debug_level)
         logger_bugzilla = logging_bugzilla.setup_logger()
-        logger_bugzilla.debug('entered bugzilla user assigned bugs function')
+        logger_bugzilla.info('Entered Bugzilla - User Assigned Bugs Function')
         retrieve = 'user_assigned_bugs'
         ascii_user_assigned_bugs_list = []
         print('User:', self.user)
@@ -303,7 +352,7 @@ class DataRetriever:
                                        log_file='log/bugzilla_function_requester.log',
                                        level=self.debug_level)
         logger_bugzilla = logging_bugzilla.setup_logger()
-        logger_bugzilla.debug('entered bugzilla user info function')
+        logger_bugzilla.info('Entered Bugzilla - User Information Function')
         retrieve = 'user_info'
         ascii_user_info_list = []
         print('User:', self.user)
@@ -503,7 +552,7 @@ class DataRetriever:
                 'search_list_output': search_list_output,
                 'ascii_bug_history_list': ascii_bug_history_list}
 
-    # MAIN CLASS FUNCTION FOR DATA RETRIEVING FROM EACH QUERY TO THE REST API
+    # MAIN FUNCTION FOR DATA RETRIEVING FROM EACH QUERY TO THE REST API
     def data_retriever(self, retrieval, data, search_list, ascii_doc_data):
         logging_bugzilla_main = LoggerSetup(name='bugzilla_main_logger',
                                             log_file='log/bugzilla_bug_data_retriever.log',
