@@ -34,13 +34,13 @@ conf_path = 'conf/'
 
 
 class UserTrackerChoice:
-    def __init__(self, tracker, issue, release_note, order, user, custom_field_name, custom_field_id,
+    def __init__(self, tracker, issue, release_note, order, user, field_name, field_id,
                  bug_function, output_path, debug_level, time):
         self.tracker = tracker
         self.issue = issue
         self.user = user
-        self.custom_field_name = custom_field_name
-        self.custom_field_id = custom_field_id
+        self.field_name = field_name
+        self.field_id = field_id
         self.bug_function = bug_function
         self.release_note = release_note
         self.order = order
@@ -186,13 +186,13 @@ class UserTrackerChoice:
             # calling the class for making the the Target Release notes object
             # self.release_note is type of list
             release_notes = TargetReleaseBugzilla(releases=self.release_note,
-                                                  terms=self.custom_field_name,
+                                                  terms=self.field_name,
                                                   debug_level=self.debug_level)
 
             # calling the basic class for collecting the corresponding data from the bugzilla rest api
             # functions: bug info, bug comments, bug history, user info, user assigned bugs
             data_object = DataRetriever(bug_id=self.issue,
-                                        terms=self.custom_field_name,
+                                        terms=self.field_name,
                                         user=self.user,
                                         debug_level=self.debug_level)
 
@@ -318,15 +318,15 @@ def user_input(argv):
                         help="add the issue ID",
                         metavar="<ISSUE_ID>")
     parser.add_argument("-n", "--name",
-                        dest="custom_field_name",
+                        dest="field_name",
                         action='append',
-                        help="Define the customfield name",
+                        help="Define the field name to search for in Bugzilla/JIRA API (when it is necessary)",
                         # required=True,
                         metavar="<CUSTOMFIELD_NAME>")
     parser.add_argument("-c", "--customfieldid",
-                        dest="custom_field_id",
+                        dest="field_id",
                         nargs='+',
-                        help="Define the customfield ID number",
+                        help="Define the field ID number in JIRA API (when it is necessary)",
                         metavar="<CUSTOMFIELD_ID>",
                         type=int)
     parser.add_argument("-u", "--user",
@@ -374,13 +374,13 @@ def user_input(argv):
     # arguments parser creation object
     arguments = parser.parse_args()
     # print(">>>> Print when a value is empty:", arguments.user)
-    # print('Print custom field names', arguments.custom_field_name)
-    # print('>>>> Print list customfield IDs:', arguments.custom_field_id)
+    # print('Print custom field names', arguments.field_name)
+    # print('>>>> Print list customfield IDs:', arguments.field_id)
     return {'tracker': arguments.tracker,
             'issue': arguments.issue,
             'user': arguments.user,
-            'custom_field_name': arguments.custom_field_name,
-            'custom_field_id': arguments.custom_field_id,
+            'field_name': arguments.field_name,
+            'field_id': arguments.field_id,
             'bug_function': arguments.function,
             'order_ascending': arguments.order_ascending,
             'release_note': arguments.release_note,
@@ -405,8 +405,8 @@ if __name__ == '__main__':
     tracker_choice = UserTrackerChoice(tracker=tracker_issue_selection['tracker'],
                                        issue=tracker_issue_selection['issue'],
                                        user=tracker_issue_selection['user'],
-                                       custom_field_name=tracker_issue_selection['custom_field_name'],
-                                       custom_field_id=tracker_issue_selection['custom_field_id'],
+                                       field_name=tracker_issue_selection['field_name'],
+                                       field_id=tracker_issue_selection['field_id'],
                                        bug_function=tracker_issue_selection['bug_function'],
                                        order=tracker_issue_selection['order_ascending'],
                                        release_note=tracker_issue_selection['release_note'],
