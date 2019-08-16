@@ -558,7 +558,7 @@ class DataRetriever:
                                             log_file='log/bugzilla_exec_function.log',
                                             level=self.debug_level)
         logger_bugzilla_func = logging_bugzilla_func.setup_logger()
-        logging_bugzilla_func.debug('entered bugzilla bug history function')
+        logger_bugzilla_func.debug('Entered Bugzilla - Bug History Function')
         retrieve = 'bug_history'
         ascii_bug_history_list = []
         print('Bug ID:', self.bug_id)
@@ -574,11 +574,11 @@ class DataRetriever:
         api_key = ''
         if api_key_auth is True:
             api_key_reason = api_connection.key_auth()['api_key_reason']
-            logging_bugzilla_func.debug(api_key_reason)
+            logger_bugzilla_func.debug(api_key_reason)
             api_key = api_connection.key_auth()['api_key']
         else:
             api_key_reason = api_connection.key_auth()['api_key_reason']
-            logging_bugzilla_func.warning(api_key_reason)
+            logger_bugzilla_func.warning(api_key_reason)
             # raise Exception(api_key_reason)
 
         # Retrieving the company link from the conf file to insert it later into the API request
@@ -645,22 +645,23 @@ class DataRetriever:
 
     # MAIN FUNCTION FOR DATA RETRIEVING FROM EACH QUERY TO THE REST API
     def data_retriever(self, retrieval, data, search_list, ascii_doc_data):
-        logging_bugzilla_main = LoggerSetup(name='bugzilla_main_logger',
-                                            log_file='log/bugzilla_bug_data_retriever.log',
+        logging_bugzilla_main = LoggerSetup(name='bugzilla_data_retriever',
+                                            log_file='log/bugzilla_data_retriever.log',
                                             level=self.debug_level)
         logger_bugzilla_main = logging_bugzilla_main.setup_logger()
-        logger_bugzilla_main.debug('entered main bugzilla function')
+        logger_bugzilla_main.debug('Entered Bugzilla - Data Retriever Function')
         ascii_doc_data_list = []
-        print('Search List:', search_list)
-        print('Search List Length:', len(search_list))
-        print()
+        logger_bugzilla_main.debug('Search List: {}'.format(str(search_list)))
+        logger_bugzilla_main.debug('Search List Length: {}'.format(len(search_list)))
         ascii_doc_data_list.extend(ascii_doc_data)
         # BUG COMMENTS
         if retrieval is 'bug_comments' and self.bug_id in data.keys():
+            logger_bugzilla_main.info('RETRIEVING BUG COMMENTS')
             comments = data[self.bug_id]['comments']
             counter_comment = 1
             for comment in comments:
                 print('Comment: {}'.format(counter_comment))
+                logger_bugzilla_main.info('Collecting Comment: {}'.format(counter_comment))
                 ascii_doc_data_list.append('=== Comment {}'.format(counter_comment))
                 comment_keys = comment.keys()
                 print()
@@ -671,10 +672,12 @@ class DataRetriever:
                                 print(key + ':', comment.get(key, 'Nothing related to {} has been found.'.format(key)))
                                 ascii_doc_data_list.append('* ' + key + ': ' + comment.get(
                                     key, 'Nothing related to {} has been found.'.format(key)))
+                                logger_bugzilla_main.debug('>> string key: {}'.format(key))
                                 print()
                             if type(comment.get(key)) is list:
                                 print(key + ':')
                                 ascii_doc_data_list.append('* {}'.format(key))
+                                logger_bugzilla_main.debug('>> listed key: {}'.format(key))
                                 key_list = comment.get(key)
                                 for item_key in key_list:
                                     print('\t', item_key)
@@ -684,11 +687,13 @@ class DataRetriever:
                                 print(key + ':', str(comment.get(key, 'Nothing related to {} has been found.'.format(key))))
                                 ascii_doc_data_list.append('* ' + key + ': ' + str(
                                     comment.get(key, 'Nothing related to {} is now available.'.format(key))))
+                                logger_bugzilla_main.debug('>> int key: '.format(key))
                                 print()
                             if type(comment.get(key)) is bool:
                                 print(key + ':', str(comment.get(key, 'Nothing related to {} has been found.'.format(key))))
                                 ascii_doc_data_list.append('* ' + key + ': ' + str(
                                     comment.get(key, 'Nothing related to {} is now available.'.format(key))))
+                                logger_bugzilla_main.debug('>> boolean key: {}'.format(str(key)))
                                 print()
                 counter_comment += 1
                 print()
@@ -699,16 +704,17 @@ class DataRetriever:
                 if key in data.keys():
                     print('\t{}: {}'.format(key, data.get(key)))
                     ascii_doc_data_list.append('* {}: {}'.format(key, data.get(key)))
+                    logger_bugzilla_main.info('{}: {}'.format(key, data.get(key)))
         else:
             if data is not None:
                 for bug in data:
                     # BUG HISTORY
                     if retrieval is 'bug_history' and bug['history']:
+                        logger_bugzilla_main.info('RETRIEVING BUG HISTORY')
                         history = bug.get('history')
                         counter_history = 1
                         for item_history in history:
                             item_history_keys_list = item_history.keys()
-                            # print('BUGKEYSALL:', item_history_keys_list)
                             keys_to_retrieve = []
                             if len(search_list) > 0:
                                 for key in search_list:
@@ -720,30 +726,37 @@ class DataRetriever:
                                 keys_to_retrieve = item_history_keys_list
                             ascii_doc_data_list.append('')
                             ascii_doc_data_list.append('=== History {}'.format(counter_history))
+                            logger_bugzilla_main.info('Collecting History: {}'.format(counter_history))
                             for key in keys_to_retrieve:
                                 if type(item_history.get(key)) is str:
                                     print(key + ':', item_history.get(key))
                                     ascii_doc_data_list.append('* ' + key + ': ' + item_history.get(key))
+                                    logger_bugzilla_main.debug('>> string key: '.format(str(key)))
                                 if type(item_history.get(key)) is list:
                                     print(key + ':')
                                     ascii_doc_data_list.append('* {}:'.format(key))
+                                    logger_bugzilla_main.debug('>> listed key: {}'.format(str(key)))
                                     item_history_list = item_history.get(key)
                                     counter_item_list = 1
                                     for item_list in item_history_list:
                                         item_list_keys = item_list.keys()
                                         print('\tItem {}'.format(counter_item_list))
                                         ascii_doc_data_list.append('** Item {}'.format(counter_item_list))
-                                        for key in item_list_keys:
-                                            print('\t\t' + key + ':', str(item_list.get(key)))
-                                            ascii_doc_data_list.append('*** ' + key + ': ' + str(item_list.get(key)))
+                                        logger_bugzilla_main.debug('>>>> Item {}'.format(counter_item_list))
+                                        for listed_key in item_list_keys:
+                                            print('\t\t' + listed_key + ':', str(item_list.get(listed_key)))
+                                            ascii_doc_data_list.append('*** ' + listed_key + ': ' + str(item_list.get(listed_key)))
+                                            logger_bugzilla_main.debug('>>>>>> key: {}'.format(listed_key))
                                         print()
                                         counter_item_list += 1
                             counter_history += 1
                             print()
                             print('++++++++++++++++++++++++++++++++++++++++++++++++')
+                            logger_bugzilla_main.debug('++++++++++++++++++++++++++++++++++++++++++++++++')
                             print()
                     # USER INFORMATION
                     elif retrieval is 'user_info':
+                        logger_bugzilla_main.info('RETRIEVING USER INFORMATION')
                         user_keys_list = bug.keys()
                         keys_to_retrieve = []
                         if len(search_list) > 0:
@@ -757,13 +770,17 @@ class DataRetriever:
 
                         ascii_doc_data_list.append('')
                         ascii_doc_data_list.append('=== User Fields')
+                        logger_bugzilla_main.info('Collecting User Fields')
                         for key in keys_to_retrieve:
                             if key in user_keys_list:
                                 print(key + ':', str(bug.get(key)))
                                 ascii_doc_data_list.append('* ' + key + ': ' + str(bug.get(key)))
+                                logger_bugzilla_main.debug('>> key: {}'.format(str(key)))
                         print('+++++++++++++++++++++++++++++++++++++++++++++++++++')
+                        logger_bugzilla_main.debug('+++++++++++++++++++++++++++++++++++++++++++++++++++')
                     # BUG INFORMATION | USER ASSIGNED BUGS
                     elif retrieval is 'bug_info' or retrieval is 'user_assigned_bugs':
+                        logger_bugzilla_main.info('RETRIEVING BUG INFORMATION')
                         bug_keys_list = bug.keys()
                         # print(bug_keys_list)
                         # print(len(bug_keys_list))
@@ -781,37 +798,45 @@ class DataRetriever:
                         if retrieval is 'bug_info':
                             print('Bug Information')
                             ascii_doc_data_list.append('=== Bug Information')
+                            logger_bugzilla_main.info('Collecting Bug Information')
                         else:
                             print('BUG ID:', bug.get('id'))
                             ascii_doc_data_list.append('=== Bug: {}'.format(bug.get('id')))
+                            logger_bugzilla_main.info('Collecting Information for the Bug: {}'.format(bug.get('id')))
                         for key in keys_to_retrieve:
                             if type(bug.get(key)) is str or type(bug.get(key)) is bool or type(bug.get(key)) is int or type(bug.get(key)) is None:
                                 if bug.get(key) is '':
                                     print(key + ': ' + 'Nothing related to {} is now available.'.format(key))
                                     ascii_doc_data_list.append('* ' + key + ': ' + 'Nothing related to {} is now available.'.format(key))
+                                    logger_bugzilla_main.debug('>> ' + key + ': ' + 'Nothing related to {} is now available.'.format(key))
                                 else:
                                     print(key + ': ' + str(bug.get(key, 'Nothing related to {} is now available.'.format(key))))
                                     ascii_doc_data_list.append('* ' + key + ': ' + str(bug.get(key, 'Nothing related to {} is now available.'.format(key))))
+                                    logger_bugzilla_main.debug('>> (string/boolean/integer) key: {}'.format(str(key)))
                                 # print(type(bug.get(key)))
                                 print()
                             if type(bug.get(key)) is list:
                                 print(key + ':')
                                 ascii_doc_data_list.append('* {}:'.format(key))
-                                counter__dictionary_items = 1
+                                logger_bugzilla_main.debug('>> listed key: {}'.format(str(key)))
+                                counter_dictionary_items = 1
                                 for list_item in bug.get(key):
                                     if type(list_item) is dict:
-                                        print('\tItem: {}'.format(counter__dictionary_items))
-                                        ascii_doc_data_list.append('** Item: {}'.format(counter__dictionary_items))
+                                        print('\tItem: {}'.format(counter_dictionary_items))
+                                        ascii_doc_data_list.append('** Item: {}'.format(counter_dictionary_items))
+                                        logger_bugzilla_main.debug('>>>> Dictionary Item: {}'.format(counter_dictionary_items))
                                         dictionary_keys = list_item.keys()
                                         for dictionary_key in dictionary_keys:
                                             # print(dictionary_keys)
                                             print('\t\t' + dictionary_key + ': ' + str(list_item.get(dictionary_key)))
                                             ascii_doc_data_list.append('*** ' + dictionary_key + ': ' + str(list_item.get(dictionary_key)))
+                                            logger_bugzilla_main.debug('>>>>>> key: {}'.format(str(dictionary_key)))
                                         print()
-                                        counter__dictionary_items += 1
+                                        counter_dictionary_items += 1
                                     else:
                                         print('\t', list_item)
                                         ascii_doc_data_list.append('** {}'.format(list_item))
+                                        logger_bugzilla_main.debug('>>>> list item collected')
                                         print()
                         print()
                         print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
@@ -819,12 +844,12 @@ class DataRetriever:
             else:
                 print('* No data is now available for that query.')
                 ascii_doc_data_list.append('* No data is now available for that query.')
+                logger_bugzilla_main.warning('No data is now available for that query.')
 
         # returning all the data for the AsciiDoc file
-        print()
-        print('ASCIIDOC')
-        for item in ascii_doc_data_list:
-            print(item)
+        # print AsciiDoc data
+        # for item in ascii_doc_data_list:
+        #     print(item)
         return ascii_doc_data_list
 
 
