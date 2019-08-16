@@ -52,6 +52,7 @@ class TargetReleaseBugzilla:
             print('Release:', release)
             logger_bugzilla_tr.info('Release: {}'.format(release))
             print('------------------')
+            logger_bugzilla_tr.info('------------------')
             ascii_target_release_list.append('== Release: {}'.format(release))
 
             # Retrieving Bugzilla API Authentication Key from the configuration file.
@@ -108,8 +109,8 @@ class TargetReleaseBugzilla:
             logger_bugzilla_tr.info('Retrieving the Target Release data from Bugzilla..')
             data = r.json()
             # pprint(data)
-            print('The API response was successful..')
-            logger_bugzilla_tr.info('The API response was successful..')
+            print('The API response was successful.')
+            logger_bugzilla_tr.info('The API response was successful.')
 
             if 'error' in data.keys():
                 logger_bugzilla_tr.warning('Error in fetching the queried data.')
@@ -175,10 +176,10 @@ class TargetReleaseBugzilla:
                 else:
                     ascii_target_release_list.append('* There is no Target Release with that name or there are no '
                                                      'issues related to that Target Release.')
-                    logger_bugzilla_tr.warning('Error on querying the data. The username is not right or there are no '
-                                               'assigned bugs yet to that username.')
                     logger_bugzilla_tr.info('There is no Target Release with that name or there are no issues related '
                                             'to that Target Release.')
+                    logger_bugzilla_tr.warning('Error on querying the data. The username is not right or there are no '
+                                               'assigned bugs yet to that username.')
                     print('\t There is no Target Release with that name or there are no issues related to that Target '
                           'Release.')
 
@@ -211,6 +212,7 @@ class DataRetriever:
         print('Bug ID:', self.bug_id)
         logger_bugzilla_func.info('Bug: {}'.format(self.bug_id))
         print('------------------')
+        logger_bugzilla_func.info('------------------')
         ascii_bug_info_list.append('== Bug ID: {}'.format(self.bug_id))
 
         # Retrieving Bugzilla API Authentication Key from the configuration file.
@@ -238,6 +240,7 @@ class DataRetriever:
 
         # read fields from configuration
         # Bugzilla search terms configuration file reading
+        logger_bugzilla_func.info('Retrieving Bugzilla search terms (fields) from the configuration file.')
         search_terms_config = configparser.ConfigParser()
         search_terms_config.read('{}/conf/search_terms.conf'.format(configuration_directory_path))
         search_list_conf_input = search_terms_config['bugzilla_bug']['search_list']
@@ -266,8 +269,8 @@ class DataRetriever:
         print('Retrieving the Bug Information data from Bugzilla..')
         logger_bugzilla_func.info('Retrieving the Target Release data from Bugzilla..')
         data = r.json()
-        print('The API response was successfully.')
-        logger_bugzilla_func.info('The API response was successfully..')
+        print('The API response was successful.')
+        logger_bugzilla_func.info('The API response was successful.')
 
         if 'error' in data.keys():
             data_output = [data]
@@ -279,6 +282,7 @@ class DataRetriever:
             # pprint(data_output)
         else:
             data_output = None
+            logger_bugzilla_func.warning('Error on querying the data.')
 
         # Show in AsciiDoc the fields to search for in Bugzilla API JSON response
         # ascii_bug_info_list.append('* Search Fields: {}'.format(search_list_output))
@@ -297,7 +301,9 @@ class DataRetriever:
         retrieve = 'user_assigned_bugs'
         ascii_user_assigned_bugs_list = []
         print('User:', self.user)
+        logger_bugzilla_func.info('User: {}'.format(self.user))
         print('------------------')
+        logger_bugzilla_func.info('------------------')
         ascii_user_assigned_bugs_list.append('== User: {}'.format(self.user))
 
         # Retrieving Bugzilla API Authentication Key from the configuration file.
@@ -323,6 +329,7 @@ class DataRetriever:
 
         # read fields from configuration
         # Bugzilla search terms configuration file reading
+        logger_bugzilla_func.info('Retrieving Bugzilla search terms (fields) from the configuration file.')
         search_terms_config = configparser.ConfigParser()
         search_terms_config.read('{}/conf/search_terms.conf'.format(configuration_directory_path))
         search_list_conf_input = search_terms_config['bugzilla_user_assigned_bugs']['search_list']
@@ -378,7 +385,9 @@ class DataRetriever:
         retrieve = 'user_info'
         ascii_user_info_list = []
         print('User:', self.user)
+        logger_bugzilla_func.info('User: {}'.format(self.user))
         print('------------------')
+        logger_bugzilla_func.info('------------------')
         ascii_user_info_list.append('== User: {}'.format(self.user))
         api_connection = BugzillaReadConfigurationApiKey()
         api_key_auth = api_connection.key_auth()['api_key_auth']
@@ -400,6 +409,7 @@ class DataRetriever:
 
         # read fields from configuration
         # Bugzilla search terms configuration file reading
+        logger_bugzilla_func.info('Retrieving Bugzilla search terms (fields) from the configuration file.')
         search_terms_config = configparser.ConfigParser()
         search_terms_config.read('{}/conf/search_terms.conf'.format(configuration_directory_path))
         search_list_conf_input = search_terms_config['bugzilla_user_info']['search_list']
@@ -451,32 +461,44 @@ class DataRetriever:
 
     # BUG COMMENTS
     def getting_bug_comments(self):
-        logging_bugzilla = LoggerSetup(name='bugzilla_logger',
-                                       log_file='log/bugzilla_function_requester.log',
-                                       level=self.debug_level)
-        logger_bugzilla = logging_bugzilla.setup_logger()
-        logger_bugzilla.debug('entered bugzilla bug comments function')
+        logging_bugzilla_func = LoggerSetup(name='bugzilla_exec_function',
+                                            log_file='log/bugzilla_exec_function.log',
+                                            level=self.debug_level)
+        logger_bugzilla_func = logging_bugzilla_func.setup_logger()
+        logger_bugzilla_func.debug('Entered Bugzilla - Bug Comments Function')
         retrieve = 'bug_comments'
         ascii_bug_comments_list = []
         print('Bug ID:', self.bug_id)
+        logger_bugzilla_func.info('Bug: {}'.format(self.bug_id))
         print('------------------')
+        logger_bugzilla_func.info('------------------')
         ascii_bug_comments_list.append('== Bug ID: {}'.format(self.bug_id))
+
+        # Retrieving Bugzilla API Authentication Key from the configuration file.
+        logger_bugzilla_func.debug('Retrieving Bugzilla API Authentication Key from the configuration file.')
         api_connection = BugzillaReadConfigurationApiKey()
         api_key_auth = api_connection.key_auth()['api_key_auth']
+        api_key = ''
         if api_key_auth is True:
             api_key_reason = api_connection.key_auth()['api_key_reason']
-            logger_bugzilla.debug(api_key_reason)
+            logger_bugzilla_func.debug(api_key_reason)
             api_key = api_connection.key_auth()['api_key']
         else:
             api_key_reason = api_connection.key_auth()['api_key_reason']
-            logger_bugzilla.warning(api_key_reason)
-            raise Exception(api_key_reason)
+            logger_bugzilla_func.warning(api_key_reason)
+            # raise Exception(api_key_reason)
+
+        # Retrieving the company link from the conf file to insert it later into the API request
+        logger_bugzilla_func.info('Retrieving the company link from the conf file to insert it later '
+                                  'into the API request.')
         config = configparser.ConfigParser()
+        # read company data from configuration file
         config.read('{}config.conf'.format(conf_path))
         company = config['bugzilla_basic_auth']['company']
 
         # read fields from configuration
         # Bugzilla search terms configuration file reading
+        logger_bugzilla_func.info('Retrieving Bugzilla search terms (fields) from the configuration file.')
         search_terms_config = configparser.ConfigParser()
         search_terms_config.read('{}/conf/search_terms.conf'.format(configuration_directory_path))
         search_list_conf_input = search_terms_config['bugzilla_comments']['search_list']
@@ -484,37 +506,47 @@ class DataRetriever:
         search_list_conf_input = search_list_conf_input.replace(' ,', ',')
         search_list_conf_input = search_list_conf_input.replace(' , ', ',')
         search_list_conf_input = search_list_conf_input.split(',')
-        print('Fields from conf file:', search_list_conf_input)
-        print('Fields from terminal:', self.terms)
+        print('Fields to search from conf file:', search_list_conf_input)
+        logger_bugzilla_func.debug('Fields from conf file: {}'.format(str(search_list_conf_input)))
+        print('Fields to search from terminal:', self.terms)
+        logger_bugzilla_func.debug('Fields from user input in terminal: {}'.format(str(self.terms)))
         if self.terms is not None:
             search_list_output = search_list_conf_input + self.terms
-            print(search_list_output)
-
         elif self.terms is None:
             search_list_output = search_list_conf_input
-            print(search_list_output)
+        print('Final fields to search (conf file + terminal):', str(search_list_output))
+        logger_bugzilla_func.info('Final fields to search (conf file + terminal): {}'.format(str(search_list_output)))
 
-        # url = 'https://bugzilla.mozilla.org/rest/bug/{}/comment'.format(self.bug_id)
+        # Connecting to Bugzilla API
+        logger_bugzilla_func.info('Connecting to Bugzilla API')
+        logger_bugzilla_func.debug('API Key: {}'.format(api_key))
         url = 'https://bugzilla.{}/rest/bug/{}/comment'.format(company, self.bug_id)
+        logger_bugzilla_func.debug('URL: {}'.format(url))
         # u = url + "?token={}".format(api_key)
+        # request connection
         r = requests.get(url, params={'api_key': '{}'.format(api_key)})
 
-        print('Retrieving the Bug Comments data from Bugzilla..')
+        print('Retrieving the Bug Information data from Bugzilla..')
+        logger_bugzilla_func.info('Retrieving the Target Release data from Bugzilla..')
         data = r.json()
-        print('Successfully fetched the data.')
+        print('The API response was successfully.')
+        logger_bugzilla_func.info('The API response was successfully.')
 
         # if 'error' in data.keys():
         #     data_output = data
         if 'error' in data.keys():
             data_output = data
+            logger_bugzilla_func.warning('Error on querying the data.')
+            logger_bugzilla_func.warning(str(data['message']))
         elif 'bugs' in data.keys():
             data_output = data.get('bugs')
-            # pprint(data_output)
+            logger_bugzilla_func.debug('The data retrieval related to the query is successful.')
         else:
             data_output = None
+            logger_bugzilla_func.warning('Error on querying the data.')
 
-        print('Final fields to search:', search_list_output)
-        ascii_bug_comments_list.append('* Search Fields: {}'.format(search_list_output))
+        # Show in AsciiDoc the fields to search for in Bugzilla API JSON response
+        # ascii_bug_comments_list.append('* Search Fields: {}'.format(search_list_output))
         return {'retrieve': retrieve,
                 'data_output': data_output,
                 'search_list_output': search_list_output,
@@ -522,32 +554,43 @@ class DataRetriever:
 
     # BUG HISTORY
     def getting_bug_history(self):
-        logging_bugzilla = LoggerSetup(name='bugzilla_logger',
-                                       log_file='log/bugzilla_function_requester.log',
-                                       level=self.debug_level)
-        logger_bugzilla = logging_bugzilla.setup_logger()
-        logger_bugzilla.debug('entered bugzilla bug history function')
+        logging_bugzilla_func = LoggerSetup(name='bugzilla_exec_function',
+                                            log_file='log/bugzilla_exec_function.log',
+                                            level=self.debug_level)
+        logger_bugzilla_func = logging_bugzilla_func.setup_logger()
+        logging_bugzilla_func.debug('entered bugzilla bug history function')
         retrieve = 'bug_history'
         ascii_bug_history_list = []
         print('Bug ID:', self.bug_id)
+        logger_bugzilla_func.info('Bug: {}'.format(self.bug_id))
         print('------------------')
+        logger_bugzilla_func.info('------------------')
         ascii_bug_history_list.append('== Bug ID: {}'.format(self.bug_id))
+
+        # Retrieving Bugzilla API Authentication Key from the configuration file.
+        logger_bugzilla_func.debug('Retrieving Bugzilla API Authentication Key from the configuration file.')
         api_connection = BugzillaReadConfigurationApiKey()
         api_key_auth = api_connection.key_auth()['api_key_auth']
+        api_key = ''
         if api_key_auth is True:
             api_key_reason = api_connection.key_auth()['api_key_reason']
-            logger_bugzilla.debug(api_key_reason)
+            logging_bugzilla_func.debug(api_key_reason)
             api_key = api_connection.key_auth()['api_key']
         else:
             api_key_reason = api_connection.key_auth()['api_key_reason']
-            logger_bugzilla.warning(api_key_reason)
-            raise Exception(api_key_reason)
+            logging_bugzilla_func.warning(api_key_reason)
+            # raise Exception(api_key_reason)
+
+        # Retrieving the company link from the conf file to insert it later into the API request
+        logger_bugzilla_func.info('Retrieving the company link from the conf file to insert it later '
+                                  'into the API request.')
         config = configparser.ConfigParser()
         config.read('{}config.conf'.format(conf_path))
         company = config['bugzilla_basic_auth']['company']
 
         # read fields from configuration
         # Bugzilla search terms configuration file reading
+        logger_bugzilla_func.info('Retrieving Bugzilla search terms (fields) from the configuration file.')
         search_terms_config = configparser.ConfigParser()
         search_terms_config.read('{}/conf/search_terms.conf'.format(configuration_directory_path))
         search_list_conf_input = search_terms_config['bugzilla_bug_history']['search_list']
@@ -555,35 +598,46 @@ class DataRetriever:
         search_list_conf_input = search_list_conf_input.replace(' ,', ',')
         search_list_conf_input = search_list_conf_input.replace(' , ', ',')
         search_list_conf_input = search_list_conf_input.split(',')
-        print('Fields from conf file:', search_list_conf_input)
-        print('Fields from terminal:', self.terms)
+        print('Fields to search from conf file:', search_list_conf_input)
+        logger_bugzilla_func.debug('Fields from conf file: {}'.format(str(search_list_conf_input)))
+        print('Fields to search from terminal:', self.terms)
+        logger_bugzilla_func.debug('Fields from user input in terminal: {}'.format(str(self.terms)))
         if self.terms is not None:
             search_list_output = search_list_conf_input + self.terms
-            print(search_list_output)
-
         elif self.terms is None:
             search_list_output = search_list_conf_input
-            print(search_list_output)
+        print('Final fields to search (conf file + terminal):', str(search_list_output))
+        logger_bugzilla_func.info('Final fields to search (conf file + terminal): {}'.format(str(search_list_output)))
 
+        # Connecting to Bugzilla API
+        logger_bugzilla_func.info('Connecting to Bugzilla API')
+        logger_bugzilla_func.debug('API Key: {}'.format(api_key))
         # url = 'https://bugzilla.mozilla.org/rest/bug/{}/history'.format(self.bug_id)
         url = 'https://bugzilla.{}/rest/bug/{}/history'.format(company, self.bug_id)
+        logger_bugzilla_func.debug('URL: {}'.format(url))
         # u = url + "?token={}".format(api_key)
+        # request connection
         r = requests.get(url, params={'api_key': '{}'.format(api_key)})
 
-        print('Retrieving the Bug History data from Bugzilla..')
+        print('Retrieving the Bug Information data from Bugzilla..')
+        logger_bugzilla_func.info('Retrieving the Target Release data from Bugzilla..')
         data = r.json()
-        print('Successfully fetched the data.')
+        print('The API response was successfully.')
+        logger_bugzilla_func.info('The API response was successfully.')
 
         if 'error' in data.keys():
             data_output = [{'history': [data]}]
+            logger_bugzilla_func.warning('Error on querying the data.')
+            logger_bugzilla_func.warning(str(data['message']))
         elif 'bugs' in data.keys():
             data_output = data.get('bugs')
-            # pprint(data_output)
+            logger_bugzilla_func.debug('The data retrieval related to the query is successful.')
         else:
             data_output = None
+            logger_bugzilla_func.warning('Error on querying the data.')
 
-        print('Final fields to search:', search_list_output)
-        ascii_bug_history_list.append('* Search Fields: {}'.format(search_list_output))
+        # Show in AsciiDoc the fields to search for in Bugzilla API JSON response
+        # ascii_bug_history_list.append('* Search Fields: {}'.format(search_list_output))
         return {'retrieve': retrieve,
                 'data_output': data_output,
                 'search_list_output': search_list_output,
