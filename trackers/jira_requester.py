@@ -53,7 +53,7 @@ class Connector:
             logger_jira_connection.debug('Server: ' + str(server_value))
         else:
             server_reason_value = server_connection.read_server_conf()['server_reason']
-            logger_jira_connection.warning(server_reason_value)
+            logger_jira_connection.error(server_reason_value)
             # raise Exception(server_reason_value)
 
         # Authentication objects
@@ -116,10 +116,10 @@ class Connector:
                 print(basic_auth_reason_value)
                 print(username_reason_value)
                 print(password_reason_value)
-                logger_jira_connection.warning('Basic Authentication failed.')
-                logger_jira_connection.warning(basic_auth_reason_value)
-                logger_jira_connection.warning(username_reason_value)
-                logger_jira_connection.warning(password_reason_value)
+                logger_jira_connection.error('Basic Authentication failed.')
+                logger_jira_connection.error(basic_auth_reason_value)
+                logger_jira_connection.error(username_reason_value)
+                logger_jira_connection.error(password_reason_value)
                 # raise Exception('Basic Authentication failed.')
             elif oauth is False:
                 oauth_reason_value = jira_oauth.read_oauth()['oauth_reason']
@@ -130,11 +130,11 @@ class Connector:
                 print(access_token_reason_value)
                 print(access_token_secret_reason_value)
                 print(consumer_key_reason_value)
-                logger_jira_connection.warning('OAuth Authentication failed.')
-                logger_jira_connection.warning(oauth_reason_value)
-                logger_jira_connection.warning(access_token_reason_value)
-                logger_jira_connection.warning(access_token_secret_reason_value)
-                logger_jira_connection.warning(consumer_key_reason_value)
+                logger_jira_connection.error('OAuth Authentication failed.')
+                logger_jira_connection.error(oauth_reason_value)
+                logger_jira_connection.error(access_token_reason_value)
+                logger_jira_connection.error(access_token_secret_reason_value)
+                logger_jira_connection.error(consumer_key_reason_value)
                 # raise Exception('OAuth Authentication failed.')
 
         return options
@@ -226,17 +226,17 @@ class TargetReleaseJira:
 
             # Data retrieved from the REST API
             logger_jira_release_notes.debug('Data retrieved from the REST API')
+            # request JIRA API
             r = requests.get(url, auth=options['authentication'])
             data = r.json()
             keys_list = data.keys()
-            print('KEYS LIST:', str(keys_list))
-            print(len(keys_list))
-            logger_jira_release_notes.debug(str(keys_list))
+            logger_jira_release_notes.debug('Keys List from requested data: {}'.format(str(keys_list)))
+            logger_jira_release_notes.debug('Length of Keys List in requested data: {}'.format(len(keys_list)))
             if 'errorMessages' in keys_list:
                 item = data['errorMessages']
-                ascii_data_list.append('* {}'.format(item))
-                print('\t' + str(item))
-                logger_jira_release_notes.info(str(item))
+                ascii_data_list.append('* {}'.format(item[0]))
+                print('\t' + str(item[0]))
+                logger_jira_release_notes.error(str(item[0]))
             else:
                 if 'issues' in keys_list:
                     logger_jira_release_notes.info(
@@ -303,7 +303,7 @@ class IssueDataRetrieverJira:
                                                     log_file='log/jira_issue_data.log',
                                                     level=self.debug_level)
         logger_jira_issue_basic_data = logging_jira_issue_basic_data.setup_logger()
-        logger_jira_issue_basic_data.debug('entered JIRA basic issue information function')
+        logger_jira_issue_basic_data.debug('Entered JIRA - Issue Information Function')
 
         ascii_data_list = []
 
@@ -337,7 +337,7 @@ class IssueDataRetrieverJira:
                 for item in data['errorMessages']:
                     ascii_data_list.append('* {}'.format(item))
                     print('\t' + item)
-                    logger_jira_issue_basic_data.info(str(item))
+                    logger_jira_issue_basic_data.warning(str(item))
             else:
                 data_layer_2 = data['fields']
                 # pprint(data_layer_2)
@@ -353,9 +353,14 @@ class IssueDataRetrieverJira:
                 search_terms_config = configparser.ConfigParser()
                 search_terms_config.read('{}/conf/search_terms.conf'.format(configuration_directory_path))
                 custom_field_names = search_terms_config['jira_custom_fields']['name']
+                custom_field_names = custom_field_names.replace(', ', ',')
+                custom_field_names = custom_field_names.replace(' ,', ',')
+                custom_field_names = custom_field_names.replace(' , ', ',')
                 custom_field_names_list = custom_field_names.split(',')
-
                 custom_field_ids = search_terms_config['jira_custom_fields']['id']
+                custom_field_ids = custom_field_ids.replace(', ', ',')
+                custom_field_ids = custom_field_ids.replace(' ,', ',')
+                custom_field_ids = custom_field_ids.replace(' , ', ',')
                 custom_field_ids_list = custom_field_ids.split(',')
                 for index, id in enumerate(custom_field_ids_list):
                     custom_field_ids_list[index] = 'customfield_' + str(id)
@@ -378,14 +383,24 @@ class IssueDataRetrieverJira:
                         key = key
                     if key in data_keys_layer_2:
                         if type(data_layer_2.get(key)) is str:
-                            print(key + ': ' + data_layer_2.get(key))
-                            ascii_data_list.append('* {}: {}'.format(key, data_layer_2.get(key)))
-                            logger_jira_issue_basic_data.info('Collected successfully the key: ' + str(key))
-                            logger_jira_issue_basic_data.debug('{}: {}'.format(key, data_layer_2.get(key)))
+                            if key.startswith('customfield_'):
+                                print(name + ': ' + data_layer_2.get(key))
+                                ascii_data_list.append('* {}: {}'.format(name, data_layer_2.get(key)))
+                                logger_jira_issue_basic_data.info('Collected String Custom field: ' + str(name))
+                            else:
+                                print(key + ': ' + data_layer_2.get(key))
+                                ascii_data_list.append('* {}: {}'.format(key, data_layer_2.get(key)))
+                                logger_jira_issue_basic_data.info('Collected successfully the key: ' + str(key))
+                                logger_jira_issue_basic_data.debug('{}: {}'.format(key, data_layer_2.get(key)))
                         if type(data_layer_2.get(key)) is list:
-                            print(key + ':')
-                            ascii_data_list.append('* {}:'.format(key))
-                            logger_jira_issue_basic_data.info('Collecting the listed items for the key: ' + str(key))
+                            if key.startswith('customfield_'):
+                                print(name + ':')
+                                ascii_data_list.append('* {}:'.format(name))
+                                logger_jira_issue_basic_data.info('Collecting Listed Items of the Custom Field: ' + str(name))
+                            else:
+                                print(key + ':')
+                                ascii_data_list.append('* {}:'.format(key))
+                                logger_jira_issue_basic_data.info('Collecting the Listed Items for the Key: ' + str(key))
                             keys_list = data_layer_2.get(key)
                             counter_dict_list = 1
                             for key_list_item in keys_list:
@@ -399,8 +414,7 @@ class IssueDataRetrieverJira:
                                         if key_item != 'self':
                                             print('\t\t {}: '.format(key_item) + str(key_list_item.get(key_item)))
                                             ascii_data_list.append('*** {}: {}'.format(key_item, key_list_item.get(key_item)))
-                                            logger_jira_issue_basic_data.info('Collected successfully the listed dictionary key: ' + str(key_item))
-                                            logger_jira_issue_basic_data.debug('{}: {}'.format(str(key_item), str(key_list_item.get(key_item))))
+                                            logger_jira_issue_basic_data.info('Collected successfully the Listed Dictionary Key: ' + str(key_item))
                                     counter_dict_list += 1
                                 else:
                                     print('\t' + str(key_list_item))
@@ -449,7 +463,7 @@ class IssueDataRetrieverJira:
                                                     log_file='log/jira_issue_data.log',
                                                     level=self.debug_level)
         logger_jira_issue_basic_data = logging_jira_issue_basic_data.setup_logger()
-        logger_jira_issue_basic_data.debug('entered JIRA issue comments function')
+        logger_jira_issue_basic_data.debug('Entered JIRA - Issue Comments Function')
 
         ascii_data_list = []
 
@@ -464,12 +478,11 @@ class IssueDataRetrieverJira:
             # layer 2
             print('Inserting into Issue Comments data.')
             logger_jira_issue_basic_data.debug('Inserting into Issue Comments data.')
-            # print(data.keys())
             if 'errorMessages' in data.keys():
                 for item in data['errorMessages']:
                     ascii_data_list.append('* {}'.format(item))
                     print('\t' + item)
-                    logger_jira_issue_basic_data.info(str(item))
+                    logger_jira_issue_basic_data.error(str(item))
             else:
                 # data 2 layer for comments
                 data_layer_2_comments = data['fields']['comment']['comments']
@@ -483,25 +496,25 @@ class IssueDataRetrieverJira:
                         list_of_fields = []
                         for key in comment_keys_list:
                             if key != 'updateAuthor':
-                                # print('\t' + str(type(comment_item[key])))
                                 if type(comment_item[key]) is str or type(comment_item[key]) is int or type(comment_item[key]) is bool:
                                     if key in search_list_output:
                                         # print('\t\t' + key + ': ' + str(comment_item[key]))
                                         list_of_fields.append('* {}: {}'.format(key, str(comment_item[key])))
-                                        logger_jira_issue_basic_data.info('Key collected successfully: ' + str(key))
-                                        logger_jira_issue_basic_data.debug('{}: {}'.format(key, str(comment_item[key])))
+                                        logger_jira_issue_basic_data.debug('Key collected successfully: ' + str(key))
                                 if type(comment_item[key]) is dict:
                                     nested_comment_item = comment_item[key]
                                     nested_comment_item_keys = nested_comment_item.keys()
                                     for nested_key in nested_comment_item_keys:
                                         if nested_key in search_list_output:
                                             list_of_fields.append('* {}: {}'.format(nested_key, str(nested_comment_item[nested_key])))
-                                            logger_jira_issue_basic_data.info('Nested Key collected successfully: ' + str(nested_key))
-                                            logger_jira_issue_basic_data.debug('{}: {}'.format(str(nested_key), str(nested_comment_item[nested_key])))
+                                            logger_jira_issue_basic_data.debug('Nested Key collected successfully: ' + str(nested_key))
                         final_list_of_fields = list(dict.fromkeys(list_of_fields))
+                        logger_jira_issue_basic_data.info('Collected successfully all the data for the Comment {}'.format(counter_comments))
+
                         for item in final_list_of_fields:
                             ascii_data_list.append(item)
 
+                        # printing AsciiDoc data
                         for item in final_list_of_fields:
                             print('\t' + item)
 
