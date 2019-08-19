@@ -144,11 +144,17 @@ class Connector:
 
 
 class ConfigData:
-    def __init__(self, search_field, input_terms):
+    def __init__(self, search_field, input_terms, debug_level):
         self.search_field = search_field
         self.input_terms = input_terms
+        self.debug_level = debug_level
 
     def get_config_search_data(self):
+        logging_jira_conf_terms = LoggerSetup(name='jira_conf_terms_logger',
+                                              log_file='log/jira_conf_terms.log',
+                                              level=self.debug_level)
+        logger_jira_conf_terms = logging_jira_conf_terms.setup_logger()
+        logger_jira_conf_terms.debug('Entered JIRA - Configuration File Search Terms Function')
         # READ FIELDS FROM CONF or USER INPUT
         search_list_output = ''
         config = configparser.ConfigParser()
@@ -166,10 +172,10 @@ class ConfigData:
         print('Fields from terminal:', self.search_field)
         if self.input_terms is not None:
             search_list_output = search_list_conf_input + self.input_terms
-            print(search_list_output)
         elif self.input_terms is None:
             search_list_output = search_list_conf_input
-            print(search_list_output)
+        print('Final fields to search (conf file + terminal):', str(search_list_output))
+        logger_jira_conf_terms.info('Final fields to search (conf file + terminal): {}'.format(str(search_list_output)))
 
         return search_list_output
 
@@ -314,7 +320,7 @@ class IssueDataRetrieverJira:
 
             # READ FIELDS FROM CONF or USER INPUT
             search_list_output = []
-            search_list = ConfigData('jira_fields', self.terms)
+            search_list = ConfigData('jira_fields', self.terms, self.debug_level)
             search_list_output = search_list.get_config_search_data()
             logger_jira_issue_basic_data.debug('Search list: {}'.format(str(search_list_output)))
 
@@ -369,10 +375,27 @@ class IssueDataRetrieverJira:
 
                 if len(custom_field_names_list) == len(custom_field_ids_list):
                     custom_fields_list = list(zip(custom_field_names_list, custom_field_ids_list))
-                    print(custom_fields_list)
-                    logger_jira_issue_basic_data.debug(str(custom_fields_list))
+                    print('Custom Fields List in Conf file: {}'.format(custom_fields_list))
+                    logger_jira_issue_basic_data.debug(
+                        'Custom Fields List in Conf file: {}'.format(str(custom_fields_list)))
                     search_list_output = search_list_output + custom_fields_list
-                print(search_list_output)
+
+                user_custom_field_ids_list = []
+                if self.cf_name is not None and self.cf_id is not None:
+                    # for index, id in enumerate(self.cf_id):
+                    #     user_custom_field_ids_list[index] = 'customfield_' + str(id)
+                    for item in self.cf_id:
+                        user_custom_field_ids_list.append(str(item).replace(str(item), 'customfield_{}'.format(str(item))))
+
+                    if len(self.cf_name) == len(user_custom_field_ids_list):
+                        user_custom_fields_list = list(zip(self.cf_name, user_custom_field_ids_list))
+                        print('Custom Fields List in User Input: {}'.format(user_custom_fields_list))
+                        logger_jira_issue_basic_data.debug(
+                            'Custom Fields List in User Input: {}'.format(user_custom_fields_list))
+                        search_list_output = search_list_output + user_custom_fields_list
+
+                print('Final Search Terms List: {}'.format(str(search_list_output)))
+                logger_jira_issue_basic_data.info('Final Search Terms List: {}'.format(str(search_list_output)))
                 logger_jira_issue_basic_data.debug(str(search_list_output))
                 logger_jira_issue_basic_data.debug('Getting the Issue data..')
                 for key in search_list_output:

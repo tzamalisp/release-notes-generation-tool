@@ -34,13 +34,14 @@ conf_path = 'conf/'
 
 
 class UserTrackerChoice:
-    def __init__(self, tracker, issue, release_note, order, user, field_name, field_id,
+    def __init__(self, tracker, issue, release_note, order, user, field_name, field_id, terms,
                  bug_function, output_path, debug_level, time):
         self.tracker = tracker
         self.issue = issue
         self.user = user
         self.field_name = field_name
         self.field_id = field_id
+        self.terms = terms
         self.bug_function = bug_function
         self.release_note = release_note
         self.order = order
@@ -54,12 +55,9 @@ class UserTrackerChoice:
             logger_rlgen_main.debug('---------------------------JIRA------------------------------------')
             print('Entered JIRA environment')
             logger_rlgen_main.debug('Entered JIRA environment')
-            # # CONNECTION TO JIRA
-            # logger_rlgen_main.debug('CONNECTION TO JIRA')
-            # test_connector = Connector()
-            # test_connector.jira_connector()
 
             # JIRA user authentication configuration file reading
+            logger_rlgen_main.debug('JIRA user authentication configuration file reading')
             config = configparser.ConfigParser()
             config.read('{}config.conf'.format(conf_path))
             user_name = config['jira_basic_auth']['username']
@@ -68,6 +66,7 @@ class UserTrackerChoice:
             email = config['author']['email']
 
             # JIRA search terms configuration file reading
+            logger_rlgen_main.debug('JIRA search terms for Target Release configuration file reading')
             search_terms_config = configparser.ConfigParser()
             search_terms_config.read('conf/search_terms.conf')
             release_name = search_terms_config['jira_target_release']['name']
@@ -77,8 +76,10 @@ class UserTrackerChoice:
                 release_name = None
 
             # PATH value from user
+            logger_rlgen_main.debug('PATH value from user (if exists in configuration file or as an input from command line)')
             path = None
             print('Path input from user:', self.output_path)
+            logger_rlgen_main.debug('Path input from user: {}'.format(self.output_path))
             if self.output_path is not None:
                 path = self.output_path
             else:
@@ -87,20 +88,26 @@ class UserTrackerChoice:
                 elif config['path']['directory'] is not '':
                     path = config['path']['directory']
             print('Final path value:', path)
+            logger_rlgen_main.debug('Final path value: {}'.format(path))
 
             # calling the class for making the the Target Release notes object
             # self.release_note is type of list
+            logger_rlgen_main.info('Calling the class for making the the Target Release notes object')
+            logger_rlgen_main.debug('self.release_note is type of list')
             release_notes = TargetReleaseJira(release_name=release_name,
                                               release=self.release_note,
                                               order=self.order,
                                               debug_level=self.debug_level)
 
-            # calling the basic class for collecting the corresponding data from the bugzilla rest api
-            # functions: bug info, bug comments, bug history, user info, user assigned bugs
+            # calling the basic class for collecting the corresponding data from the Bugzilla REST API
+            # functions: bug info, bug comments
+            logger_rlgen_main.info(
+                'calling the basic class for collecting the corresponding data from the JIRA REST API')
+            logger_rlgen_main.debug('# functions: bug info, bug comments')
             issue_object = IssueDataRetrieverJira(issue=self.issue,
-                                                  terms=None,
-                                                  cf_name=None,
-                                                  cf_id=None,
+                                                  terms=self.terms,
+                                                  cf_name=self.field_name,
+                                                  cf_id=self.field_id,
                                                   debug_level=self.debug_level)
 
             report_field = 'No report field is specified.'
@@ -323,12 +330,17 @@ def user_input(argv):
                         help="Define the field name to search for in Bugzilla/JIRA API (when it is necessary)",
                         # required=True,
                         metavar="<CUSTOMFIELD_NAME>")
-    parser.add_argument("-c", "--customfieldid",
+    parser.add_argument("-c", "--customid",
                         dest="field_id",
                         nargs='+',
                         help="Define the field ID number in JIRA API (when it is necessary)",
-                        metavar="<CUSTOMFIELD_ID>",
+                        metavar="<CUSTOM_FIELD_ID>",
                         type=int)
+    parser.add_argument("-s", "--searchterms",
+                        dest="search_terms",
+                        nargs='+',
+                        help="Define Search Terms you want search for in Bug Information",
+                        metavar="<SEARCH_TERMS>")
     parser.add_argument("-u", "--user",
                         dest="user",
                         help="add the user you want to search for",
@@ -381,6 +393,7 @@ def user_input(argv):
             'user': arguments.user,
             'field_name': arguments.field_name,
             'field_id': arguments.field_id,
+            'search_terms': arguments.search_terms,
             'bug_function': arguments.function,
             'order_ascending': arguments.order_ascending,
             'release_note': arguments.release_note,
@@ -407,6 +420,7 @@ if __name__ == '__main__':
                                        user=tracker_issue_selection['user'],
                                        field_name=tracker_issue_selection['field_name'],
                                        field_id=tracker_issue_selection['field_id'],
+                                       terms=tracker_issue_selection['search_terms'],
                                        bug_function=tracker_issue_selection['bug_function'],
                                        order=tracker_issue_selection['order_ascending'],
                                        release_note=tracker_issue_selection['release_note'],
