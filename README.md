@@ -4,7 +4,7 @@
 
 # Release Notes Generation Tool (RLGen)
 
-The code in this repository was written for the Google Summer of Code 2019 (GSoC'19) project for JBoss Community
+The code in this repository was written for the Google Summer of Code 2019 (GSoC'19) project for the JBoss Community
 (Red Hat). The Release Notes Generation Tool (RLGen) collects and processes the data from the JIRA and Bugzilla Bug
 Tracking Systems. The outcomes by this processed data are easily readable reports in AsciiDoc format.
 These reports are classified into two categories:
