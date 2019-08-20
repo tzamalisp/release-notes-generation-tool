@@ -4,7 +4,7 @@
 
 # Release Notes Generation Tool (RLGen)
 
-The code in this repository was written for the Google Summer of Code 2019 (GSoC'19) project for the JBoss Community
+The code in this repository was written for the Google Summer of Code 2019 (GSoC 2019) project for the JBoss Community
 (Red Hat). The Release Notes Generation Tool (RLGen) collects and processes the data from the JIRA and Bugzilla Bug
 Tracking Systems. The outcomes by this processed data are easily readable reports in AsciiDoc format.
 These reports are classified into two categories:
@@ -20,13 +20,13 @@ Link of the proposed tool in GSoC 2019: https://summerofcode.withgoogle.com/proj
 
 ## Documentation
 
-Please, check the Github Wiki link (https://github.com/tzamalisp/release-notes-generation-tool/wiki) for the detailed
+Please, check the *Github Wiki link* (https://github.com/tzamalisp/release-notes-generation-tool/wiki) for the detailed
 documentation of the tool, the Tracking Systems you can retrieve information from, and the tool's functions.
 
 Specifically, the following links describe in detail of how to:
 
 * handling the tool and its basic functionalities that have been implemented successfully during the
-GSoC'19 life: https://github.com/tzamalisp/release-notes-generation-tool/wiki
+GSoC 2019 life: https://github.com/tzamalisp/release-notes-generation-tool/wiki
 
 * setting up the configuration files for the Authentication Step and the Fields you want to search for in each query to
 the related Bug Tracking System: https://github.com/tzamalisp/release-notes-generation-tool/wiki/Configuration
@@ -40,7 +40,7 @@ the related Bug Tracking System: https://github.com/tzamalisp/release-notes-gene
 
 ### v1.0
 
-This is the first release of Release Notes Generation Tool (RLGen). For information about this release you can check
+This is the first release of the Release Notes Generation Tool (RLGen). For information about this release you can check
 the following link:
 * https://github.com/tzamalisp/release-notes-generation-tool/releases/tag/v1.0
 
