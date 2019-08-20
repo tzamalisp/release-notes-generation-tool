@@ -1,4 +1,3 @@
-import logging
 import sys
 import configparser
 from argparse import ArgumentParser
@@ -151,8 +150,9 @@ class UserTrackerChoice:
                     print('Please define an issue.')
             else:
                 print('Please enter a valid letter for function:\n'
-                      '-f r: Release Note\n'
-                      '-f c: Bug Comments\n')
+                      '--function r: Release Note\n'
+                      '--function c: Bug Comments\n'
+                      '--function b: Bug Information\n')
             # MAKING DOC REPORT -> ASCIIDOC
             print('Generating DOC..')
             doc_basic = GeneratorJira(kind_of_report=report_field,
@@ -282,12 +282,12 @@ class UserTrackerChoice:
                     data_report = bug_history_data
             else:
                 print('Please enter a valid letter for function:\n'
-                      '-f r: Release Note\n'
-                      '-f u: User Information\n'
-                      '-f b: Bug Information\n'
-                      '-f c: Bug Comments\n'
-                      '-f h: Bug History\n'
-                      '-f a: Bugs Assigned to a User')
+                      '--function r: Release Note\n'
+                      '--function u: User Information\n'
+                      '--function b: Bug Information\n'
+                      '--function c: Bug Comments\n'
+                      '--function h: Bug History\n'
+                      '--function a: Bugs Assigned to a User\n')
 
             report = GeneratorBugzillaReport(kind_of_report=report_field,
                                              releases=self.release_note,
@@ -317,62 +317,114 @@ def user_input(argv):
 
     parser.add_argument("-t", "--tracker",
                         dest="tracker",
-                        help="add the tracker you want to search the issue: 'j' or 'J' for Jira | "
+                        help="Add the tracker you want to search for the issue: 'j' or 'J' for Jira | "
                              "'b' or 'B' for Bugzilla",
-                        metavar="<TRACKER_VALUE>")
+                        metavar="<TRACKER>",
+                        required=True)
+    parser.add_argument("-r", "--release",
+                        dest="release_note",
+                        nargs='+',
+                        help="Add each Target Release Name inside quotes, separated with the SPACE character "
+                             "(e.g.: --release '5.backlog.GA' 'httpd 2.4.backlog.GA'). This argument"
+                             "returns a list of the releases defined by the user. It can be used with the 'releases' "
+                             "function (--function r) both for JIRA and Bugzilla Tracking Systems.",
+                        metavar="<TARGET_RELEASE_NAME>",
+                        type=str)
     parser.add_argument("-i", "--issue",
                         dest="issue",
-                        help="add the issue ID",
+                        help="Add the issue ID. It can be used with the following functions for each Tracking System: "
+                             "1) Bugzilla -> 'bug information' (--function b), "
+                             "'bug comments' (--function c), "
+                             "'bug history' (--function h)\n. "
+                             "2) JIRA -> 'bug information' (--function b), "
+                             "'bug comments' (--function c).",
                         metavar="<ISSUE_ID>")
     parser.add_argument("-n", "--name",
                         dest="field_name",
                         action='append',
-                        help="Define the field name to search for in Bugzilla/JIRA API (when it is necessary)",
-                        # required=True,
-                        metavar="<CUSTOMFIELD_NAME>")
+                        help="Besides the configuration file, using this argument you can define the field name/s to "
+                             "search for in Bugzilla/JIRA API. 1) Bugzilla: Define the Fields you want to search for "
+                             "in Bug Information or the Bugs' Details for each Target Release. "
+                             "This argument can be used with the 'bug information' "
+                             "function (--function b) or the 'releases' function (--function r). "
+                             "Each Custom Field Name must be inside quotes with the '--name' declaration in front "
+                             "of it (e.g.: --name 'resolution' --name 'qa_contact'). If a field/term that is defined "
+                             "by the user in prompt is not a part of the fields that are included in bug "
+                             "report (of Bugzilla API) then it will not be exported in the AsciiDoc file. "
+                             " Please check the Wiki in Github repository of the RLGen tool for the"
+                             "available Bug Field names.\n"
+                             " 2) JIRA: Define the Custom Field Name you want to search for in Bug Information. "
+                             "It must be accompanied by the relevant Custom Field ID which can be declared by "
+                             "the '--customid' argument and it is unique. Each Custom Field Name must be inside quotes"
+                             "with the '--name' declaration in front of it "
+                             "(e.g.: --name 'TestFieldUserInput' --name 'TestFieldUserInput2'). "
+                             "This argument can be used with the 'bug information' function (--function b). "
+                             "Please see the relevant argument documentation (--function)",
+                        metavar="<FIELD_NAME>")
     parser.add_argument("-c", "--customid",
                         dest="field_id",
                         nargs='+',
-                        help="Define the field ID number in JIRA API (when it is necessary)",
+                        help="NOTE: ONLY FOR JIRA TRACKER.\n"
+                             "You have to know the Custom Field ID number in JIRA API (when it is necessary), so you "
+                             "can declare this argument. Furthermore, each Custom Field ID must be accompanied by the "
+                             "corresponding name which can be defined by the '--name' argument. The ID must be an "
+                             "integer. This value is the unique number of the custom field ID created automatically "
+                             "by the JIRA API. If a Custom Field ID that is defined by the user in prompt is not a "
+                             "part of the fields that are included in bug reports (of JIRA API) then it "
+                             "will not be exported in the AsciiDoc file. Each Custom Field ID has to be separated with"
+                             "the SPACE character from the next one (e.g.: --customid 12311940 12310840). "
+                             "This argument can be used with the 'bug information' function (--function b). "
+                             "Please see the relevant argument documentation (--function)",
                         metavar="<CUSTOM_FIELD_ID>",
                         type=int)
     parser.add_argument("-s", "--searchterms",
                         dest="search_terms",
                         nargs='+',
-                        help="Define Search Terms you want search for in Bug Information",
+                        help="NOTE: ONLY FOR JIRA TRACKER. "
+                             "Define the Fields you want to search for in Bug "
+                             "Information. Each field must be in quotes and separated by the SPACE character from the "
+                             "next one (e.g.: --searchterms 'worklog' 'progress'). If a field/term that is defined by "
+                             "the user in prompt is not a part of the fields that are included in bug "
+                             "report (of JIRA API) then it will not be exported in the AsciiDoc file. Each search "
+                             "field must be inside quotes and separated with the SPACE character from the next "
+                             "one (e.g.: --searchterms 'worklog' 'progress').",
                         metavar="<SEARCH_TERMS>")
     parser.add_argument("-u", "--user",
                         dest="user",
-                        help="add the user you want to search for",
+                        help="NOTE: ONLY FOR BUGZILLA TRACKER. "
+                             "Add the user (username/user email) you want to search for. This argument must be used "
+                             "with the 'user information' and the 'user assigned bugs' functions (see the '--function' "
+                             "argument).",
                         metavar="<USER_NAME>")
     parser.add_argument("-f", "--function",
                         dest="function",
-                        help="add the function you want to use for Bugzilla (i: bug information, c: bug comments, "
-                             "h: bug history)",
-                        metavar="<BUG_FUNCTION>")
-    parser.add_argument("-r", "--release",
-                        dest="release_note",
-                        nargs='+',
-                        help="add each Target Release Name separated with SPACE character, inside quotes)",
-                        metavar="<TARGET_RELEASE_NAME>",
-                        type=str)
+                        help="Add the function you want to use for each Tracking System: \n "
+                             "1) Bugzilla -> r: releases, b: bug information, c: bug comments, h: bug history, "
+                             "u: user information, a: user assigned bugs. \n"
+                             "2) JIRA -> r: releases, b: bug information, c: bug comments",
+                        metavar="<BUG_FUNCTION>",
+                        required=True)
     parser.add_argument("-a", "--ascending",
                         dest="order_ascending",
-                        help="add the operation you want for ascending/descending order of the release note results "
-                             "retrieved from JIRA API (a: ascending, d: descending)",
+                        help="NOTE: ONLY FOR JIRA TRACKER.\n "
+                             "OPTIONAL: Add the operation you want to be executed "
+                             "for ascending/descending order classification of the release note results "
+                             "which are retrieved from the JIRA API -> a: ascending, d: descending. ",
                         metavar="<ASC/DESC_ORDER>")
     parser.add_argument("-o", "--output",
                         dest="output_path",
-                        help="add the path directory yoy want to save the Asciidoc export files",
+                        help="OPTIONAL: Add the full path directory you want to save the AsciiDoc exported file.",
                         metavar="<OUTPUT_PATH>")
     parser.add_argument("-z", "--zonetime",
                         dest="zone_time",
-                        help="enable/disable the Report Time mode (0: Disable, 1: Enable) - by default is Disabled",
+                        help="OPTIONAL: Enable/Disable the Report Time mode -> 0: Disable, 1: Enable.\n By default is "
+                             "Disabled",
                         metavar="<ZONE_TIME>",
                         type=int)
     parser.add_argument("-d", "--debug",
                         dest="debug_level",
-                        help="define the level of debugging (0: DEBUG, 1: INFO, 2: WARNING)",
+                        help="OPTIONAL: Define the level of debugging (0: DEBUG, 1: INFO, 2: WARNING, 3: ERROR, "
+                             "4: CRITICAL).",
                         metavar="<DEBUG_LEVEL>",
                         type=int)
 
@@ -413,7 +465,6 @@ if __name__ == '__main__':
 
     logger_rlgen_main.info('Entering the RLGen Tool')
 
-    logger_rlgen_main.debug('Hello Tracker!')
     # User Choice
     tracker_choice = UserTrackerChoice(tracker=tracker_issue_selection['tracker'],
                                        issue=tracker_issue_selection['issue'],

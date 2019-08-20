@@ -1,4 +1,3 @@
-import logging
 import requests
 import configparser
 import os
@@ -382,8 +381,6 @@ class IssueDataRetrieverJira:
 
                 user_custom_field_ids_list = []
                 if self.cf_name is not None and self.cf_id is not None:
-                    # for index, id in enumerate(self.cf_id):
-                    #     user_custom_field_ids_list[index] = 'customfield_' + str(id)
                     for item in self.cf_id:
                         user_custom_field_ids_list.append(str(item).replace(str(item), 'customfield_{}'.format(str(item))))
 

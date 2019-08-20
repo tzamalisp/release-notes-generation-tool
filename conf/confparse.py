@@ -1,5 +1,4 @@
 import configparser
-import logging
 import os
 
 # from logger_creation import LoggerSetup
@@ -154,15 +153,7 @@ class JiraReadConfigurationKerberos:
 # Bugzilla
 
 class BugzillaReadConfigurationBasicAuth:
-    # def __init__(self, debug_level):
-    #     self.debug_level = debug_level
-
     def read_user_auth(self):
-        # logging_configuration_basic_auth_bugzila = LoggerSetup(name='bugzilla_configuration_basic_auth',
-        #                                                        log_file='log/bugzilla_configuration_basic_auth.log',
-        #                                                        level=self.debug_level)
-        # logger_configuration_basic_auth_bugzilla = logging_configuration_basic_auth_bugzila.setup_logger()
-        # logger_configuration_basic_auth_bugzilla.info('Bugzilla Basic Authorization')
         config = configparser.ConfigParser()
         config.read('{}config.conf'.format(conf_path))
         if config['bugzilla_basic_auth']['username'] is '' or config['bugzilla_basic_auth']['password'] is '':
@@ -208,15 +199,7 @@ class BugzillaReadConfigurationBasicAuth:
 
 
 class BugzillaReadConfigurationApiKey:
-    # def __init__(self, debug_level):
-    #     self.debug_level = debug_level
-
     def key_auth(self):
-        # logging_configuration_key_bugzilla = LoggerSetup(name='bugzilla_configuration_key',
-        #                                                  log_file='log/bugzilla_configuration_key.log',
-        #                                                  level=self.debug_level)
-        # logger_configuration_key_bugzilla = logging_configuration_key_bugzilla.setup_logger()
-        # logger_configuration_key_bugzilla.info('Bugzilla API Key Authorization')
         config = configparser.ConfigParser()
         config.read('{}config.conf'.format(conf_path))
         if config['bugzilla_oauth']['api_key'] is not '':
