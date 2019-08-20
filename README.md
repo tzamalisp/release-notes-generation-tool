@@ -3,6 +3,51 @@
      style="width: 60%; border: 1px solid black; display: block; margin-left: auto; margin-right: auto;" />
 
 # Release Notes Generation Tool (RLGen)
+
+The Release Notes Generation Tool (RLGen) collects and processes the data from the JIRA and Bugzilla Bug Tracking
+Systems. The outcomes by this processed data are easily readable reports in AsciiDoc format.
+These reports are classified into two categories:
+
+* Release notes reports based on detected issues which are related to them, including also information for each issue.
+
+* Issue reports including information about specified issues defined dynamically by the user, information about the
+bugs assigned to a specific user, as well as information about the user.
+
+The tool can be used to generate these reports automatically (e.g. via a cronjob) or on-demand by the actor.
+
+Link of the proposed tool in GSoC 2019: https://summerofcode.withgoogle.com/projects/#6700180181614592
+
+## Documentation
+
+Please, check the Github Wiki link (https://github.com/tzamalisp/release-notes-generation-tool/wiki) for the detailed
+documentation of the tool, the Tracking Systems you can retrieve information from, and the tool's functions.
+
+Specifically, the following links describe in detail of how to:
+
+* handling the tool with its basic functionalities: https://github.com/tzamalisp/release-notes-generation-tool/wiki
+
+* setting up the configuration files for the Authentication Step and the Fields you want to search for in each query to
+the related Bug Tracking System: https://github.com/tzamalisp/release-notes-generation-tool/wiki/Configuration
+
+* querying the JIRA API: https://github.com/tzamalisp/release-notes-generation-tool/wiki/JIRA-requester
+
+* querying the Bugzilla API: https://github.com/tzamalisp/release-notes-generation-tool/wiki/Bugzilla-requester
+
+
+## Latest Versions
+
+### v1.0
+
+This is the first release of Release Notes Generation Tool (RLGen). For information about this release you can check
+the following link:
+* https://github.com/tzamalisp/release-notes-generation-tool/releases/tag/v1.0
+
+
+## Proposal of the Google Summer of Code 2019 project for JBoss Community (Red Hat)
+
+Below you can find the proposal I sent to JBoss Community describing the development of the proposed system, including
+the methodologies, the deadlines, and the milestones of the development process.
+
 ### DESCRIPTION
 The tool aims to collect, process, and analyze data from various Bug Tracking Systems. The outcomes by this processed
 data are easily readable reports in various formats, like AsciiDoc, and PDF files, that contain release notes and issue
@@ -153,8 +198,3 @@ found, and after this, the tool will be submitted.
  <img src="images/jboss.png"
  alt="JBoss Logo"
  width="100" />
-
-# Documentation
-
-Please, check the Github Wiki link (https://github.com/tzamalisp/release-notes-generation-tool/wiki) for the
-documentation of the tool, the Tracking Systems you can retrieve information, and the tool's functions.
