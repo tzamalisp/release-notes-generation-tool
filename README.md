@@ -156,5 +156,5 @@ found, and after this, the tool will be submitted.
 
 # Documentation
 
-Please, check the Github Wiki link (https://github.com/tzamalisp/release-notes-generation-tool/wiki) the documentation
-of the tool and its functionality.
+Please, check the Github Wiki link (https://github.com/tzamalisp/release-notes-generation-tool/wiki) for the
+documentation of the tool, the Tracking Systems you can retrieve information, and the tool's functions.
