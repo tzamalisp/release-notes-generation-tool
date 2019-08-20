@@ -4,8 +4,9 @@
 
 # Release Notes Generation Tool (RLGen)
 
-The Release Notes Generation Tool (RLGen) collects and processes the data from the JIRA and Bugzilla Bug Tracking
-Systems. The outcomes by this processed data are easily readable reports in AsciiDoc format.
+The code in this repository was written for the Google Summer of Code 2019 (GSoC'19) project for JBoss Community
+(Red Hat). The Release Notes Generation Tool (RLGen) collects and processes the data from the JIRA and Bugzilla Bug
+Tracking Systems. The outcomes by this processed data are easily readable reports in AsciiDoc format.
 These reports are classified into two categories:
 
 * Release notes reports based on detected issues which are related to them, including also information for each issue.
@@ -24,7 +25,8 @@ documentation of the tool, the Tracking Systems you can retrieve information fro
 
 Specifically, the following links describe in detail of how to:
 
-* handling the tool with its basic functionalities: https://github.com/tzamalisp/release-notes-generation-tool/wiki
+* handling the tool and its basic functionalities that have been implemented successfully during the
+GSoC'19 life: https://github.com/tzamalisp/release-notes-generation-tool/wiki
 
 * setting up the configuration files for the Authentication Step and the Fields you want to search for in each query to
 the related Bug Tracking System: https://github.com/tzamalisp/release-notes-generation-tool/wiki/Configuration
@@ -43,7 +45,7 @@ the following link:
 * https://github.com/tzamalisp/release-notes-generation-tool/releases/tag/v1.0
 
 
-## Proposal of the Google Summer of Code 2019 project for JBoss Community (Red Hat)
+## Proposal - Google Summer of Code 2019 project for the JBoss Community (Red Hat)
 
 Below you can find the proposal I sent to JBoss Community describing the development of the proposed system, including
 the methodologies, the deadlines, and the milestones of the development process.
