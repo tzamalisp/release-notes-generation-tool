@@ -154,7 +154,7 @@ found, and after this, the tool will be submitted.
  alt="JBoss Logo"
  width="100" />
 
-### Documentation
+## Documentation
 
-Please check the Github Wiki link (https://github.com/tzamalisp/release-notes-generation-tool/wiki) the documentation
+Please, check the Github Wiki link (https://github.com/tzamalisp/release-notes-generation-tool/wiki) the documentation
 of the tool and its functionality.
