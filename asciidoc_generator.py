@@ -36,8 +36,8 @@ class GeneratorJira:
         elif self.time is 0:
             now_str = 'NoReportTime'
         else:
-            logger_asciidoc.warning('Please define a correct value for enabling/disabling the Report Time mode '
-                                    '(0: Disable, 1: Enable) - by default is Disabled')
+            logger_asciidoc.error('Please define a correct value for enabling/disabling the Report Time mode '
+                                  '(0: Disable, 1: Enable) - by default is Disabled')
         report_fields = []
         if self.user is None:
             self.user = 'unknown_username'
@@ -50,7 +50,7 @@ class GeneratorJira:
         # kind of report
         report_fields.append(self.kind_of_report)
         print(report_fields)
-        logger_asciidoc.debug(str(report_fields))
+        logger_asciidoc.info('Report fields - Kind of Report: {}'.format(str(report_fields)))
         # releases input
         if self.releases is not None:
             for release in self.releases:
@@ -62,6 +62,8 @@ class GeneratorJira:
         if self.user is not None:
             report_fields.append(self.user)
         report_fields_string = '_'.join(report_fields)
+        logger_asciidoc.info('Report fields - Kind of Report + Releases/Bug + User: {}'
+                             .format(str(report_fields_string)))
         if self.path is None:
             f = open('release-notes-docs/jira_{}_{}.adoc'
                      .format(report_fields_string, now_str), 'w+')
@@ -70,7 +72,7 @@ class GeneratorJira:
                      .format(self.path, report_fields_string, now_str), 'w+')
         print('Writing file..')
         logger_asciidoc.info('Writing file..')
-        f.write('= Release Notes Generation Tool (RLGEN)')
+        f.write('= Release Notes Generation Tool (RLGen)')
         f.write('\n')
         f.write(':author: {} {}'.format(self.firstname, self.lastname))
         f.write('\n')
@@ -86,6 +88,14 @@ class GeneratorJira:
         f.write('\n')
         f.write('----------\n')
         f.write('Report time: ' + str(datetime.now()))
+        f.write('\n')
+        f.write('\n')
+        f.write('\n')
+        f.write('-----------\n')
+        f.write('Copyright \N{COPYRIGHT SIGN} 2019, Pantelis Tzamalis, Google Summer of Code 2019 (GSoC) in '
+                'collaboration with JBoss, Red Hat - https://github.com/tzamalisp')
+        f.write('\n')
+        f.write('-----------\n')
         f.write('\n')
         f.write('\n')
         f.write('\n')
@@ -125,8 +135,8 @@ class GeneratorBugzillaReport:
         elif self.time is 0:
             now_str = 'NoReportTime'
         else:
-            logger_asciidoc.warning('Please define a correct value for enabling/disabling the Report Time mode '
-                                    '(0: Disable, 1: Enable) - by default is Disabled')
+            logger_asciidoc.error('Please define a correct value for enabling/disabling the Report Time mode '
+                                  '(0: Disable, 1: Enable) - by default is Disabled')
         report_fields = []
         if self.username is '':
             self.username = 'unknown_username'
@@ -139,7 +149,7 @@ class GeneratorBugzillaReport:
         # kind of report
         report_fields.append(self.kind_of_report)
         print(report_fields)
-        logger_asciidoc.debug(str(report_fields))
+        logger_asciidoc.info('Report fields - Kind of Report: {}'.format(str(report_fields)))
         # releases input
         if self.releases is not None:
             for release in self.releases:
@@ -151,6 +161,8 @@ class GeneratorBugzillaReport:
         if self.user is not None:
             report_fields.append(self.user)
         report_fields_string = '_'.join(report_fields)
+        logger_asciidoc.info('Report fields - Kind of Report + Releases/Bug + User: {}'
+                             .format(str(report_fields_string)))
         if self.path is None:
             f = open('release-notes-docs/bugzilla_{}_{}.adoc'
                      .format(report_fields_string, now_str), 'w+')
@@ -159,7 +171,7 @@ class GeneratorBugzillaReport:
                      .format(self.path, report_fields_string, now_str), 'w+')
         print('Writing file..')
         logger_asciidoc.info('Writing file..')
-        f.write('= Release Notes Generation Tool (RLGEN)')
+        f.write('= Release Notes Generation Tool (RLGen)')
         f.write('\n')
         f.write(':author: {} {}'.format(self.firstname, self.lastname))
         f.write('\n')
@@ -177,6 +189,14 @@ class GeneratorBugzillaReport:
         f.write('\n')
         f.write('----------\n')
         f.write('Report time: ' + str(datetime.now()))
+        f.write('\n')
+        f.write('\n')
+        f.write('\n')
+        f.write('-----------\n')
+        f.write('Copyright \N{COPYRIGHT SIGN} 2019, Pantelis Tzamalis, Google Summer of Code 2019 (GSoC) in '
+                'collaboration with JBoss, Red Hat - https://github.com/tzamalisp')
+        f.write('\n')
+        f.write('-----------\n')
         f.write('\n')
         f.write('\n')
         f.write('\n')

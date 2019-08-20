@@ -51,31 +51,36 @@ class UserTrackerChoice:
     def tracker_selection(self):
         # JIRA
         if self.tracker is 'J' or self.tracker is 'j':
-            logger_rlgen_main.debug('---------------------------JIRA------------------------------------')
+            logger_rlgen_main.info('---------------------------JIRA------------------------------------')
             print('Entered JIRA environment')
-            logger_rlgen_main.debug('Entered JIRA environment')
+            logger_rlgen_main.info('Entered JIRA environment.')
 
             # JIRA user authentication configuration file reading
-            logger_rlgen_main.debug('JIRA user authentication configuration file reading')
+            logger_rlgen_main.info('JIRA - Reading user information in configuration file.')
             config = configparser.ConfigParser()
             config.read('{}config.conf'.format(conf_path))
             user_name = config['jira_basic_auth']['username']
             first_name = config['author']['firstname']
             last_name = config['author']['lastname']
             email = config['author']['email']
+            logger_rlgen_main.debug('JIRA - Username: {}'.format(user_name))
+            logger_rlgen_main.debug('JIRA - First Name: {}'.format(first_name))
+            logger_rlgen_main.debug('JIRA - Last Name: {}'.format(last_name))
+            logger_rlgen_main.debug('JIRA - Email: {}'.format(email))
 
             # JIRA search terms configuration file reading
-            logger_rlgen_main.debug('JIRA search terms for Target Release configuration file reading')
+            logger_rlgen_main.info('JIRA - API field name reading for Target Release in configuration file.')
             search_terms_config = configparser.ConfigParser()
             search_terms_config.read('conf/search_terms.conf')
             release_name = search_terms_config['jira_target_release']['name']
-
+            logger_rlgen_main.debug('JIRA - Release Name: {}'.format(release_name))
             # RELEASE NAME
             if release_name is '':
                 release_name = None
 
             # PATH value from user
-            logger_rlgen_main.debug('PATH value from user (if exists in configuration file or as an input from command line)')
+            logger_rlgen_main.debug(
+                'JIRA - PATH value from user (if exists in configuration file or as an input from command prompt)')
             path = None
             print('Path input from user:', self.output_path)
             logger_rlgen_main.debug('Path input from user: {}'.format(self.output_path))
@@ -87,12 +92,13 @@ class UserTrackerChoice:
                 elif config['path']['directory'] is not '':
                     path = config['path']['directory']
             print('Final path value:', path)
-            logger_rlgen_main.debug('Final path value: {}'.format(path))
+            logger_rlgen_main.debug('JIRA - Final path value: {}'.format(path))
 
             # calling the class for making the the Target Release notes object
             # self.release_note is type of list
-            logger_rlgen_main.info('Calling the class for making the the Target Release notes object')
-            logger_rlgen_main.debug('self.release_note is type of list')
+            logger_rlgen_main.info(
+                'JIRA - Calling the class for making the object for the Target Release notes report.')
+            logger_rlgen_main.debug('self.release_note class argument is type of list')
             release_notes = TargetReleaseJira(release_name=release_name,
                                               release=self.release_note,
                                               order=self.order,
@@ -101,8 +107,9 @@ class UserTrackerChoice:
             # calling the basic class for collecting the corresponding data from the Bugzilla REST API
             # functions: bug info, bug comments
             logger_rlgen_main.info(
-                'calling the basic class for collecting the corresponding data from the JIRA REST API')
-            logger_rlgen_main.debug('# functions: bug info, bug comments')
+                'JIRA - Calling the basic class for collecting the corresponding issue data from the JIRA REST API.')
+            logger_rlgen_main.debug('JIRA - Functions that can be executed: bug info (--function b), '
+                                    'bug comments (--function c)')
             issue_object = IssueDataRetrieverJira(issue=self.issue,
                                                   terms=self.terms,
                                                   cf_name=self.field_name,
@@ -114,47 +121,75 @@ class UserTrackerChoice:
 
             # JIRA RELEASE NOTES
             if self.bug_function is 'r' or self.bug_function is 'R':
+                logger_rlgen_main.info('JIRA - Executing Target Releases functionality.')
                 if release_name is not None and self.release_note is not None:
                     print(self.release_note)
+                    logger_rlgen_main.info('JIRA - Release Notes set in command prompt:  {}'
+                                           .format(str(self.release_note)))
                     report_field = 'TargetReleases'
                     release_notes_data = release_notes.get_release_notes()
                     data_report = release_notes_data
+                    logger_rlgen_main.info(
+                        "JIRA - Check the 'jira_target_releases.log' file inside 'log' directory of the RLGen tool for "
+                        "getting information about the Target Release functionality execution.")
                 else:
                     if self.release_note is None:
                         print('Please define at least a Release Note to search for..')
-                        logger_rlgen_main.warning('Please define at least a Release Note with the -r argument.')
+                        logger_rlgen_main.error("JIRA - Please define at least a Release Note with the '--release' "
+                                                "argument.")
                         # raise Exception('Please define at least a Release Note with the -r argument.')
                     elif release_name is None:
                         print(
                             'Please define the Release Name field of the custom field of JIRA inside the configuration '
                             'file.')
+                        logger_rlgen_main.error('JIRA - Please define the Release Name field of the custom field of '
+                                                'JIRA inside the configuration file.')
                         # raise Exception('Please define the Release Name field of the custom field of JIRA inside the '
                         #                 'configuration file')
                     else:
                         print('Both Release Name and Release notes fields are note defined.')
+                        logger_rlgen_main.error('JIRA - Both Release Name (in configuration file '
+                                                '([jira_target_release] -> name)) and Release Notes (in command '
+                                                'prompt) fields are note defined.')
             elif self.bug_function is 'b' or self.bug_function is 'B':
+                logger_rlgen_main.info('JIRA - Executing Issue Information functionality.')
                 if self.issue is not None:
                     report_field = 'BugInfo'
                     issue_data = issue_object.get_data()
                     issue_info_data = issue_object.get_basic_issue_data(issue_data)
                     data_report = issue_info_data
+                    logger_rlgen_main.info(
+                        "JIRA - Check the 'jira_issue_data.log' file inside 'log' directory of the RLGen tool "
+                        "for getting information about the Bug Information functionality execution.")
                 else:
-                    print('Please define an issue.')
+                    print('JIRA - Please define an issue.')
+                    logger_rlgen_main.error('JIRA - Please define an issue.')
             elif self.bug_function is 'c' or self.bug_function is 'C':
+                logger_rlgen_main.info('JIRA - Executing Issue Comments functionality.')
                 if self.issue is not None:
                     report_field = 'BugComments'
                     issue_data = issue_object.get_data()
                     issue_comments_data = issue_object.getting_comments_data(issue_data)
                     data_report = issue_comments_data
+                    logger_rlgen_main.info(
+                        "JIRA - Check the 'jira_issue_data.log' file inside 'log' directory of the RLGen tool "
+                        "for getting information about the Bug Comments functionality execution.")
                 else:
-                    print('Please define an issue.')
+                    print('JIRA - Please define an issue.')
+                    logger_rlgen_main.error('JIRA - Please define an issue.')
             else:
                 print('Please enter a valid letter for function:\n'
                       '--function r: Release Note\n'
                       '--function c: Bug Comments\n'
                       '--function b: Bug Information\n')
+                logger_rlgen_main.error('JIRA - Please enter a valid letter for function:\n '
+                                        '--function r: Release Note\n '
+                                        '--function c: Bug Comments\n '
+                                        '--function b: Bug Information\n ')
             # MAKING DOC REPORT -> ASCIIDOC
             print('Generating DOC..')
+            logger_rlgen_main.info('JIRA - Executing the AsciiDoc File Generation functionality.')
+            logger_rlgen_main.info('JIRA - Generating AsciiDoc file..')
             doc_basic = GeneratorJira(kind_of_report=report_field,
                                       releases=self.release_note,
                                       user=user_name,
@@ -166,19 +201,33 @@ class UserTrackerChoice:
                                       path=path,
                                       time=self.time)
             doc_basic.generating_doc_jira()
+            logger_rlgen_main.info('JIRA - AsciiDoc file created..')
+            logger_rlgen_main.info(
+                "JIRA - Check the 'asciidoc_generator.log' file inside 'log' directory of the RLGen tool "
+                "for getting information about the AsciiDoc File Generation functionality execution.")
 
         # BUGZILLA
         elif self.tracker is 'B' or self.tracker is 'b':
-            logger_rlgen_main.debug('---------------------------------BUGZILLA------------------------------------')
+            logger_rlgen_main.info('---------------------------------BUGZILLA------------------------------------')
             print('Entered Bugzilla environment')
+            logger_rlgen_main.info('Entered Bugzilla environment.')
+
+            # Bugzilla user authentication configuration file reading
+            logger_rlgen_main.info('BUGZILLA - Reading user information in configuration file.')
             config = configparser.ConfigParser()
             config.read('{}config.conf'.format(conf_path))
             user_name = config['bugzilla_basic_auth']['username']
             first_name = config['author']['firstname']
             last_name = config['author']['lastname']
             email = config['author']['email']
+            logger_rlgen_main.debug('BUGZILLA - Username: {}'.format(user_name))
+            logger_rlgen_main.debug('BUGZILLA - First Name: {}'.format(first_name))
+            logger_rlgen_main.debug('BUGZILLA - Last Name: {}'.format(last_name))
+            logger_rlgen_main.debug('BUGZILLA - Email: {}'.format(email))
 
             # PATH value from user
+            logger_rlgen_main.debug(
+                'BUGZILLA - PATH value from user (if exists in configuration file or as an input from command prompt)')
             path = None
             print('Path input from user:', self.output_path)
             if self.output_path is not None:
@@ -189,15 +238,25 @@ class UserTrackerChoice:
                 elif config['path']['directory'] is not '':
                     path = config['path']['directory']
             print('Final path value:', path)
+            logger_rlgen_main.debug('BUGZILLA - Final path value: {}'.format(path))
 
             # calling the class for making the the Target Release notes object
             # self.release_note is type of list
+            logger_rlgen_main.info(
+                'BUGZILLA - Calling the class for making the object for the Target Release notes report.')
+            logger_rlgen_main.debug('self.release_note class argument is type of list')
             release_notes = TargetReleaseBugzilla(releases=self.release_note,
                                                   terms=self.field_name,
                                                   debug_level=self.debug_level)
 
             # calling the basic class for collecting the corresponding data from the bugzilla rest api
             # functions: bug info, bug comments, bug history, user info, user assigned bugs
+            logger_rlgen_main.info(
+                'BUGZILLA - Calling the basic class for collecting the corresponding issue or user related data from '
+                'the Bugzilla REST API.')
+            logger_rlgen_main.debug('BUGZILLA - Functions that can be executed: bug information (--function b), '
+                                    'bug comments (--function c), bug history (--function h), '
+                                    'user assigned bugs (--function -a), user information (--function u)')
             data_object = DataRetriever(bug_id=self.issue,
                                         terms=self.field_name,
                                         user=self.user,
@@ -209,15 +268,21 @@ class UserTrackerChoice:
             # FUNCTIONS: -f --function
             # release notes
             if self.bug_function is 'r' or self.bug_function is 'R':
+                logger_rlgen_main.info('BUGZILLA - Executing Target Releases functionality.')
                 if self.release_note is not None:
                     report_field = 'TargetReleases'
                     release_notes_data = release_notes.getting_target_release_notes()
                     # bug release notes
                     data_report = release_notes_data
+                    logger_rlgen_main.info(
+                        "BUGZILLA - Check the 'bugzilla_target_releases.log' file inside 'log' directory of the "
+                        "RLGen tool for getting information about the Target Release functionality execution.")
                 else:
-                    print('Please define a release note.')
+                    print('BUGZILLA - Please define a release note.')
+                    logger_rlgen_main.error('BUGZILLA - Please define a release note.')
             # bug info
             elif self.bug_function is 'b' or self.bug_function is 'b':
+                logger_rlgen_main.info('BUGZILLA - Executing Bug Information functionality.')
                 if self.issue is not None:
                     report_field = 'BugInfo'
                     bug_info = data_object.getting_bug_info()
@@ -227,10 +292,16 @@ class UserTrackerChoice:
                                                                bug_info['ascii_bug_info_list'])
                     # bug info
                     data_report = bug_info_data
+                    logger_rlgen_main.info(
+                        "BUGZILLA - Check the 'bugzilla_exec_function.log' and the 'bugzilla_data_retriever.log' files "
+                        "inside 'log' directory of the RLGen tool for getting information about the Bug Information "
+                        "functionality execution.")
                 else:
-                    print('Please define a correct Bug ID.')
+                    print('BUGZILLA - Please define a correct Bug ID.')
+                    logger_rlgen_main.error('BUGZILLA - Please define a correct Bug ID.')
             # user assigned bugs
             elif self.bug_function is 'a' or self.bug_function is 'A':
+                logger_rlgen_main.info('BUGZILLA - Executing User Assigned Bugs functionality.')
                 if self.user is not None:
                     report_field = 'UserAssignedBugs'
                     user_assigned_bugs = data_object.getting_user_assigned_bugs()
@@ -241,10 +312,16 @@ class UserTrackerChoice:
                         ascii_doc_data=user_assigned_bugs['ascii_user_assigned_bugs_list'])
                     # user assigned bugs doc
                     data_report = user_assigned_bugs_data
+                    logger_rlgen_main.info(
+                        "BUGZILLA - Check the 'bugzilla_exec_function.log' and the 'bugzilla_data_retriever.log' files "
+                        "inside 'log' directory of the RLGen tool for getting information about the User Assigned Bugs "
+                        "functionality execution.")
                 else:
-                    print('Please define a username or user email.')
+                    print('BUGZILLA - Please define a username or user email.')
+                    logger_rlgen_main.error('BUGZILLA - Please define a correct username or user email.')
             # user info
             elif self.bug_function is 'u' or self.bug_function is 'U':
+                logger_rlgen_main.info('BUGZILLA - Executing User Information functionality.')
                 if self.user is not None:
                     report_field = 'UserInfo'
                     user_info = data_object.getting_user_info()
@@ -254,10 +331,16 @@ class UserTrackerChoice:
                                                                 ascii_doc_data=user_info['ascii_user_info_list'])
                     # user info doc
                     data_report = user_info_data
+                    logger_rlgen_main.info(
+                        "BUGZILLA - Check the 'bugzilla_exec_function.log' and the 'bugzilla_data_retriever.log' files "
+                        "inside 'log' directory of the RLGen tool for getting information about the User Information "
+                        "functionality execution.")
                 else:
-                    print('Please define a username or user email.')
+                    print('BUGZILLA - Please define a username or user email.')
+                    logger_rlgen_main.error('BUGZILLA - Please define a correct username or user email.')
             # bug comments
             elif self.bug_function is 'c' or self.bug_function is 'C':
+                logger_rlgen_main.info('BUGZILLA - Executing Bug Comments functionality.')
                 if self.issue is not None:
                     report_field = 'BugComments'
                     bug_comments = data_object.getting_bug_comments()
@@ -267,10 +350,16 @@ class UserTrackerChoice:
                                                                    ascii_doc_data=bug_comments['ascii_bug_comments_list'])
                     # bug comments doc
                     data_report = bug_comments_data
+                    logger_rlgen_main.info(
+                        "BUGZILLA - Check the 'bugzilla_exec_function.log' and the 'bugzilla_data_retriever.log' files "
+                        "inside 'log' directory of the RLGen tool for getting information about the Bug Comments "
+                        "functionality execution.")
                 else:
-                    print('Please define a correct Bug ID.')
+                    print('BUGZILLA - Please define a correct Bug ID.')
+                    logger_rlgen_main.error('BUGZILLA - Please define a correct Bug ID.')
             # bug history
             elif self.bug_function is 'h' or self.bug_function is 'H':
+                logger_rlgen_main.info('BUGZILLA - Executing Bug History functionality.')
                 if self.issue is not None:
                     report_field = 'BugHistory'
                     bug_history = data_object.getting_bug_history()
@@ -280,6 +369,13 @@ class UserTrackerChoice:
                                                                   ascii_doc_data=bug_history['ascii_bug_history_list'])
                     # bug history doc
                     data_report = bug_history_data
+                    logger_rlgen_main.info(
+                        "BUGZILLA - Check the 'bugzilla_exec_function.log' and the 'bugzilla_data_retriever.log' files "
+                        "inside 'log' directory of the RLGen tool for getting information about the Bug History "
+                        "functionality execution.")
+                else:
+                    print('Please define a correct Bug ID.')
+                    logger_rlgen_main.error('Please define a correct Bug ID.')
             else:
                 print('Please enter a valid letter for function:\n'
                       '--function r: Release Note\n'
@@ -288,7 +384,18 @@ class UserTrackerChoice:
                       '--function c: Bug Comments\n'
                       '--function h: Bug History\n'
                       '--function a: Bugs Assigned to a User\n')
+                logger_rlgen_main.error('BUGZILLA -Please enter a valid letter for function:\n '
+                                        '--function r: Release Note\n '
+                                        '--function u: User Information\n '
+                                        '--function b: Bug Information\n '
+                                        '--function c: Bug Comments\n '
+                                        '--function h: Bug History\n '
+                                        '--function a: Bugs Assigned to a User\n')
 
+            # MAKING DOC REPORT
+            print('Generating DOC..')
+            logger_rlgen_main.info('BUGZILLA - Executing the AsciiDoc File Generation functionality.')
+            logger_rlgen_main.info('BUGZILLA - Generating AsciiDoc file..')
             report = GeneratorBugzillaReport(kind_of_report=report_field,
                                              releases=self.release_note,
                                              bug=self.issue,
@@ -301,10 +408,14 @@ class UserTrackerChoice:
                                              path=path,
                                              time=self.time)
             report.generating_doc_bugzilla()
+            logger_rlgen_main.info('BUGZILLA - AsciiDoc file created..')
+            logger_rlgen_main.info(
+                "BUGZILLA - Check the 'asciidoc_generator.log' file inside 'log' directory of the RLGen tool "
+                "for getting information about the AsciiDoc File Generation functionality execution.")
         else:
             print('Please press a valid letter ("J" or "j" for JIRA / "B" or "b" for Bugzilla) '
                   'for choosing your tracker.')
-            logger_rlgen_main.warning('Please press a valid letter ("J" or "j" for JIRA / "B" or "b" for Bugzilla) '
+            logger_rlgen_main.error('Please press a valid letter ("J" or "j" for JIRA / "B" or "b" for Bugzilla) '
                                       'for choosing your tracker.')
 
 
@@ -421,7 +532,7 @@ def user_input(argv):
                              "Disabled",
                         metavar="<ZONE_TIME>",
                         type=int)
-    parser.add_argument("-d", "--debug",
+    parser.add_argument("-l", "--loglevel",
                         dest="debug_level",
                         help="OPTIONAL: Define the level of debugging (0: DEBUG, 1: INFO, 2: WARNING, 3: ERROR, "
                              "4: CRITICAL).",

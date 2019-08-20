@@ -171,8 +171,11 @@ class ConfigData:
         print('Fields from terminal:', self.search_field)
         if self.input_terms is not None:
             search_list_output = search_list_conf_input + self.input_terms
+            logger_jira_conf_terms.info('Search Terms have been set up by '
+                                        'the user in command prompt: {}'.format(str(self.input_terms)))
         elif self.input_terms is None:
             search_list_output = search_list_conf_input
+            logger_jira_conf_terms.info('There have no Search Terms been set up by the user in command prompt.')
         print('Final fields to search (conf file + terminal):', str(search_list_output))
         logger_jira_conf_terms.info('Final fields to search (conf file + terminal): {}'.format(str(search_list_output)))
 
@@ -378,6 +381,10 @@ class IssueDataRetrieverJira:
                     logger_jira_issue_basic_data.debug(
                         'Custom Fields List in Conf file: {}'.format(str(custom_fields_list)))
                     search_list_output = search_list_output + custom_fields_list
+                else:
+                    logger_jira_issue_basic_data.warning(
+                        'You have not specified the same length of Custom Field Names and Custom Field IDs in '
+                        'configuration file.')
 
                 user_custom_field_ids_list = []
                 if self.cf_name is not None and self.cf_id is not None:
@@ -388,8 +395,15 @@ class IssueDataRetrieverJira:
                         user_custom_fields_list = list(zip(self.cf_name, user_custom_field_ids_list))
                         print('Custom Fields List in User Input: {}'.format(user_custom_fields_list))
                         logger_jira_issue_basic_data.debug(
-                            'Custom Fields List in User Input: {}'.format(user_custom_fields_list))
+                            'Custom Fields List in User Input: {}'.format(str(user_custom_fields_list)))
                         search_list_output = search_list_output + user_custom_fields_list
+                    else:
+                        logger_jira_issue_basic_data.warning(
+                            'You have not specified the same length of Custom Field Names and Custom Field IDs in '
+                            'command prompt.')
+                else:
+                    logger_jira_issue_basic_data.info('There have no Custom Field Names and Custom Fields IDs been set '
+                                                      'up by the user in command prompt')
 
                 print('Final Search Terms List: {}'.format(str(search_list_output)))
                 logger_jira_issue_basic_data.info('Final Search Terms List: {}'.format(str(search_list_output)))
