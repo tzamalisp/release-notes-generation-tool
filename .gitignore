@@ -1,0 +1,8 @@
+
+conf/
+
+log/
+
+release-notes-docs/
+
+jira_requester.py
