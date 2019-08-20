@@ -2,7 +2,7 @@
      alt="Google Summer of Code"
      style="width: 60%; border: 1px solid black; display: block; margin-left: auto; margin-right: auto;" />
 
-# Release Notes Generation Tool (RLGEN)
+# Release Notes Generation Tool (RLGen)
 ### DESCRIPTION
 The tool aims to collect, process, and analyze data from various Bug Tracking Systems. The outcomes by this processed
 data are easily readable reports in various formats, like AsciiDoc, and PDF files, that contain release notes and issue
@@ -25,7 +25,7 @@ about known bugs. These facts (or events) may include the time a bug is reported
 behavior, and details on how to reproduce the bug . In addition, it contains the identity of the person who reported it
 as well as any programmers who may be working on fixing it.
 
-RLGEN is an open-source tool that allows a user to request or seeing reports which are related to bugs release notes
+RLGen is an open-source tool that allows a user to request or seeing reports which are related to bugs release notes
 and issues tracking. The tool connects with various bug tracking systems (like JIRA and BugZilla), and after requesting
 their APIs it can scan, collect, process, and analyze the data that are relevant to bug releases notes. The requested
 data can be fetched automatically, on-demand (i.e. when a user wants to engender a report), or when an event of release
@@ -66,7 +66,7 @@ tool is devided into components, each one with different functionalities. In tha
 the user (actor/actuator) to generate reports in a stable and more automated way.
 
 <img src="images/release-notes-tool-system-architecture.png"
-     alt="RLGEN Architecture"
+     alt="RLGen Architecture"
      style="width: 90%; border: 1px solid black; display: block; margin-left: auto; margin-right: auto;" />
 
 The above Figure presents the components of the tool and the data flow can be summarized in the following parts:
@@ -95,7 +95,7 @@ to the covetable data structure for later use by the component of data exports.
 4) Result presentation (**Output**): This component is responsible for the generation of the requested by the user file
 formats that the reports should be exported. The reports can be in AsciiDoc, PDF, DOC, or CSV file formats.
 
-In fact, *RLGEN* adopts a kind of *hybridization* on the way the reports are generated. From the perspective of *Human
+In fact, *RLGen* adopts a kind of *hybridization* on the way the reports are generated. From the perspective of *Human
 Intelligence*, this belongs to the on-demand scanning of the Bug Tracking Systems, while Machine Intelligence is about
 the *automated* or *event-triggered scanning*. Nevertheless, after the report generation, the decision making pertains
 to the human part.
@@ -154,5 +154,7 @@ found, and after this, the tool will be submitted.
  alt="JBoss Logo"
  width="100" />
 
+# Documentation
 
-
+Please, check the Github Wiki link (https://github.com/tzamalisp/release-notes-generation-tool/wiki) the documentation
+of the tool and its functionality.

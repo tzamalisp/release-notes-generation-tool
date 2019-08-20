@@ -157,6 +157,12 @@ log/
 
 conf/config\.conf
 
+=======
+
+conf/
+
+log/
+
 release-notes-docs/
 
 jira_requester.py
