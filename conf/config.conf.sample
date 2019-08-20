@@ -1,0 +1,33 @@
+[author]
+firstname = John
+lastname = Doe
+email = user@example.com
+
+[jira_hosting_server]
+server = https://issues.example.com/
+
+[jira_basic_auth]
+username = user_example
+password = XXxxxXXxX@1234
+
+[jira_oauth]
+access_token =
+access_token_secret =
+consumer_key =
+
+[jira_kerberos]
+kerberos = True/False
+
+[jira_kerberos_options]
+mutual_authentication = DISABLED/ENABLED
+
+[bugzilla_basic_auth]
+company = example.com
+username = hello_user
+password =
+
+[bugzilla_oauth]
+api_key = XXxxxxxXXXxxxXXXXXxXXXXXasasjDF
+
+[path]
+directory =
