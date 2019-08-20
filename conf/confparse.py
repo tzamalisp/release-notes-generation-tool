@@ -1,18 +1,10 @@
 import configparser
 import os
 
-# from logger_creation import LoggerSetup
-
 current_d = os.getcwd()
 # print(current_d)
 directories_list = current_d.split('/')
-# print(directories_list)
-# print(directories_list[1:4])
-# basic_desktop_path = directories_list[1:4]
 conf_path = 'conf/'
-# new_path = 'conf/'
-# basic_desktop_path.append(new_path)
-# conf_path = '/' + '/'.join(basic_desktop_path)
 
 
 """READING JIRA - BUGZILLA CONFIGURATION FILE CLASSES"""

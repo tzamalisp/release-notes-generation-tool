@@ -17,17 +17,7 @@ from logger_creation import LoggerSetup
 current_d = os.getcwd()
 # print(current_d)
 directories_list = current_d.split('/')
-# print(directories_list)
-# print(directories_list[1:4])
-# basic_desktop_path = directories_list[1:4]
-# print('Path Desktop')
-# print(basic_desktop_path)
-# print()
-# print()
 conf_path = 'conf/'
-# new_path = 'conf/'
-# basic_desktop_path.append(new_path)
-# conf_path = '/' + '/'.join(basic_desktop_path)
 
 """ USER CHOICE OF ISSUE TRACKING PLATFORM """
 
@@ -416,7 +406,7 @@ class UserTrackerChoice:
             print('Please press a valid letter ("J" or "j" for JIRA / "B" or "b" for Bugzilla) '
                   'for choosing your tracker.')
             logger_rlgen_main.error('Please press a valid letter ("J" or "j" for JIRA / "B" or "b" for Bugzilla) '
-                                      'for choosing your tracker.')
+                                    'for choosing your tracker.')
 
 
 """ USER TERMINAL INPUTS """
@@ -593,5 +583,6 @@ if __name__ == '__main__':
     tracker_choice.tracker_selection()
     print()
     print('Terminating..')
+    logger_rlgen_main.info('Terminating..')
 
 

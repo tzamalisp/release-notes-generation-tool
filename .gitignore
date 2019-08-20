@@ -158,3 +158,5 @@ log/
 conf/config\.conf
 
 release-notes-docs/
+
+jira_requester.py
