@@ -4,9 +4,9 @@
 
 # Release Notes Generation Tool (RLGen)
 
-The code in this repository was written for the Google Summer of Code 2019 (GSoC 2019) project for the JBoss Community
-(Red Hat). The Release Notes Generation Tool (RLGen) collects and processes the data from the JIRA and Bugzilla Bug
-Tracking Systems. The outcomes by this processed data are easily readable reports in AsciiDoc format.
+The code in this repository was written for the *Google Summer of Code 2019 (GSoC 2019)* project in collaboration with
+*JBoss Community (Red Hat)*. The Release Notes Generation Tool (RLGen) collects and processes the data from the JIRA
+and Bugzilla Bug Tracking Systems. The outcomes by this processed data are easily readable reports in AsciiDoc format.
 These reports are classified into two categories:
 
 * Release notes reports based on detected issues which are related to them, including also information for each issue.
@@ -26,23 +26,62 @@ documentation of the tool, the Tracking Systems you can retrieve information fro
 Specifically, the following links describe in detail of how to:
 
 * handling the tool and its basic functionalities that have been implemented successfully during the
-GSoC 2019 life: https://github.com/tzamalisp/release-notes-generation-tool/wiki
+GSoC 2019: https://github.com/tzamalisp/release-notes-generation-tool/wiki/01-Release-Notes-Generation-Tool-(RLGen)
 
 * setting up the configuration files for the Authentication Step and the Fields you want to search for in each query to
-the related Bug Tracking System: https://github.com/tzamalisp/release-notes-generation-tool/wiki/Configuration
+the related Bug Tracking System: https://github.com/tzamalisp/release-notes-generation-tool/wiki/02-Configuration
 
-* querying the JIRA API: https://github.com/tzamalisp/release-notes-generation-tool/wiki/JIRA-requester
+* querying the Bugzilla API: https://github.com/tzamalisp/release-notes-generation-tool/wiki/03-Bugzilla-requester
 
-* querying the Bugzilla API: https://github.com/tzamalisp/release-notes-generation-tool/wiki/Bugzilla-requester
+* querying the JIRA API: https://github.com/tzamalisp/release-notes-generation-tool/wiki/04-JIRA-requester
 
 
 ## Latest Versions
 
 ### v1.0
 
-This is the first release of the Release Notes Generation Tool (RLGen). For information about this release you can check
-the following link:
+This is the first release of the Release Notes Generation Tool (RLGen) for the *GSoC 2019*. For information about this
+release you can check the following links:
 * https://github.com/tzamalisp/release-notes-generation-tool/releases/tag/v1.0
+
+In this first version of the RLGen tool, the following functionalities requested by the JBoss Community (Red Hat)
+during the *Google Summer of Code 2019* have been all developed successfully. The functions are described below based on
+each Issue Tracking System that the tool connects to fetch information:
+* JIRA Issue Tracking System:
+   * Retrieving the _summary_ and the _description_ for each of the issues related to a _Release Note_.
+   * _Multiple Release Notes_ including information (summary, description) about the associated issues can be requested
+   to the API.
+   * The Release Notes results can be exported in _ascending_ or _descending_ order.
+   * Information about an Issue can be fetched by requesting directly the JIRA API. This retrieved information can
+   dynamically change each time either by adjusting the specified fields in the _'search_terms.conf'_ file that is
+   located inside the 'conf' directory or by adding the extra fields the actor wants to search for from
+   the _command prompt by calling the related arguments_:
+      * If the actor knows the field name of search, she can easily retrieve the related information.
+      * If the actor knows an Issue's _Custom Field ID_ (some IDs are known only by the employees of an organization),
+      she can easily retrieve the relevant information.
+   * _Users' comments_ related to an Issue can be retrieved.
+* Bugzilla Issue Tracking System:
+   * Retrieving _fields of information_ for each of the issues related to a _Release Note_.
+   * Retrieving information about an _Issue_:
+      * Detailed _bug information_.
+      * The _comments_ which are related to the bug.
+      * The _history_ of the bug.
+   * Retrieving information about a _User_:
+      * The _bugs_ which are assigned to the user.
+      * Detailed _information_ about the user (such as email, username, etc.)
+   * By requesting directly the Bugzilla API the fields of the requested information can be dynamically changed by the
+   user either by adjusting the specified fields in the _'search_terms.conf'_ file that is located inside the 'conf'
+   directory or by adding the extra fields you want to search for from the _command prompt by calling the related
+   arguments_. The fields of search can be adjusted for all the functions of the tool (release notes issues information,
+   bug information, bug history, bug comments, user information, user-assigned bugs)
+* For all the functions described above, some common functionalities for both Tracking Systems have been implemented:
+   * The outcomes from each of the above processes are exported to _AsciiDoc_ report files.
+   * The user can optionally set the _level of logging_ (debugging) for each query.
+   * The _time of report_ can be enabled or disabled and printed out to the filename of the AsciiDoc report.
+   * The AsciiDoc report file can be exported to _every path directory_ the user wants. This function can be modified
+   either from the configuration file (inside the 'conf' directory) or by calling the command line argument that is
+   responsible for that action. If no path is specified the tool will save the AsciiDoc reports by default inside the
+   'release-notes-docs' directory under the main directory of the RLGen tool.
 
 
 ## Proposal - Google Summer of Code 2019 project for the JBoss Community (Red Hat)
