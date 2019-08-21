@@ -40,7 +40,7 @@ the related Issue Tracking System: https://github.com/tzamalisp/release-notes-ge
 
 ### v1.0
 
-This is the **1st release* of the *Release Notes Generation Tool (RLGen)* for the **GSoC 2019**.
+This is the **1st release (v1.0)** of the *Release Notes Generation Tool (RLGen)* for the **GSoC 2019**.
 For information about this release you can check the following links:
 * https://github.com/tzamalisp/release-notes-generation-tool/releases/tag/v1.0
 
