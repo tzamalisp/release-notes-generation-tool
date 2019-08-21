@@ -4,8 +4,8 @@
 
 # Release Notes Generation Tool (RLGen)
 
-The code in this repository was written for the *Google Summer of Code 2019 (GSoC 2019)* project in collaboration with
-*JBoss Community (Red Hat)*. The Release Notes Generation Tool (RLGen) collects and processes the data from the JIRA
+The code in this repository was written for the **Google Summer of Code 2019 (GSoC 2019)** project in collaboration with
+**JBoss Community (Red Hat)**. The *Release Notes Generation Tool (RLGen)* collects and processes the data from the JIRA
 and Bugzilla Bug Tracking Systems. The outcomes by this processed data are easily readable reports in AsciiDoc format.
 These reports are classified into two categories:
 
@@ -28,8 +28,8 @@ Specifically, the following links describe in detail of how to:
 * handling the tool and its basic functionalities that have been implemented successfully during the
 GSoC 2019: https://github.com/tzamalisp/release-notes-generation-tool/wiki/01-Release-Notes-Generation-Tool-(RLGen)
 
-* setting up the configuration files for the Authentication Step and the Fields you want to search for in each query to
-the related Bug Tracking System: https://github.com/tzamalisp/release-notes-generation-tool/wiki/02-Configuration
+* setting up the configuration files for the Authentication Steps and the Fields you want to search for in each query to
+the related Issue Tracking System: https://github.com/tzamalisp/release-notes-generation-tool/wiki/02-Configuration
 
 * querying the Bugzilla API: https://github.com/tzamalisp/release-notes-generation-tool/wiki/03-Bugzilla-requester
 
@@ -40,8 +40,8 @@ the related Bug Tracking System: https://github.com/tzamalisp/release-notes-gene
 
 ### v1.0
 
-This is the first release of the Release Notes Generation Tool (RLGen) for the *GSoC 2019*. For information about this
-release you can check the following links:
+This is the **1st release* of the *Release Notes Generation Tool (RLGen)* for the **GSoC 2019**.
+For information about this release you can check the following links:
 * https://github.com/tzamalisp/release-notes-generation-tool/releases/tag/v1.0
 
 In this first version of the RLGen tool, the following functionalities requested by the JBoss Community (Red Hat)
