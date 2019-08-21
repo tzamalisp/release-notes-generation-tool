@@ -28,8 +28,9 @@ Specifically, the following links describe in detail of how to:
 * handling the tool and its basic functionalities that have been implemented successfully during the
 GSoC 2019: https://github.com/tzamalisp/release-notes-generation-tool/wiki/01-Release-Notes-Generation-Tool-(RLGen)
 
-* setting up the configuration files for the Authentication Steps and the Fields you want to search for in each query to
-the related Issue Tracking System: https://github.com/tzamalisp/release-notes-generation-tool/wiki/02-Configuration
+* setting up the configuration files for the API Authentication methods of the REST APIs and the Fields you want to
+search for in each query to the related Issue Tracking System:
+https://github.com/tzamalisp/release-notes-generation-tool/wiki/02-Configuration
 
 * querying the Bugzilla API: https://github.com/tzamalisp/release-notes-generation-tool/wiki/03-Bugzilla-requester
 
@@ -60,6 +61,9 @@ each Issue Tracking System that the tool connects to fetch information:
       * If the actor knows an Issue's _Custom Field ID_ (some IDs are known only by the employees of an organization),
       she can easily retrieve the relevant information.
    * _Users' comments_ related to an Issue can be retrieved.
+   * The following *Authentication methods* have been implemented:
+      * *Basic Authentication* (username, password)
+      * *oAuth* (Access Token, Access Token Secret, Consumer Key, Key Certificate Data file)
 * Bugzilla Issue Tracking System:
    * Retrieving _fields of information_ for each of the issues related to a _Release Note_.
    * Retrieving information about an _Issue_:
@@ -74,6 +78,9 @@ each Issue Tracking System that the tool connects to fetch information:
    directory or by adding the extra fields you want to search for from the _command prompt by calling the related
    arguments_. The fields of search can be adjusted for all the functions of the tool (release notes issues information,
    bug information, bug history, bug comments, user information, user-assigned bugs)
+   * The following *Authentication methods* have been implemented:
+      * *Basic Authentication* (username, password)
+      * *oAuth* (Bugzilla API key)
 * For all the functions described above, some common functionalities for both Tracking Systems have been implemented:
    * The outcomes from each of the above processes are exported to _AsciiDoc_ report files.
    * The user can optionally set the _level of logging_ (debugging) for each query.
