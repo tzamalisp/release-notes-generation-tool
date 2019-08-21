@@ -11,7 +11,7 @@ from conf.confparse import JiraReadConfigurationOAuth
 from logger_creation import LoggerSetup
 
 current_d = os.getcwd()
-# print(current_d)
+print('JIRA requester Path: ', current_d)
 directories_list = current_d.split('/')
 conf_path = 'conf/'
 working_directory_path = directories_list[1:]
@@ -53,10 +53,29 @@ class Connector:
         jira_basic_auth = JiraReadConfigurationBasicAuth()
         jira_oauth = JiraReadConfigurationOAuth()
         # code for key cert here
-        key_cert_data = None
-        # with open(key_cert, 'r') as key_cert_file:
-        #     key_cert_data = key_cert_file.read()
-        key_cert_data = 'To be added'
+        # TXT
+        if os.path.exists('key_cert.txt') is True:
+            with open('key_cert.txt', 'r') as key_cert_file:
+                key_cert_data = key_cert_file.read()
+        # CRT
+        elif os.path.exists('key_cert.crt') is True:
+            with open('key_cert.crt', 'r') as key_cert_file:
+                key_cert_data = key_cert_file.read()
+        # PEM
+        elif os.path.exists('key_cert.pem') is True:
+            with open('key_cert.pem', 'r') as key_cert_file:
+                key_cert_data = key_cert_file.read()
+        # CER
+        elif os.path.exists('key_cert.cer') is True:
+            with open('key_cert.cer', 'r') as key_cert_file:
+                key_cert_data = key_cert_file.read()
+        # KEY
+        elif os.path.exists('key_cert.key') is True:
+            with open('key_cert.key', 'r') as key_cert_file:
+                key_cert_data = key_cert_file.read()
+        else:
+            key_cert_data = None
+        logger_jira_connection.debug('JIRA - oAuth - Key Cert Data: {}'.format(str(key_cert_data)))
 
         basic_auth = jira_basic_auth.read_user_basic_auth()['basic_auth']
         oauth = jira_oauth.read_oauth()['oauth']
@@ -99,7 +118,7 @@ class Connector:
                                                        consumer_key_value,
                                                        key_cert_data)
                 else:
-                    logger_jira_connection.warning('Please add the Key Certification Data.')
+                    logger_jira_connection.error('Please add the Key Certification Data.')
                     # raise Exception('Please add the key certification data.')
         else:
             if basic_auth is False:

@@ -30,7 +30,7 @@ GSoC 2019: https://github.com/tzamalisp/release-notes-generation-tool/wiki/01-Re
 
 * setting up the configuration files for the API Authentication methods of the REST APIs and the Fields you want to
 search for in each query to the related Issue Tracking System:
-https://github.com/tzamalisp/release-notes-generation-tool/wiki/02-Configuration
+https://github.com/tzamalisp/release-notes-generation-tool/wiki/02-Authentication-and-Configuration
 
 * querying the Bugzilla API: https://github.com/tzamalisp/release-notes-generation-tool/wiki/03-Bugzilla-requester
 
