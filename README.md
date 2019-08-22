@@ -57,9 +57,9 @@ each Issue Tracking System that the tool connects to fetch information:
    dynamically change each time either by adjusting the specified fields in the _'search_terms.conf'_ file that is
    located inside the 'conf' directory or by adding the extra fields the actor wants to search for from
    the _command prompt by calling the related arguments_:
-      * If the actor knows the field name of search, she can easily retrieve the related information.
+      * If the actor knows the field name of search, one can easily retrieve the related information.
       * If the actor knows an Issue's _Custom Field ID_ (some IDs are known only by the employees of an organization),
-      she can easily retrieve the relevant information.
+      one can easily retrieve the relevant information.
    * _Users' comments_ related to an Issue can be retrieved.
    * The following *Authentication methods* have been implemented:
       * *Basic Authentication* (username, password)
@@ -164,11 +164,11 @@ the user (actor/actuator) to generate reports in a stable and more automated way
 
 The above Figure presents the components of the tool and the data flow can be summarized in the following parts:
 
-1) **The user** asks the tool for a Bugs Release Notes / Issues Tracking report via a python script in command prompt.
-The script has as inputs some arguments like the bug release note ID, the file she wants the results to be exported, as
-well as other inputs that will be discussed with the Mentors. There are three ways in which the user can obtain
-the data:
-    - *On-demand​:* The user asks for a new report randomly, i.e. whenever she wants to.
+1) **The user** asks the tool for a Bugs Release Notes / Issues Tracking report via a Python script in command prompt.
+The script has as inputs some arguments like the bug release note ID, the file that the actor wants the results to be
+exported, as well as other inputs that will be discussed with the Mentors. There are three ways in which the user can
+obtain the data:
+    - *On-demand​:* The user asks for a new report randomly, i.e. whenever the user wants to.
     - *Periodically:* New reports are generated automatically in specific time intervals.
     - *Triggered events:* New report is generated when a specific new amount of bugs is detected, i.e. a trend is
     scanned.
