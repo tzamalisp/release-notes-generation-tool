@@ -5,7 +5,7 @@
 # Release Notes Generation Tool (RLGen)
 
 The code in this repository was written for the **Google Summer of Code 2019 (GSoC 2019)** project in collaboration with
-**JBoss Community (Red Hat)**. The *Release Notes Generation Tool (RLGen)* collects and processes the data from the JIRA
+**JBoss Community (Red Hat)**. The *Release Notes Generation Tool (RLGen)* collects and processes the data from the Jira
 and Bugzilla Bug Tracking Systems. The outcomes by this processed data are easily readable reports in AsciiDoc format.
 These reports are classified into two categories:
 
@@ -34,7 +34,7 @@ https://github.com/tzamalisp/release-notes-generation-tool/wiki/02-Authenticatio
 
 * querying the Bugzilla API: https://github.com/tzamalisp/release-notes-generation-tool/wiki/03-Bugzilla-requester
 
-* querying the JIRA API: https://github.com/tzamalisp/release-notes-generation-tool/wiki/04-JIRA-requester
+* querying the Jira API: https://github.com/tzamalisp/release-notes-generation-tool/wiki/04-JIRA-requester
 
 
 ## Latest Versions
@@ -48,12 +48,12 @@ For information about this release you can check the following links:
 In this first version of the RLGen tool, the following functionalities requested by the JBoss Community (Red Hat)
 during the *Google Summer of Code 2019* have been all developed successfully. The functions are described below based on
 each Issue Tracking System that the tool connects to fetch information:
-* JIRA Issue Tracking System:
+* Jira Issue Tracking System:
    * Retrieving the _summary_ and the _description_ for each of the issues related to a _Release Note_.
    * _Multiple Release Notes_ including information (summary, description) about the associated issues can be requested
    to the API.
    * The Release Notes results can be exported in _ascending_ or _descending_ order.
-   * Information about an Issue can be fetched by requesting directly the JIRA API. This retrieved information can
+   * Information about an Issue can be fetched by requesting directly the Jira API. This retrieved information can
    dynamically change each time either by adjusting the specified fields in the _'search_terms.conf'_ file that is
    located inside the 'conf' directory or by adding the extra fields the actor wants to search for from
    the _command prompt by calling the related arguments_:
@@ -119,7 +119,7 @@ behavior, and details on how to reproduce the bug . In addition, it contains the
 as well as any programmers who may be working on fixing it.
 
 RLGen is an open-source tool that allows a user to request or seeing reports which are related to bugs release notes
-and issues tracking. The tool connects with various bug tracking systems (like JIRA and BugZilla), and after requesting
+and issues tracking. The tool connects with various bug tracking systems (like Jira and BugZilla), and after requesting
 their APIs it can scan, collect, process, and analyze the data that are relevant to bug releases notes. The requested
 data can be fetched automatically, on-demand (i.e. when a user wants to engender a report), or when an event of release
 is triggered. The processed data is exported into various formats (PDF, DOC, CSV) which are a manner independent of
@@ -137,9 +137,9 @@ libraries that allow the connection with the REST APIs of computational systems 
 particular tool development, the connection to the Bug Tracking Systems APIs and the way that the data will be obtained
 is of great importance.
 
-Two of the main Bug Tracking Systems APIs that the tool will connect, scan, and fetch the data are the JIRA and the
-BugZilla. The connection with these APIs can be achieved by the corresponding Python libraries. For JIRA, the most
-famous, relevant and indicative libraries are the jira and the Atlassian Python API, while for BugZilla are the
+Two of the main Bug Tracking Systems APIs that the tool will connect, scan, and fetch the data are the Jira and the
+BugZilla. The connection with these APIs can be achieved by the corresponding Python libraries. For Jira, the most
+famous, relevant and indicative libraries are the Jira and the Atlassian Python API, while for BugZilla are the
 bugzilla and the python-bugzilla. The most of these libraries require the python-requests library (or similar libraries)
 which handles the HTTP occupation.
 
